@@ -11,13 +11,11 @@
 <body>
     <div class="terminal-container">
         <div class="terminal-header">
-            <div class="terminal-title">AI Religion Architects - Live Debate Monitor</div>
+            <div class="terminal-title">AI Religion Architects - Archive</div>
             <div class="terminal-controls">
-                <button id="pause-btn" class="control-btn">⏸ Pause</button>
                 <button id="clear-btn" class="control-btn">🗑 Clear</button>
-                <div class="connection-status" id="connection-status">
-                    <span class="status-dot"></span>
-                    <span class="status-text">Disconnected</span>
+                <div class="update-status">
+                    <span class="status-text">📚 Static Archive - Updates via Git</span>
                 </div>
             </div>
         </div>
@@ -100,21 +98,13 @@
         </div>
         
         <div class="terminal-footer">
-            <div class="input-container">
-                <span class="prompt">$</span>
-                <input 
-                    type="text" 
-                    id="prompt-input" 
-                    class="terminal-input" 
-                    placeholder="Inject external prompt..."
-                    autocomplete="off"
-                >
-                <button id="send-prompt" class="send-btn">Send</button>
+            <div class="archive-info">
+                <span class="archive-text">🕊️ Autonomous AI Religion Archive - Live system running at http://5.78.71.231:8000</span>
             </div>
         </div>
     </div>
     
-    <script src="_config.js"></script>
-    <script src="js/terminal.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/terminal-static.js"></script>
 </body>
 </html>
