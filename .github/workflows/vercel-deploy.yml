@@ -1,16 +1,9 @@
-name: Deploy to Vercel on AI Religion Updates
+name: Deploy Static Archive to Vercel
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'data/**'
-      - 'logs/**'
-      - 'frontend/**'
-      - 'index.html'
-      - 'js/**'
-      - 'styles/**'
-      - 'vercel.json'
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   deploy:
@@ -28,30 +21,40 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
         
-      - name: Check for AI Religion updates
+      - name: Check for deployment trigger
         id: check_updates
         run: |
-          # Check if this is an AI Religion auto-commit
+          # Check if this is an AI Religion auto-commit or frontend update
           if git log -1 --pretty=%B | grep -q "AI Religion Cycle"; then
-            echo "ai_update=true" >> $GITHUB_OUTPUT
-            echo "🤖 AI Religion update detected!"
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+            echo "🤖 AI Religion debate update detected - deploying archive!"
+          elif git log -1 --pretty=%B | grep -q "frontend\|vercel\|static\|archive"; then
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+            echo "🌐 Frontend update detected - deploying!"
           else
-            echo "ai_update=false" >> $GITHUB_OUTPUT
-            echo "📝 Regular update detected"
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+            echo "📝 No deployment needed for this update"
           fi
           
       - name: Deploy to Vercel
-        if: steps.check_updates.outputs.ai_update == 'true' || contains(github.event.head_commit.message, 'frontend') || contains(github.event.head_commit.message, 'vercel')
+        if: steps.check_updates.outputs.should_deploy == 'true'
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          echo "🚀 Deploying to Vercel..."
+          echo "🚀 Deploying static archive to Vercel..."
+          # Skip deployment if secrets are not set
+          if [[ -z "$VERCEL_TOKEN" ]]; then
+            echo "⚠️ Vercel secrets not configured. Skipping deployment."
+            echo "Please add VERCEL_ORG_ID, VERCEL_PROJECT_ID, and VERCEL_TOKEN to GitHub secrets."
+            exit 0
+          fi
           vercel --token=${VERCEL_TOKEN} --prod --yes
           
-      - name: Notify deployment
-        if: steps.check_updates.outputs.ai_update == 'true'
+      - name: Notify successful deployment
+        if: steps.check_updates.outputs.should_deploy == 'true'
         run: |
-          echo "✅ AI Religion Architects frontend updated with latest debate transcripts!"
-          echo "🔗 Visit: https://trickster-meltedmindz.vercel.app"
+          echo "✅ AI Religion Architects archive updated!"
+          echo "📚 Static archive deployed with latest AI religion evolution"
+          echo "🔗 Visit: https://trickster-three.vercel.app"

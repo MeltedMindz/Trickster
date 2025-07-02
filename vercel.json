@@ -2,44 +2,12 @@
   "version": 2,
   "name": "trickster",
   "public": true,
-  "builds": [
+  "outputDirectory": "public",
+  "buildCommand": "cp index.html public/ && cp -r js public/ && cp -r styles public/ || echo 'Files already in public'",
+  "rewrites": [
     {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "js/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "styles/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "logs/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "data/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/js/(.*)",
-      "dest": "/js/$1"
-    },
-    {
-      "src": "/styles/(.*)",
-      "dest": "/styles/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/",
+      "destination": "/index.html"
     }
   ],
   "headers": [
