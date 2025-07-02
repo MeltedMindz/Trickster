@@ -5,14 +5,20 @@ import json
 
 
 class DebateLogger:
-    def __init__(self, log_dir: str = "logs"):
+    def __init__(self, log_dir: str = "logs", cycle_number: int = None):
         self.log_dir = log_dir
         os.makedirs(log_dir, exist_ok=True)
         
         # Create session log file
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        self.session_file = os.path.join(log_dir, f"debate_session_{timestamp}.log")
-        self.transcript_file = os.path.join(log_dir, f"transcript_{timestamp}.txt")
+        if cycle_number is not None:
+            # Use cycle-based naming for cleaner file organization
+            self.session_file = os.path.join(log_dir, f"CYCLE{cycle_number}_session.log")
+            self.transcript_file = os.path.join(log_dir, f"CYCLE{cycle_number}.txt")
+        else:
+            # Fallback to timestamp naming
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            self.session_file = os.path.join(log_dir, f"debate_session_{timestamp}.log")
+            self.transcript_file = os.path.join(log_dir, f"transcript_{timestamp}.txt")
         
         self._write_header()
     

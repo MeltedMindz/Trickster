@@ -35,7 +35,6 @@ class ClaudeReligionOrchestrator:
         
         # Initialize components
         self.shared_memory = SharedMemory(self.db_path)
-        self.logger = DebateLogger(self.log_dir)
         
         # Agent names for the debate system
         self.agent_names = ["Zealot", "Skeptic", "Trickster"]
@@ -149,8 +148,11 @@ class ClaudeReligionOrchestrator:
         self.cycle_count += 1
         cycle_start_time = datetime.now()
         
+        # Create cycle-specific logger with clean naming
+        cycle_logger = DebateLogger(self.log_dir, self.cycle_count)
+        
         logger.info(f"🔄 Starting debate cycle {self.cycle_count}")
-        self.logger.log_cycle_start(self.cycle_count)
+        cycle_logger.log_cycle_start(self.cycle_count)
         
         try:
             # Get current state for context
@@ -164,7 +166,7 @@ class ClaudeReligionOrchestrator:
                 proposer_name, current_state, self.cycle_count
             )
             
-            self.logger.log_event(f"PROPOSAL by {proposer_name}: {proposal['content']}", "Cycle")
+            cycle_logger.log_event(f"PROPOSAL by {proposer_name}: {proposal['content']}", "Cycle")
             logger.info(f"✅ Proposal generated: {proposal['content'][:100]}...")
             
             # Phase 2: Challenges from other agents
@@ -179,7 +181,7 @@ class ClaudeReligionOrchestrator:
                 )
                 
                 challenges.append(challenge)
-                self.logger.log_event(f"CHALLENGE by {challenger_name}: {challenge}", "Cycle")
+                cycle_logger.log_event(f"CHALLENGE by {challenger_name}: {challenge}", "Cycle")
                 logger.info(f"✅ Challenge from {challenger_name}: {challenge[:80]}...")
             
             # Phase 3: Voting
@@ -195,7 +197,7 @@ class ClaudeReligionOrchestrator:
                 vote = self._parse_vote(vote_response)
                 votes[agent_name] = vote
                 
-                self.logger.log_event(f"VOTE by {agent_name}: {vote} - {vote_response}", "Cycle")
+                cycle_logger.log_event(f"VOTE by {agent_name}: {vote} - {vote_response}", "Cycle")
                 logger.info(f"✅ {agent_name} voted: {vote}")
             
             # Phase 4: Determine outcome
@@ -224,7 +226,7 @@ class ClaudeReligionOrchestrator:
             # Log cycle completion
             cycle_duration = (datetime.now() - cycle_start_time).total_seconds()
             logger.info(f"✅ Cycle {self.cycle_count} completed in {cycle_duration:.1f}s")
-            self.logger.log_event(f"Cycle {self.cycle_count} completed: {outcome}", "System")
+            cycle_logger.log_event(f"Cycle {self.cycle_count} completed: {outcome}", "System")
             
             # Summarization every 5 cycles
             if self.cycle_count % 5 == 0:
@@ -240,7 +242,7 @@ class ClaudeReligionOrchestrator:
             
         except Exception as e:
             logger.error(f"❌ Error in cycle {self.cycle_count}: {str(e)}")
-            self.logger.log_event(f"ERROR in cycle {self.cycle_count}: {str(e)}", "System")
+            cycle_logger.log_event(f"ERROR in cycle {self.cycle_count}: {str(e)}", "System")
             
             # Don't stop the scheduler for individual cycle errors
             return {"status": "error", "error": str(e), "cycle": self.cycle_count}
@@ -455,28 +457,43 @@ Focus on what you think are the most important developments and where the religi
             with open(os.path.join(data_dir, 'religion_state.json'), 'w') as f:
                 json.dump(religion_data, f, indent=2)
             
-            # Export recent transcripts list
+            # Export recent transcripts list (look for CYCLE*.txt files)
             import glob
             log_dir = os.environ.get('LOG_DIR', 'logs')
+            
+            # Look for both old and new naming patterns
+            cycle_pattern = os.path.join(log_dir, 'CYCLE*.txt')
             transcript_pattern = os.path.join(log_dir, 'transcript_*.txt')
+            
+            cycle_files = glob.glob(cycle_pattern)
             transcript_files = glob.glob(transcript_pattern)
-            transcript_files.sort(key=os.path.getmtime, reverse=True)
+            
+            # Combine and sort by modification time
+            all_files = cycle_files + transcript_files
+            all_files.sort(key=os.path.getmtime, reverse=True)
             
             transcripts_data = []
-            for file_path in transcript_files[:5]:  # Last 5 transcripts
+            for file_path in all_files[:10]:  # Last 10 files
                 try:
                     with open(file_path, 'r') as f:
                         content = f.read()
                         filename = os.path.basename(file_path)
-                        timestamp = filename.replace('transcript_', '').replace('.txt', '')
                         
-                        transcripts_data.append({
-                            "filename": filename,
-                            "timestamp": timestamp,
-                            "content": content,
-                            "modified": datetime.fromtimestamp(os.path.getmtime(file_path)).isoformat(),
-                            "preview": content[:200] + "..." if len(content) > 200 else content
-                        })
+                        # Extract timestamp or cycle info
+                        if filename.startswith('CYCLE'):
+                            timestamp = filename.replace('.txt', '')
+                        else:
+                            timestamp = filename.replace('transcript_', '').replace('.txt', '')
+                        
+                        # Only include files with actual content
+                        if len(content.strip()) > 200:
+                            transcripts_data.append({
+                                "filename": filename,
+                                "timestamp": timestamp,
+                                "content": content,
+                                "modified": datetime.fromtimestamp(os.path.getmtime(file_path)).isoformat(),
+                                "preview": content[:200] + "..." if len(content) > 200 else content
+                            })
                 except Exception as e:
                     logger.warning(f"Could not read transcript {file_path}: {e}")
             

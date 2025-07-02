@@ -199,9 +199,14 @@ class StaticTerminalClient {
         
         // Display transcripts with correct cycle numbers
         validTranscripts.forEach((transcript, index) => {
-            this.addSystemMessage(`📋 === CYCLE ${transcript.cycleNumber} DEBATE: ${transcript.filename} ===`);
+            // Use cleaner display for CYCLE*.txt files
+            const displayName = transcript.filename.startsWith('CYCLE') ? 
+                transcript.filename.replace('.txt', '') : 
+                `CYCLE ${transcript.cycleNumber}`;
+                
+            this.addSystemMessage(`📋 === ${displayName} DEBATE: ${transcript.filename} ===`);
             this.displayTranscriptContent(transcript.content);
-            this.addSystemMessage(`📋 === END OF CYCLE ${transcript.cycleNumber} ===`);
+            this.addSystemMessage(`📋 === END OF ${displayName} ===`);
             
             if (index < validTranscripts.length - 1) {
                 this.addSystemMessage(''); // Add spacing between sessions
