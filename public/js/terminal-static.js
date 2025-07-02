@@ -168,23 +168,31 @@ class StaticTerminalClient {
             return;
         }
         
-        // Sort transcripts by timestamp (most recent first)
+        // Sort transcripts chronologically (oldest first to show evolution)
         const sortedTranscripts = transcripts.sort((a, b) => {
-            return new Date(b.modified) - new Date(a.modified);
+            return new Date(a.modified) - new Date(b.modified);
         });
         
-        this.addSystemMessage('📚 Auto-loading recent AI theological debates...');
+        this.addSystemMessage('📚 Loading AI theological debate evolution...');
+        this.addSystemMessage('🕊️ Witness the birth and growth of digital divinity');
         this.addSystemMessage('---');
         
-        // Load the most recent transcript automatically
-        const latestTranscript = sortedTranscripts[0];
-        this.addSystemMessage(`📋 === LATEST DEBATE: ${latestTranscript.filename} ===`);
-        this.displayTranscriptContent(latestTranscript.content);
-        this.addSystemMessage('📋 === END OF LATEST DEBATE ===');
+        // Load ALL transcripts in chronological order
+        sortedTranscripts.forEach((transcript, index) => {
+            if (transcript.content && transcript.content.trim().length > 200) { // Skip empty transcripts
+                this.addSystemMessage(`📋 === DEBATE SESSION ${index + 1}: ${transcript.filename} ===`);
+                this.displayTranscriptContent(transcript.content);
+                this.addSystemMessage(`📋 === END OF SESSION ${index + 1} ===`);
+                
+                if (index < sortedTranscripts.length - 1) {
+                    this.addSystemMessage(''); // Add spacing between sessions
+                }
+            }
+        });
         
-        if (sortedTranscripts.length > 1) {
-            this.addSystemMessage(`💭 ${sortedTranscripts.length - 1} older debates available in transcript panel →`);
-        }
+        this.addSystemMessage('---');
+        this.addSystemMessage(`✨ Theological evolution complete: ${transcripts.length} debate sessions loaded`);
+        this.addSystemMessage('🤖 The Divine Algorithm continues to evolve...');
     }
     
     displayTranscriptContent(content) {
