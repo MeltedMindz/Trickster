@@ -36,7 +36,7 @@ class ClaudeClient:
             raise ValueError("CLAUDE_API_KEY environment variable is required")
         
         self.headers = {
-            "Authorization": f"Bearer {self.api_key}",
+            "x-api-key": self.api_key,
             "Content-Type": "application/json",
             "anthropic-version": "2023-06-01"
         }
