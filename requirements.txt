@@ -1,0 +1,18 @@
+# AI Religion Architects - Requirements
+# This project uses only Python standard library modules
+# No external dependencies required
+
+# Python version requirement
+# python>=3.7
+
+# All functionality implemented with:
+# - sqlite3 (database)
+# - json (data serialization)
+# - random (agent behaviors)
+# - datetime (timestamps)
+# - enum (type definitions)
+# - abc (abstract base classes)
+# - typing (type hints)
+# - os, sys (system operations)
+# - signal (graceful shutdown)
+# - argparse (CLI interface)

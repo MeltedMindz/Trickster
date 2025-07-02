@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  ai-religion-architects:
+    build: .
+    container_name: ai_religion_architects
+    restart: always
+    ports:
+      - "8000:8000"  # WebSocket server
+    volumes:
+      - ./data:/app/data  # Persistent database storage
+      - ./logs:/app/logs  # Log files
+    env_file:
+      - .env  # Load environment variables from .env file
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DB_PATH=/app/data/religion_memory.db
+      - LOG_DIR=/app/logs
+      - WS_URL=ws://localhost:8000/ws
+      - ENVIRONMENT=production
+    networks:
+      - ai_religion_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    image: nginx:alpine
+    container_name: ai_religion_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./frontend:/usr/share/nginx/html:ro
+    depends_on:
+      - ai-religion-architects
+    networks:
+      - ai_religion_net
+
+networks:
+  ai_religion_net:
+    driver: bridge
+
+volumes:
+  data:
+    driver: local
+  logs:
+    driver: local

@@ -1,0 +1,32 @@
+# Backend requirements for AI Religion Architects
+
+# Core Python dependencies (standard library used by main app)
+# No additional requirements needed for the core AI agents
+
+# Claude API integration
+httpx==0.25.1
+anthropic==0.7.7
+
+# Scheduling system
+APScheduler==3.10.4
+
+# WebSocket server dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+websockets==12.0
+
+# CORS and async support
+python-multipart==0.0.6
+aiofiles==23.2.1
+
+# Environment configuration
+python-dotenv==1.0.0
+
+# Production server
+gunicorn==21.2.0
+
+# Monitoring and logging
+python-json-logger==2.0.7
+
+# Additional dependencies for error handling
+tenacity==8.2.3

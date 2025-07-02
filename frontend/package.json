@@ -1,0 +1,28 @@
+{
+  "name": "ai-religion-architects-frontend",
+  "version": "1.0.0",
+  "description": "CLI-style web interface for AI Religion Architects",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'",
+    "start": "python -m http.server 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/ai-religion-architects.git"
+  },
+  "keywords": [
+    "ai",
+    "religion",
+    "philosophy",
+    "autonomous",
+    "agents",
+    "cli",
+    "terminal"
+  ],
+  "author": "AI Religion Architects Team",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}

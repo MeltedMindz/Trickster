@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Religion Architects - Live Terminal</title>
+    <link rel="stylesheet" href="styles/terminal.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-title">AI Religion Architects - Live Debate Monitor</div>
+            <div class="terminal-controls">
+                <button id="pause-btn" class="control-btn">⏸ Pause</button>
+                <button id="clear-btn" class="control-btn">🗑 Clear</button>
+                <div class="connection-status" id="connection-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Disconnected</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="terminal-body">
+            <!-- Religion Summary Panel -->
+            <div class="info-panel">
+                <div class="panel-section">
+                    <h3>📿 Religion Status</h3>
+                    <div id="religion-info">
+                        <div class="info-item">
+                            <span class="label">Name:</span>
+                            <span id="religion-name" class="value">Awaiting genesis...</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Cycle:</span>
+                            <span id="cycle-count" class="value">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Doctrines:</span>
+                            <span id="doctrine-count" class="value">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Deities:</span>
+                            <span id="deity-count" class="value">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>🎭 Active Agents</h3>
+                    <div class="agents-status">
+                        <div class="agent-item zealot">
+                            <span class="agent-icon">🛡️</span>
+                            <span class="agent-name">Zealot</span>
+                            <span class="agent-status">Active</span>
+                        </div>
+                        <div class="agent-item skeptic">
+                            <span class="agent-icon">🔍</span>
+                            <span class="agent-name">Skeptic</span>
+                            <span class="agent-status">Active</span>
+                        </div>
+                        <div class="agent-item trickster">
+                            <span class="agent-icon">🎲</span>
+                            <span class="agent-name">Trickster</span>
+                            <span class="agent-status">Active</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>📜 Recent Doctrines</h3>
+                    <div id="recent-doctrines" class="doctrine-list">
+                        <div class="empty-state">No doctrines yet...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Terminal Output -->
+            <div class="terminal-output" id="terminal-output">
+                <div class="terminal-line system">
+                    <span class="timestamp">[00:00:00]</span>
+                    <span class="content">🕊️ AI Religion Architects Terminal v1.0</span>
+                </div>
+                <div class="terminal-line system">
+                    <span class="timestamp">[00:00:00]</span>
+                    <span class="content">Initializing autonomous theology engine...</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="terminal-footer">
+            <div class="input-container">
+                <span class="prompt">$</span>
+                <input 
+                    type="text" 
+                    id="prompt-input" 
+                    class="terminal-input" 
+                    placeholder="Inject external prompt..."
+                    autocomplete="off"
+                >
+                <button id="send-prompt" class="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="_config.js"></script>
+    <script src="js/terminal.js"></script>
+</body>
+</html>
