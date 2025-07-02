@@ -13,13 +13,23 @@ class StaticTerminalClient {
         this.recentTranscripts = document.getElementById('recent-transcripts');
         this.loadTranscriptsBtn = document.getElementById('load-transcripts-btn');
         
+        // Debug: Check if elements exist
+        console.log('🔍 DOM Elements Check:');
+        console.log('religionName:', this.religionName ? '✅' : '❌');
+        console.log('cycleCount:', this.cycleCount ? '✅' : '❌');
+        console.log('doctrineCount:', this.doctrineCount ? '✅' : '❌');
+        console.log('deityCount:', this.deityCount ? '✅' : '❌');
+        
         this.init();
     }
     
     init() {
         this.setupEventListeners();
-        this.loadStaticData();
         this.displayWelcomeMessage();
+        // Add a small delay to ensure DOM is fully ready
+        setTimeout(() => {
+            this.loadStaticData();
+        }, 100);
     }
     
     setupEventListeners() {
