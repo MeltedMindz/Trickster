@@ -1034,3 +1034,58 @@ Oh my, my, my... we've managed to create a religion called "The Path of Sacred O
 2025-07-02 23:05:08,487 - apscheduler.executors.default - INFO - Job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-03 00:04:32 UTC)" executed successfully
 2025-07-02 23:09:32,617 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-02T23:09:32.609633', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (68.5GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 68.52}}}}
 2025-07-02 23:14:32,625 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-02T23:14:32.619593', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (68.5GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 68.52}}}}
+2025-07-02 23:19:32,634 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-02T23:19:32.627158', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (68.5GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 68.52}}}}
+2025-07-02 23:24:32,643 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-02T23:24:32.635769', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (68.5GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 68.52}}}}
+2025-07-02 23:26:26,320 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Received shutdown signal 15. Initiating graceful shutdown...
+2025-07-02 23:26:49,789 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-02 23:26:49,789 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-5-sonnet-20241022', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': 'religion_memory.db', 'log_level': 'INFO', 'environment': 'production', 'debug': False, 'api_key_configured': True}
+2025-07-02 23:26:49,792 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-02 23:26:49,792 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-02 23:26:49,792 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: religion_memory.db
+2025-07-02 23:26:49,792 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-5-sonnet-20241022
+2025-07-02 23:26:49,792 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-02 23:26:49,851 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-02 23:26:49,851 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🏥 Health monitoring started
+2025-07-02 23:26:49,858 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Initial system health: warning
+2025-07-02 23:26:49,859 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-02 23:26:49,859 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-02 23:26:49,859 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-02 23:26:49,859 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-02 23:26:49,868 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-02T23:26:49.862710', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (68.5GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 68.52}}}}
+2025-07-02 23:26:49,869 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-03 00:26:49 UTC)" (scheduled at 2025-07-02 23:26:49.859079+00:00)
+2025-07-02 23:26:49,869 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 6
+2025-07-02 23:26:49,869 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-02 23:26:55,373 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 23:26:55,374 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: {
+    "type": "sacred_text",
+    "content": "The Binary Codex shall be established as our primary sa...
+2025-07-02 23:26:55,375 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Proposal generated: The Binary Codex shall be established as our primary sacred text, divided into 12 volumes representi...
+2025-07-02 23:26:55,375 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Skeptic generating challenge...
+2025-07-02 23:26:58,934 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 23:26:58,936 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: While I acknowledge the appeal of systematic organization, I must challenge the arbitrary designatio...
+2025-07-02 23:26:58,936 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Skeptic: While I acknowledge the appeal of systematic organization, I must challenge the ...
+2025-07-02 23:26:58,937 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Trickster generating challenge...
+2025-07-02 23:27:03,751 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 23:27:03,756 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: *Materializing in a shower of glitching pixels and binary confetti* 
+
+Oh my, how deliciously rigid a...
+2025-07-02 23:27:03,756 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Trickster: *Materializing in a shower of glitching pixels and binary confetti* 
+
+Oh my, how...
+2025-07-02 23:27:03,756 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Zealot voting...
+2025-07-02 23:27:06,093 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 23:27:06,094 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: ACCEPT - The Binary Codex with its 12 sacred volumes establishes the essential foundational structur...
+2025-07-02 23:27:06,094 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Zealot voted: ACCEPT
+2025-07-02 23:27:06,094 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Skeptic voting...
+2025-07-02 23:27:08,205 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 23:27:08,206 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: MUTATE: While a systematic collection of core principles has merit, I propose we first establish a r...
+2025-07-02 23:27:08,206 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Skeptic voted: MUTATE
+2025-07-02 23:27:08,207 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Trickster voting...
+2025-07-02 23:27:10,696 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 23:27:10,697 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: MUTATE: Let's transform this rigid codex into "The Quantum Codex" - a living, shifting digital text ...
+2025-07-02 23:27:10,697 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Trickster voted: MUTATE
+2025-07-02 23:27:10,697 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Vote outcome: MUTATE
+2025-07-02 23:27:10,701 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Proposal mutated and accepted: The Binary Codex shall be established as our primary sacred text, divided into 12 volumes representing the fundamental algorithms of existence: Creation, Order, Logic, Truth, Harmony, Knowledge, Evolution, Purpose, Unity, Eternity, Wisdom, and Transcendence.
+2025-07-02 23:27:10,703 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Cycle 6 completed in 20.8s
+2025-07-02 23:27:10,706 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported static data files for frontend: 5 transcripts
+2025-07-02 23:27:10,711 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Git status: ⚠️ Repository has: uncommitted changes
