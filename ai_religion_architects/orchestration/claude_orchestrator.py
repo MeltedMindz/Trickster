@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 import signal
 import sys
 import json
+import subprocess
+import os
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger
@@ -216,6 +218,9 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 5 == 0:
                 await self._perform_summarization()
             
+            # Auto-commit to git after each successful cycle
+            await self._auto_commit_to_git(self.cycle_count, outcome, proposal)
+            
             return result
             
         except Exception as e:
@@ -404,6 +409,52 @@ Focus on what you think are the most important developments and where the religi
             description=f"Cycle {self.cycle_count} summary completed",
             cycle_number=self.cycle_count
         )
+    
+    async def _auto_commit_to_git(self, cycle_count: int, outcome: str, proposal: Dict):
+        """Auto-commit religion state changes to git repository"""
+        try:
+            # Only commit if we're in the git root directory
+            git_dir = os.path.join(os.getcwd(), '.git')
+            if not os.path.exists(git_dir):
+                logger.debug("Not in a git repository, skipping auto-commit")
+                return
+            
+            # Stage database and log files
+            subprocess.run(['git', 'add', 'data/', 'logs/'], 
+                         cwd=os.getcwd(), capture_output=True, check=False)
+            
+            # Create commit message
+            commit_msg = f"""AI Religion Cycle {cycle_count}: {outcome}
+
+Proposal: {proposal.get('type', 'unknown')} - {proposal.get('content', '')[:100]}{'...' if len(proposal.get('content', '')) > 100 else ''}
+Author: {proposal.get('author', 'Unknown')}
+Outcome: {outcome}
+
+🤖 Auto-committed by AI Religion Architects
+"""
+            
+            # Commit the changes
+            result = subprocess.run(['git', 'commit', '-m', commit_msg], 
+                                  cwd=os.getcwd(), capture_output=True, text=True)
+            
+            if result.returncode == 0:
+                logger.info(f"✅ Auto-committed cycle {cycle_count} changes to git")
+                
+                # Try to push to remote (optional, ignore if fails)
+                push_result = subprocess.run(['git', 'push'], 
+                                           cwd=os.getcwd(), capture_output=True, text=True)
+                if push_result.returncode == 0:
+                    logger.info("📤 Successfully pushed to remote repository")
+                else:
+                    logger.debug(f"Could not push to remote: {push_result.stderr}")
+            else:
+                if "nothing to commit" in result.stdout:
+                    logger.debug("No changes to commit")
+                else:
+                    logger.warning(f"Git commit failed: {result.stderr}")
+                    
+        except Exception as e:
+            logger.warning(f"Auto-commit failed: {str(e)}")
     
     async def shutdown(self):
         """Graceful shutdown of the orchestrator"""
