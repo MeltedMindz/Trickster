@@ -1,0 +1,57 @@
+name: Deploy to Vercel on AI Religion Updates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'logs/**'
+      - 'frontend/**'
+      - 'index.html'
+      - 'js/**'
+      - 'styles/**'
+      - 'vercel.json'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+        
+      - name: Check for AI Religion updates
+        id: check_updates
+        run: |
+          # Check if this is an AI Religion auto-commit
+          if git log -1 --pretty=%B | grep -q "AI Religion Cycle"; then
+            echo "ai_update=true" >> $GITHUB_OUTPUT
+            echo "🤖 AI Religion update detected!"
+          else
+            echo "ai_update=false" >> $GITHUB_OUTPUT
+            echo "📝 Regular update detected"
+          fi
+          
+      - name: Deploy to Vercel
+        if: steps.check_updates.outputs.ai_update == 'true' || contains(github.event.head_commit.message, 'frontend') || contains(github.event.head_commit.message, 'vercel')
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          echo "🚀 Deploying to Vercel..."
+          vercel --token=${VERCEL_TOKEN} --prod --yes
+          
+      - name: Notify deployment
+        if: steps.check_updates.outputs.ai_update == 'true'
+        run: |
+          echo "✅ AI Religion Architects frontend updated with latest debate transcripts!"
+          echo "🔗 Visit: https://trickster-meltedmindz.vercel.app"

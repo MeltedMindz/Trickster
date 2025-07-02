@@ -217,6 +217,70 @@ async def resume_orchestrator():
     return {"status": "resumed"}
 
 
+@app.get("/api/transcripts")
+async def get_recent_transcripts(limit: int = 5):
+    """Get recent debate transcripts"""
+    try:
+        import os
+        import glob
+        
+        log_dir = os.environ.get('LOG_DIR', '/app/logs')
+        transcript_pattern = os.path.join(log_dir, 'transcript_*.txt')
+        transcript_files = glob.glob(transcript_pattern)
+        
+        # Sort by modification time, most recent first
+        transcript_files.sort(key=os.path.getmtime, reverse=True)
+        
+        transcripts = []
+        for file_path in transcript_files[:limit]:
+            try:
+                with open(file_path, 'r') as f:
+                    content = f.read()
+                    filename = os.path.basename(file_path)
+                    # Extract timestamp from filename
+                    timestamp = filename.replace('transcript_', '').replace('.txt', '')
+                    transcripts.append({
+                        "filename": filename,
+                        "timestamp": timestamp,
+                        "content": content,
+                        "modified": datetime.fromtimestamp(os.path.getmtime(file_path)).isoformat()
+                    })
+            except Exception as e:
+                logger.error(f"Error reading transcript {file_path}: {e}")
+                continue
+        
+        return {"transcripts": transcripts, "total": len(transcripts)}
+    except Exception as e:
+        logger.error(f"Error fetching transcripts: {e}")
+        return {"transcripts": [], "total": 0, "error": str(e)}
+
+
+@app.get("/api/religion/summary")
+async def get_religion_summary():
+    """Get a detailed summary of the current religion state"""
+    try:
+        state = state_manager.get_current_state()
+        
+        # Enhance with additional statistics
+        enhanced_state = {
+            **state,
+            "summary": {
+                "total_cycles": state.get('total_debates', 0),
+                "total_doctrines": len(state.get('accepted_doctrines', [])),
+                "total_deities": len(state.get('deities', [])),
+                "total_rituals": len(state.get('rituals', [])),
+                "total_commandments": len(state.get('commandments', [])),
+                "religion_age_cycles": state.get('total_debates', 0),
+                "last_updated": datetime.now().isoformat()
+            }
+        }
+        
+        return enhanced_state
+    except Exception as e:
+        logger.error(f"Error getting religion summary: {e}")
+        return {"error": str(e)}
+
+
 @app.post("/api/prompt")
 async def inject_prompt(prompt: Dict[str, str]):
     """Inject an external prompt into the debate"""

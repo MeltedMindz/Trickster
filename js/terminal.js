@@ -19,6 +19,8 @@ class TerminalClient {
         this.doctrineCount = document.getElementById('doctrine-count');
         this.deityCount = document.getElementById('deity-count');
         this.recentDoctrines = document.getElementById('recent-doctrines');
+        this.recentTranscripts = document.getElementById('recent-transcripts');
+        this.loadTranscriptsBtn = document.getElementById('load-transcripts-btn');
         
         this.init();
     }
@@ -27,6 +29,7 @@ class TerminalClient {
         this.connect();
         this.setupEventListeners();
         this.startPingInterval();
+        this.loadTranscripts();
     }
     
     connect() {
@@ -253,6 +256,65 @@ class TerminalClient {
                 sendPrompt();
             }
         });
+        
+        // Load transcripts button
+        this.loadTranscriptsBtn.addEventListener('click', () => {
+            this.loadTranscripts();
+        });
+    }
+    
+    async loadTranscripts() {
+        try {
+            const apiUrl = window.AI_RELIGION_CONFIG?.API_URL || 'http://localhost:8000/api';
+            const response = await fetch(`${apiUrl}/transcripts?limit=3`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            const data = await response.json();
+            this.updateTranscripts(data.transcripts || []);
+        } catch (error) {
+            console.error('Failed to load transcripts:', error);
+            this.recentTranscripts.innerHTML = '<div class="empty-state">Failed to load transcripts</div>';
+        }
+    }
+    
+    updateTranscripts(transcripts) {
+        if (transcripts.length === 0) {
+            this.recentTranscripts.innerHTML = '<div class="empty-state">No transcripts available</div>';
+            return;
+        }
+        
+        this.recentTranscripts.innerHTML = transcripts.map((transcript, index) => {
+            const preview = transcript.content.substring(0, 80) + (transcript.content.length > 80 ? '...' : '');
+            return `
+                <div class="transcript-item" data-transcript-index="${index}">
+                    <div class="timestamp">${transcript.timestamp}</div>
+                    <div class="content">${preview}</div>
+                </div>
+            `;
+        }).join('');
+        
+        // Add click listeners
+        const transcriptItems = this.recentTranscripts.querySelectorAll('.transcript-item');
+        transcriptItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                this.showFullTranscript(transcripts[index].filename, transcripts[index].content);
+            });
+        });
+    }
+    
+    showFullTranscript(filename, content) {
+        // Add full transcript to terminal
+        this.addSystemMessage(`📋 Loading transcript: ${filename}`, 'system');
+        const lines = content.split('\n');
+        lines.forEach(line => {
+            if (line.trim()) {
+                this.addTerminalLine(line, 'system');
+            }
+        });
+        this.addSystemMessage('📋 End of transcript', 'system');
     }
     
     startPingInterval() {
