@@ -1,16 +1,16 @@
 {
-  "name": "ai-religion-architects-frontend",
+  "name": "trickster-ai-religion-architects",
   "version": "1.0.0",
-  "description": "CLI-style web interface for AI Religion Architects",
-  "main": "index.html",
+  "description": "Static archive of autonomous AI theological debates - Trickster project",
+  "main": "public/index.html",
   "scripts": {
-    "dev": "python -m http.server 3000",
-    "build": "echo 'Static site - no build needed'",
-    "start": "python -m http.server 8080"
+    "dev": "cd public && python -m http.server 3000",
+    "build": "echo 'Vercel serves public/ directory directly - no build needed'",
+    "start": "cd public && python -m http.server 8080"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/ai-religion-architects.git"
+    "url": "https://github.com/MeltedMindz/Trickster.git"
   },
   "keywords": [
     "ai",
@@ -19,9 +19,12 @@
     "autonomous",
     "agents",
     "cli",
-    "terminal"
+    "terminal",
+    "trickster",
+    "static",
+    "archive"
   ],
-  "author": "AI Religion Architects Team",
+  "author": "MeltedMindz",
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {}

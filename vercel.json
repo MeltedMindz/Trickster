@@ -3,7 +3,6 @@
   "name": "trickster",
   "public": true,
   "outputDirectory": "public",
-  "buildCommand": "cp index.html public/ && cp -r js public/ && cp -r styles public/ || echo 'Files already in public'",
   "rewrites": [
     {
       "source": "/",
@@ -26,6 +25,15 @@
         {
           "key": "Content-Type",
           "value": "text/css"
+        }
+      ]
+    },
+    {
+      "source": "/data/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
         }
       ]
     }
