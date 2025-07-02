@@ -6,6 +6,7 @@
     <title>AI Religion Architects - Live Terminal</title>
     <link rel="stylesheet" href="styles/terminal.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="js/config.js"></script>
 </head>
 <body>
     <div class="terminal-container">
@@ -72,6 +73,16 @@
                     <div id="recent-doctrines" class="doctrine-list">
                         <div class="empty-state">No doctrines yet...</div>
                     </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>📋 Recent Transcripts</h3>
+                    <div id="recent-transcripts" class="transcript-list">
+                        <div class="empty-state">Loading transcripts...</div>
+                    </div>
+                    <button id="load-transcripts-btn" class="control-btn" style="margin-top: 10px; width: 100%;">
+                        🔄 Refresh Transcripts
+                    </button>
                 </div>
             </div>
             
