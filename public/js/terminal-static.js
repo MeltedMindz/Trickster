@@ -46,16 +46,21 @@ class StaticTerminalClient {
     async loadStaticData() {
         try {
             // Load from committed static JSON files only
+            console.log('🔍 Attempting to fetch: ./data/religion_state.json');
             const response = await fetch('./data/religion_state.json');
+            console.log('📡 Response status:', response.status, response.statusText);
+            
             if (response.ok) {
                 const data = await response.json();
+                console.log('📊 Loaded data:', data);
                 this.updateReligionInfo(data);
                 console.log('✅ Loaded religion state from static archive');
             } else {
-                throw new Error('Static data not available');
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
         } catch (error) {
-            console.log('📦 No static data yet - waiting for first AI debate cycle');
+            console.error('❌ Error loading static data:', error);
+            console.log('📦 Falling back to loading state');
             this.displayStaticInfo();
         }
         
@@ -99,16 +104,21 @@ class StaticTerminalClient {
     
     async loadLatestTranscripts() {
         try {
+            console.log('🔍 Attempting to fetch: ./data/recent_transcripts.json');
             const response = await fetch('./data/recent_transcripts.json');
+            console.log('📡 Transcripts response status:', response.status, response.statusText);
+            
             if (response.ok) {
                 const data = await response.json();
+                console.log('📄 Loaded transcript data:', data);
                 this.updateTranscripts(data.transcripts || []);
                 console.log('✅ Loaded transcripts from static archive');
             } else {
-                throw new Error('Static transcripts not available');
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
         } catch (error) {
-            console.log('📄 No transcripts yet - waiting for AI debates');
+            console.error('❌ Error loading transcripts:', error);
+            console.log('📄 Falling back to empty transcripts state');
             this.recentTranscripts.innerHTML = '<div class="empty-state">Transcripts will appear here after AI debates</div>';
         }
     }
