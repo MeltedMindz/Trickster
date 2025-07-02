@@ -337,6 +337,14 @@ class SharedMemory:
             ''', (milestone_type, description, cycle_number, datetime.now()))
             conn.commit()
     
+    def get_current_cycle_number(self) -> int:
+        """Get the current cycle number from the database"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT MAX(cycle_number) FROM debate_history")
+            result = cursor.fetchone()
+            return result[0] if result[0] is not None else 0
+    
     def get_current_state(self) -> Dict[str, Any]:
         """Get a comprehensive view of the current religious state"""
         with self._get_connection() as conn:
