@@ -36,6 +36,9 @@ class ClaudeReligionOrchestrator:
         # Initialize components
         self.shared_memory = SharedMemory(self.db_path)
         
+        # Create a general logger for non-cycle events
+        self.general_logger = DebateLogger(self.log_dir)
+        
         # Agent names for the debate system
         self.agent_names = ["Zealot", "Skeptic", "Trickster"]
         self.current_proposer_index = 0
@@ -101,7 +104,7 @@ class ClaudeReligionOrchestrator:
         
         # Log initial state
         initial_state = self.shared_memory.get_current_state()
-        self.logger.log_event("Claude orchestrator initialized", "System")
+        self.general_logger.log_event("Claude orchestrator initialized", "System")
         
         # Schedule the debate cycle job
         self.scheduler.add_job(
@@ -332,7 +335,7 @@ class ClaudeReligionOrchestrator:
         
         if proposal_type == "name":
             self.shared_memory.set_religion_name(content)
-            self.logger.log_event(f"RELIGION NAMED: {content}", "System")
+            self.general_logger.log_event(f"RELIGION NAMED: {content}", "System")
             
         elif proposal_type == "belief":
             self.shared_memory.add_doctrine(
@@ -393,7 +396,7 @@ class ClaudeReligionOrchestrator:
     async def _perform_summarization(self):
         """Have Claude summarize the current state of the religion"""
         logger.info("📋 Performing periodic summarization...")
-        self.logger.log_event("=== PERIODIC SUMMARIZATION ===", "System")
+        self.general_logger.log_event("=== PERIODIC SUMMARIZATION ===", "System")
         
         current_state = self.shared_memory.get_current_state()
         
@@ -414,7 +417,7 @@ Focus on what you think are the most important developments and where the religi
                     agent_name, "summarizer", current_state, summary_prompt
                 )
                 
-                self.logger.log_summary(agent_name, summary)
+                self.general_logger.log_summary(agent_name, summary)
                 logger.info(f"📝 {agent_name} summary: {summary}")
                 
             except Exception as e:
@@ -573,7 +576,7 @@ Outcome: {outcome}
             final_state = self.shared_memory.get_current_state()
             
             # Log final state
-            self.logger.log_session_end(final_state)
+            self.general_logger.log_session_end(final_state)
             
             # Add shutdown milestone
             self.shared_memory.add_evolution_milestone(
