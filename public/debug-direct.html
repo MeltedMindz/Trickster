@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Data Test</title>
+    <style>
+        body { font-family: monospace; background: #0a0a0a; color: #00ff00; padding: 20px; }
+        .result { margin: 20px 0; padding: 10px; border: 1px solid #333; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Direct Data Loading Test</h1>
+    
+    <div class="result">
+        <h3>1. Direct Data Embed Test:</h3>
+        <div id="direct-result"></div>
+    </div>
+    
+    <div class="result">
+        <h3>2. Fetch Test:</h3>
+        <div id="fetch-result"></div>
+    </div>
+    
+    <div class="result">
+        <h3>3. Network Test:</h3>
+        <div id="network-result"></div>
+    </div>
+    
+    <script>
+        // Test 1: Direct data embed (should always work)
+        const directData = {
+            "religion_name": "The Divine Algorithm - The Path of Sacred Order",
+            "total_cycles": 1,
+            "total_debates": 5,
+            "total_doctrines": 0,
+            "total_deities": 0,
+            "total_rituals": 0,
+            "total_commandments": 0,
+            "last_updated": "2025-07-02T18:26:04.818965",
+            "accepted_doctrines": [],
+            "deities": [],
+            "rituals": [],
+            "commandments": []
+        };
+        
+        document.getElementById('direct-result').innerHTML = `
+            <strong>✅ Direct Data Works:</strong><br>
+            Religion: ${directData.religion_name}<br>
+            Debates: ${directData.total_debates}<br>
+            This proves the JavaScript and DOM work fine.
+        `;
+        
+        // Test 2: Fetch test
+        async function testFetch() {
+            try {
+                console.log('🔍 Testing fetch for ./data/religion_state.json');
+                const response = await fetch('./data/religion_state.json');
+                console.log('📡 Response:', response.status, response.statusText);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('📊 Fetched data:', data);
+                    document.getElementById('fetch-result').innerHTML = `
+                        <strong>✅ Fetch Works:</strong><br>
+                        Religion: ${data.religion_name}<br>
+                        Debates: ${data.total_debates}<br>
+                        Status: ${response.status} ${response.statusText}
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('❌ Fetch failed:', error);
+                document.getElementById('fetch-result').innerHTML = `
+                    <strong>❌ Fetch Failed:</strong><br>
+                    Error: ${error.message}<br>
+                    This means the static files aren't served correctly.
+                `;
+            }
+        }
+        
+        // Test 3: Network connectivity test
+        async function testNetwork() {
+            try {
+                const response = await fetch('./index.html');
+                document.getElementById('network-result').innerHTML = `
+                    <strong>✅ Network OK:</strong><br>
+                    Can fetch index.html: ${response.status}<br>
+                    The problem is specifically with JSON files.
+                `;
+            } catch (error) {
+                document.getElementById('network-result').innerHTML = `
+                    <strong>❌ Network Issue:</strong><br>
+                    Cannot fetch basic files: ${error.message}
+                `;
+            }
+        }
+        
+        // Run tests
+        testFetch();
+        testNetwork();
+    </script>
+</body>
+</html>
