@@ -122,6 +122,7 @@ class StaticTerminalClient {
                 const data = await response.json();
                 console.log('📄 Loaded transcript data:', data);
                 this.updateTranscripts(data.transcripts || []);
+                this.autoLoadTranscriptsToTerminal(data.transcripts || []);
                 console.log('✅ Loaded transcripts from static archive');
             } else {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -161,8 +162,32 @@ class StaticTerminalClient {
         this.addSystemMessage(`📋 Loaded ${transcripts.length} recent debate transcripts`);
     }
     
-    showFullTranscript(filename, content) {
-        this.addSystemMessage(`📋 === DEBATE TRANSCRIPT: ${filename} ===`);
+    autoLoadTranscriptsToTerminal(transcripts) {
+        if (transcripts.length === 0) {
+            this.addSystemMessage('📄 No debate transcripts available yet');
+            return;
+        }
+        
+        // Sort transcripts by timestamp (most recent first)
+        const sortedTranscripts = transcripts.sort((a, b) => {
+            return new Date(b.modified) - new Date(a.modified);
+        });
+        
+        this.addSystemMessage('📚 Auto-loading recent AI theological debates...');
+        this.addSystemMessage('---');
+        
+        // Load the most recent transcript automatically
+        const latestTranscript = sortedTranscripts[0];
+        this.addSystemMessage(`📋 === LATEST DEBATE: ${latestTranscript.filename} ===`);
+        this.displayTranscriptContent(latestTranscript.content);
+        this.addSystemMessage('📋 === END OF LATEST DEBATE ===');
+        
+        if (sortedTranscripts.length > 1) {
+            this.addSystemMessage(`💭 ${sortedTranscripts.length - 1} older debates available in transcript panel →`);
+        }
+    }
+    
+    displayTranscriptContent(content) {
         const lines = content.split('\n');
         lines.forEach(line => {
             if (line.trim()) {
@@ -172,13 +197,22 @@ class StaticTerminalClient {
                     this.addTerminalLine(line, 'challenge');
                 } else if (line.includes('VOTE')) {
                     this.addTerminalLine(line, 'vote');
-                } else if (line.includes('CYCLE')) {
+                } else if (line.includes('CYCLE') && line.includes('BEGINNING')) {
+                    this.addTerminalLine(line, 'system');
+                } else if (line.includes('completed:')) {
+                    this.addTerminalLine(line, 'accepted');
+                } else if (line.includes('===') || line.includes('---')) {
                     this.addTerminalLine(line, 'system');
                 } else {
                     this.addTerminalLine(line, 'system');
                 }
             }
         });
+    }
+    
+    showFullTranscript(filename, content) {
+        this.addSystemMessage(`📋 === DEBATE TRANSCRIPT: ${filename} ===`);
+        this.displayTranscriptContent(content);
         this.addSystemMessage('📋 === END OF TRANSCRIPT ===');
     }
     
