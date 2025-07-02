@@ -13,7 +13,7 @@ class Config:
     # Claude API Configuration
     CLAUDE_API_KEY: Optional[str] = os.getenv("CLAUDE_API_KEY")
     CLAUDE_API_URL: str = "https://api.anthropic.com/v1/messages"
-    CLAUDE_MODEL: str = os.getenv("CLAUDE_MODEL", "claude-3-sonnet-20240229")
+    CLAUDE_MODEL: str = os.getenv("CLAUDE_MODEL", "claude-3-5-sonnet-20241022")
     CLAUDE_MAX_TOKENS: int = int(os.getenv("CLAUDE_MAX_TOKENS", "2000"))
     CLAUDE_TEMPERATURE: float = float(os.getenv("CLAUDE_TEMPERATURE", "0.7"))
     
