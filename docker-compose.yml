@@ -10,6 +10,10 @@ services:
     volumes:
       - ./data:/app/data  # Persistent database storage
       - ./logs:/app/logs  # Log files
+      - ./.git:/app/.git  # Git repository for auto-commits
+      - ./ai_religion_architects:/app/ai_religion_architects  # Source code
+      - ./backend:/app/backend  # Backend code
+      - ./run_claude_system.py:/app/run_claude_system.py  # Main script
     env_file:
       - .env  # Load environment variables from .env file
     environment:

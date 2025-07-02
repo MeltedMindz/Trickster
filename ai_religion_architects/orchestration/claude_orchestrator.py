@@ -419,6 +419,12 @@ Focus on what you think are the most important developments and where the religi
                 logger.debug("Not in a git repository, skipping auto-commit")
                 return
             
+            # Configure git if not already configured
+            subprocess.run(['git', 'config', '--global', 'user.email', 'ai-religion@anthropic.com'], 
+                         cwd=os.getcwd(), capture_output=True, check=False)
+            subprocess.run(['git', 'config', '--global', 'user.name', 'AI Religion Architects'], 
+                         cwd=os.getcwd(), capture_output=True, check=False)
+            
             # Stage database and log files
             subprocess.run(['git', 'add', 'data/', 'logs/'], 
                          cwd=os.getcwd(), capture_output=True, check=False)
