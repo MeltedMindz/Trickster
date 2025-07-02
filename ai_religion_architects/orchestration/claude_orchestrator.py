@@ -88,6 +88,18 @@ class ClaudeReligionOrchestrator:
             logger.error(f"❌ Failed to initialize Claude client: {e}")
             raise
         
+        # Start health monitoring
+        from ai_religion_architects.utils.health_check import SystemHealthMonitor
+        self.health_monitor = SystemHealthMonitor(self.shared_memory, self.log_dir)
+        
+        # Start periodic health checks (every 5 minutes)
+        asyncio.create_task(self.health_monitor.periodic_health_check(300))
+        logger.info("🏥 Health monitoring started")
+        
+        # Run initial health check
+        health_report = self.health_monitor.check_system_health()
+        logger.info(f"📊 Initial system health: {health_report['overall_status']}")
+        
         # Log initial state
         initial_state = self.shared_memory.get_current_state()
         self.logger.log_event("Claude orchestrator initialized", "System")
@@ -478,7 +490,7 @@ Focus on what you think are the most important developments and where the religi
             logger.warning(f"Failed to export static data: {str(e)}")
     
     async def _auto_commit_to_git(self, cycle_count: int, outcome: str, proposal: Dict):
-        """Auto-commit religion state changes to git repository"""
+        """Auto-commit religion state changes to git repository with robust monitoring"""
         try:
             # Only commit if we're in the git root directory
             git_dir = os.path.join(os.getcwd(), '.git')
@@ -486,15 +498,13 @@ Focus on what you think are the most important developments and where the religi
                 logger.debug("Not in a git repository, skipping auto-commit")
                 return
             
-            # Configure git if not already configured (use existing setup)
-            subprocess.run(['git', 'config', '--global', 'user.email', 'meltedmindz1@gmail.com'], 
-                         cwd=os.getcwd(), capture_output=True, check=False)
-            subprocess.run(['git', 'config', '--global', 'user.name', 'MeltedMindz'], 
-                         cwd=os.getcwd(), capture_output=True, check=False)
+            # Use the git monitor for robust sync
+            from ai_religion_architects.utils.git_monitor import GitSyncMonitor
+            git_monitor = GitSyncMonitor()
             
-            # Stage static data files and logs
-            subprocess.run(['git', 'add', 'public/data/', 'logs/'], 
-                         cwd=os.getcwd(), capture_output=True, check=False)
+            # Check git health before committing
+            health_status = git_monitor.get_sync_health_status()
+            logger.info(f"📊 Git status: {health_status['status_message']}")
             
             # Create commit message
             commit_msg = f"""AI Religion Cycle {cycle_count}: {outcome}
@@ -506,28 +516,27 @@ Outcome: {outcome}
 🤖 Auto-committed by AI Religion Architects
 """
             
-            # Commit the changes
-            result = subprocess.run(['git', 'commit', '-m', commit_msg], 
-                                  cwd=os.getcwd(), capture_output=True, text=True)
+            # Files to add
+            files_to_add = ['public/data/', 'logs/']
             
-            if result.returncode == 0:
-                logger.info(f"✅ Auto-committed cycle {cycle_count} changes to git")
-                
-                # Try to push to remote (optional, ignore if fails)
-                push_result = subprocess.run(['git', 'push'], 
-                                           cwd=os.getcwd(), capture_output=True, text=True)
-                if push_result.returncode == 0:
-                    logger.info("📤 Successfully pushed to remote repository")
-                else:
-                    logger.debug(f"Could not push to remote: {push_result.stderr}")
+            # Perform sync with monitoring and retry
+            success = git_monitor.sync_repository(files_to_add, commit_msg)
+            
+            if success:
+                logger.info(f"✅ Successfully synced cycle {cycle_count} changes to remote repository")
             else:
-                if "nothing to commit" in result.stdout:
-                    logger.debug("No changes to commit")
-                else:
-                    logger.warning(f"Git commit failed: {result.stderr}")
+                logger.error(f"❌ Failed to sync changes to remote repository")
+                
+                # Log detailed status for debugging
+                final_status = git_monitor.get_sync_health_status()
+                logger.error(f"Git sync failed. Status: {final_status}")
+                
+                # Alert if commits are accumulating
+                if final_status['commits_ahead'] > 5:
+                    logger.critical(f"⚠️ CRITICAL: {final_status['commits_ahead']} commits pending push! Manual intervention may be required.")
                     
         except Exception as e:
-            logger.warning(f"Auto-commit failed: {str(e)}")
+            logger.error(f"Auto-commit failed with exception: {str(e)}", exc_info=True)
     
     async def shutdown(self):
         """Graceful shutdown of the orchestrator"""
