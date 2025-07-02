@@ -76,29 +76,19 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
-  deploy-to-vps:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
-    steps:
-    - name: Deploy to VPS
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        key: ${{ secrets.VPS_SSH_KEY }}
-        script: |
-          # Pull latest image
-          docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          
-          # Stop existing container
-          docker-compose -f /opt/ai-religion-architects/docker-compose.yml down || true
-          
-          # Start new container
-          cd /opt/ai-religion-architects
-          docker-compose pull
-          docker-compose up -d
-          
-          # Clean up old images
-          docker image prune -f
+  # deploy-to-vps:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   
+  #   steps:
+  #   - name: Deploy to VPS
+  #     uses: appleboy/ssh-action@v1.0.0
+  #     with:
+  #       host: ${{ secrets.VPS_HOST }}
+  #       username: ${{ secrets.VPS_USERNAME }}
+  #       key: ${{ secrets.VPS_SSH_KEY }}
+  #       script: |
+  #         # VPS deployment disabled - system runs directly with Python
+  #         # Auto-updates via git pulls are handled by the running system
+  #         echo "VPS deployment skipped - system self-manages via git"
