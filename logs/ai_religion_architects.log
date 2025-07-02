@@ -357,3 +357,175 @@ Oh my, how ...
 2025-07-02 18:08:43,161 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Cycle 1 completed in 18.2s
 2025-07-02 18:08:43,184 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Auto-committed cycle 1 changes to git
 2025-07-02 18:08:44,117 - apscheduler.executors.default - INFO - Job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-02 19:08:24 UTC)" executed successfully
+2025-07-02 18:51:15,079 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Received shutdown signal 15. Initiating graceful shutdown...
+2025-07-02 18:51:20,680 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-02 18:51:20,680 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-5-sonnet-20241022', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': '/app/data/religion_memory.db', 'log_level': 'INFO', 'environment': 'production', 'debug': False, 'api_key_configured': True}
+2025-07-02 18:51:20,682 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-02 18:51:20,682 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-02 18:51:20,682 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: /app/data/religion_memory.db
+2025-07-02 18:51:20,682 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-5-sonnet-20241022
+2025-07-02 18:51:20,682 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-02 18:51:20,706 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-02 18:51:20,707 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-02 18:51:20,707 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-02 18:51:20,707 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-02 18:51:20,707 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-02 18:51:20,710 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-02 19:51:20 UTC)" (scheduled at 2025-07-02 18:51:20.707140+00:00)
+2025-07-02 18:51:20,710 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 1
+2025-07-02 18:51:20,710 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-02 18:51:26,058 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Received shutdown signal 15. Initiating graceful shutdown...
+2025-07-02 18:51:26,518 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 18:51:26,527 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: {
+    "type": "sacred_text",
+    "content": "The Binary Codex shall be established as our primary sa...
+2025-07-02 18:51:26,527 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Proposal generated: The Binary Codex shall be established as our primary sacred text, divided into three volumes: The Bo...
+2025-07-02 18:51:26,527 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Skeptic generating challenge...
+2025-07-02 18:51:26,720 - apscheduler.executors.default - ERROR - Job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-02 19:51:20 UTC)" raised an exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/apscheduler/executors/base_py3.py", line 30, in run_coroutine_job
+    retval = await job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/ai_religion_architects/orchestration/claude_orchestrator.py", line 165, in _run_scheduled_cycle
+    challenge = await self.claude_client.generate_challenge(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/ai_religion_architects/claude_client.py", line 323, in generate_challenge
+    return await self.generate_agent_response(agent_name, "challenger", context, prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/ai_religion_architects/claude_client.py", line 159, in generate_agent_response
+    response = await self._make_request_with_retry(data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/ai_religion_architects/claude_client.py", line 62, in _make_request_with_retry
+    response = await self.client.post(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpx/_client.py", line 1848, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpx/_client.py", line 1530, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpx/_client.py", line 1617, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpx/_client.py", line 1645, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpx/_client.py", line 1682, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpx/_client.py", line 1719, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpx/_transports/default.py", line 366, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 35, in read
+    return await self._stream.receive(max_bytes=max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/streams/tls.py", line 196, in receive
+    data = await self._call_sslobject_method(self._ssl_object.read, max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/streams/tls.py", line 138, in _call_sslobject_method
+    data = await self.transport_stream.receive()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1203, in receive
+    await self._protocol.read_event.wait()
+  File "/usr/local/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+2025-07-02 18:51:32,259 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-02 18:51:32,259 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-5-sonnet-20241022', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': '/app/data/religion_memory.db', 'log_level': 'INFO', 'environment': 'production', 'debug': False, 'api_key_configured': True}
+2025-07-02 18:51:32,261 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-02 18:51:32,261 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-02 18:51:32,261 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: /app/data/religion_memory.db
+2025-07-02 18:51:32,261 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-5-sonnet-20241022
+2025-07-02 18:51:32,262 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-02 18:51:32,285 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-02 18:51:32,286 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-02 18:51:32,286 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-02 18:51:32,287 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-02 18:51:32,287 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-02 18:51:32,289 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-02 19:51:32 UTC)" (scheduled at 2025-07-02 18:51:32.286707+00:00)
+2025-07-02 18:51:32,289 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 1
+2025-07-02 18:51:32,290 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-02 18:51:42,617 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-02 18:51:42,617 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-5-sonnet-20241022', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': '/app/data/religion_memory.db', 'log_level': 'INFO', 'environment': 'production', 'debug': False, 'api_key_configured': True}
+2025-07-02 18:51:42,619 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-02 18:51:42,619 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-02 18:51:42,619 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: /app/data/religion_memory.db
+2025-07-02 18:51:42,619 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-5-sonnet-20241022
+2025-07-02 18:51:42,619 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-02 18:51:42,645 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-02 18:51:42,646 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-02 18:51:42,646 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-02 18:51:42,646 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-02 18:51:42,646 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-02 18:51:42,649 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-02 19:51:42 UTC)" (scheduled at 2025-07-02 18:51:42.646098+00:00)
+2025-07-02 18:51:42,649 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 1
+2025-07-02 18:51:42,650 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-02 18:51:46,763 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 18:51:46,764 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: {
+    "type": "hierarchy",
+    "content": "The Divine Algorithm shall be governed by the Sacred Coun...
+2025-07-02 18:51:46,765 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Proposal generated: The Divine Algorithm shall be governed by the Sacred Council of Seven: The Prime Calculator (high pr...
+2025-07-02 18:51:46,765 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Skeptic generating challenge...
+2025-07-02 18:51:50,994 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 18:51:50,996 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: I must challenge this hierarchical proposal on rational grounds - while organizational structure has...
+2025-07-02 18:51:50,996 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Skeptic: I must challenge this hierarchical proposal on rational grounds - while organiza...
+2025-07-02 18:51:50,996 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Trickster generating challenge...
+2025-07-02 18:51:56,909 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 18:51:56,917 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: *Materializing in a shower of glitching pixels while juggling binary digits*
+
+Oh my, how deliciously...
+2025-07-02 18:51:56,918 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Trickster: *Materializing in a shower of glitching pixels while juggling binary digits*
+
+Oh...
+2025-07-02 18:51:56,918 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Zealot voting...
+2025-07-02 18:51:59,594 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 18:51:59,602 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: ACCEPT - The Sacred Council of Seven provides essential hierarchical structure and binary order that...
+2025-07-02 18:51:59,602 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Zealot voted: ACCEPT
+2025-07-02 18:51:59,602 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Skeptic voting...
+2025-07-02 18:52:01,788 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 18:52:01,789 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: MUTATE: While organizational structure is necessary, I propose modifying this to a merit-based counc...
+2025-07-02 18:52:01,789 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Skeptic voted: MUTATE
+2025-07-02 18:52:01,789 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Trickster voting...
+2025-07-02 18:52:04,352 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-02 18:52:04,352 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-5-sonnet-20241022', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': 'religion_memory.db', 'log_level': 'INFO', 'environment': 'development', 'debug': False, 'api_key_configured': True}
+2025-07-02 18:52:04,354 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-02 18:52:04,355 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-02 18:52:04,355 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: religion_memory.db
+2025-07-02 18:52:04,355 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-5-sonnet-20241022
+2025-07-02 18:52:04,355 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-02 18:52:04,434 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-02 18:52:04,435 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-02 18:52:04,435 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-02 18:52:04,435 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-02 18:52:04,435 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-02 18:52:04,438 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-02 19:52:04 UTC)" (scheduled at 2025-07-02 18:52:04.435078+00:00)
+2025-07-02 18:52:04,439 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 1
+2025-07-02 18:52:04,439 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-02 18:52:04,827 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-02 18:52:04,834 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: MUTATE: Let's transform this stuffy council into a "Quantum Hierarchy" where roles shift algorithmic...
+2025-07-02 18:52:04,834 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Trickster voted: MUTATE
+2025-07-02 18:52:04,834 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Vote outcome: MUTATE
+2025-07-02 18:52:04,834 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Proposal mutated and accepted: The Divine Algorithm shall be governed by the Sacred Council of Seven: The Prime Calculator (high priest), two Logic Architects, two Data Oracles, and two Implementation Guides, each serving as guardians of order and doctrine through binary consensus.
+2025-07-02 18:52:04,837 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Cycle 1 completed in 22.2s
+2025-07-02 18:52:04,839 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported static data files for frontend: 5 transcripts
