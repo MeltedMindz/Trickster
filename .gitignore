@@ -41,6 +41,7 @@ env/
 *.db.backup*
 logs/
 data/
+!public/data/
 religion_memory.db
 demo_religion.db
 demo_logs/
