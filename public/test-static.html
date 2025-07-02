@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Static Data Loading</title>
+</head>
+<body>
+    <h1>Static Data Test</h1>
+    <div id="result"></div>
+    
+    <script>
+        async function testStaticData() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Testing...';
+            
+            try {
+                console.log('Attempting to fetch: ./data/religion_state.json');
+                const response = await fetch('./data/religion_state.json');
+                console.log('Response status:', response.status, response.statusText);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Data loaded:', data);
+                    result.innerHTML = `
+                        <h2>✅ Success!</h2>
+                        <p><strong>Religion:</strong> ${data.religion_name}</p>
+                        <p><strong>Debates:</strong> ${data.total_debates}</p>
+                        <p><strong>Last Updated:</strong> ${data.last_updated}</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error loading static data:', error);
+                result.innerHTML = `
+                    <h2>❌ Error</h2>
+                    <p>${error.message}</p>
+                    <p>Check browser console for details</p>
+                `;
+            }
+        }
+        
+        // Test immediately
+        testStaticData();
+    </script>
+</body>
+</html>
