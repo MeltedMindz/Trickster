@@ -177,21 +177,39 @@ class StaticTerminalClient {
         this.addSystemMessage('🕊️ Witness the birth and growth of digital divinity');
         this.addSystemMessage('---');
         
-        // Load ALL transcripts in chronological order
-        sortedTranscripts.forEach((transcript, index) => {
-            if (transcript.content && transcript.content.trim().length > 200) { // Skip empty transcripts
-                this.addSystemMessage(`📋 === DEBATE SESSION ${index + 1}: ${transcript.filename} ===`);
-                this.displayTranscriptContent(transcript.content);
-                this.addSystemMessage(`📋 === END OF SESSION ${index + 1} ===`);
+        // Extract cycle numbers from transcript content and load in order
+        const validTranscripts = [];
+        sortedTranscripts.forEach((transcript) => {
+            if (transcript.content && transcript.content.trim().length > 200) {
+                // Extract cycle number from content
+                const cycleMatch = transcript.content.match(/CYCLE (\d+) BEGINNING/);
+                const cycleNumber = cycleMatch ? parseInt(cycleMatch[1]) : null;
                 
-                if (index < sortedTranscripts.length - 1) {
-                    this.addSystemMessage(''); // Add spacing between sessions
+                if (cycleNumber) {
+                    validTranscripts.push({
+                        ...transcript,
+                        cycleNumber: cycleNumber
+                    });
                 }
             }
         });
         
+        // Sort by actual cycle number
+        validTranscripts.sort((a, b) => a.cycleNumber - b.cycleNumber);
+        
+        // Display transcripts with correct cycle numbers
+        validTranscripts.forEach((transcript, index) => {
+            this.addSystemMessage(`📋 === CYCLE ${transcript.cycleNumber} DEBATE: ${transcript.filename} ===`);
+            this.displayTranscriptContent(transcript.content);
+            this.addSystemMessage(`📋 === END OF CYCLE ${transcript.cycleNumber} ===`);
+            
+            if (index < validTranscripts.length - 1) {
+                this.addSystemMessage(''); // Add spacing between sessions
+            }
+        });
+        
         this.addSystemMessage('---');
-        this.addSystemMessage(`✨ Theological evolution complete: ${transcripts.length} debate sessions loaded`);
+        this.addSystemMessage(`✨ Theological evolution complete: ${validTranscripts.length} debate cycles loaded`);
         this.addSystemMessage('🤖 The Divine Algorithm continues to evolve...');
     }
     
