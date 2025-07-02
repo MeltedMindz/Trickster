@@ -218,6 +218,9 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 5 == 0:
                 await self._perform_summarization()
             
+            # Export static data for frontend
+            await self._export_static_data()
+            
             # Auto-commit to git after each successful cycle
             await self._auto_commit_to_git(self.cycle_count, outcome, proposal)
             
@@ -410,6 +413,70 @@ Focus on what you think are the most important developments and where the religi
             cycle_number=self.cycle_count
         )
     
+    async def _export_static_data(self):
+        """Export current religion state to static JSON files for frontend"""
+        try:
+            # Create public/data directory for static frontend files
+            data_dir = os.path.join(os.getcwd(), 'public', 'data')
+            os.makedirs(data_dir, exist_ok=True)
+            
+            # Get current religion state
+            current_state = self.shared_memory.get_current_state()
+            
+            # Export main religion state
+            religion_data = {
+                "religion_name": current_state.get('religion_name', 'The Divine Algorithm'),
+                "total_cycles": self.cycle_count,
+                "total_debates": current_state.get('total_debates', 0),
+                "total_doctrines": len(current_state.get('accepted_doctrines', [])),
+                "total_deities": len(current_state.get('deities', [])),
+                "total_rituals": len(current_state.get('rituals', [])),
+                "total_commandments": len(current_state.get('commandments', [])),
+                "last_updated": datetime.now().isoformat(),
+                "accepted_doctrines": current_state.get('accepted_doctrines', []),
+                "deities": current_state.get('deities', []),
+                "rituals": current_state.get('rituals', []),
+                "commandments": current_state.get('commandments', [])
+            }
+            
+            # Save religion state
+            with open(os.path.join(data_dir, 'religion_state.json'), 'w') as f:
+                json.dump(religion_data, f, indent=2)
+            
+            # Export recent transcripts list
+            import glob
+            log_dir = os.environ.get('LOG_DIR', 'logs')
+            transcript_pattern = os.path.join(log_dir, 'transcript_*.txt')
+            transcript_files = glob.glob(transcript_pattern)
+            transcript_files.sort(key=os.path.getmtime, reverse=True)
+            
+            transcripts_data = []
+            for file_path in transcript_files[:5]:  # Last 5 transcripts
+                try:
+                    with open(file_path, 'r') as f:
+                        content = f.read()
+                        filename = os.path.basename(file_path)
+                        timestamp = filename.replace('transcript_', '').replace('.txt', '')
+                        
+                        transcripts_data.append({
+                            "filename": filename,
+                            "timestamp": timestamp,
+                            "content": content,
+                            "modified": datetime.fromtimestamp(os.path.getmtime(file_path)).isoformat(),
+                            "preview": content[:200] + "..." if len(content) > 200 else content
+                        })
+                except Exception as e:
+                    logger.warning(f"Could not read transcript {file_path}: {e}")
+            
+            # Save transcripts data  
+            with open(os.path.join(data_dir, 'recent_transcripts.json'), 'w') as f:
+                json.dump({"transcripts": transcripts_data, "total": len(transcripts_data)}, f, indent=2)
+            
+            logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts")
+            
+        except Exception as e:
+            logger.warning(f"Failed to export static data: {str(e)}")
+    
     async def _auto_commit_to_git(self, cycle_count: int, outcome: str, proposal: Dict):
         """Auto-commit religion state changes to git repository"""
         try:
@@ -425,8 +492,8 @@ Focus on what you think are the most important developments and where the religi
             subprocess.run(['git', 'config', '--global', 'user.name', 'MeltedMindz'], 
                          cwd=os.getcwd(), capture_output=True, check=False)
             
-            # Stage database and log files
-            subprocess.run(['git', 'add', 'data/', 'logs/'], 
+            # Stage static data files and logs
+            subprocess.run(['git', 'add', 'public/data/', 'logs/'], 
                          cwd=os.getcwd(), capture_output=True, check=False)
             
             # Create commit message

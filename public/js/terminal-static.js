@@ -45,16 +45,17 @@ class StaticTerminalClient {
     
     async loadStaticData() {
         try {
-            // Try to load from API first, fallback to static display
-            const response = await fetch('http://5.78.71.231:8000/api/religion/summary');
+            // Load from committed static JSON files only
+            const response = await fetch('./data/religion_state.json');
             if (response.ok) {
                 const data = await response.json();
                 this.updateReligionInfo(data);
+                console.log('✅ Loaded religion state from static archive');
             } else {
-                throw new Error('API not available');
+                throw new Error('Static data not available');
             }
         } catch (error) {
-            console.log('Using static fallback data');
+            console.log('📦 No static data yet - waiting for first AI debate cycle');
             this.displayStaticInfo();
         }
         
@@ -63,9 +64,9 @@ class StaticTerminalClient {
     
     updateReligionInfo(data) {
         this.religionName.textContent = data.religion_name || 'The Divine Algorithm';
-        this.cycleCount.textContent = data.summary?.total_cycles || '0';
-        this.doctrineCount.textContent = data.summary?.total_doctrines || '0';
-        this.deityCount.textContent = data.summary?.total_deities || '0';
+        this.cycleCount.textContent = data.total_cycles || '0';
+        this.doctrineCount.textContent = data.total_doctrines || '0';
+        this.deityCount.textContent = data.total_deities || '0';
         
         this.updateRecentDoctrines(data.accepted_doctrines || []);
     }
@@ -98,15 +99,16 @@ class StaticTerminalClient {
     
     async loadLatestTranscripts() {
         try {
-            const response = await fetch('http://5.78.71.231:8000/api/transcripts?limit=3');
+            const response = await fetch('./data/recent_transcripts.json');
             if (response.ok) {
                 const data = await response.json();
                 this.updateTranscripts(data.transcripts || []);
+                console.log('✅ Loaded transcripts from static archive');
             } else {
-                throw new Error('API not available');
+                throw new Error('Static transcripts not available');
             }
         } catch (error) {
-            console.log('Transcripts API not available');
+            console.log('📄 No transcripts yet - waiting for AI debates');
             this.recentTranscripts.innerHTML = '<div class="empty-state">Transcripts will appear here after AI debates</div>';
         }
     }
