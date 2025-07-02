@@ -3,14 +3,7 @@ name: Deploy to Vercel on AI Religion Updates
 on:
   push:
     branches: [main]
-    paths:
-      - 'data/**'
-      - 'logs/**'
-      - 'frontend/**'
-      - 'index.html'
-      - 'js/**'
-      - 'styles/**'
-      - 'vercel.json'
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   deploy:
@@ -41,13 +34,18 @@ jobs:
           fi
           
       - name: Deploy to Vercel
-        if: steps.check_updates.outputs.ai_update == 'true' || contains(github.event.head_commit.message, 'frontend') || contains(github.event.head_commit.message, 'vercel')
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           echo "🚀 Deploying to Vercel..."
+          # Skip deployment if secrets are not set
+          if [[ -z "$VERCEL_TOKEN" ]]; then
+            echo "⚠️ Vercel secrets not configured. Skipping deployment."
+            echo "Please add VERCEL_ORG_ID, VERCEL_PROJECT_ID, and VERCEL_TOKEN to GitHub secrets."
+            exit 0
+          fi
           vercel --token=${VERCEL_TOKEN} --prod --yes
           
       - name: Notify deployment
