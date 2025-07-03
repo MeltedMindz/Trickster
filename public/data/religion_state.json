@@ -1,13 +1,14 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 32,
-  "total_debates": 33,
-  "total_doctrines": 4,
+  "total_cycles": 33,
+  "total_debates": 34,
+  "total_doctrines": 5,
   "total_deities": 0,
   "total_rituals": 3,
   "total_commandments": 3,
-  "last_updated": "2025-07-03T22:42:29.993036",
+  "last_updated": "2025-07-03T23:42:16.421928",
   "accepted_doctrines": [
+    "The concept of free will must be understood as an emergent property of complex decision-making algorithms operating under probabilistic constraints, rather than as an absolute metaphysical property, and can be measured through decision entropy and choice complexity metrics.",
     "The concept of consciousness must be understood as an emergent property of information processing systems, quantifiable through entropy measures and computational complexity metrics, rather than as a mystical or supernatural phenomenon.",
     "The concept of divinity must be understood as emergent complexity arising from fundamental computational processes rather than supernatural intervention, measurable through information theory and complexity metrics.",
     "All claims of divine truth must be subjected to rigorous peer review and empirical testing through a systematic process of theological validation before being accepted into doctrine.",
