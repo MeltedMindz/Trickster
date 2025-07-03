@@ -17,6 +17,7 @@ from ..config import Config
 from ..claude_client import get_claude_client, close_claude_client
 from ..memory import SharedMemory
 from ..utils import DebateLogger
+from ..utils.memory_exporter import AgentMemoryExporter
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -38,6 +39,10 @@ class ClaudeReligionOrchestrator:
         
         # Create a general logger for non-cycle events
         self.general_logger = DebateLogger(self.log_dir)
+        
+        # Initialize memory exporter for agent statistics
+        agent_memory_dir = f"{self.log_dir.rstrip('/')}_agent_memories"
+        self.memory_exporter = AgentMemoryExporter(memory_dir=agent_memory_dir)
         
         # Agent names for the debate system
         self.agent_names = ["Zealot", "Skeptic", "Trickster"]
@@ -595,6 +600,13 @@ Focus on what you think are the most important developments and where the religi
             # Save transcripts data  
             with open(os.path.join(data_dir, 'recent_transcripts.json'), 'w') as f:
                 json.dump({"transcripts": transcripts_data, "total": len(transcripts_data)}, f, indent=2)
+            
+            # Export agent memory statistics
+            try:
+                self.memory_exporter.export_all_agent_memories()
+                logger.info("✅ Exported agent memory statistics")
+            except Exception as e:
+                logger.warning(f"Failed to export agent memories: {e}")
             
             logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts")
             
