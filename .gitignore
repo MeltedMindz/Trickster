@@ -36,11 +36,6 @@ env/
 .DS_Store
 
 # Project specific
-*.db
-*.db-journal
-*.db.backup*
-religion_memory.db
-demo_religion.db
 demo_logs/
 religion_export_*.json
 
