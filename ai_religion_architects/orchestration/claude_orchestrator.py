@@ -467,9 +467,9 @@ Focus on what you think are the most important developments and where the religi
         )
     
     async def _create_daily_summary(self):
-        \"\"\"Create daily summary every 24 cycles\"\"\"
+        """Create daily summary every 24 cycles"""
         day_number = self.cycle_count // 24
-        logger.info(f\"📋 Creating Day {day_number} summary after {self.cycle_count} cycles\")
+        logger.info(f"📋 Creating Day {day_number} summary after {self.cycle_count} cycles")
         
         try:
             # Initialize Claude client for summarizer if needed
@@ -483,19 +483,19 @@ Focus on what you think are the most important developments and where the religi
             
             # Log the milestone
             self.shared_memory.add_evolution_milestone(
-                milestone_type=\"daily_summary\",
-                description=f\"Day {day_number} summary created: {summary[:100]}...\",
+                milestone_type="daily_summary",
+                description=f"Day {day_number} summary created: {summary[:100]}...",
                 cycle_number=self.cycle_count
             )
             
-            self.general_logger.log_event(f\"=== DAY {day_number} SUMMARY CREATED ===\", \"System\")
-            self.general_logger.log_event(summary[:200] + \"...\", \"Summary\")
+            self.general_logger.log_event(f"=== DAY {day_number} SUMMARY CREATED ===", "System")
+            self.general_logger.log_event(summary[:200] + "...", "Summary")
             
-            logger.info(f\"✅ Day {day_number} summary completed and exported\")
+            logger.info(f"✅ Day {day_number} summary completed and exported")
             
         except Exception as e:
-            logger.error(f\"❌ Failed to create Day {day_number} summary: {e}\")
-            self.general_logger.log_event(f\"ERROR creating Day {day_number} summary: {str(e)}\", \"System\")
+            logger.error(f"❌ Failed to create Day {day_number} summary: {e}")
+            self.general_logger.log_event(f"ERROR creating Day {day_number} summary: {str(e)}", "System")
     
     async def _export_static_data(self):
         """Export current religion state to static JSON files for frontend"""
