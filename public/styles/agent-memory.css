@@ -7,7 +7,10 @@
     border-radius: 10px;
     margin: clamp(10px, 3vw, 20px) 0;
     border: 2px solid #333;
-    overflow-x: auto;
+    overflow-x: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .memory-header {
@@ -77,6 +80,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: clamp(10px, 3vw, 20px);
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .memory-section {

@@ -16,9 +16,10 @@ body {
 .terminal-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
     background-color: #0d0d0d;
     border: 1px solid #1a1a1a;
+    overflow: hidden;
 }
 
 /* Header */
@@ -110,12 +111,11 @@ body {
     background-color: #0f0f0f;
     border-right: 1px solid #2a2a2a;
     padding: 15px;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overflow-x: hidden;
     flex-shrink: 0;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    -webkit-overflow-scrolling: touch;
 }
 
 .panel-section {
@@ -236,13 +236,14 @@ body {
 .terminal-output {
     flex: 1;
     padding: 15px;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overflow-x: hidden;
     font-size: clamp(11px, 2.5vw, 13px);
     line-height: 1.6;
     min-width: 0;
     word-wrap: break-word;
     height: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 .terminal-line {
@@ -408,11 +409,12 @@ body {
 /* Agent Memory Container */
 .agent-memory-container {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: auto !important;
     overflow-x: hidden;
     padding: 15px;
     min-width: 0;
     height: 100%;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 /* Responsive Design */
@@ -474,19 +476,24 @@ body {
     .terminal-body {
         flex-direction: column;
         height: calc(100vh - 120px); /* Account for header and footer */
+        overflow: hidden;
     }
     
     .terminal-output {
         padding: 10px;
         font-size: 11px;
-        flex: 1;
+        flex: 1 1 auto;
         min-height: 0;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
     }
     
     .agent-memory-container {
-        flex: 1;
+        flex: 1 1 auto;
         min-height: 0;
         padding: 10px;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
     }
     
     .panel-section {
