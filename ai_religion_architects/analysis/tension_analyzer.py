@@ -1,7 +1,7 @@
 """Analyzes theological tensions and predicts schisms"""
 
 import logging
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 from datetime import datetime
 
 from ..memory.cultural_memory import CulturalMemory
