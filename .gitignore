@@ -39,6 +39,10 @@ env/
 demo_logs/
 religion_export_*.json
 
+# Database files (prevent root-level database files from being tracked)
+religion_memory.db
+*.db
+
 # Docker
 .dockerignore
 
