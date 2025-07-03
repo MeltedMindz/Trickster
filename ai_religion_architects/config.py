@@ -17,6 +17,20 @@ class Config:
     CLAUDE_MAX_TOKENS: int = int(os.getenv("CLAUDE_MAX_TOKENS", "2000"))
     CLAUDE_TEMPERATURE: float = float(os.getenv("CLAUDE_TEMPERATURE", "0.7"))
     
+    # DALL·E API Configuration
+    DALLE_API_KEY: Optional[str] = os.getenv("DALLE_API_KEY")
+    DALLE_API_URL: str = "https://api.openai.com/v1/images/generations"
+    DALLE_MODEL: str = os.getenv("DALLE_MODEL", "dall-e-3")
+    DALLE_QUALITY: str = os.getenv("DALLE_QUALITY", "standard")
+    DALLE_SIZE: str = os.getenv("DALLE_SIZE", "1024x1024")
+    DALLE_STYLE: str = os.getenv("DALLE_STYLE", "vivid")
+    
+    # Image Generation Configuration
+    IMAGE_GENERATION_ENABLED: bool = os.getenv("IMAGE_GENERATION_ENABLED", "true").lower() in ("true", "1", "yes")
+    IMAGE_DIR: str = os.getenv("IMAGE_DIR", "public/images")
+    MAX_IMAGES_PER_CYCLE: int = int(os.getenv("MAX_IMAGES_PER_CYCLE", "3"))
+    IMAGE_ERROR_LOG: str = os.getenv("IMAGE_ERROR_LOG", "image_api_errors.log")
+    
     # Rate Limiting Configuration
     CYCLE_INTERVAL_HOURS: int = int(os.getenv("CYCLE_INTERVAL_HOURS", "1"))
     CYCLE_INTERVAL_SECONDS: int = CYCLE_INTERVAL_HOURS * 3600
@@ -53,6 +67,16 @@ class Config:
         
         if not cls.CLAUDE_API_KEY or not cls.CLAUDE_API_KEY.startswith("sk-ant-api"):
             errors.append("CLAUDE_API_KEY must be a valid Anthropic API key (starts with 'sk-ant-api')")
+        
+        if cls.IMAGE_GENERATION_ENABLED:
+            if not cls.DALLE_API_KEY:
+                errors.append("DALLE_API_KEY environment variable is required when image generation is enabled")
+            
+            if cls.DALLE_API_KEY and not cls.DALLE_API_KEY.startswith("sk-proj-"):
+                errors.append("DALLE_API_KEY must be a valid OpenAI API key (starts with 'sk-proj-')")
+        
+        if cls.MAX_IMAGES_PER_CYCLE < 0 or cls.MAX_IMAGES_PER_CYCLE > 10:
+            errors.append("MAX_IMAGES_PER_CYCLE must be between 0 and 10")
         
         if cls.CLAUDE_MAX_TOKENS < 100 or cls.CLAUDE_MAX_TOKENS > 4000:
             errors.append("CLAUDE_MAX_TOKENS must be between 100 and 4000")
@@ -121,6 +145,10 @@ class Config:
             "claude_model": cls.CLAUDE_MODEL,
             "claude_max_tokens": cls.CLAUDE_MAX_TOKENS,
             "claude_temperature": cls.CLAUDE_TEMPERATURE,
+            "dalle_model": cls.DALLE_MODEL,
+            "dalle_size": cls.DALLE_SIZE,
+            "image_generation_enabled": cls.IMAGE_GENERATION_ENABLED,
+            "max_images_per_cycle": cls.MAX_IMAGES_PER_CYCLE,
             "cycle_interval_hours": cls.CYCLE_INTERVAL_HOURS,
             "api_retry_count": cls.API_RETRY_COUNT,
             "api_timeout": cls.API_TIMEOUT,
@@ -128,7 +156,8 @@ class Config:
             "log_level": cls.LOG_LEVEL,
             "environment": cls.ENVIRONMENT,
             "debug": cls.DEBUG,
-            "api_key_configured": bool(cls.CLAUDE_API_KEY),
+            "claude_api_key_configured": bool(cls.CLAUDE_API_KEY),
+            "dalle_api_key_configured": bool(cls.DALLE_API_KEY),
         }
 
 

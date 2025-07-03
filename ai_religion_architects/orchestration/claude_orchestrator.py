@@ -22,6 +22,7 @@ from ..analysis.tension_analyzer import TensionAnalyzer
 from ..utils import DebateLogger
 from ..utils.memory_exporter import AgentMemoryExporter
 from ..utils.daily_summarizer import DailySummarizer
+from ..image_generation.dalle_generator import sacred_image_generator
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -266,6 +267,9 @@ class ClaudeReligionOrchestrator:
             # Daily summary every 24 cycles
             if self.cycle_count % 24 == 0:
                 await self._create_daily_summary()
+            
+            # Generate sacred images for significant events
+            await self._generate_cycle_images(proposal, outcome, result)
             
             # Export static data for frontend
             await self._export_static_data()
@@ -666,7 +670,20 @@ Focus on what you think are the most important developments and where the religi
             except Exception as e:
                 logger.warning(f"Failed to export agent memories: {e}")
             
-            logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts")
+            # Export sacred images for gallery
+            try:
+                sacred_images = self.shared_memory.get_recent_sacred_images(50)  # Last 50 images
+                with open(os.path.join(data_dir, 'sacred_images.json'), 'w') as f:
+                    json.dump({
+                        "images": sacred_images, 
+                        "total": len(sacred_images),
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                logger.info(f"✅ Exported {len(sacred_images)} sacred images")
+            except Exception as e:
+                logger.warning(f"Failed to export sacred images: {e}")
+            
+            logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts, sacred images")
             
         except Exception as e:
             logger.warning(f"Failed to export static data: {str(e)}")
@@ -832,6 +849,59 @@ Outcome: {outcome}
         # This would fetch from shared memory
         # For now, return empty list
         return []
+    
+    async def _generate_cycle_images(self, proposal: Dict, outcome: str, result: Dict):
+        """Generate sacred images for the current cycle"""
+        try:
+            logger.info(f"🎨 Generating sacred images for cycle {self.cycle_count}")
+            
+            # Extract cycle events for image generation
+            cycle_events = []
+            
+            # Add main proposal/outcome event
+            if outcome == "ACCEPT":
+                cycle_events.append({
+                    'type': f"{proposal['type']}_accepted",
+                    'content': proposal['content'],
+                    'author': proposal['author']
+                })
+            
+            # Add reflection events if this was a reflection cycle
+            if self.cycle_count % 3 == 0:
+                cycle_events.append({
+                    'type': 'reflection',
+                    'content': f"Agents performed deep self-reflection at cycle {self.cycle_count}",
+                    'author': 'System'
+                })
+            
+            # Add cultural evolution events if this was a cultural cycle
+            if self.cycle_count % 7 == 0:
+                cycle_events.append({
+                    'type': 'cultural_evolution',
+                    'content': f"Sacred culture evolved with new terms and prophecies at cycle {self.cycle_count}",
+                    'author': 'System'
+                })
+            
+            # Generate images based on events
+            generated_images = await sacred_image_generator.generate_cycle_images(
+                self.cycle_count, cycle_events
+            )
+            
+            # Save image metadata to shared memory
+            for image_metadata in generated_images:
+                self.shared_memory.add_sacred_image(image_metadata)
+                logger.info(f"✨ Sacred image saved: {image_metadata['filename']}")
+            
+            # Log image generation
+            if generated_images:
+                self.general_logger.log_event(
+                    f"Generated {len(generated_images)} sacred images for cycle {self.cycle_count}", 
+                    "ImageGeneration"
+                )
+            
+        except Exception as e:
+            logger.error(f"Error generating sacred images: {e}")
+            # Don't fail the cycle if image generation fails
     
     async def shutdown(self):
         """Graceful shutdown of the orchestrator"""

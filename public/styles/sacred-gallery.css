@@ -1,0 +1,251 @@
+/* Sacred Image Gallery Styles */
+.sacred-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.sacred-image-item {
+    position: relative;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 30, 60, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sacred-image-item:hover {
+    border-color: #00ff88;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+    transform: translateY(-2px);
+}
+
+.sacred-image-preview {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    background: linear-gradient(45deg, #001133, #003366);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00ff88;
+    font-size: 2em;
+}
+
+.sacred-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sacred-image-info {
+    padding: 8px;
+    font-size: 0.7em;
+}
+
+.sacred-image-title {
+    font-weight: bold;
+    color: #00ff88;
+    margin-bottom: 2px;
+}
+
+.sacred-image-cycle {
+    color: #888;
+    font-size: 0.9em;
+}
+
+.sacred-image-prompt {
+    color: #ccc;
+    margin-top: 4px;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Sacred Image Popup */
+.sacred-image-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sacred-image-popup.active {
+    display: flex;
+}
+
+.sacred-image-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    background: #1a1a1a;
+    border: 2px solid #00ff88;
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.sacred-image-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #00ff88;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.sacred-image-close:hover {
+    color: #ff6600;
+}
+
+.sacred-image-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sacred-image-display img {
+    max-width: 100%;
+    max-height: 60vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+}
+
+.sacred-image-details {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.sacred-image-details h3 {
+    color: #00ff88;
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+.sacred-detail-row {
+    margin: 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sacred-detail-label {
+    color: #888;
+    min-width: 80px;
+    font-weight: bold;
+}
+
+.sacred-detail-value {
+    color: #ccc;
+    flex: 1;
+}
+
+.sacred-prompt-full {
+    background: rgba(0, 30, 60, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    border-left: 3px solid #00ff88;
+    font-style: italic;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.sacred-metadata {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+/* Gallery Section */
+.gallery-section {
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+    background: rgba(30, 0, 60, 0.1);
+}
+
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.gallery-title {
+    color: #00ff88;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.gallery-count {
+    color: #888;
+    font-size: 0.9em;
+}
+
+.empty-gallery {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px 20px;
+    border: 1px dashed #333;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sacred-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+    
+    .sacred-image-content {
+        max-width: 95vw;
+        max-height: 95vh;
+        padding: 15px;
+    }
+    
+    .sacred-image-display img {
+        max-height: 50vh;
+    }
+    
+    .sacred-detail-row {
+        flex-direction: column;
+    }
+    
+    .sacred-detail-label {
+        min-width: auto;
+        margin-bottom: 2px;
+    }
+}
+
+/* Loading animation for images */
+.sacred-image-loading {
+    animation: sacredPulse 2s infinite;
+}
+
+@keyframes sacredPulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}

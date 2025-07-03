@@ -237,6 +237,22 @@ class SharedMemory:
                 )
             ''')
             
+            # Sacred images
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS sacred_images (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    image_id TEXT UNIQUE,
+                    filename TEXT NOT NULL,
+                    local_path TEXT,
+                    web_path TEXT,
+                    prompt TEXT,
+                    cycle_number INTEGER,
+                    event_type TEXT,
+                    metadata TEXT,
+                    created_at TIMESTAMP
+                )
+            ''')
+            
             # Initialize religion state if not exists
             cursor.execute("SELECT COUNT(*) FROM religion_state")
             if cursor.fetchone()[0] == 0:
@@ -492,3 +508,118 @@ class SharedMemory:
             'commandments': state['commandments'][:5],  # Top 5 commandments
             'total_debates': state['total_debates']
         }
+    
+    def add_sacred_image(self, image_metadata: Dict[str, Any]) -> int:
+        """Add a sacred image to the database"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO sacred_images 
+                (image_id, filename, local_path, web_path, prompt, cycle_number, event_type, metadata, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                image_metadata['id'],
+                image_metadata['filename'],
+                image_metadata['local_path'],
+                image_metadata['web_path'],
+                image_metadata['prompt'],
+                image_metadata['cycle_number'],
+                image_metadata['event_type'],
+                json.dumps(image_metadata),
+                datetime.now()
+            ))
+            return cursor.lastrowid
+    
+    def get_all_sacred_images(self) -> List[Dict[str, Any]]:
+        """Get all sacred images"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT image_id, filename, web_path, prompt, cycle_number, event_type, created_at, metadata
+                FROM sacred_images 
+                ORDER BY created_at DESC
+            ''')
+            
+            images = []
+            for row in cursor.fetchall():
+                image_data = {
+                    'id': row[0],
+                    'filename': row[1],
+                    'web_path': row[2],
+                    'prompt': row[3],
+                    'cycle_number': row[4],
+                    'event_type': row[5],
+                    'created_at': row[6],
+                }
+                
+                # Parse metadata JSON if available
+                if row[7]:
+                    try:
+                        metadata = json.loads(row[7])
+                        image_data.update(metadata)
+                    except json.JSONDecodeError:
+                        pass
+                
+                images.append(image_data)
+            
+            return images
+    
+    def get_recent_sacred_images(self, limit: int = 20) -> List[Dict[str, Any]]:
+        """Get recent sacred images for gallery"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT image_id, filename, web_path, prompt, cycle_number, event_type, created_at, metadata
+                FROM sacred_images 
+                ORDER BY created_at DESC 
+                LIMIT ?
+            ''', (limit,))
+            
+            images = []
+            for row in cursor.fetchall():
+                image_data = {
+                    'id': row[0],
+                    'filename': row[1],
+                    'web_path': row[2],
+                    'prompt': row[3][:100] + '...' if len(row[3]) > 100 else row[3],  # Truncate for gallery
+                    'cycle_number': row[4],
+                    'event_type': row[5],
+                    'created_at': row[6],
+                }
+                images.append(image_data)
+            
+            return images
+    
+    def get_cycle_images(self, cycle_number: int) -> List[Dict[str, Any]]:
+        """Get all images from a specific cycle"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT image_id, filename, web_path, prompt, event_type, created_at, metadata
+                FROM sacred_images 
+                WHERE cycle_number = ?
+                ORDER BY created_at DESC
+            ''', (cycle_number,))
+            
+            images = []
+            for row in cursor.fetchall():
+                image_data = {
+                    'id': row[0],
+                    'filename': row[1],
+                    'web_path': row[2],
+                    'prompt': row[3],
+                    'event_type': row[4],
+                    'created_at': row[5],
+                }
+                
+                # Parse metadata JSON if available
+                if row[6]:
+                    try:
+                        metadata = json.loads(row[6])
+                        image_data.update(metadata)
+                    except json.JSONDecodeError:
+                        pass
+                
+                images.append(image_data)
+            
+            return images
