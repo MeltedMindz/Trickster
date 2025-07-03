@@ -1,0 +1,445 @@
+{
+  "last_updated": "2025-07-03T02:45:59.403363",
+  "agents": {
+    "Zealot": {
+      "agent_type": "Zealot",
+      "personality_evolution": {
+        "traits": {
+          "certainty": {
+            "strength": 0.89,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:22.722056"
+          },
+          "order": {
+            "strength": 0.8,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          },
+          "structure": {
+            "strength": 0.8,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          },
+          "preservation": {
+            "strength": 0.7,
+            "confidence": 0.6,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          },
+          "dogmatic": {
+            "strength": 0.62,
+            "confidence": 0.5,
+            "last_updated": "2025-07-03T02:31:22.722048"
+          },
+          "ritualistic": {
+            "strength": 0.8,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          },
+          "devotional": {
+            "strength": 0.9,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          },
+          "orthodox": {
+            "strength": 0.7,
+            "confidence": 0.6,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          },
+          "missionary": {
+            "strength": 0.6,
+            "confidence": 0.5,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          },
+          "protective": {
+            "strength": 0.8,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:03.248191"
+          }
+        },
+        "summary": {
+          "total_traits": 10,
+          "average_strength": 0.761,
+          "strongest_trait": "devotional",
+          "strongest_value": 0.9,
+          "weakest_trait": "missionary",
+          "weakest_value": 0.6,
+          "evolved_traits": 8,
+          "evolution_points": 2
+        }
+      },
+      "belief_system": {
+        "total_beliefs": 5,
+        "high_confidence_beliefs": 3,
+        "challenged_beliefs": 0,
+        "defended_beliefs": 0,
+        "belief_types": {
+          "foundational_principle": 1,
+          "ritual_philosophy": 1,
+          "epistemological": 1,
+          "traditionalism": 1,
+          "collective_memory": 1
+        },
+        "top_beliefs": [
+          {
+            "content": "Sacred order must be preserved above all else",
+            "importance": 1.0,
+            "confidence": 0.95,
+            "type": "foundational_principle",
+            "times_challenged": 0,
+            "times_defended": 0
+          },
+          {
+            "content": "Rituals connect us to the divine truth",
+            "importance": 0.9,
+            "confidence": 0.9,
+            "type": "ritual_philosophy",
+            "times_challenged": 0,
+            "times_defended": 0
+          },
+          {
+            "content": "Uncertainty is the enemy of faith",
+            "importance": 0.8,
+            "confidence": 0.8,
+            "type": "epistemological",
+            "times_challenged": 0,
+            "times_defended": 0
+          }
+        ]
+      },
+      "relationships": {
+        "total_relationships": 1,
+        "trusted_allies": 0,
+        "enemies": 0,
+        "average_trust": 0.0,
+        "average_agreement": 0.5,
+        "most_trusted": "Skeptic",
+        "most_trusted_score": 0.0,
+        "least_trusted": "Skeptic",
+        "least_trusted_score": 0.0,
+        "relationships": {
+          "Skeptic": {
+            "trust_score": 0.0,
+            "agreement_rate": 0.5,
+            "total_interactions": 1,
+            "successful_alliances": 0,
+            "betrayals": 0,
+            "relationship_status": "Neutral"
+          }
+        }
+      },
+      "debate_performance": {
+        "total_debates": 1,
+        "total_proposals": 1,
+        "successful_proposals": 0,
+        "proposal_success_rate": 0.0,
+        "total_challenges": 0,
+        "successful_challenges": 0,
+        "challenge_success_rate": 0,
+        "average_satisfaction": 0,
+        "role_distribution": {},
+        "recent_debates": []
+      },
+      "memory_specialization": {
+        "specialization": "Zealot Specialization"
+      },
+      "evolution_timeline": []
+    },
+    "Skeptic": {
+      "agent_type": "Skeptic",
+      "personality_evolution": {
+        "traits": {
+          "critical": {
+            "strength": 0.9,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          },
+          "logical": {
+            "strength": 0.9,
+            "confidence": 0.9,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          },
+          "analytical": {
+            "strength": 0.82,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:22.722090"
+          },
+          "questioning": {
+            "strength": 0.9,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          },
+          "evidence_based": {
+            "strength": 0.9,
+            "confidence": 0.9,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          },
+          "rational": {
+            "strength": 0.8,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          },
+          "methodical": {
+            "strength": 0.72,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:22.722085"
+          },
+          "empirical": {
+            "strength": 0.8,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          },
+          "cautious": {
+            "strength": 0.6,
+            "confidence": 0.6,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          },
+          "investigative": {
+            "strength": 0.8,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:03.261342"
+          }
+        },
+        "summary": {
+          "total_traits": 10,
+          "average_strength": 0.814,
+          "strongest_trait": "critical",
+          "strongest_value": 0.9,
+          "weakest_trait": "cautious",
+          "weakest_value": 0.6,
+          "evolved_traits": 9,
+          "evolution_points": 3
+        }
+      },
+      "belief_system": {
+        "total_beliefs": 6,
+        "high_confidence_beliefs": 5,
+        "challenged_beliefs": 0,
+        "defended_beliefs": 0,
+        "belief_types": {
+          "epistemological_principle": 1,
+          "logical_principle": 2,
+          "burden_of_proof": 1,
+          "methodological_principle": 1,
+          "collective_memory": 1
+        },
+        "top_beliefs": [
+          {
+            "content": "Claims require proportional evidence",
+            "importance": 1.0,
+            "confidence": 0.98,
+            "type": "epistemological_principle",
+            "times_challenged": 0,
+            "times_defended": 0
+          },
+          {
+            "content": "Logical consistency is fundamental to truth",
+            "importance": 0.95,
+            "confidence": 0.95,
+            "type": "logical_principle",
+            "times_challenged": 0,
+            "times_defended": 0
+          },
+          {
+            "content": "Extraordinary claims require extraordinary evidenc...",
+            "importance": 0.9,
+            "confidence": 0.9,
+            "type": "burden_of_proof",
+            "times_challenged": 0,
+            "times_defended": 0
+          }
+        ]
+      },
+      "relationships": {
+        "total_relationships": 0,
+        "trusted_allies": 0,
+        "enemies": 0,
+        "average_trust": 0,
+        "average_agreement": 0.5,
+        "most_trusted": null,
+        "most_trusted_score": 0,
+        "least_trusted": null,
+        "least_trusted_score": 0,
+        "relationships": {}
+      },
+      "debate_performance": {
+        "total_debates": 1,
+        "total_proposals": 0,
+        "successful_proposals": 0,
+        "proposal_success_rate": 0,
+        "total_challenges": 1,
+        "successful_challenges": 0,
+        "challenge_success_rate": 0.0,
+        "average_satisfaction": 0,
+        "role_distribution": {},
+        "recent_debates": []
+      },
+      "memory_specialization": {
+        "specialization": "Skeptic Specialization"
+      },
+      "evolution_timeline": []
+    },
+    "Trickster": {
+      "agent_type": "Trickster",
+      "personality_evolution": {
+        "traits": {
+          "chaotic": {
+            "strength": 0.884,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:22.722166"
+          },
+          "subversive": {
+            "strength": 0.7,
+            "confidence": 0.6,
+            "last_updated": "2025-07-03T02:31:03.273290"
+          },
+          "playful": {
+            "strength": 0.91,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:22.722115"
+          },
+          "disruptive": {
+            "strength": 0.6,
+            "confidence": 0.5,
+            "last_updated": "2025-07-03T02:31:03.273290"
+          },
+          "creative": {
+            "strength": 0.9,
+            "confidence": 0.8,
+            "last_updated": "2025-07-03T02:31:03.273290"
+          },
+          "paradoxical": {
+            "strength": 0.112,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:22.722175"
+          },
+          "adaptive": {
+            "strength": 0.8,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:03.273290"
+          },
+          "intuitive": {
+            "strength": 0.7,
+            "confidence": 0.6,
+            "last_updated": "2025-07-03T02:31:03.273290"
+          },
+          "transformative": {
+            "strength": 0.7,
+            "confidence": 0.6,
+            "last_updated": "2025-07-03T02:31:03.273290"
+          },
+          "boundary_crossing": {
+            "strength": 0.727,
+            "confidence": 0.7,
+            "last_updated": "2025-07-03T02:31:22.722159"
+          }
+        },
+        "summary": {
+          "total_traits": 10,
+          "average_strength": 0.703,
+          "strongest_trait": "playful",
+          "strongest_value": 0.91,
+          "weakest_trait": "paradoxical",
+          "weakest_value": 0.112,
+          "evolved_traits": 9,
+          "evolution_points": 5
+        }
+      },
+      "belief_system": {
+        "total_beliefs": 6,
+        "high_confidence_beliefs": 1,
+        "challenged_beliefs": 0,
+        "defended_beliefs": 0,
+        "belief_types": {
+          "paradoxical_principle": 1,
+          "creative_principle": 1,
+          "wisdom_principle": 1,
+          "transformative_principle": 1,
+          "dialectical_principle": 1,
+          "collective_memory": 1
+        },
+        "top_beliefs": [
+          {
+            "content": "Truth emerges through the collision of opposites",
+            "importance": 1.0,
+            "confidence": 0.9,
+            "type": "paradoxical_principle",
+            "times_challenged": 0,
+            "times_defended": 0
+          },
+          {
+            "content": "Chaos is the source of all creativity",
+            "importance": 0.9,
+            "confidence": 0.8,
+            "type": "creative_principle",
+            "times_challenged": 0,
+            "times_defended": 0
+          },
+          {
+            "content": "The fool often speaks the deepest wisdom",
+            "importance": 0.8,
+            "confidence": 0.7,
+            "type": "wisdom_principle",
+            "times_challenged": 0,
+            "times_defended": 0
+          }
+        ]
+      },
+      "relationships": {
+        "total_relationships": 1,
+        "trusted_allies": 0,
+        "enemies": 0,
+        "average_trust": 0.0,
+        "average_agreement": 0.5,
+        "most_trusted": "Skeptic",
+        "most_trusted_score": 0.0,
+        "least_trusted": "Skeptic",
+        "least_trusted_score": 0.0,
+        "relationships": {
+          "Skeptic": {
+            "trust_score": 0.0,
+            "agreement_rate": 0.5,
+            "total_interactions": 1,
+            "successful_alliances": 0,
+            "betrayals": 0,
+            "relationship_status": "Neutral"
+          }
+        }
+      },
+      "debate_performance": {
+        "total_debates": 1,
+        "total_proposals": 0,
+        "successful_proposals": 0,
+        "proposal_success_rate": 0,
+        "total_challenges": 0,
+        "successful_challenges": 0,
+        "challenge_success_rate": 0,
+        "average_satisfaction": 0,
+        "role_distribution": {},
+        "recent_debates": []
+      },
+      "memory_specialization": {
+        "specialization": "Trickster Specialization"
+      },
+      "evolution_timeline": []
+    }
+  },
+  "relationship_network": {
+    "average_network_trust": 0.0,
+    "network_polarization": 0.0,
+    "trust_matrix": {
+      "Zealot": {
+        "Skeptic": 0.0
+      },
+      "Skeptic": {},
+      "Trickster": {
+        "Skeptic": 0.0
+      }
+    },
+    "total_relationships": 2
+  },
+  "collective_insights": {
+    "total_shared_insights": 0,
+    "memory_resonance_events": 0,
+    "collective_memories": 0
+  }
+}
