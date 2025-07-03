@@ -1,0 +1,182 @@
+/* Daily Summaries Component Styles */
+
+.daily-summaries-dashboard {
+    background: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.summaries-header {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    background: #222;
+}
+
+.summaries-header h3 {
+    margin: 0 0 5px 0;
+    color: #4CAF50;
+    font-size: 14px;
+}
+
+.summaries-meta {
+    font-size: 11px;
+    color: #888;
+    line-height: 1.3;
+}
+
+.last-updated {
+    font-size: 10px;
+    color: #666;
+}
+
+.summaries-list {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.summary-item {
+    border-bottom: 1px solid #333;
+    transition: background-color 0.2s;
+}
+
+.summary-item:hover {
+    background: #2a2a2a;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-header {
+    padding: 8px 10px 5px 10px;
+    background: #252525;
+}
+
+.day-number {
+    font-weight: bold;
+    color: #00ff00;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.day-title {
+    color: #e0e0e0;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 3px;
+    line-height: 1.2;
+}
+
+.summary-stats {
+    font-size: 9px;
+    color: #888;
+}
+
+.summary-content {
+    padding: 8px 10px;
+}
+
+.summary-text {
+    font-size: 10px;
+    color: #ccc;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.summary-metrics {
+    display: grid;
+    gap: 3px;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 9px;
+    gap: 5px;
+}
+
+.metric-label {
+    color: #888;
+    flex-shrink: 0;
+    min-width: 60px;
+}
+
+.metric-value {
+    color: #aaa;
+    text-align: right;
+    font-size: 8px;
+    line-height: 1.2;
+}
+
+.summaries-loading {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 11px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .daily-summaries-container {
+        max-height: 300px;
+    }
+    
+    .summaries-list {
+        max-height: 250px;
+    }
+    
+    .summary-text {
+        font-size: 9px;
+        line-height: 1.3;
+    }
+    
+    .metric {
+        font-size: 8px;
+    }
+    
+    .metric-value {
+        font-size: 7px;
+    }
+}
+
+@media (max-width: 480px) {
+    .summaries-header h3 {
+        font-size: 12px;
+    }
+    
+    .summaries-meta {
+        font-size: 10px;
+    }
+    
+    .day-title {
+        font-size: 10px;
+    }
+    
+    .summary-text {
+        font-size: 8px;
+    }
+}
+
+/* Scrollbar styling */
+.summaries-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.summaries-list::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 3px;
+}
+
+.summaries-list::-webkit-scrollbar-thumb {
+    background: #0066cc;
+    border-radius: 3px;
+}
+
+.summaries-list::-webkit-scrollbar-thumb:hover {
+    background: #4CAF50;
+}
