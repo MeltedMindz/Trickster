@@ -402,6 +402,7 @@ class SharedMemory:
                 VALUES (?, ?, ?, ?, ?)
             ''', (agent_a, agent_b, shared_goal, datetime.now(), cycle_number))
             conn.commit()
+            conn.commit()
             return cursor.lastrowid
     
     def dissolve_faction(self, faction_id: int):
@@ -528,6 +529,7 @@ class SharedMemory:
                 json.dumps(image_metadata),
                 datetime.now()
             ))
+            conn.commit()
             return cursor.lastrowid
     
     def get_all_sacred_images(self) -> List[Dict[str, Any]]:
