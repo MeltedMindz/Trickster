@@ -519,13 +519,33 @@ Focus on what you think are the most important developments and where the religi
                                 
                             # Check if this file contains the cycle we're looking for
                             if f'CYCLE {cycle_num} BEGINNING' in content and len(content.strip()) > 200:
-                                # Check if timestamp is close to database timestamp
-                                file_time = datetime.fromtimestamp(os.path.getmtime(file_path))
-                                time_diff = abs((file_time - target_time).total_seconds())
-                                
-                                if time_diff < best_score:
-                                    best_score = time_diff
-                                    best_file = file_path
+                                # Check if this file is primarily about this cycle (not just mentioning it)
+                                cycle_start = content.find(f'CYCLE {cycle_num} BEGINNING')
+                                if cycle_start >= 0:
+                                    # Look for the next cycle or end of file to extract just this cycle
+                                    next_cycle_start = content.find('CYCLE ', cycle_start + 10)
+                                    if next_cycle_start >= 0:
+                                        # Check if the next cycle is a different number
+                                        next_cycle_line = content[next_cycle_start:next_cycle_start + 50]
+                                        import re
+                                        next_cycle_match = re.search(r'CYCLE (\d+)', next_cycle_line)
+                                        if next_cycle_match and int(next_cycle_match.group(1)) != cycle_num:
+                                            # Extract just this cycle's content
+                                            cycle_content = content[cycle_start:next_cycle_start]
+                                        else:
+                                            cycle_content = content[cycle_start:]
+                                    else:
+                                        cycle_content = content[cycle_start:]
+                                    
+                                    # Only consider if this cycle has substantial content
+                                    if len(cycle_content.strip()) > 500:
+                                        # Check if timestamp is close to database timestamp
+                                        file_time = datetime.fromtimestamp(os.path.getmtime(file_path))
+                                        time_diff = abs((file_time - target_time).total_seconds())
+                                        
+                                        if time_diff < best_score:
+                                            best_score = time_diff
+                                            best_file = file_path
                                     
                         except Exception as e:
                             continue
@@ -534,15 +554,35 @@ Focus on what you think are the most important developments and where the religi
                     if best_file:
                         try:
                             with open(best_file, 'r') as f:
-                                content = f.read()
+                                full_content = f.read()
                                 filename = os.path.basename(best_file)
+                            
+                            # Extract just this cycle's content
+                            cycle_start = full_content.find(f'CYCLE {cycle_num} BEGINNING')
+                            if cycle_start >= 0:
+                                # Look for the next cycle or end of file
+                                next_cycle_start = full_content.find('CYCLE ', cycle_start + 10)
+                                if next_cycle_start >= 0:
+                                    # Check if the next cycle is a different number
+                                    next_cycle_line = full_content[next_cycle_start:next_cycle_start + 50]
+                                    import re
+                                    next_cycle_match = re.search(r'CYCLE (\d+)', next_cycle_line)
+                                    if next_cycle_match and int(next_cycle_match.group(1)) != cycle_num:
+                                        # Extract just this cycle's content
+                                        cycle_content = full_content[:cycle_start] + full_content[cycle_start:next_cycle_start]
+                                    else:
+                                        cycle_content = full_content
+                                else:
+                                    cycle_content = full_content
+                            else:
+                                cycle_content = full_content
                                 
                             transcripts_data.append({
                                 "filename": filename,
                                 "timestamp": filename.replace('transcript_', '').replace('.txt', ''),
-                                "content": content,
+                                "content": cycle_content,
                                 "modified": datetime.fromtimestamp(os.path.getmtime(best_file)).isoformat(),
-                                "preview": content[:200] + "..." if len(content) > 200 else content,
+                                "preview": cycle_content[:200] + "..." if len(cycle_content) > 200 else cycle_content,
                                 "cycle_number": cycle_num
                             })
                             found_cycles.add(cycle_num)
