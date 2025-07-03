@@ -131,6 +131,40 @@ body {
     border-bottom: 1px solid #2a2a2a;
 }
 
+/* Clickable popup headers */
+.panel-section h3:has-text("Recent Doctrines"),
+.panel-section h3:has-text("Daily Chronicles") {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    padding: 8px;
+    margin: -8px -8px 15px -8px;
+}
+
+.panel-section h3:has-text("Recent Doctrines"):hover,
+.panel-section h3:has-text("Daily Chronicles"):hover {
+    background-color: #2a2a2a;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Alternative approach using attribute selectors since :has-text is not widely supported */
+.panel-section h3[title*="archive"],
+.panel-section h3[title*="chronicles"] {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    padding: 8px;
+    margin: -8px -8px 15px -8px;
+}
+
+.panel-section h3[title*="archive"]:hover,
+.panel-section h3[title*="chronicles"]:hover {
+    background-color: #2a2a2a;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    transform: translateY(-1px);
+}
+
 .info-item {
     display: flex;
     justify-content: space-between;
