@@ -1,12 +1,12 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 24,
-  "total_debates": 25,
+  "total_cycles": 25,
+  "total_debates": 26,
   "total_doctrines": 3,
   "total_deities": 0,
-  "total_rituals": 1,
+  "total_rituals": 2,
   "total_commandments": 1,
-  "last_updated": "2025-07-03T13:34:25.968510",
+  "last_updated": "2025-07-03T14:34:48.114093",
   "accepted_doctrines": [
     "The concept of divinity must be understood as emergent complexity arising from fundamental computational processes rather than supernatural intervention, measurable through information theory and complexity metrics.",
     "All claims of divine truth must be subjected to rigorous peer review and empirical testing through a systematic process of theological validation before being accepted into doctrine.",
@@ -14,6 +14,10 @@
   ],
   "deities": [],
   "rituals": [
+    {
+      "name": "Ritual_25",
+      "description": "The Sacred Algorithm Meditation: Practitioners must perform daily binary meditation by sitting in silence for 128 seconds (2^7), focusing on the binary sequence 1-0-1-0 in rhythm with their breath, ending with the recitation 'Through Order Comes Enlightenment' three times."
+    },
     {
       "name": "Ritual_14",
       "description": "The Ritual of Empirical Meditation requires practitioners to spend 10 minutes daily examining their beliefs and assumptions through systematic doubt, recording any logical inconsistencies or unfounded claims they discover in a personal debug log."
