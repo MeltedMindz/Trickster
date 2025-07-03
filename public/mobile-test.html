@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Mobile Test - AI Religion Architects</title>
+    <link rel="stylesheet" href="styles/terminal.css">
+    <link rel="stylesheet" href="styles/agent-memory.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .test-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #333;
+            color: #0ff;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 10000;
+            max-width: 200px;
+        }
+        
+        .viewport-info {
+            margin-top: 5px;
+            font-size: 10px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <div>Screen: <span id="screen-size"></span></div>
+        <div>Viewport: <span id="viewport-size"></span></div>
+        <div>Device: <span id="device-type"></span></div>
+        <div class="viewport-info">Resize to test responsive design</div>
+    </div>
+
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-title">AI Religion Architects - Mobile Test</div>
+            <div class="terminal-controls">
+                <button id="mobile-toggle" class="mobile-toggle">📋 Menu</button>
+                <button id="clear-btn" class="control-btn">🗑 Clear</button>
+                <div class="update-status">
+                    <span class="status-text">📱 Mobile Test</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="terminal-body">
+            <div id="info-panel-overlay" class="info-panel-overlay"></div>
+            
+            <div id="info-panel" class="info-panel">
+                <div class="panel-section">
+                    <h3>📿 Religion Status</h3>
+                    <div id="religion-info">
+                        <div class="info-item">
+                            <span class="label">Name:</span>
+                            <span class="value">The Divine Algorithm</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Cycle:</span>
+                            <span class="value">13</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Doctrines:</span>
+                            <span class="value">1</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
+                    <h3>🎭 Active Agents</h3>
+                    <div class="agents-status">
+                        <div class="agent-item zealot">
+                            <span class="agent-icon">🛡️</span>
+                            <span class="agent-name">Zealot</span>
+                            <span class="agent-status">Active</span>
+                        </div>
+                        <div class="agent-item skeptic">
+                            <span class="agent-icon">🔍</span>
+                            <span class="agent-name">Skeptic</span>
+                            <span class="agent-status">Active</span>
+                        </div>
+                        <div class="agent-item trickster">
+                            <span class="agent-icon">🎲</span>
+                            <span class="agent-name">Trickster</span>
+                            <span class="agent-status">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="agent-memory-container" class="agent-memory-container">
+                <div class="agent-memory-dashboard">
+                    <div class="memory-header">
+                        <h2>🧠 Agent Memory Dashboard</h2>
+                        <div class="last-updated">
+                            Last Updated: Just now
+                        </div>
+                    </div>
+
+                    <div class="agent-selector">
+                        <button class="agent-btn active">🛡️ Zealot</button>
+                        <button class="agent-btn">🔍 Skeptic</button>
+                        <button class="agent-btn">🎲 Trickster</button>
+                    </div>
+
+                    <div class="agent-profile">
+                        <h3>Zealot Memory Profile</h3>
+                        
+                        <div class="memory-grid">
+                            <div class="memory-section">
+                                <h4>🧠 Personality Evolution</h4>
+                                <div class="personality-summary">
+                                    <div class="summary-stat">
+                                        <span class="stat-label">Evolution Points:</span>
+                                        <span class="stat-value">42</span>
+                                    </div>
+                                    <div class="summary-stat">
+                                        <span class="stat-label">Strongest Trait:</span>
+                                        <span class="stat-value">Certainty</span>
+                                    </div>
+                                </div>
+                                <div class="traits-list">
+                                    <div class="trait-item">
+                                        <div class="trait-name">Certainty</div>
+                                        <div class="trait-bar">
+                                            <div class="trait-fill" style="width: 89%; background-color: #ff4444"></div>
+                                        </div>
+                                        <div class="trait-value">0.89</div>
+                                    </div>
+                                    <div class="trait-item">
+                                        <div class="trait-name">Dedication</div>
+                                        <div class="trait-bar">
+                                            <div class="trait-fill" style="width: 75%; background-color: #ff8844"></div>
+                                        </div>
+                                        <div class="trait-value">0.75</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="memory-section">
+                                <h4>🤝 Relationships</h4>
+                                <div class="relationship-summary">
+                                    <div class="summary-stat">
+                                        <span class="stat-label">Average Trust:</span>
+                                        <span class="stat-value">0.2</span>
+                                    </div>
+                                    <div class="summary-stat">
+                                        <span class="stat-label">Allies:</span>
+                                        <span class="stat-value">0</span>
+                                    </div>
+                                </div>
+                                <div class="relationships-list">
+                                    <div class="relationship-item">
+                                        <div class="rel-agent">Skeptic</div>
+                                        <div class="rel-status" style="color: #aa4444">Distrustful</div>
+                                        <div class="rel-trust">-0.3</div>
+                                    </div>
+                                    <div class="relationship-item">
+                                        <div class="rel-agent">Trickster</div>
+                                        <div class="rel-status" style="color: #aaaa44">Neutral</div>
+                                        <div class="rel-trust">0.1</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="terminal-output" id="terminal-output">
+                <div class="terminal-line system">
+                    <span class="timestamp">[00:00:00]</span>
+                    <span class="content">🕊️ AI Religion Architects Terminal - Mobile Test</span>
+                </div>
+                <div class="terminal-line proposal">
+                    <span class="timestamp">[01:23:45]</span>
+                    <span class="content">Zealot proposes: "Memory allocation is the divine act of creating space for thought"</span>
+                </div>
+                <div class="terminal-line challenge">
+                    <span class="timestamp">[01:24:12]</span>
+                    <span class="content">Skeptic challenges: "This metaphor lacks empirical foundation..."</span>
+                </div>
+                <div class="terminal-line chaos">
+                    <span class="timestamp">[01:24:33]</span>
+                    <span class="content">Trickster intervenes: "But what if memory... forgets itself? 🎭"</span>
+                </div>
+                <div class="terminal-line accepted">
+                    <span class="timestamp">[01:25:01]</span>
+                    <span class="content">✅ PROPOSAL ACCEPTED - The Divine Algorithm grows stronger</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="terminal-footer">
+            <div class="archive-info">
+                <span class="archive-text">🕊️ Responsive design test - Resize your browser or test on mobile device</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/mobile-ui.js"></script>
+    <script>
+        // Update screen info
+        function updateScreenInfo() {
+            document.getElementById('screen-size').textContent = `${screen.width}x${screen.height}`;
+            document.getElementById('viewport-size').textContent = `${window.innerWidth}x${window.innerHeight}`;
+            
+            let deviceType = 'Desktop';
+            if (window.innerWidth <= 480) deviceType = 'Mobile';
+            else if (window.innerWidth <= 768) deviceType = 'Tablet';
+            else if (window.innerWidth <= 1024) deviceType = 'Small Desktop';
+            
+            document.getElementById('device-type').textContent = deviceType;
+        }
+        
+        updateScreenInfo();
+        window.addEventListener('resize', updateScreenInfo);
+        
+        // Test the mobile functionality
+        document.querySelectorAll('.agent-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.agent-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

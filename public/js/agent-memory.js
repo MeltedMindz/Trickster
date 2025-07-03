@@ -52,8 +52,9 @@ class AgentMemoryDashboard {
                 <div class="agent-selector">
                     ${Object.keys(this.memoryData.agents).map(agentName => `
                         <button class="agent-btn ${agentName === this.selectedAgent ? 'active' : ''}" 
-                                data-agent="${agentName}">
-                            ${agentName}
+                                data-agent="${agentName}"
+                                aria-label="Select ${agentName} agent">
+                            ${this.getAgentIcon(agentName)} ${agentName}
                         </button>
                     `).join('')}
                 </div>
@@ -309,6 +310,46 @@ class AgentMemoryDashboard {
             case 'mutate': return '#aaaa44';
             default: return '#888888';
         }
+    }
+
+    getAgentIcon(agentName) {
+        switch (agentName.toLowerCase()) {
+            case 'zealot': return '🛡️';
+            case 'skeptic': return '🔍';
+            case 'trickster': return '🎲';
+            default: return '🤖';
+        }
+    }
+
+    formatNumberForMobile(number, decimals = 2) {
+        if (typeof number !== 'number') return number;
+        
+        // On mobile, show shorter numbers
+        if (window.innerWidth <= 480) {
+            if (number >= 1000) {
+                return (number / 1000).toFixed(1) + 'k';
+            }
+            return number.toFixed(Math.min(decimals, 1));
+        }
+        
+        return number.toFixed(decimals);
+    }
+
+    truncateTextForMobile(text, maxLength = null) {
+        if (typeof text !== 'string') return text;
+        
+        // Determine max length based on screen size
+        if (!maxLength) {
+            if (window.innerWidth <= 480) {
+                maxLength = 30;
+            } else if (window.innerWidth <= 768) {
+                maxLength = 50;
+            } else {
+                return text;
+            }
+        }
+        
+        return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
     }
 }
 

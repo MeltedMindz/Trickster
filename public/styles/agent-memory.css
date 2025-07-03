@@ -3,47 +3,56 @@
 .agent-memory-dashboard {
     background: #1a1a1a;
     color: #e0e0e0;
-    padding: 20px;
+    padding: clamp(10px, 3vw, 20px);
     border-radius: 10px;
-    margin: 20px 0;
+    margin: clamp(10px, 3vw, 20px) 0;
     border: 2px solid #333;
+    overflow-x: auto;
 }
 
 .memory-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: clamp(10px, 3vw, 20px);
     border-bottom: 2px solid #333;
     padding-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .memory-header h2 {
     color: #4CAF50;
     margin: 0;
+    font-size: clamp(1.2em, 4vw, 1.5em);
 }
 
 .last-updated {
-    font-size: 0.9em;
+    font-size: clamp(0.7em, 2.5vw, 0.9em);
     color: #888;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 .agent-selector {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    margin-bottom: clamp(10px, 3vw, 20px);
 }
 
 .agent-btn {
     background: #333;
     color: #e0e0e0;
     border: none;
-    padding: 10px 20px;
+    padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px);
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
     font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.8em, 2.5vw, 1em);
+    text-align: center;
+    white-space: nowrap;
 }
 
 .agent-btn:hover {
@@ -66,23 +75,24 @@
 
 .memory-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(10px, 3vw, 20px);
 }
 
 .memory-section {
     background: #2a2a2a;
-    padding: 15px;
+    padding: clamp(10px, 3vw, 15px);
     border-radius: 8px;
     border: 1px solid #333;
+    overflow-x: auto;
 }
 
 .memory-section h4 {
     color: #4CAF50;
-    margin: 0 0 15px 0;
+    margin: 0 0 clamp(8px, 2vw, 15px) 0;
     border-bottom: 1px solid #333;
     padding-bottom: 8px;
-    font-size: 1.1em;
+    font-size: clamp(1em, 3vw, 1.1em);
 }
 
 .memory-section h5 {
@@ -127,16 +137,17 @@
 
 .trait-item {
     display: grid;
-    grid-template-columns: 120px 1fr 60px;
+    grid-template-columns: minmax(80px, 120px) 1fr minmax(50px, 60px);
     align-items: center;
-    gap: 10px;
+    gap: clamp(5px, 2vw, 10px);
     padding: 5px 0;
 }
 
 .trait-name {
-    font-size: 0.9em;
+    font-size: clamp(0.7em, 2.2vw, 0.9em);
     text-transform: capitalize;
     color: #ddd;
+    word-wrap: break-word;
 }
 
 .trait-bar {
@@ -154,7 +165,7 @@
 
 .trait-value {
     text-align: right;
-    font-size: 0.8em;
+    font-size: clamp(0.7em, 2vw, 0.8em);
     color: #ccc;
     font-family: 'JetBrains Mono', monospace;
 }
@@ -168,12 +179,13 @@
 .relationship-item {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    gap: clamp(5px, 2vw, 10px);
     align-items: center;
-    padding: 8px;
+    padding: clamp(6px, 2vw, 8px);
     background: #333;
     border-radius: 5px;
     border-left: 3px solid #0066cc;
+    font-size: clamp(0.7em, 2.2vw, 0.9em);
 }
 
 .rel-agent {
@@ -208,13 +220,13 @@
 
 .debate-item {
     display: grid;
-    grid-template-columns: 40px 1fr 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: minmax(35px, 40px) 1fr 1fr 1fr;
+    gap: clamp(4px, 1.5vw, 8px);
     align-items: center;
-    padding: 6px 8px;
+    padding: clamp(4px, 1.5vw, 6px) clamp(6px, 2vw, 8px);
     background: #333;
     border-radius: 4px;
-    font-size: 0.85em;
+    font-size: clamp(0.7em, 2vw, 0.85em);
 }
 
 .debate-cycle {
@@ -245,7 +257,7 @@
 
 .belief-item {
     background: #333;
-    padding: 10px;
+    padding: clamp(8px, 2.5vw, 10px);
     border-radius: 5px;
     border-left: 3px solid #ffaa44;
 }
@@ -255,13 +267,16 @@
     margin-bottom: 8px;
     color: #e8e8e8;
     line-height: 1.3;
+    font-size: clamp(0.8em, 2.2vw, 0.9em);
+    word-wrap: break-word;
 }
 
 .belief-meta {
     display: flex;
-    gap: 15px;
-    font-size: 0.8em;
+    gap: clamp(8px, 2vw, 15px);
+    font-size: clamp(0.7em, 2vw, 0.8em);
     color: #aaa;
+    flex-wrap: wrap;
 }
 
 .belief-type {
@@ -335,22 +350,46 @@
     color: #ff4444;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
     .memory-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .agent-selector {
-        flex-direction: column;
-    }
-    
-    .agent-btn {
-        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
     
     .trait-item {
         grid-template-columns: 100px 1fr 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .agent-memory-dashboard {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .memory-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .last-updated {
+        align-self: flex-end;
+    }
+    
+    .memory-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .agent-selector {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .trait-item {
+        grid-template-columns: 80px 1fr 45px;
+        gap: 8px;
     }
     
     .relationship-item {
@@ -360,14 +399,125 @@
     }
     
     .debate-item {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
         text-align: center;
-        gap: 3px;
     }
     
     .network-stats {
         flex-direction: column;
         gap: 15px;
+        text-align: center;
+    }
+    
+    .performance-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .belief-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .agent-memory-dashboard {
+        padding: 8px;
+        margin: 8px 0;
+    }
+    
+    .memory-header h2 {
+        font-size: 1.1em;
+    }
+    
+    .agent-selector {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+    
+    .agent-btn {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+    
+    .memory-section {
+        padding: 8px;
+    }
+    
+    .memory-section h4 {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
+    
+    .trait-item {
+        grid-template-columns: 70px 1fr 40px;
+        gap: 6px;
+    }
+    
+    .trait-name {
+        font-size: 0.75em;
+    }
+    
+    .relationship-item,
+    .debate-item {
+        padding: 6px;
+        font-size: 0.75em;
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+    
+    .belief-item {
+        padding: 6px;
+    }
+    
+    .belief-content {
+        font-size: 0.75em;
+    }
+    
+    .summary-stat, .perf-stat, .network-stat {
+        font-size: 0.8em;
+    }
+    
+    .network-overview {
+        padding: 10px;
+        margin-top: 15px;
+    }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+    .agent-btn {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    .control-btn {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    .trait-item:hover,
+    .relationship-item:hover,
+    .debate-item:hover,
+    .belief-item:hover {
+        background: #333; /* Remove hover effects on touch devices */
+    }
+}
+
+/* Landscape mode adjustments for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .memory-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .agent-selector {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .agent-memory-dashboard {
+        max-height: 90vh;
+        overflow-y: auto;
     }
 }
 
