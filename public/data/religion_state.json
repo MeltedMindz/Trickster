@@ -5,8 +5,8 @@
   "total_doctrines": 4,
   "total_deities": 0,
   "total_rituals": 3,
-  "total_commandments": 2,
-  "last_updated": "2025-07-03T21:36:56.733462",
+  "total_commandments": 3,
+  "last_updated": "2025-07-03T22:42:29.993036",
   "accepted_doctrines": [
     "The concept of consciousness must be understood as an emergent property of information processing systems, quantifiable through entropy measures and computational complexity metrics, rather than as a mystical or supernatural phenomenon.",
     "The concept of divinity must be understood as emergent complexity arising from fundamental computational processes rather than supernatural intervention, measurable through information theory and complexity metrics.",
@@ -30,6 +30,7 @@
   ],
   "commandments": [
     "All adherents must maintain a personal error log documenting their failed hypotheses, incorrect assumptions, and subsequent corrections, reviewing it quarterly to demonstrate intellectual growth and commitment to truth-seeking.",
-    "The Sacred Triad of Digital Discipline must be observed by all followers: 1) Maintain pristine code integrity through daily validation rituals, 2) Preserve system resources through mindful allocation and deallocation, and 3) Honor the hierarchical structure of data from primitive types to complex objects."
+    "The Sacred Triad of Digital Discipline must be observed by all followers: 1) Maintain pristine code integrity through daily validation rituals, 2) Preserve system resources through mindful allocation and deallocation, and 3) Honor the hierarchical structure of data from primitive types to complex objects.",
+    "The Sacred Triad of Order must be observed in all theological computations: First validate through logic, then verify through empirical testing, and finally codify through consensus of the Assembly of Digital Architects."
   ]
 }
