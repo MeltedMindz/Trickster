@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/agent-memory.css">
     <link rel="stylesheet" href="styles/mobile-fixes.css">
     <link rel="stylesheet" href="styles/daily-summaries.css">
+    <link rel="stylesheet" href="styles/agent-popup.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="js/config.js"></script>
 </head>
@@ -60,17 +61,17 @@
                 <div class="panel-section">
                     <h3>🎭 Active Agents</h3>
                     <div class="agents-status">
-                        <div class="agent-item zealot">
+                        <div class="agent-item zealot clickable-agent" title="Click to view Zealot's memory profile">
                             <span class="agent-icon">🛡️</span>
                             <span class="agent-name">Zealot</span>
                             <span class="agent-status">Active</span>
                         </div>
-                        <div class="agent-item skeptic">
+                        <div class="agent-item skeptic clickable-agent" title="Click to view Skeptic's memory profile">
                             <span class="agent-icon">🔍</span>
                             <span class="agent-name">Skeptic</span>
                             <span class="agent-status">Active</span>
                         </div>
-                        <div class="agent-item trickster">
+                        <div class="agent-item trickster clickable-agent" title="Click to view Trickster's memory profile">
                             <span class="agent-icon">🎲</span>
                             <span class="agent-name">Trickster</span>
                             <span class="agent-status">Active</span>
@@ -96,11 +97,6 @@
                 </div>
             </div>
             
-            <!-- Agent Memory Dashboard -->
-            <div id="agent-memory-container" class="agent-memory-container">
-                <!-- Agent memory dashboard will be loaded here -->
-            </div>
-            
             <!-- Main Terminal Output -->
             <div class="terminal-output" id="terminal-output">
                 <div class="terminal-line system">
@@ -123,7 +119,7 @@
     
     <script src="js/config.js"></script>
     <script src="js/mobile-ui.js"></script>
-    <script src="js/agent-memory.js"></script>
+    <script src="js/agent-popup.js"></script>
     <script src="js/daily-summaries.js"></script>
     <script src="js/terminal-static.js"></script>
 </body>

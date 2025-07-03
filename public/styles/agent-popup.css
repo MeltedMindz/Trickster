@@ -1,0 +1,453 @@
+/* Agent Memory Popup Styles */
+
+.agent-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.agent-popup {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 10px;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    color: #e0e0e0;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #2a2a2a;
+    border-bottom: 2px solid #333;
+    border-radius: 8px 8px 0 0;
+}
+
+.popup-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.popup-close {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.popup-close:hover {
+    background: #444;
+    color: #fff;
+}
+
+.popup-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.popup-meta {
+    text-align: center;
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.popup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.popup-section {
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.popup-section h4 {
+    color: #4CAF50;
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.popup-section h5 {
+    color: #ffaa44;
+    margin: 15px 0 10px 0;
+    font-size: 1em;
+}
+
+/* Reuse existing component styles */
+.personality-summary, .relationship-summary, .belief-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #333;
+    border-radius: 5px;
+}
+
+.summary-stat, .perf-stat {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.stat-label {
+    color: #aaa;
+    font-size: 0.8em;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.traits-list {
+    display: grid;
+    gap: 8px;
+}
+
+.trait-item {
+    display: grid;
+    grid-template-columns: 120px 1fr 60px;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.trait-name {
+    font-size: 0.9em;
+    text-transform: capitalize;
+    color: #ddd;
+}
+
+.trait-bar {
+    background: #444;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.trait-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+    border-radius: 4px;
+}
+
+.trait-value {
+    text-align: right;
+    font-size: 0.8em;
+    color: #ccc;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.relationships-list {
+    display: grid;
+    gap: 8px;
+}
+
+.relationship-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 8px;
+    background: #333;
+    border-radius: 5px;
+    border-left: 3px solid #0066cc;
+}
+
+.rel-agent {
+    font-weight: bold;
+    color: #ddd;
+}
+
+.rel-status {
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.rel-trust {
+    text-align: right;
+    font-size: 0.8em;
+    color: #ccc;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.performance-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.recent-debates {
+    display: grid;
+    gap: 5px;
+}
+
+.debate-item {
+    display: grid;
+    grid-template-columns: 60px 1fr 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 8px;
+    background: #333;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.debate-cycle {
+    font-weight: bold;
+    color: #0066cc;
+}
+
+.debate-role {
+    color: #aaa;
+    text-transform: capitalize;
+}
+
+.debate-outcome {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.debate-satisfaction {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.top-beliefs {
+    display: grid;
+    gap: 10px;
+}
+
+.belief-item {
+    background: #333;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #ffaa44;
+}
+
+.belief-content {
+    font-style: italic;
+    margin-bottom: 8px;
+    color: #e8e8e8;
+    line-height: 1.3;
+}
+
+.belief-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8em;
+    color: #aaa;
+    flex-wrap: wrap;
+}
+
+.belief-type {
+    color: #ffaa44;
+    text-transform: capitalize;
+}
+
+.specialization-content {
+    display: grid;
+    gap: 8px;
+}
+
+.specialization-type {
+    font-weight: bold;
+    color: #4CAF50;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 10px;
+    background: #333;
+    border-radius: 5px;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
+}
+
+.spec-label {
+    color: #aaa;
+    font-size: 0.9em;
+}
+
+.spec-value {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: right;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.error-popup {
+    max-width: 400px;
+    text-align: center;
+}
+
+.error-popup .popup-content {
+    padding: 30px;
+}
+
+.error-popup p {
+    color: #ff4444;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .agent-popup-overlay {
+        padding: 10px;
+    }
+    
+    .agent-popup {
+        max-width: 95vw;
+        max-height: 95vh;
+        width: 100%;
+    }
+    
+    .popup-header {
+        padding: 10px 15px;
+    }
+    
+    .popup-title {
+        font-size: 1em;
+    }
+    
+    .popup-content {
+        padding: 15px;
+    }
+    
+    .popup-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .popup-section {
+        padding: 12px;
+    }
+    
+    .personality-summary, .relationship-summary, .belief-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .trait-item {
+        grid-template-columns: 80px 1fr 45px;
+        gap: 8px;
+    }
+    
+    .relationship-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .debate-item {
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .performance-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .belief-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup-header {
+        padding: 8px 12px;
+    }
+    
+    .popup-title {
+        font-size: 0.9em;
+    }
+    
+    .popup-content {
+        padding: 12px;
+    }
+    
+    .popup-section {
+        padding: 10px;
+    }
+    
+    .popup-section h4 {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    
+    .trait-item {
+        grid-template-columns: 70px 1fr 40px;
+        gap: 6px;
+    }
+    
+    .trait-name {
+        font-size: 0.8em;
+    }
+}
+
+/* Scrollbar styling */
+.popup-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 4px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+    background: #0066cc;
+    border-radius: 4px;
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+    background: #4CAF50;
+}

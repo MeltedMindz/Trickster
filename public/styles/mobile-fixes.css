@@ -7,25 +7,12 @@
 }
 
 .info-panel,
-.agent-memory-container, 
 .terminal-output {
     position: relative !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     touch-action: pan-y !important;
-}
-
-/* Ensure containers fill available space */
-.agent-memory-dashboard {
-    max-height: 100% !important;
-    overflow: hidden !important;
-}
-
-.memory-grid {
-    max-height: 100% !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
 }
 
 /* Mobile-specific overrides */
@@ -52,40 +39,14 @@
         display: flex !important;
     }
     
-    .agent-memory-container {
-        flex: 1 1 50% !important;
-        min-height: 0 !important;
-        max-height: 50% !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        display: block !important;
-    }
-    
     .terminal-output {
-        flex: 1 1 50% !important;
-        min-height: 0 !important;
-        max-height: 50% !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        display: block !important;
-    }
-    
-    /* Force proper scrolling behavior */
-    .agent-memory-dashboard {
-        height: 100% !important;
-        max-height: 100% !important;
-        overflow: hidden !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    
-    .memory-grid {
         flex: 1 !important;
         min-height: 0 !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
-        touch-action: pan-y !important;
+        display: block !important;
     }
+    
 }
 
 /* Extra small screens */
@@ -98,16 +59,12 @@
 
 /* Force scrollbar visibility on touch devices */
 @media (hover: none) and (pointer: coarse) {
-    .agent-memory-container::-webkit-scrollbar,
-    .terminal-output::-webkit-scrollbar,
-    .memory-grid::-webkit-scrollbar {
+    .terminal-output::-webkit-scrollbar {
         width: 8px !important;
         background: rgba(255, 255, 255, 0.1) !important;
     }
     
-    .agent-memory-container::-webkit-scrollbar-thumb,
-    .terminal-output::-webkit-scrollbar-thumb,
-    .memory-grid::-webkit-scrollbar-thumb {
+    .terminal-output::-webkit-scrollbar-thumb {
         background: rgba(0, 255, 0, 0.3) !important;
         border-radius: 4px !important;
     }

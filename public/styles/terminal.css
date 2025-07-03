@@ -163,6 +163,19 @@ body {
     font-size: 12px;
 }
 
+.clickable-agent {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.clickable-agent:hover {
+    background-color: #2a2a2a;
+    border-color: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    transform: translateY(-1px);
+}
+
 .agent-item.zealot .agent-icon { color: #ffd700; }
 .agent-item.skeptic .agent-icon { color: #00bfff; }
 .agent-item.trickster .agent-icon { color: #ff69b4; }
