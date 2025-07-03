@@ -43,12 +43,22 @@
         overflow: hidden !important;
     }
     
+    /* Hide info panel on mobile - it's accessible via menu button */
+    .info-panel {
+        display: none !important;
+    }
+    
+    .info-panel.open {
+        display: flex !important;
+    }
+    
     .agent-memory-container {
         flex: 1 1 50% !important;
         min-height: 0 !important;
         max-height: 50% !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
+        display: block !important;
     }
     
     .terminal-output {
@@ -57,6 +67,7 @@
         max-height: 50% !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
+        display: block !important;
     }
     
     /* Force proper scrolling behavior */
