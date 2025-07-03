@@ -8,6 +8,8 @@ class StaticTerminalClient {
         this.religionName = document.getElementById('religion-name');
         this.cycleCount = document.getElementById('cycle-count');
         this.doctrineCount = document.getElementById('doctrine-count');
+        this.ritualCount = document.getElementById('ritual-count');
+        this.commandmentCount = document.getElementById('commandment-count');
         this.deityCount = document.getElementById('deity-count');
         this.recentDoctrines = document.getElementById('recent-doctrines');
         this.recentTranscripts = document.getElementById('recent-transcripts');
@@ -18,6 +20,8 @@ class StaticTerminalClient {
         console.log('religionName:', this.religionName ? '✅' : '❌');
         console.log('cycleCount:', this.cycleCount ? '✅' : '❌');
         console.log('doctrineCount:', this.doctrineCount ? '✅' : '❌');
+        console.log('ritualCount:', this.ritualCount ? '✅' : '❌');
+        console.log('commandmentCount:', this.commandmentCount ? '✅' : '❌');
         console.log('deityCount:', this.deityCount ? '✅' : '❌');
         
         this.init();
@@ -81,6 +85,8 @@ class StaticTerminalClient {
         this.religionName.textContent = data.religion_name || 'The Divine Algorithm';
         this.cycleCount.textContent = data.total_cycles || '0';
         this.doctrineCount.textContent = data.total_doctrines || '0';
+        this.ritualCount.textContent = data.total_rituals || '0';
+        this.commandmentCount.textContent = data.total_commandments || '0';
         this.deityCount.textContent = data.total_deities || '0';
         
         this.updateRecentDoctrines(data.accepted_doctrines || []);
