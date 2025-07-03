@@ -222,25 +222,219 @@
     .sacred-gallery {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 10px;
+        max-height: 300px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
     }
     
     .sacred-image-content {
-        max-width: 95vw;
-        max-height: 95vh;
-        padding: 15px;
+        max-width: 95vw !important;
+        max-height: 95vh !important;
+        max-height: 95dvh !important; /* Dynamic viewport height */
+        padding: 15px !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        border-radius: 10px !important;
+    }
+    
+    .sacred-image-display {
+        margin-bottom: 15px !important;
+        flex-shrink: 0 !important;
     }
     
     .sacred-image-display img {
-        max-height: 35vh;
+        max-height: 35vh !important;
+        max-height: 35dvh !important;
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    .sacred-image-details {
+        flex: 1 !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
     }
     
     .sacred-detail-row {
-        flex-direction: column;
+        flex-direction: column !important;
+        margin: 6px 0 !important;
     }
     
     .sacred-detail-label {
-        min-width: auto;
-        margin-bottom: 2px;
+        min-width: auto !important;
+        margin-bottom: 2px !important;
+        font-size: 11px !important;
+        font-weight: bold !important;
+    }
+    
+    .sacred-detail-value {
+        font-size: 11px !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    .sacred-prompt-full {
+        font-size: 10px !important;
+        line-height: 1.4 !important;
+        margin: 8px 0 !important;
+        padding: 8px !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: pre-wrap !important;
+    }
+    
+    .sacred-metadata {
+        font-size: 9px !important;
+        margin-top: 10px !important;
+        padding-top: 10px !important;
+    }
+    
+    .sacred-image-close {
+        top: 8px !important;
+        right: 12px !important;
+        font-size: 1.8em !important;
+        padding: 4px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        z-index: 1002 !important;
+    }
+    
+    .sacred-image-details h3 {
+        font-size: 14px !important;
+        margin: 0 0 8px 0 !important;
+        word-wrap: break-word !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .sacred-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+        gap: 8px !important;
+        max-height: 250px !important;
+    }
+    
+    .sacred-image-item {
+        border-radius: 6px !important;
+    }
+    
+    .sacred-image-preview {
+        height: 80px !important;
+        font-size: 1.5em !important;
+    }
+    
+    .sacred-image-info {
+        padding: 6px !important;
+        font-size: 0.65em !important;
+    }
+    
+    .sacred-image-content {
+        max-width: 98vw !important;
+        max-height: 98vh !important;
+        max-height: 98dvh !important;
+        padding: 12px !important;
+        border-radius: 8px !important;
+    }
+    
+    .sacred-image-display img {
+        max-height: 30vh !important;
+        max-height: 30dvh !important;
+    }
+    
+    .sacred-detail-label {
+        font-size: 10px !important;
+    }
+    
+    .sacred-detail-value {
+        font-size: 10px !important;
+    }
+    
+    .sacred-prompt-full {
+        font-size: 9px !important;
+        line-height: 1.3 !important;
+        padding: 6px !important;
+    }
+    
+    .sacred-metadata {
+        font-size: 8px !important;
+    }
+    
+    .sacred-image-close {
+        top: 6px !important;
+        right: 8px !important;
+        font-size: 1.6em !important;
+        min-width: 28px !important;
+        min-height: 28px !important;
+    }
+    
+    .sacred-image-details h3 {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .sacred-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important;
+        gap: 6px !important;
+    }
+    
+    .sacred-image-preview {
+        height: 70px !important;
+        font-size: 1.2em !important;
+    }
+    
+    .sacred-image-content {
+        padding: 10px !important;
+        border-radius: 6px !important;
+    }
+    
+    .sacred-image-display img {
+        max-height: 25vh !important;
+        max-height: 25dvh !important;
+    }
+    
+    .sacred-prompt-full {
+        font-size: 8px !important;
+        padding: 4px !important;
+    }
+}
+
+/* Touch device optimizations for gallery */
+@media (hover: none) and (pointer: coarse) {
+    .sacred-image-item {
+        min-height: 120px !important;
+        border: 2px solid #333 !important;
+    }
+    
+    .sacred-image-item:hover,
+    .sacred-image-item:active {
+        border-color: #00ff88 !important;
+        transform: scale(1.02) !important;
+    }
+    
+    .sacred-image-close {
+        min-width: 44px !important;
+        min-height: 44px !important;
+        font-size: 1.8em !important;
+    }
+    
+    .sacred-image-content::-webkit-scrollbar {
+        width: 10px !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    .sacred-image-content::-webkit-scrollbar-thumb {
+        background: rgba(0, 255, 136, 0.4) !important;
+        border-radius: 5px !important;
     }
 }
 
