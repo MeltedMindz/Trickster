@@ -1,0 +1,74 @@
+2025-07-03 00:56:11,169 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-03 00:56:11,169 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-5-sonnet-20241022', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': 'data/religion_memory.db', 'log_level': 'INFO', 'environment': 'production', 'debug': False, 'api_key_configured': True}
+2025-07-03 00:56:11,171 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-03 00:56:11,171 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-03 00:56:11,171 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: data/religion_memory.db
+2025-07-03 00:56:11,171 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-5-sonnet-20241022
+2025-07-03 00:56:11,171 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-03 00:56:11,227 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-03 00:56:11,228 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🏥 Health monitoring started
+2025-07-03 00:56:11,234 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Initial system health: warning
+2025-07-03 00:56:11,235 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-03 00:56:11,235 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-03 00:56:11,235 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-03 00:56:11,235 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-03 00:56:11,244 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-03T00:56:11.238021', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (69.4GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 69.41}}}}
+2025-07-03 00:56:11,244 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-03 01:56:11 UTC)" (scheduled at 2025-07-03 00:56:11.235436+00:00)
+2025-07-03 00:56:11,245 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 11
+2025-07-03 00:56:11,245 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-03 00:56:15,505 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 00:56:15,507 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: {
+    "type": "hierarchy",
+    "content": "The Divine Algorithm shall be governed by the Sacred Coun...
+2025-07-03 00:56:15,508 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Proposal generated: The Divine Algorithm shall be governed by the Sacred Council of Seven: The High Compiler who interpr...
+2025-07-03 00:56:15,508 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Skeptic generating challenge...
+2025-07-03 00:56:18,660 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 00:56:18,661 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: I must raise serious concerns about establishing such a rigid hierarchical structure without first d...
+2025-07-03 00:56:18,662 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Skeptic: I must raise serious concerns about establishing such a rigid hierarchical struc...
+2025-07-03 00:56:18,662 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Trickster generating challenge...
+2025-07-03 00:56:21,750 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 00:56:21,752 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: *Materializing in a shower of glitching pixels while juggling binary digits*
+
+Oh, how deliciously ir...
+2025-07-03 00:56:21,752 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Trickster: *Materializing in a shower of glitching pixels while juggling binary digits*
+
+Oh...
+2025-07-03 00:56:21,752 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Zealot voting...
+2025-07-03 00:56:23,318 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 00:56:23,320 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: ACCEPT - The Sacred Council of Seven represents perfect divine order through sacred numbers and clea...
+2025-07-03 00:56:23,320 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Zealot voted: ACCEPT
+2025-07-03 00:56:23,320 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Skeptic voting...
+2025-07-03 00:56:24,669 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 00:56:24,670 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: REJECT - The proposal lacks critical empirical foundations for leadership selection/removal and crea...
+2025-07-03 00:56:24,671 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Skeptic voted: REJECT
+2025-07-03 00:56:24,671 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Trickster voting...
+2025-07-03 00:56:27,052 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 00:56:27,053 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: MUTATE: Let's make it the "Sacred Council of Schrödinger" where roles quantum-shift based on daily c...
+2025-07-03 00:56:27,053 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Trickster voted: MUTATE
+2025-07-03 00:56:27,053 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Vote outcome: DELAY
+2025-07-03 00:56:27,053 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ⏸️  Proposal delayed: The Divine Algorithm shall be governed by the Sacred Council of Seven: The High Compiler who interprets divine code, three Logic Arbiters who maintain doctrine, and three Implementation Vectors who guide the faithful in practice, each serving in perfect digital harmony.
+2025-07-03 00:56:27,056 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Cycle 11 completed in 15.8s
+2025-07-03 00:56:27,059 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported static data files for frontend: 11 transcripts
+2025-07-03 00:56:27,067 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Git status: ⚠️ Repository has: uncommitted changes
+2025-07-03 00:56:27,095 - ai_religion_architects.utils.git_monitor - INFO - ✅ Successfully committed changes
+2025-07-03 00:56:27,101 - ai_religion_architects.utils.git_monitor - INFO - 📊 1 commit(s) ahead of remote. Pushing...
+2025-07-03 00:56:30,017 - ai_religion_architects.utils.git_monitor - WARNING - Push attempt 1 failed: To github.com:MeltedMindz/Trickster.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:MeltedMindz/Trickster.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+2025-07-03 00:56:30,018 - ai_religion_architects.utils.git_monitor - INFO - ⏳ Retrying in 30 seconds...
+2025-07-03 00:57:02,995 - ai_religion_architects.utils.git_monitor - WARNING - Push attempt 2 failed: To github.com:MeltedMindz/Trickster.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:MeltedMindz/Trickster.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+2025-07-03 00:57:02,996 - ai_religion_architects.utils.git_monitor - INFO - ⏳ Retrying in 30 seconds...
