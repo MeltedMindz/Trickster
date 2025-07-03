@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env /root/Trickster/venv/bin/python
 """
 Git synchronization monitoring script
 Run this to check the health of git sync and manually trigger sync if needed
