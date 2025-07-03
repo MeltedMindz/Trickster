@@ -28,7 +28,7 @@ class Config:
     API_TIMEOUT: int = int(os.getenv("API_TIMEOUT", "60"))
     
     # Database Configuration
-    DB_PATH: str = os.getenv("DB_PATH", "religion_memory.db")
+    DB_PATH: str = os.getenv("DB_PATH", "data/religion_memory.db")
     
     # Logging Configuration
     LOG_DIR: str = os.getenv("LOG_DIR", "logs")
