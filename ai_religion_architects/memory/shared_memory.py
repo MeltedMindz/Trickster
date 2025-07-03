@@ -583,7 +583,7 @@ class SharedMemory:
                     'id': row[0],
                     'filename': row[1],
                     'web_path': row[2],
-                    'prompt': row[3][:100] + '...' if len(row[3]) > 100 else row[3],  # Truncate for gallery
+                    'prompt': row[3],  # Full prompt for detailed view
                     'cycle_number': row[4],
                     'event_type': row[5],
                     'created_at': row[6],
