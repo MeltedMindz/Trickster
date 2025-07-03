@@ -511,23 +511,28 @@ class SharedMemory:
         }
     
     def add_sacred_image(self, image_metadata: Dict[str, Any]) -> int:
-        """Add a sacred image to the database"""
+        """Add a sacred image to the database with new metadata format"""
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('''
                 INSERT INTO sacred_images 
-                (image_id, filename, local_path, web_path, prompt, cycle_number, event_type, metadata, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (image_id, filename, local_path, web_path, prompt, cycle_number, event_type, metadata, created_at,
+                 sacred_name, proposing_agent, related_doctrine, agent_description)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
-                image_metadata['id'],
-                image_metadata['filename'],
-                image_metadata['local_path'],
-                image_metadata['web_path'],
-                image_metadata['prompt'],
-                image_metadata['cycle_number'],
-                image_metadata['event_type'],
+                image_metadata.get('id', ''),
+                image_metadata.get('filename', ''),
+                image_metadata.get('local_path', ''),
+                image_metadata.get('web_path', ''),
+                image_metadata.get('agent_description', ''),  # Store agent description in prompt field
+                image_metadata.get('cycle_number', 0),
+                image_metadata.get('event_type', 'cycle'),
                 json.dumps(image_metadata),
-                datetime.now()
+                datetime.now(),
+                image_metadata.get('sacred_name', ''),
+                image_metadata.get('proposing_agent', ''),
+                image_metadata.get('related_doctrine', ''),
+                image_metadata.get('agent_description', '')
             ))
             conn.commit()
             return cursor.lastrowid

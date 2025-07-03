@@ -98,7 +98,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sacred-image-close {
@@ -124,7 +125,7 @@
 
 .sacred-image-display img {
     max-width: 100%;
-    max-height: 60vh;
+    max-height: 45vh;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
 }
@@ -132,6 +133,8 @@
 .sacred-image-details {
     color: #ccc;
     line-height: 1.6;
+    flex: 1;
+    min-height: 0;
 }
 
 .sacred-image-details h3 {
@@ -166,6 +169,8 @@
     font-style: italic;
     font-size: 0.9em;
     line-height: 1.4;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .sacred-metadata {
@@ -226,7 +231,7 @@
     }
     
     .sacred-image-display img {
-        max-height: 50vh;
+        max-height: 35vh;
     }
     
     .sacred-detail-row {

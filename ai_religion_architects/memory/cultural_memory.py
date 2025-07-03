@@ -43,6 +43,7 @@ class CulturalMemory:
                                         adopted_cycle, usage_count, created_at)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (term, definition, etymology, proposer, cycle, 0, datetime.now()))
+            conn.commit()
             
         return sacred_term
         
@@ -56,6 +57,7 @@ class CulturalMemory:
                     UPDATE sacred_terms SET usage_count = usage_count + 1 
                     WHERE term = ?
                 ''', (term,))
+                conn.commit()
                 
     def create_symbol(self, name: str, description: str, meaning: str,
                      concepts: List[str], proposer: str, cycle: int) -> ReligiousSymbol:
@@ -81,6 +83,7 @@ class CulturalMemory:
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (name, description, meaning, json.dumps(concepts), 
                   proposer, cycle, datetime.now()))
+            conn.commit()
                   
         return symbol
         
@@ -108,6 +111,7 @@ class CulturalMemory:
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (name, description, commemorates, cycle, 
                   observance_rule, 0.5, datetime.now()))
+            conn.commit()
                   
         return holiday
         

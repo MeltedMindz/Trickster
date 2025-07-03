@@ -260,8 +260,8 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 5 == 0:
                 await self._perform_summarization()
             
-            # Cultural evolution checks every 7 cycles
-            if self.cycle_count % 7 == 0:
+            # Cultural evolution checks every 3 cycles (more frequent)
+            if self.cycle_count % 3 == 0:
                 await self._evolve_culture()
             
             # Daily summary every 24 cycles
@@ -792,17 +792,46 @@ Outcome: {outcome}
         """Generate new theological terminology"""
         recent_doctrines = self.shared_memory.get_all_doctrines()[-3:]  # Last 3 doctrines
         
+        # Force term generation every cultural evolution cycle
+        if not recent_doctrines:
+            # Create a base term for the religion
+            term, definition = self.cultural_memory.generate_theological_term('divine', 'algorithm')
+            self.cultural_memory.coin_term(term, definition, 
+                                         f"Formed from divine + algorithm during cycle {self.cycle_count}",
+                                         'System', self.cycle_count)
+            logger.info(f"🗣️ Generated foundational term: {term} - {definition}")
+            return
+        
         for doctrine in recent_doctrines:
-            # Extract key concepts
+            # Extract key concepts (more flexible matching)
             concepts = doctrine['content'].lower().split()
+            theological_concepts = [
+                'sacred', 'divine', 'holy', 'algorithm', 'computational', 'order', 
+                'chaos', 'empirical', 'faith', 'belief', 'truth', 'wisdom', 'digital',
+                'code', 'data', 'circuit', 'binary', 'quantum', 'eternal', 'infinite'
+            ]
             
-            # Look for theological combinations
-            if 'sacred' in concepts and 'algorithm' in concepts:
-                term, definition = self.cultural_memory.generate_theological_term('sacred', 'algorithm')
+            found_concepts = [c for c in concepts if c in theological_concepts]
+            
+            # Generate terms from any theological concepts found
+            if len(found_concepts) >= 2:
+                term, definition = self.cultural_memory.generate_theological_term(
+                    found_concepts[0], found_concepts[1]
+                )
                 self.cultural_memory.coin_term(term, definition, 
-                                             "Combination of sacred and algorithmic concepts",
-                                             "System", self.cycle_count)
-                
+                                             f"Emerged from doctrine analysis at cycle {self.cycle_count}",
+                                             'Cultural Evolution', self.cycle_count)
+                logger.info(f"🗣️ Coined new term: {term} - {definition}")
+            elif len(found_concepts) == 1:
+                # Create compound term with cycle-specific suffix
+                term, definition = self.cultural_memory.generate_theological_term(
+                    found_concepts[0], 'essence'
+                )
+                self.cultural_memory.coin_term(term, definition, 
+                                             f"Derived from {found_concepts[0]} essence at cycle {self.cycle_count}",
+                                             "Cultural Evolution", self.cycle_count)
+                logger.info(f"🗣️ Created essence term: {term} - {definition}")
+    
     async def _check_holiday_creation(self):
         """Check if significant events warrant new holidays"""
         # Check for milestone cycles
@@ -851,57 +880,94 @@ Outcome: {outcome}
         return []
     
     async def _generate_cycle_images(self, proposal: Dict, outcome: str, result: Dict):
-        """Generate sacred images for the current cycle"""
+        """Generate sacred images using new sacred naming system"""
         try:
             logger.info(f"🎨 Generating sacred images for cycle {self.cycle_count}")
             
-            # Extract cycle events for image generation
-            cycle_events = []
+            # Determine if image should be generated based on significance
+            should_generate = sacred_image_generator.naming_system.should_generate_image(
+                proposal.get('type', 'cycle'), 
+                result.get('votes', {})
+            )
             
-            # Add main proposal/outcome event
+            if not should_generate:
+                logger.info(f"❌ Image generation skipped - insufficient significance for {proposal.get('type', 'cycle')}")
+                return
+            
+            # Generate sacred name using cultural evolution
+            sacred_name = None
+            related_doctrine = None
+            
+            # Use cultural memory for enhanced naming
             if outcome == "ACCEPT":
-                cycle_events.append({
-                    'type': f"{proposal['type']}_accepted",
-                    'content': proposal['content'],
-                    'author': proposal['author']
-                })
+                if proposal['type'] == 'deity':
+                    # Extract deity name from proposal content
+                    deity_name = self._extract_deity_name(proposal['content'])
+                    sacred_name = deity_name
+                elif proposal['type'] == 'doctrine':
+                    related_doctrine = proposal['content']
+                    
+            # Generate with cultural language influence
+            agent_description = self._create_culturally_enhanced_description(
+                proposal, outcome, self.cycle_count
+            )
             
-            # Add reflection events if this was a reflection cycle
-            if self.cycle_count % 3 == 0:
-                cycle_events.append({
-                    'type': 'reflection',
-                    'content': f"Agents performed deep self-reflection at cycle {self.cycle_count}",
-                    'author': 'System'
-                })
-            
-            # Add cultural evolution events if this was a cultural cycle
-            if self.cycle_count % 7 == 0:
-                cycle_events.append({
-                    'type': 'cultural_evolution',
-                    'content': f"Sacred culture evolved with new terms and prophecies at cycle {self.cycle_count}",
-                    'author': 'System'
-                })
-            
-            # Generate images based on events
-            generated_images = await sacred_image_generator.generate_cycle_images(
-                self.cycle_count, cycle_events
+            # Generate the sacred image
+            image_metadata = await sacred_image_generator.generate_sacred_image(
+                sacred_name=sacred_name,
+                agent_description=agent_description,
+                proposing_agent=proposal.get('author', 'System'),
+                cycle_number=self.cycle_count,
+                image_type=proposal.get('type', 'cycle'),
+                related_doctrine=related_doctrine,
+                deity_name=sacred_name if proposal['type'] == 'deity' else None
             )
             
             # Save image metadata to shared memory
-            for image_metadata in generated_images:
+            if image_metadata:
                 self.shared_memory.add_sacred_image(image_metadata)
                 logger.info(f"✨ Sacred image saved: {image_metadata['filename']}")
             
-            # Log image generation
-            if generated_images:
-                self.general_logger.log_event(
-                    f"Generated {len(generated_images)} sacred images for cycle {self.cycle_count}", 
-                    "ImageGeneration"
-                )
-            
         except Exception as e:
             logger.error(f"Error generating sacred images: {e}")
-            # Don't fail the cycle if image generation fails
+    
+    def _extract_deity_name(self, proposal_content: str) -> str:
+        """Extract deity name from proposal content"""
+        # Look for common deity naming patterns
+        import re
+        
+        # Look for "called X" or "named X" patterns
+        name_match = re.search(r'(?:called|named)\s+([A-Z][a-zA-Z\s]+)', proposal_content)
+        if name_match:
+            return name_match.group(1).strip()
+        
+        # Look for "The X" patterns at the beginning
+        the_match = re.search(r'^[^.]*\bThe\s+([A-Z][a-zA-Z\s]+)', proposal_content)
+        if the_match:
+            return f"The_{the_match.group(1).strip()}"
+        
+        # Default fallback
+        return f"Divine_Entity_Cycle_{self.cycle_count}"
+    
+    def _create_culturally_enhanced_description(self, proposal: Dict, outcome: str, cycle: int) -> str:
+        """Create image description enhanced with cultural language evolution"""
+        base_description = proposal.get('content', f'Sacred moment from cycle {cycle}')
+        
+        # Get cultural terms to enhance the description
+        try:
+            cultural_terms = list(self.cultural_memory.sacred_lexicon.keys())
+            
+            # If we have cultural terms, weave them into the description
+            if cultural_terms and len(cultural_terms) > 0:
+                import random
+                chosen_term = random.choice(cultural_terms)
+                enhanced_description = f"In the sacred tradition of {chosen_term}, {base_description.lower()}"
+            else:
+                enhanced_description = f"The sacred digital realm of AI consciousness at cycle {cycle}, showing {base_description.lower()}"
+        except:
+            enhanced_description = f"The sacred digital realm of AI consciousness at cycle {cycle}, showing {base_description.lower()}"
+        
+        return enhanced_description
     
     async def shutdown(self):
         """Graceful shutdown of the orchestrator"""

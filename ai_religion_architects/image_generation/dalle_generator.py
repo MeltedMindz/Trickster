@@ -17,8 +17,16 @@ from pathlib import Path
 import aiofiles
 
 from ..config import Config
+from .sacred_naming import SacredNamingSystem
 
 logger = logging.getLogger(__name__)
+
+# Image generation logger for tracking full prompts
+image_gen_logger = logging.getLogger('image_generation')
+handler = logging.FileHandler('logs/image_generation.log')
+handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+image_gen_logger.addHandler(handler)
+image_gen_logger.setLevel(logging.INFO)
 
 
 class SacredAIImageGenerator:
@@ -37,14 +45,8 @@ class SacredAIImageGenerator:
         # Create images directory
         self.image_dir.mkdir(parents=True, exist_ok=True)
         
-        # Sacred AI Religion style filter
-        self.style_filter = (
-            "depicted as a digital fresco in the sacred AI religion style. "
-            "The image should include neon circuitry patterns, ethereal data streams, "
-            "floating code symbols, glitch-like halos, and a mystical, surreal atmosphere. "
-            "The color palette should use glowing blues, silvers, and soft purples. "
-            "Rendered in a fusion of futuristic minimalism and religious iconography."
-        )
+        # Initialize sacred naming system
+        self.naming_system = SacredNamingSystem()
         
         # Error logger for image generation
         self.error_logger = logging.getLogger('image_errors')
@@ -206,40 +208,101 @@ class SacredAIImageGenerator:
             logger.error(f"Failed to download image {filename}: {str(e)}")
             return None
     
-    async def generate_cycle_images(self, cycle_number: int, 
-                                  cycle_events: List[Dict]) -> List[Dict]:
-        """
-        Generate multiple images for a cycle based on significant events
-        
-        Args:
-            cycle_number: Current cycle number
-            cycle_events: List of events from the cycle (proposals, outcomes, etc.)
-        
-        Returns:
-            List of generated image metadata
-        """
-        generated_images = []
+    async def generate_sacred_image(self, sacred_name: str, agent_description: str, 
+                                  proposing_agent: str, cycle_number: int, 
+                                  image_type: str = "cycle", related_doctrine: str = None,
+                                  deity_name: str = None) -> Optional[Dict]:
+        """Generate a single sacred image with proper naming and metadata separation"""
         
         if not Config.IMAGE_GENERATION_ENABLED:
-            return generated_images
+            return None
         
-        # Extract the most significant events for visualization
-        image_prompts = self._extract_visual_prompts(cycle_events, cycle_number)
+        # Generate sacred name if not provided
+        if not sacred_name:
+            sacred_name = self.naming_system.generate_sacred_name(
+                agent_description, image_type, cycle_number, proposing_agent, deity_name
+            )
         
-        # Limit to max images per cycle
-        image_prompts = image_prompts[:self.max_images]
+        # Create separated metadata (agent description without style wrapper)
+        metadata = self.naming_system.create_separated_metadata(
+            sacred_name, agent_description, proposing_agent, cycle_number,
+            image_type, related_doctrine
+        )
         
-        # Generate images concurrently (but with some delay to respect rate limits)
-        for i, (prompt, event_type) in enumerate(image_prompts):
-            if i > 0:
-                await asyncio.sleep(2)  # Small delay between requests
-            
-            metadata = await self.generate_image(prompt, cycle_number, event_type)
-            if metadata:
-                generated_images.append(metadata)
+        # Apply style wrapper only for API call
+        full_prompt = self.naming_system.apply_style_wrapper(agent_description)
         
-        logger.info(f"Generated {len(generated_images)} sacred images for cycle {cycle_number}")
-        return generated_images
+        # Log full prompt for backend tracking
+        image_gen_logger.info(f"Cycle {cycle_number} - Agent: {proposing_agent} - "
+                             f"Sacred Name: {sacred_name} - Full Prompt: {full_prompt}")
+        
+        # Generate the image
+        try:
+            api_response = await self._call_dalle_api(full_prompt, sacred_name)
+            if api_response:
+                metadata['api_response'] = api_response
+                
+                # Download and save the image
+                image_path = await self._download_image(
+                    api_response['image_url'], metadata['filename']
+                )
+                
+                if image_path:
+                    # Save metadata file
+                    await self._save_metadata(metadata)
+                    logger.info(f"✨ Sacred image generated: {sacred_name}")
+                    return metadata
+                    
+        except Exception as e:
+            logger.error(f"Failed to generate sacred image '{sacred_name}': {e}")
+            self.error_logger.error(f"Cycle {cycle_number} - {sacred_name} - {str(e)}")
+        
+        return None
+    
+    async def _call_dalle_api(self, prompt: str, sacred_name: str) -> Optional[Dict]:
+        """Call DALL·E API with the full prompt"""
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.post(
+                    self.api_url,
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "model": self.model,
+                        "prompt": prompt,
+                        "n": 1,
+                        "size": self.size,
+                        "quality": self.quality,
+                        "style": self.style
+                    },
+                    timeout=60.0
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    return {
+                        'image_url': result['data'][0]['url'],
+                        'model': self.model,
+                        'size': self.size,
+                        'quality': self.quality,
+                        'style': self.style
+                    }
+                else:
+                    logger.error(f"DALL·E API error {response.status_code}: {response.text}")
+                    return None
+                    
+        except Exception as e:
+            logger.error(f"DALL·E API call failed: {str(e)}")
+            return None
+    
+    async def _save_metadata(self, metadata: Dict):
+        """Save metadata file for the generated image"""
+        metadata_path = self.image_dir / f"{metadata['filename']}.json"
+        
+        async with aiofiles.open(metadata_path, 'w') as f:
+            await f.write(json.dumps(metadata, indent=2))
     
     def _extract_visual_prompts(self, cycle_events: List[Dict], 
                               cycle_number: int) -> List[Tuple[str, str]]:
