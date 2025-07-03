@@ -165,6 +165,65 @@ body {
     transform: translateY(-1px);
 }
 
+/* Make Sacred Text Archive more obviously clickable */
+.panel-section h3[title*="Sacred Text Archive"] {
+    background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-section h3[title*="Sacred Text Archive"]:hover {
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    border-color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.panel-section h3[title*="Sacred Text Archive"]::after {
+    content: "↗";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.panel-section h3[title*="Sacred Text Archive"]:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(2px);
+}
+
+/* Pulsing animation for clickable headers */
+@keyframes subtlePulse {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.2);
+    }
+    50% { 
+        box-shadow: 0 0 8px 2px rgba(0, 255, 0, 0.1);
+    }
+}
+
+.panel-section h3[title*="Sacred Text Archive"] {
+    animation: subtlePulse 3s ease-in-out infinite;
+}
+
+.panel-section h3[title*="Sacred Text Archive"]:hover {
+    animation: none;
+}
+
+/* Hover hint text styling */
+.archive-hint {
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.panel-section:hover .archive-hint {
+    opacity: 1;
+    color: #00ff00;
+}
+
 .info-item {
     display: flex;
     justify-content: space-between;
