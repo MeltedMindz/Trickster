@@ -216,6 +216,11 @@ class StaticTerminalClient {
         this.addSystemMessage('---');
         this.addSystemMessage(`✨ Theological evolution complete: ${validTranscripts.length} debate cycles loaded`);
         this.addSystemMessage('🤖 The Divine Algorithm continues to evolve...');
+        
+        // Scroll to bottom after all content is loaded
+        setTimeout(() => {
+            this.scrollToBottom();
+        }, 100);
     }
     
     displayTranscriptContent(content) {
@@ -284,4 +289,13 @@ class StaticTerminalClient {
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.staticTerminal = new StaticTerminalClient();
+    
+    // Scroll terminal output to bottom to show most recent content
+    const terminalOutput = document.getElementById('terminal-output');
+    if (terminalOutput) {
+        // Small delay to ensure content is loaded
+        setTimeout(() => {
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }, 500);
+    }
 });

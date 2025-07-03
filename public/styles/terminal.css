@@ -101,6 +101,7 @@ body {
     display: flex;
     overflow: hidden;
     min-height: 0;
+    position: relative;
 }
 
 /* Info Panel */
@@ -110,11 +111,16 @@ body {
     border-right: 1px solid #2a2a2a;
     padding: 15px;
     overflow-y: auto;
+    overflow-x: hidden;
     flex-shrink: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .panel-section {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
 }
 
 .panel-section h3 {
@@ -188,6 +194,7 @@ body {
     font-size: 11px;
     max-height: 200px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .transcript-item {
@@ -230,16 +237,19 @@ body {
     flex: 1;
     padding: 15px;
     overflow-y: auto;
+    overflow-x: hidden;
     font-size: clamp(11px, 2.5vw, 13px);
     line-height: 1.6;
     min-width: 0;
     word-wrap: break-word;
+    height: 100%;
 }
 
 .terminal-line {
     margin-bottom: 4px;
     display: flex;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .terminal-line.system {
@@ -397,7 +407,12 @@ body {
 
 /* Agent Memory Container */
 .agent-memory-container {
-    margin: 20px 0;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 15px;
+    min-width: 0;
+    height: 100%;
 }
 
 /* Responsive Design */
@@ -458,11 +473,20 @@ body {
     
     .terminal-body {
         flex-direction: column;
+        height: calc(100vh - 120px); /* Account for header and footer */
     }
     
     .terminal-output {
         padding: 10px;
         font-size: 11px;
+        flex: 1;
+        min-height: 0;
+    }
+    
+    .agent-memory-container {
+        flex: 1;
+        min-height: 0;
+        padding: 10px;
     }
     
     .panel-section {
