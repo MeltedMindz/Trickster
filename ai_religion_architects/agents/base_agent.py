@@ -4,6 +4,7 @@ from enum import Enum
 import random
 import json
 from datetime import datetime
+from ..memory.agent_memory import AgentMemory
 
 
 class Vote(Enum):
@@ -39,12 +40,20 @@ class Proposal:
 
 
 class BaseAgent(ABC):
-    def __init__(self, name: str, personality_traits: List[str]):
+    def __init__(self, name: str, personality_traits: List[str], memory_dir: str = "data/agent_memories"):
         self.name = name
         self.personality_traits = personality_traits
-        self.memory = []
+        self.memory = []  # Legacy simple memory - kept for compatibility
         self.current_faction = None
         self.influence_score = 0
+        
+        # Initialize agent-specific memory system
+        self.agent_memory: AgentMemory = self._create_memory_system(memory_dir)
+        
+    @abstractmethod
+    def _create_memory_system(self, memory_dir: str) -> AgentMemory:
+        """Create the appropriate memory system for this agent type"""
+        pass
         
     @abstractmethod
     def generate_proposal(self, shared_memory: Dict, cycle_count: int) -> Optional[Proposal]:
@@ -74,14 +83,23 @@ class BaseAgent(ABC):
             "goal": shared_goal,
             "formed_at": datetime.now()
         }
+        
+        # Update relationship memory
+        self.agent_memory.update_relationship(other_agent.name, "alliance", "formed")
+        
         return f"{self.name} forms faction with {other_agent.name} for: {shared_goal}"
     
     def dissolve_faction(self) -> str:
         """Dissolve current faction"""
         if self.current_faction:
             old_faction = self.current_faction
+            ally_name = old_faction['ally']
             self.current_faction = None
-            return f"{self.name} dissolves faction with {old_faction['ally']}"
+            
+            # Update relationship memory based on why faction dissolved
+            self.agent_memory.update_relationship(ally_name, "alliance", "dissolved")
+            
+            return f"{self.name} dissolves faction with {ally_name}"
         return f"{self.name} has no faction to dissolve"
     
     def summarize_beliefs(self, shared_memory: Dict) -> str:
@@ -98,3 +116,81 @@ class BaseAgent(ABC):
             summary_parts.append(f"We worship: {', '.join(shared_memory['deities'][:2])}")
         
         return " ".join(summary_parts) if summary_parts else "Our faith is still forming."
+    
+    def record_debate_outcome(self, cycle_number: int, proposal: Proposal, role: str, 
+                            response: str, outcome: str, other_participants: List[str], 
+                            satisfaction: float):
+        """Record the outcome of a debate in agent memory"""
+        # Determine lessons learned based on outcome and role
+        lessons = []
+        if role == "proposer" and outcome == "accepted":
+            lessons.append("Proposal style was effective")
+        elif role == "challenger" and outcome == "rejected":
+            lessons.append("Challenge was persuasive")
+        elif satisfaction < 0.3:
+            lessons.append("Strategy needs adjustment")
+        
+        # Calculate emotional impact
+        emotional_impact = 0.5
+        if outcome == "accepted" and role in ["proposer", "supporter"]:
+            emotional_impact = 0.8
+        elif outcome == "rejected" and role == "challenger":
+            emotional_impact = 0.7
+        elif satisfaction < 0.2:
+            emotional_impact = 0.2
+        
+        # Record in agent memory
+        self.agent_memory.add_debate_memory(
+            cycle_number=cycle_number,
+            proposal_content=proposal.content,
+            agent_role=role,
+            agent_response=response,
+            outcome=outcome,
+            other_participants=other_participants,
+            personal_satisfaction=satisfaction,
+            lessons_learned=lessons,
+            emotional_impact=emotional_impact
+        )
+        
+        # Process outcome for personality evolution
+        self.agent_memory.process_debate_outcome(outcome, role, satisfaction)
+        
+        # Update relationship memories based on voting patterns
+        for participant in other_participants:
+            if participant != self.name:
+                # Simplified relationship update - could be more sophisticated
+                if outcome in ["accepted", "rejected"]:
+                    self.agent_memory.update_relationship(participant, "debate", outcome)
+    
+    def get_memory_enhanced_context(self, shared_memory: Dict) -> Dict:
+        """Get context that combines shared memory with personal memory"""
+        context = shared_memory.copy()
+        
+        # Add agent's personal perspective
+        personal_context = self.agent_memory.get_decision_context()
+        context['personal_memory'] = personal_context
+        
+        # Add memory summary
+        context['memory_summary'] = self.agent_memory.get_memory_summary()
+        
+        return context
+    
+    def save_memory(self):
+        """Save agent memory to database"""
+        self.agent_memory.save_to_database()
+    
+    def should_oppose_based_on_memory(self, proposal: Proposal, proposer: str) -> Tuple[bool, str]:
+        """Check if agent should oppose proposal based on memory"""
+        # This is a base implementation - specialized agents can override
+        if proposer in self.agent_memory.relationships:
+            relationship = self.agent_memory.relationships[proposer]
+            if relationship.trust_score < -0.5:
+                return True, f"Low trust in {proposer}"
+        
+        return False, ""
+    
+    def get_personality_strength(self, trait_name: str) -> float:
+        """Get the strength of a personality trait"""
+        if trait_name in self.agent_memory.personality_traits:
+            return self.agent_memory.personality_traits[trait_name].strength
+        return 0.5  # Default neutral strength

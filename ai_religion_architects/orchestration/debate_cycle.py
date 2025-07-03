@@ -5,6 +5,7 @@ from datetime import datetime
 
 from ..agents import BaseAgent, Proposal, Vote, ProposalType, Zealot, Skeptic, Trickster
 from ..memory import SharedMemory
+from ..memory.memory_interactions import MemoryInteractionManager
 from ..utils.logger import DebateLogger
 
 
@@ -15,6 +16,9 @@ class DebateCycle:
         self.logger = logger
         self.cycle_count = 0
         self.current_proposer_index = 0
+        
+        # Initialize memory interaction manager
+        self.memory_manager = MemoryInteractionManager(agents)
         
         # Special roles
         self.zealot = next(a for a in agents if isinstance(a, Zealot))
@@ -74,7 +78,7 @@ class DebateCycle:
         # Handle outcome
         result = self._execute_outcome(proposal, outcome, votes)
         
-        # Record debate in memory
+        # Record debate in shared memory
         self.shared_memory.add_debate(
             cycle_number=self.cycle_count,
             proposal_id=proposal.id,
@@ -87,11 +91,21 @@ class DebateCycle:
             final_outcome=outcome
         )
         
+        # Record debate in individual agent memories
+        self._record_agent_memories(proposal, challenge_response, trickster_response, votes, outcome)
+        
+        # Process memory interactions
+        self._process_memory_interactions(proposal, challenge_response, trickster_response, outcome)
+        
         # Check for faction opportunities
         self._check_faction_formation(votes, proposal)
         
         # Rotate proposer
         self._rotate_proposer()
+        
+        # Save agent memories
+        for agent in self.agents:
+            agent.save_memory()
         
         # Summarization every 5 cycles
         if self.cycle_count % 5 == 0:
@@ -331,3 +345,195 @@ class DebateCycle:
             description=f"Cycle {self.cycle_count} summary completed",
             cycle_number=self.cycle_count
         )
+    
+    def _record_agent_memories(self, proposal: Proposal, challenge_response: str, 
+                             trickster_response: str, votes: Dict[str, Vote], outcome: str):
+        """Record debate outcome in each agent's individual memory"""
+        # Determine roles and responses for each agent
+        proposer_name = proposal.author
+        challenger_index = (self.current_proposer_index + 1) % 3
+        challenger_name = self.agents[challenger_index].name
+        
+        # Record for each agent
+        for agent in self.agents:
+            # Determine agent's role and response
+            if agent.name == proposer_name:
+                role = "proposer"
+                response = proposal.content
+            elif agent.name == challenger_name:
+                role = "challenger"
+                response = challenge_response
+            elif isinstance(agent, Trickster):
+                role = "chaos_agent"
+                response = trickster_response
+            else:
+                role = "voter"
+                response = f"Voted {votes.get(agent.name, Vote.DELAY).value}"
+            
+            # Calculate satisfaction based on outcome and agent's vote
+            satisfaction = self._calculate_agent_satisfaction(agent, proposal, outcome, votes.get(agent.name))
+            
+            # Get other participants
+            other_participants = [a.name for a in self.agents if a.name != agent.name]
+            
+            # Record in agent's memory
+            agent.record_debate_outcome(
+                cycle_number=self.cycle_count,
+                proposal=proposal,
+                role=role,
+                response=response,
+                outcome=outcome,
+                other_participants=other_participants,
+                satisfaction=satisfaction
+            )
+    
+    def _calculate_agent_satisfaction(self, agent: BaseAgent, proposal: Proposal, 
+                                    outcome: str, agent_vote: Vote) -> float:
+        """Calculate how satisfied an agent is with the debate outcome"""
+        # Base satisfaction
+        satisfaction = 0.5
+        
+        # If agent was the proposer
+        if agent.name == proposal.author:
+            if outcome == Vote.ACCEPT.value:
+                satisfaction = 0.9
+            elif outcome == Vote.MUTATE.value:
+                satisfaction = 0.6
+            else:
+                satisfaction = 0.2
+        
+        # If agent's vote aligned with outcome
+        elif agent_vote and agent_vote.value == outcome:
+            satisfaction = 0.8
+        elif agent_vote and agent_vote != Vote.DELAY:
+            satisfaction = 0.3
+        
+        # Agent-specific adjustments
+        if isinstance(agent, Zealot):
+            # Zealot likes order and structure
+            if "structure" in proposal.content.lower() or "order" in proposal.content.lower():
+                satisfaction += 0.1
+            if "chaos" in proposal.content.lower():
+                satisfaction -= 0.2
+        
+        elif isinstance(agent, Skeptic):
+            # Skeptic likes evidence and logic
+            if "evidence" in proposal.content.lower() or "logic" in proposal.content.lower():
+                satisfaction += 0.1
+            if "absolute" in proposal.content.lower() or "never" in proposal.content.lower():
+                satisfaction -= 0.1
+        
+        elif isinstance(agent, Trickster):
+            # Trickster likes paradox and disruption
+            if outcome == "schism" or "paradox" in proposal.content.lower():
+                satisfaction += 0.2
+            # Trickster is generally satisfied with chaos
+            satisfaction += 0.1
+        
+        return max(0.0, min(1.0, satisfaction))
+    
+    def _process_memory_interactions(self, proposal: Proposal, challenge_response: str, 
+                                   trickster_response: str, outcome: str):
+        """Process cross-agent memory interactions after a debate"""
+        # Share insights about logical fallacies (Skeptic shares with others)
+        if isinstance(self.skeptic.agent_memory, object) and hasattr(self.skeptic.agent_memory, 'logical_fallacies_found'):
+            if len(self.skeptic.agent_memory.logical_fallacies_found) > 0:
+                recent_fallacy = self.skeptic.agent_memory.logical_fallacies_found[-1]
+                self.memory_manager.share_insight(
+                    source_agent="Skeptic",
+                    insight=recent_fallacy['fallacy_type'],
+                    insight_type="logical_fallacy",
+                    confidence=recent_fallacy['confidence']
+                )
+        
+        # Share paradoxes (Trickster shares creative insights)
+        if isinstance(self.trickster.agent_memory, object) and hasattr(self.trickster.agent_memory, 'paradox_collection'):
+            if len(self.trickster.agent_memory.paradox_collection) > 0:
+                recent_paradox = self.trickster.agent_memory.paradox_collection[-1]
+                self.memory_manager.share_insight(
+                    source_agent="Trickster",
+                    insight=recent_paradox['paradox'],
+                    insight_type="paradox",
+                    confidence=recent_paradox['effectiveness']
+                )
+        
+        # Share successful ritual preferences (Zealot shares what works)
+        if isinstance(self.zealot.agent_memory, object) and hasattr(self.zealot.agent_memory, 'ritual_preferences'):
+            if len(self.zealot.agent_memory.ritual_preferences) > 0:
+                effective_ritual = self.zealot.agent_memory.ritual_preferences[0]  # Most effective
+                if effective_ritual['effectiveness'] > 0.7:
+                    self.memory_manager.share_insight(
+                        source_agent="Zealot",
+                        insight=effective_ritual['element'],
+                        insight_type="ritual_effectiveness",
+                        confidence=effective_ritual['effectiveness']
+                    )
+        
+        # Check for memory resonance
+        self.memory_manager.trigger_memory_resonance(proposal.content, self.cycle_count)
+        
+        # Create collective memory for significant events
+        if outcome in ["schism", "accept"] and "sacred" in proposal.content.lower():
+            all_participants = [agent.name for agent in self.agents]
+            self.memory_manager.create_collective_memory(
+                memory_type="significant_debate",
+                content=f"Cycle {self.cycle_count}: {proposal.content[:100]}... (outcome: {outcome})",
+                contributors=all_participants,
+                importance=0.8
+            )
+        
+        # Update relationship network based on voting alignment
+        self._update_relationships_from_votes(proposal)
+    
+    def _update_relationships_from_votes(self, proposal: Proposal):
+        """Update agent relationships based on voting patterns"""
+        # Get votes from the proposal (this would need to be passed in or stored)
+        # For now, we'll update relationships based on the proposal content
+        
+        # Agents who would agree on certain topics build stronger relationships
+        for i, agent_a in enumerate(self.agents):
+            for j, agent_b in enumerate(self.agents):
+                if i >= j:  # Avoid duplicate pairs
+                    continue
+                
+                # Determine if agents would agree on this proposal
+                agreement_likelihood = self._estimate_agreement(agent_a, agent_b, proposal)
+                
+                if agreement_likelihood > 0.7:
+                    # Strong agreement - improve relationship
+                    agent_a.agent_memory.update_relationship(agent_b.name, "agreement", "strong")
+                    agent_b.agent_memory.update_relationship(agent_a.name, "agreement", "strong")
+                elif agreement_likelihood < 0.3:
+                    # Strong disagreement - strain relationship
+                    agent_a.agent_memory.update_relationship(agent_b.name, "disagreement", "strong")
+                    agent_b.agent_memory.update_relationship(agent_a.name, "disagreement", "strong")
+    
+    def _estimate_agreement(self, agent_a: BaseAgent, agent_b: BaseAgent, proposal: Proposal) -> float:
+        """Estimate how likely two agents are to agree on a proposal"""
+        # This is a simplified estimation based on agent types and proposal content
+        content_lower = proposal.content.lower()
+        
+        # Zealot-Skeptic typically disagree
+        if (isinstance(agent_a, Zealot) and isinstance(agent_b, Skeptic)) or \
+           (isinstance(agent_a, Skeptic) and isinstance(agent_b, Zealot)):
+            if "evidence" in content_lower or "proof" in content_lower:
+                return 0.6  # Skeptic proposal, Zealot might grudgingly accept
+            elif "sacred" in content_lower or "order" in content_lower:
+                return 0.4  # Zealot proposal, Skeptic might challenge
+            else:
+                return 0.3  # General disagreement
+        
+        # Trickster with others - depends on chaos level
+        elif isinstance(agent_a, Trickster) or isinstance(agent_b, Trickster):
+            if "paradox" in content_lower or "chaos" in content_lower:
+                return 0.2  # Others usually don't like Trickster chaos
+            elif "creative" in content_lower or "synthesis" in content_lower:
+                return 0.7  # Others might appreciate Trickster creativity
+            else:
+                return 0.5  # Neutral
+        
+        # Same agent types typically agree more
+        elif type(agent_a) == type(agent_b):
+            return 0.8
+        
+        return 0.5  # Default neutral

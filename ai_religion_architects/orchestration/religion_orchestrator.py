@@ -20,11 +20,12 @@ class ReligionOrchestrator:
         self.shared_memory = SharedMemory(db_path)
         self.logger = DebateLogger(log_dir)
         
-        # Initialize agents
+        # Initialize agents with memory system
+        agent_memory_dir = f"{log_dir.rstrip('/')}_agent_memories"
         self.agents = [
-            Zealot(),
-            Skeptic(), 
-            Trickster()
+            Zealot(memory_dir=agent_memory_dir),
+            Skeptic(memory_dir=agent_memory_dir), 
+            Trickster(memory_dir=agent_memory_dir)
         ]
         
         # Initialize debate cycle manager

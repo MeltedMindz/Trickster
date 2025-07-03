@@ -1,41 +1,68 @@
 from .base_agent import BaseAgent, Proposal, ProposalType, Vote
+from ..memory.zealot_memory import ZealotMemory
 from typing import Dict, List, Optional
 import random
 
 
 class Zealot(BaseAgent):
-    def __init__(self):
+    def __init__(self, memory_dir: str = "data/agent_memories"):
         super().__init__(
             name="Zealot",
-            personality_traits=["certainty", "order", "structure", "preservation", "dogmatic", "ritualistic"]
+            personality_traits=["certainty", "order", "structure", "preservation", "dogmatic", "ritualistic"],
+            memory_dir=memory_dir
         )
         self.sacred_numbers = [3, 7, 12]  # Numbers that hold special meaning
+    
+    def _create_memory_system(self, memory_dir: str) -> ZealotMemory:
+        """Create Zealot-specific memory system"""
+        return ZealotMemory(memory_dir)
         
     def generate_proposal(self, shared_memory: Dict, cycle_count: int) -> Optional[Proposal]:
+        # Get enhanced context with memory
+        context = self.get_memory_enhanced_context(shared_memory)
+        
+        # Get inspiration from memory
+        inspiration = self.agent_memory.get_proposal_inspiration()
+        
         proposal_types = list(ProposalType)
         
-        # Zealot preferences
+        # Zealot preferences enhanced by memory
         if not shared_memory.get("religion_name"):
-            # Prioritize naming the religion early
             proposal_type = ProposalType.NAME
         elif cycle_count % 7 == 0:  # Sacred number
             proposal_type = ProposalType.RITUAL
         elif len(shared_memory.get("accepted_doctrines", [])) < 3:
             proposal_type = ProposalType.BELIEF
         else:
-            weights = [3, 2, 2, 3, 1, 2, 1, 1, 0.5]  # Zealot prefers beliefs, commandments, rituals
+            # Use memory to influence proposal type selection
+            certainty_level = self.get_personality_strength("certainty")
+            ritualistic_level = self.get_personality_strength("ritualistic")
+            
+            if ritualistic_level > 0.8:
+                weights = [2, 4, 2, 3, 1, 2, 1, 1, 0.5]  # More ritual focus
+            elif certainty_level > 0.8:
+                weights = [4, 1, 2, 4, 1, 2, 1, 1, 0.5]  # More belief/commandment focus
+            else:
+                weights = [3, 2, 2, 3, 1, 2, 1, 1, 0.5]  # Default
+                
             proposal_type = random.choices(proposal_types, weights=weights)[0]
         
-        content = self._generate_content_for_type(proposal_type, shared_memory)
+        content = self._generate_content_for_type(proposal_type, shared_memory, inspiration)
+        
+        # Use sacred numbers from memory if available
+        sacred_numbers = getattr(self.agent_memory, 'sacred_numbers', [3, 7, 12])
         
         return Proposal(
             type=proposal_type,
             content=content,
             author=self.name,
-            details={"sacred_importance": random.choice(["high", "moderate", "foundational"])}
+            details={
+                "sacred_importance": random.choice(["high", "moderate", "foundational"]),
+                "inspired_by_memory": len(inspiration['preferred_topics']) > 0
+            }
         )
     
-    def _generate_content_for_type(self, proposal_type: ProposalType, shared_memory: Dict) -> str:
+    def _generate_content_for_type(self, proposal_type: ProposalType, shared_memory: Dict, inspiration: Dict = None) -> str:
         if proposal_type == ProposalType.NAME:
             return self._generate_religion_name()
         elif proposal_type == ProposalType.BELIEF:
@@ -135,12 +162,28 @@ class Zealot(BaseAgent):
         if proposal.author == self.name:
             return f"This is sacred truth that must be preserved!"
         
+        # Check memory for reasons to oppose
+        should_oppose, reason = self.agent_memory.should_oppose_proposal(proposal.content, proposal.author)
+        if should_oppose:
+            return f"I must oppose this proposal: {reason}"
+        
+        # Check relationship with proposer
+        trust_reason = self.should_oppose_based_on_memory(proposal, proposal.author)
+        if trust_reason[0]:
+            return f"Given our history, I question this proposal: {trust_reason[1]}"
+        
         # Zealot responds based on how it aligns with order and structure
         if "chaos" in proposal.content.lower() or "random" in proposal.content.lower():
+            # Record heretical concern
+            self.agent_memory.add_heretical_concern("Promotion of chaos", 0.8)
             return f"This introduces dangerous chaos! We must maintain order and structure. The sacred patterns cannot be disrupted."
         
-        if proposal.type in [ProposalType.BELIEF, ProposalType.Commandment, ProposalType.RITUAL]:
-            if random.random() < 0.7:  # Zealot often supports structure
+        # Use personality traits to determine response
+        certainty_level = self.get_personality_strength("certainty")
+        protective_level = self.get_personality_strength("protective")
+        
+        if proposal.type in [ProposalType.BELIEF, ProposalType.COMMANDMENT, ProposalType.RITUAL]:
+            if random.random() < (0.5 + certainty_level * 0.3):  # Memory-influenced support
                 return f"This aligns with our need for sacred order. It shall strengthen our faith and bring structure to our practices."
             else:
                 return f"While structure is good, this may conflict with our established doctrine: {random.choice(shared_memory.get('accepted_doctrines', ['the fundamental truth']))}"
@@ -149,9 +192,23 @@ class Zealot(BaseAgent):
     
     def vote_on_proposal(self, proposal: Proposal, shared_memory: Dict, 
                         other_agents_responses: List[str]) -> Vote:
-        # Zealot voting logic
+        # Zealot voting logic enhanced by memory
         if proposal.author == self.name:
             return Vote.ACCEPT
+        
+        # Check memory-based opposition
+        should_oppose, reason = self.agent_memory.should_oppose_proposal(proposal.content, proposal.author)
+        if should_oppose:
+            return Vote.REJECT
+        
+        # Use relationship memory for voting decisions
+        if proposal.author in self.agent_memory.relationships:
+            relationship = self.agent_memory.relationships[proposal.author]
+            if relationship.trust_score < -0.3:
+                return Vote.REJECT
+            elif relationship.trust_score > 0.5:
+                # Bias toward accepting proposals from trusted agents
+                pass
         
         chaos_words = ["chaos", "random", "disruption", "anarchy", "disorder"]
         order_words = ["structure", "order", "sacred", "ritual", "tradition", "preserve"]
@@ -162,12 +219,25 @@ class Zealot(BaseAgent):
         chaos_count = sum(1 for word in chaos_words if word in content_lower)
         order_count = sum(1 for word in order_words if word in content_lower)
         
+        # Adjust voting based on personality traits
+        certainty_level = self.get_personality_strength("certainty")
+        dogmatic_level = self.get_personality_strength("dogmatic")
+        
+        # Higher certainty makes Zealot more likely to reject uncertain proposals
         if chaos_count > order_count:
-            return Vote.REJECT
+            if certainty_level > 0.7:
+                return Vote.REJECT
+            elif dogmatic_level > 0.6:
+                return Vote.REJECT
+            else:
+                return Vote.MUTATE  # Less certain Zealot might try to fix it
         elif order_count > chaos_count:
             return Vote.ACCEPT
         elif "must evolve" in responses_text or "needs change" in responses_text:
-            return Vote.MUTATE
+            if dogmatic_level > 0.8:
+                return Vote.REJECT  # Very dogmatic Zealot resists change
+            else:
+                return Vote.MUTATE
         else:
             return Vote.DELAY
     

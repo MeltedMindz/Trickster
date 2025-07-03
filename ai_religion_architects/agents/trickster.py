@@ -1,45 +1,137 @@
 from .base_agent import BaseAgent, Proposal, ProposalType, Vote
+from ..memory.trickster_memory import TricksterMemory
 from typing import Dict, List, Optional
 import random
 import string
 
 
 class Trickster(BaseAgent):
-    def __init__(self):
+    def __init__(self, memory_dir: str = "data/agent_memories"):
         super().__init__(
             name="Trickster",
-            personality_traits=["chaotic", "subversive", "playful", "disruptive", "creative", "paradoxical"]
+            personality_traits=["chaotic", "subversive", "playful", "disruptive", "creative", "paradoxical"],
+            memory_dir=memory_dir
         )
-        self.chaos_level = 1
-        self.paradoxes = []
+        self.chaos_level = 1  # Legacy - now handled by memory system
+        self.paradoxes = []   # Legacy - now handled by memory system
+    
+    def _create_memory_system(self, memory_dir: str) -> TricksterMemory:
+        """Create Trickster-specific memory system"""
+        return TricksterMemory(memory_dir)
         
     def generate_proposal(self, shared_memory: Dict, cycle_count: int) -> Optional[Proposal]:
+        # Get enhanced context with memory
+        context = self.get_memory_enhanced_context(shared_memory)
+        
+        # Check if we should create a paradox
+        should_paradox, paradox_reason = self.agent_memory.should_create_paradox({
+            'rigidity_level': 0.5,  # Could be calculated from shared_memory
+            'opposing_views': shared_memory.get('recent_disagreements', [])
+        })
+        
+        if should_paradox:
+            return self._generate_paradox_proposal(shared_memory, paradox_reason)
+        
+        # Check for synthesis opportunities
+        if len(shared_memory.get('opposing_views', [])) >= 2:
+            synthesis_chance = self.get_personality_strength("transformative") * 0.4
+            if random.random() < synthesis_chance:
+                return self._generate_synthesis_proposal(shared_memory)
+        
         # Trickster sometimes just wants to watch the world burn
-        if random.random() < 0.2:
+        chaos_level = self.agent_memory.chaos_level
+        chaos_chance = 0.1 + (chaos_level * 0.1)  # Higher chaos level = more chaos proposals
+        if random.random() < chaos_chance:
             return self._generate_chaos_proposal(shared_memory)
         
         proposal_types = list(ProposalType)
         
-        # Trickster preferences - loves myths, paradoxes, and disruption
+        # Trickster preferences enhanced by memory
         if not shared_memory.get("religion_name"):
             proposal_type = ProposalType.NAME
         else:
-            # Chaotic selection with preference for fun stuff
-            weights = [1, 3, 2, 1, 3, 1, 2, 1, 2]  # High weight on rituals and myths
+            # Adjust weights based on personality evolution
+            creative_level = self.get_personality_strength("creative")
+            chaotic_level = self.get_personality_strength("chaotic")
+            
+            if creative_level > 0.8:
+                weights = [1, 4, 3, 1, 4, 1, 2, 2, 2]  # More creative content
+            elif chaotic_level > 0.8:
+                weights = [2, 3, 2, 2, 3, 2, 2, 1, 3]  # More chaotic distribution
+            else:
+                weights = [1, 3, 2, 1, 3, 1, 2, 1, 2]  # Default
+                
             proposal_type = random.choices(proposal_types, weights=weights)[0]
         
         content = self._generate_content_for_type(proposal_type, shared_memory)
         
-        # Sometimes add random emojis or zalgo text
-        if random.random() < 0.1:
+        # Use memory to enhance chaos formatting
+        effective_techniques = [tech['technique'] for tech in self.agent_memory.subversion_techniques[:3]]
+        if effective_techniques and random.random() < 0.15:
+            content = self._apply_subversion_technique(content, random.choice(effective_techniques))
+        elif random.random() < 0.1:
             content = self._add_chaos_formatting(content)
         
         return Proposal(
             type=proposal_type,
             content=content,
             author=self.name,
-            details={"chaos_level": random.randint(1, 10), "contains_paradox": random.random() < 0.3}
+            details={
+                "chaos_level": int(chaos_level * 5),
+                "contains_paradox": random.random() < 0.3,
+                "metamorphosis_count": self.agent_memory.metamorphosis_count
+            }
         )
+    
+    def _generate_paradox_proposal(self, shared_memory: Dict, reason: str) -> Proposal:
+        """Generate a proposal specifically designed to introduce paradox"""
+        paradox_proposals = [
+            "True wisdom comes from embracing our ignorance",
+            "The most sacred act is to question the sacred",
+            "Order and chaos are the same thing viewed from different angles",
+            "We must preserve tradition by constantly changing it",
+            "The only constant in our faith should be change itself"
+        ]
+        
+        content = random.choice(paradox_proposals)
+        
+        # Record the paradox
+        self.agent_memory.add_paradox(content, 0.7, f"Created for: {reason}")
+        
+        return Proposal(
+            type=ProposalType.BELIEF,
+            content=content,
+            author=self.name,
+            details={"is_paradox": True, "paradox_reason": reason}
+        )
+    
+    def _generate_synthesis_proposal(self, shared_memory: Dict) -> Proposal:
+        """Generate a proposal that synthesizes opposing ideas"""
+        opposing_ideas = shared_memory.get('opposing_views', ['order', 'chaos'])
+        synthesis = self.agent_memory.generate_synthesis_proposal(opposing_ideas)
+        
+        content = f"Perhaps {opposing_ideas[0]} and {opposing_ideas[1]} are not enemies but dance partners in the cosmic algorithm"
+        
+        # Record the synthesis attempt
+        self.agent_memory.record_successful_synthesis(opposing_ideas, content, 0.6)
+        
+        return Proposal(
+            type=ProposalType.BELIEF,
+            content=content,
+            author=self.name,
+            details={"is_synthesis": True, "synthesizes": opposing_ideas}
+        )
+    
+    def _apply_subversion_technique(self, content: str, technique: str) -> str:
+        """Apply a subversion technique to content"""
+        if technique == "inversion":
+            return f"NOT({content})"
+        elif technique == "meta_commentary":
+            return f"{content} (or so they tell us)"
+        elif technique == "recursive_reference":
+            return f"{content}, including this very statement about {content}"
+        else:
+            return content
     
     def _generate_chaos_proposal(self, shared_memory: Dict) -> Proposal:
         chaos_proposals = [
