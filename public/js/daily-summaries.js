@@ -315,17 +315,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if we should add daily summaries to the info panel
     const infoPanelSections = document.querySelector('.info-panel');
     if (infoPanelSections) {
+        // Find the Recent Doctrines section to insert before it
+        const doctrineSections = infoPanelSections.querySelectorAll('.panel-section');
+        let doctrineSection = null;
+        
+        doctrineSections.forEach(section => {
+            const h3 = section.querySelector('h3');
+            if (h3 && h3.textContent.includes('Recent Doctrines')) {
+                doctrineSection = section;
+            }
+        });
+        
         // Add daily summaries section to info panel
         const summariesSection = document.createElement('div');
         summariesSection.className = 'panel-section';
         summariesSection.innerHTML = `
-            <h3>📅 Daily Chronicles</h3>
+            <h3 title="Click to view Daily Chronicles" style="cursor: pointer;">📅 Daily Chronicles</h3>
             <div id="daily-chronicles-container" class="daily-chronicles-container">
                 <!-- Daily chronicles will be loaded here -->
             </div>
         `;
         
-        infoPanelSections.appendChild(summariesSection);
+        // Insert before doctrines section if found, otherwise append to end
+        if (doctrineSection) {
+            infoPanelSections.insertBefore(summariesSection, doctrineSection);
+        } else {
+            infoPanelSections.appendChild(summariesSection);
+        }
         
         // Initialize the component
         window.dailySummaries = new DailySummariesComponent();
