@@ -18,6 +18,7 @@ from ..claude_client import get_claude_client, close_claude_client
 from ..memory import SharedMemory
 from ..utils import DebateLogger
 from ..utils.memory_exporter import AgentMemoryExporter
+from ..utils.daily_summarizer import DailySummarizer
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -43,6 +44,9 @@ class ClaudeReligionOrchestrator:
         # Initialize memory exporter for agent statistics
         agent_memory_dir = f"{self.log_dir.rstrip('/')}_agent_memories"
         self.memory_exporter = AgentMemoryExporter(memory_dir=agent_memory_dir)
+        
+        # Initialize daily summarizer
+        self.daily_summarizer = DailySummarizer(self.db_path)
         
         # Agent names for the debate system
         self.agent_names = ["Zealot", "Skeptic", "Trickster"]
@@ -240,6 +244,10 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 5 == 0:
                 await self._perform_summarization()
             
+            # Daily summary every 24 cycles
+            if self.cycle_count % 24 == 0:
+                await self._create_daily_summary()
+            
             # Export static data for frontend
             await self._export_static_data()
             
@@ -434,6 +442,37 @@ Focus on what you think are the most important developments and where the religi
             description=f"Cycle {self.cycle_count} summary completed",
             cycle_number=self.cycle_count
         )
+    
+    async def _create_daily_summary(self):
+        \"\"\"Create daily summary every 24 cycles\"\"\"
+        day_number = self.cycle_count // 24
+        logger.info(f\"📋 Creating Day {day_number} summary after {self.cycle_count} cycles\")
+        
+        try:
+            # Initialize Claude client for summarizer if needed
+            await self.daily_summarizer.initialize_claude()
+            
+            # Create summary for the completed day
+            summary = await self.daily_summarizer.create_day_summary(day_number)
+            
+            # Export to public directory for frontend
+            self.daily_summarizer.export_summaries_to_public()
+            
+            # Log the milestone
+            self.shared_memory.add_evolution_milestone(
+                milestone_type=\"daily_summary\",
+                description=f\"Day {day_number} summary created: {summary[:100]}...\",
+                cycle_number=self.cycle_count
+            )
+            
+            self.general_logger.log_event(f\"=== DAY {day_number} SUMMARY CREATED ===\", \"System\")
+            self.general_logger.log_event(summary[:200] + \"...\", \"Summary\")
+            
+            logger.info(f\"✅ Day {day_number} summary completed and exported\")
+            
+        except Exception as e:
+            logger.error(f\"❌ Failed to create Day {day_number} summary: {e}\")
+            self.general_logger.log_event(f\"ERROR creating Day {day_number} summary: {str(e)}\", \"System\")
     
     async def _export_static_data(self):
         """Export current religion state to static JSON files for frontend"""
