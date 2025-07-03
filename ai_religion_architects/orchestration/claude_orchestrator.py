@@ -460,45 +460,97 @@ Focus on what you think are the most important developments and where the religi
             with open(os.path.join(data_dir, 'religion_state.json'), 'w') as f:
                 json.dump(religion_data, f, indent=2)
             
-            # Export recent transcripts list (look for CYCLE*.txt files)
+            # Export transcripts for all cycles from database
             import glob
+            import re
             log_dir = os.environ.get('LOG_DIR', 'logs')
             
-            # Look for both old and new naming patterns
-            cycle_pattern = os.path.join(log_dir, 'CYCLE*.txt')
-            transcript_pattern = os.path.join(log_dir, 'transcript_*.txt')
-            
-            cycle_files = glob.glob(cycle_pattern)
-            transcript_files = glob.glob(transcript_pattern)
-            
-            # Combine and sort by modification time
-            all_files = cycle_files + transcript_files
-            all_files.sort(key=os.path.getmtime, reverse=True)
+            # Get all cycles from database to ensure we find transcripts for each
+            with self.shared_memory._get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT cycle_number, timestamp FROM debate_history ORDER BY cycle_number")
+                db_cycles = cursor.fetchall()
             
             transcripts_data = []
-            for file_path in all_files[:10]:  # Last 10 files
+            found_cycles = set()
+            
+            # First, look for new CYCLE*.txt files
+            cycle_pattern = os.path.join(log_dir, 'CYCLE*.txt')
+            cycle_files = glob.glob(cycle_pattern)
+            
+            for file_path in cycle_files:
                 try:
                     with open(file_path, 'r') as f:
                         content = f.read()
                         filename = os.path.basename(file_path)
                         
-                        # Extract timestamp or cycle info
-                        if filename.startswith('CYCLE'):
-                            timestamp = filename.replace('.txt', '')
-                        else:
-                            timestamp = filename.replace('transcript_', '').replace('.txt', '')
-                        
-                        # Only include files with actual content
-                        if len(content.strip()) > 200:
+                        # Extract cycle number from filename
+                        cycle_match = re.search(r'CYCLE(\d+)', filename)
+                        if cycle_match and len(content.strip()) > 200:
+                            cycle_num = int(cycle_match.group(1))
+                            found_cycles.add(cycle_num)
+                            
                             transcripts_data.append({
                                 "filename": filename,
-                                "timestamp": timestamp,
+                                "timestamp": f"CYCLE{cycle_num}",
                                 "content": content,
                                 "modified": datetime.fromtimestamp(os.path.getmtime(file_path)).isoformat(),
-                                "preview": content[:200] + "..." if len(content) > 200 else content
+                                "preview": content[:200] + "..." if len(content) > 200 else content,
+                                "cycle_number": cycle_num
                             })
                 except Exception as e:
-                    logger.warning(f"Could not read transcript {file_path}: {e}")
+                    logger.warning(f"Could not read cycle file {file_path}: {e}")
+            
+            # Then, look for old transcript files for missing cycles
+            transcript_pattern = os.path.join(log_dir, 'transcript_*.txt')
+            transcript_files = glob.glob(transcript_pattern)
+            
+            for cycle_num, db_timestamp in db_cycles:
+                if cycle_num not in found_cycles:
+                    # Find transcript file for this cycle
+                    target_time = datetime.fromisoformat(db_timestamp.replace('Z', '+00:00'))
+                    best_file = None
+                    best_score = float('inf')
+                    
+                    for file_path in transcript_files:
+                        try:
+                            with open(file_path, 'r') as f:
+                                content = f.read()
+                                
+                            # Check if this file contains the cycle we're looking for
+                            if f'CYCLE {cycle_num} BEGINNING' in content and len(content.strip()) > 200:
+                                # Check if timestamp is close to database timestamp
+                                file_time = datetime.fromtimestamp(os.path.getmtime(file_path))
+                                time_diff = abs((file_time - target_time).total_seconds())
+                                
+                                if time_diff < best_score:
+                                    best_score = time_diff
+                                    best_file = file_path
+                                    
+                        except Exception as e:
+                            continue
+                    
+                    # Add the best matching file
+                    if best_file:
+                        try:
+                            with open(best_file, 'r') as f:
+                                content = f.read()
+                                filename = os.path.basename(best_file)
+                                
+                            transcripts_data.append({
+                                "filename": filename,
+                                "timestamp": filename.replace('transcript_', '').replace('.txt', ''),
+                                "content": content,
+                                "modified": datetime.fromtimestamp(os.path.getmtime(best_file)).isoformat(),
+                                "preview": content[:200] + "..." if len(content) > 200 else content,
+                                "cycle_number": cycle_num
+                            })
+                            found_cycles.add(cycle_num)
+                        except Exception as e:
+                            logger.warning(f"Could not read transcript {best_file}: {e}")
+            
+            # Sort by cycle number
+            transcripts_data.sort(key=lambda x: x.get('cycle_number', 0))
             
             # Save transcripts data  
             with open(os.path.join(data_dir, 'recent_transcripts.json'), 'w') as f:
