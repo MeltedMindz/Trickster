@@ -165,6 +165,78 @@ class SharedMemory:
                 )
             ''')
             
+            # Sacred terminology
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS sacred_terms (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    term TEXT NOT NULL UNIQUE,
+                    definition TEXT,
+                    etymology TEXT,
+                    proposed_by TEXT,
+                    adopted_cycle INTEGER,
+                    usage_count INTEGER DEFAULT 0,
+                    created_at TIMESTAMP
+                )
+            ''')
+            
+            # Religious symbols
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS religious_symbols (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    description TEXT,
+                    meaning TEXT,
+                    associated_concepts TEXT,
+                    proposed_by TEXT,
+                    adopted_cycle INTEGER,
+                    created_at TIMESTAMP
+                )
+            ''')
+            
+            # Sacred holidays
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS sacred_holidays (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    description TEXT,
+                    commemorates TEXT,
+                    cycle_established INTEGER,
+                    observance_rule TEXT,
+                    significance_score REAL,
+                    created_at TIMESTAMP
+                )
+            ''')
+            
+            # Theological tensions (schism tracking)
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS theological_tensions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    tension_id TEXT UNIQUE,
+                    conflicting_doctrines TEXT,
+                    agent_positions TEXT,
+                    tension_score REAL,
+                    cycles_unresolved INTEGER DEFAULT 0,
+                    resolution_attempts TEXT,
+                    created_at TIMESTAMP,
+                    resolved_at TIMESTAMP
+                )
+            ''')
+            
+            # Prophecies
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS prophecies (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    prophecy_id TEXT UNIQUE,
+                    prophet TEXT,
+                    prediction TEXT,
+                    target_cycle INTEGER,
+                    created_cycle INTEGER,
+                    confidence REAL,
+                    fulfillment_status TEXT DEFAULT 'pending',
+                    created_at TIMESTAMP
+                )
+            ''')
+            
             # Initialize religion state if not exists
             cursor.execute("SELECT COUNT(*) FROM religion_state")
             if cursor.fetchone()[0] == 0:

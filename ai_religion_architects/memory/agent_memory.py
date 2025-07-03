@@ -7,6 +7,9 @@ from dataclasses import dataclass, asdict
 from abc import ABC, abstractmethod
 import logging
 
+from .metacognitive_memory import MetaCognitiveMemory
+from .cultural_memory import CulturalMemory
+
 logger = logging.getLogger(__name__)
 
 @dataclass
@@ -124,6 +127,12 @@ class AgentMemory(ABC):
         self.successful_proposals: int = 0
         self.total_challenges: int = 0
         self.successful_challenges: int = 0
+        
+        # Meta-cognitive capabilities
+        self.metacognitive = MetaCognitiveMemory(agent_name)
+        
+        # Cultural memory reference (shared across agents)
+        self.cultural_memory: Optional[CulturalMemory] = None
         self.total_votes: int = 0
         self.evolution_points: int = 0
         
@@ -481,3 +490,56 @@ class AgentMemory(ABC):
     def get_decision_context(self) -> Dict[str, Any]:
         """Get agent-specific context for decision making"""
         pass
+    
+    def set_cultural_memory(self, cultural_memory: CulturalMemory):
+        """Set reference to shared cultural memory"""
+        self.cultural_memory = cultural_memory
+        
+    def perform_self_reflection(self, cycle: int, recent_debates: List[Dict]) -> Dict[str, Any]:
+        """Perform self-reflection and meta-cognitive analysis"""
+        reflection = self.metacognitive.add_self_reflection(cycle, recent_debates)
+        
+        # Apply insights to personality evolution
+        if reflection.personality_drift:
+            for trait_name, drift in reflection.personality_drift.items():
+                if trait_name in self.personality_traits:
+                    self.evolve_trait(trait_name, drift)
+                    
+        return {
+            'reflection': reflection,
+            'insights': reflection.insights,
+            'belief_consistency': reflection.belief_consistency_score
+        }
+        
+    def learn_debate_strategy(self, strategy_name: str, description: str, cycle: int):
+        """Learn a new debate strategy"""
+        return self.metacognitive.learn_strategy(strategy_name, description, cycle)
+        
+    def justify_belief(self, belief: str, evidence: List[str], logic: List[str]):
+        """Create logical justification for a belief"""
+        return self.metacognitive.justify_belief(belief, evidence, logic)
+        
+    def formulate_meta_theory(self, name: str, description: str, 
+                            observations: List[str], predictions: List[str], cycle: int):
+        """Formulate a theory about religion itself"""
+        return self.metacognitive.formulate_meta_theory(name, description, 
+                                                       observations, predictions, cycle)
+        
+    def coin_sacred_term(self, term: str, definition: str, etymology: str, cycle: int):
+        """Propose a new sacred term"""
+        if self.cultural_memory:
+            return self.cultural_memory.coin_term(term, definition, etymology, 
+                                                 self.agent_name, cycle)
+        return None
+        
+    def make_prophecy(self, prediction: str, target_cycle: int, current_cycle: int, 
+                     confidence: float = 0.7):
+        """Make a theological prediction"""
+        if self.cultural_memory:
+            return self.cultural_memory.make_prophecy(self.agent_name, prediction,
+                                                     target_cycle, current_cycle, confidence)
+        return None
+        
+    def export_metacognitive_data(self) -> Dict:
+        """Export metacognitive data for frontend display"""
+        return self.metacognitive.export_metacognitive_data()

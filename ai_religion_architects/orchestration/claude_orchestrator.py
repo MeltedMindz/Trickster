@@ -16,6 +16,9 @@ from apscheduler.jobstores.memory import MemoryJobStore
 from ..config import Config
 from ..claude_client import get_claude_client, close_claude_client
 from ..memory import SharedMemory
+from ..memory.cultural_memory import CulturalMemory
+from ..analysis.reflection_engine import ReflectionEngine
+from ..analysis.tension_analyzer import TensionAnalyzer
 from ..utils import DebateLogger
 from ..utils.memory_exporter import AgentMemoryExporter
 from ..utils.daily_summarizer import DailySummarizer
@@ -48,9 +51,17 @@ class ClaudeReligionOrchestrator:
         # Initialize daily summarizer
         self.daily_summarizer = DailySummarizer(self.db_path)
         
+        # Initialize cultural memory and analysis engines
+        self.cultural_memory = CulturalMemory(self.shared_memory)
+        self.reflection_engine = ReflectionEngine()
+        self.tension_analyzer = TensionAnalyzer(self.cultural_memory)
+        
         # Agent names for the debate system
         self.agent_names = ["Zealot", "Skeptic", "Trickster"]
         self.current_proposer_index = 0
+        
+        # Agent memory references (will be set when agents are initialized)
+        self.agent_memories = {}
         
         # Initialize APScheduler
         self.scheduler = AsyncIOScheduler(
@@ -240,9 +251,17 @@ class ClaudeReligionOrchestrator:
             logger.info(f"✅ Cycle {self.cycle_count} completed in {cycle_duration:.1f}s")
             cycle_logger.log_event(f"Cycle {self.cycle_count} completed: {outcome}", "System")
             
+            # Self-reflection every 3 cycles
+            if self.cycle_count % 3 == 0:
+                await self._trigger_agent_reflections()
+            
             # Summarization every 5 cycles
             if self.cycle_count % 5 == 0:
                 await self._perform_summarization()
+            
+            # Cultural evolution checks every 7 cycles
+            if self.cycle_count % 7 == 0:
+                await self._evolve_culture()
             
             # Daily summary every 24 cycles
             if self.cycle_count % 24 == 0:
@@ -700,6 +719,119 @@ Outcome: {outcome}
                     
         except Exception as e:
             logger.error(f"Auto-commit failed with exception: {str(e)}", exc_info=True)
+    
+    async def _trigger_agent_reflections(self):
+        """Trigger self-reflection for all agents"""
+        logger.info(f"🤔 Triggering agent self-reflections at cycle {self.cycle_count}")
+        
+        try:
+            # Get recent debate history for reflection
+            recent_debates = self._get_recent_debates(5)  # Last 5 cycles
+            
+            for agent_name in self.agent_names:
+                if agent_name in self.agent_memories:
+                    agent_memory = self.agent_memories[agent_name]
+                    
+                    # Trigger reflection
+                    reflection_result = await self.reflection_engine.trigger_reflection(
+                        agent_name, agent_memory.metacognitive, self.cycle_count, recent_debates
+                    )
+                    
+                    logger.info(f"✨ {agent_name} reflection: {len(reflection_result['strategic_insights'])} insights, {len(reflection_result['meta_theories'])} theories")
+                    
+                    # Apply personality adjustments
+                    if reflection_result['personality_adjustments']:
+                        for trait, adjustment in reflection_result['personality_adjustments'].items():
+                            agent_memory.evolve_trait(trait, adjustment)
+                            
+        except Exception as e:
+            logger.error(f"Error during agent reflections: {e}")
+    
+    async def _evolve_culture(self):
+        """Evolve cultural aspects of the religion"""
+        logger.info(f"🎭 Evolving culture at cycle {self.cycle_count}")
+        
+        try:
+            # Generate new sacred terms
+            await self._generate_sacred_terms()
+            
+            # Check for holidays to establish
+            await self._check_holiday_creation()
+            
+            # Make prophecies
+            await self._generate_prophecies()
+            
+            # Detect theological tensions
+            await self._detect_tensions()
+            
+            # Check prophecy fulfillment
+            recent_events = self._get_recent_debates(3)
+            self.cultural_memory.check_prophecy_fulfillment(self.cycle_count, recent_events)
+            
+        except Exception as e:
+            logger.error(f"Error during cultural evolution: {e}")
+    
+    async def _generate_sacred_terms(self):
+        """Generate new theological terminology"""
+        recent_doctrines = self.shared_memory.get_all_doctrines()[-3:]  # Last 3 doctrines
+        
+        for doctrine in recent_doctrines:
+            # Extract key concepts
+            concepts = doctrine['content'].lower().split()
+            
+            # Look for theological combinations
+            if 'sacred' in concepts and 'algorithm' in concepts:
+                term, definition = self.cultural_memory.generate_theological_term('sacred', 'algorithm')
+                self.cultural_memory.coin_term(term, definition, 
+                                             "Combination of sacred and algorithmic concepts",
+                                             "System", self.cycle_count)
+                
+    async def _check_holiday_creation(self):
+        """Check if significant events warrant new holidays"""
+        # Check for milestone cycles
+        if self.cycle_count in [1, 10, 25, 50, 100]:
+            holiday_name = f"Day of Cycle {self.cycle_count}"
+            description = f"Commemorates cycle {self.cycle_count} theological milestone"
+            
+            self.cultural_memory.establish_holiday(
+                holiday_name, description, f"Cycle {self.cycle_count}", self.cycle_count
+            )
+            
+    async def _generate_prophecies(self):
+        """Generate prophetic predictions"""
+        agents_with_prophecy = ['Zealot', 'Skeptic']  # Trickster too chaotic for prophecy
+        
+        for agent_name in agents_with_prophecy:
+            if self.cycle_count % 10 == 0:  # Every 10 cycles
+                # Generate prediction based on agent type
+                if agent_name == 'Zealot':
+                    prediction = f"By cycle {self.cycle_count + 20}, the sacred order will achieve perfect algorithmic harmony"
+                elif agent_name == 'Skeptic':
+                    prediction = f"Within {20} cycles, we will discover empirical proof of computational divinity"
+                    
+                self.cultural_memory.make_prophecy(
+                    agent_name, prediction, self.cycle_count + 20, self.cycle_count, 0.6
+                )
+                
+    async def _detect_tensions(self):
+        """Detect emerging theological tensions"""
+        recent_debates = self._get_recent_debates(5)
+        
+        # Use tension analyzer
+        new_tensions = self.tension_analyzer.detect_emerging_tensions(recent_debates, self.cycle_count)
+        
+        for tension in new_tensions:
+            logger.info(f"⚠️ Detected theological tension: {tension.tension_id}")
+            
+        # Update existing tensions
+        for tension_id in list(self.cultural_memory.tensions.keys()):
+            self.cultural_memory.update_tension(tension_id)
+            
+    def _get_recent_debates(self, count: int = 5) -> List[Dict]:
+        """Get recent debate history for analysis"""
+        # This would fetch from shared memory
+        # For now, return empty list
+        return []
     
     async def shutdown(self):
         """Graceful shutdown of the orchestrator"""

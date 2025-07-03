@@ -378,7 +378,9 @@ class AgentMemoryExporter:
             "relationships": self._get_relationship_stats(memory),
             "debate_performance": self._get_debate_stats(memory),
             "memory_specialization": self._get_specialization_stats(agent, memory),
-            "evolution_timeline": self._get_evolution_timeline(memory)
+            "evolution_timeline": self._get_evolution_timeline(memory),
+            "metacognitive_abilities": self._get_metacognitive_stats(memory),
+            "cultural_contributions": self._get_cultural_stats(memory)
         }
         
         return stats
@@ -726,3 +728,56 @@ class AgentMemoryExporter:
             "trust_matrix": trust_matrix,
             "total_relationships": len(all_relationships)
         }
+    
+    def _get_metacognitive_stats(self, memory: Any) -> Dict[str, Any]:
+        """Get metacognitive abilities statistics"""
+        if not hasattr(memory, 'metacognitive'):
+            return {}
+            
+        try:
+            return memory.export_metacognitive_data()
+        except Exception as e:
+            logger.error(f"Error exporting metacognitive data: {e}")
+            return {}
+    
+    def _get_cultural_stats(self, memory: Any) -> Dict[str, Any]:
+        """Get cultural contributions statistics"""
+        if not hasattr(memory, 'cultural_memory') or not memory.cultural_memory:
+            return {}
+            
+        try:
+            # Count contributions by this agent
+            cultural_data = memory.cultural_memory.export_cultural_data()
+            
+            agent_name = memory.agent_name
+            contributions = {
+                "sacred_terms_coined": 0,
+                "symbols_created": 0,
+                "holidays_established": 0,
+                "prophecies_made": 0,
+                "tensions_created": 0
+            }
+            
+            # Count terms coined by this agent
+            for term, data in cultural_data.get('sacred_terms', {}).items():
+                if 'proposed_by' in data and data['proposed_by'] == agent_name:
+                    contributions["sacred_terms_coined"] += 1
+                    
+            # Count symbols created
+            for symbol, data in cultural_data.get('symbols', {}).items():
+                if 'proposed_by' in data and data['proposed_by'] == agent_name:
+                    contributions["symbols_created"] += 1
+                    
+            # Add general cultural impact metrics
+            contributions["cultural_influence_score"] = (
+                contributions["sacred_terms_coined"] * 2 +
+                contributions["symbols_created"] * 3 +
+                contributions["holidays_established"] * 5 +
+                contributions["prophecies_made"] * 4
+            )
+            
+            return contributions
+            
+        except Exception as e:
+            logger.error(f"Error getting cultural stats: {e}")
+            return {}
