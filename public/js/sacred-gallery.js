@@ -183,10 +183,10 @@ class SacredImageGallery {
                             id: `discovered_${index}`,
                             filename: filename,
                             web_path: `/images/${filename}`,
-                            prompt: 'Sacred AI vision (metadata not available)',
+                            agent_description: 'Sacred AI vision (metadata not available)',
                             cycle_number: 0,
                             event_type: 'discovered',
-                            created_at: new Date().toISOString()
+                            timestamp: new Date().toISOString()
                         });
                     });
                 }
@@ -256,7 +256,7 @@ class SacredImageGallery {
             <div class="sacred-image-info">
                 <div class="sacred-image-title">${icon} ${this.formatEventType(image.event_type)}</div>
                 <div class="sacred-image-cycle">Cycle ${image.cycle_number}</div>
-                <div class="sacred-image-prompt">${image.prompt}</div>
+                <div class="sacred-image-prompt">${image.agent_description}</div>
             </div>
         `;
         
@@ -310,8 +310,8 @@ class SacredImageGallery {
         popupTitle.textContent = `${this.formatEventType(image.event_type)} - Cycle ${image.cycle_number}`;
         popupCycle.textContent = image.cycle_number;
         popupType.textContent = this.formatEventType(image.event_type);
-        popupCreated.textContent = new Date(image.created_at).toLocaleString();
-        popupPrompt.textContent = image.prompt;
+        popupCreated.textContent = new Date(image.timestamp).toLocaleString();
+        popupPrompt.textContent = image.agent_description;
         
         // Technical details
         let techDetails = '';
