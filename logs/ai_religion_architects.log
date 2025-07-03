@@ -2534,3 +2534,102 @@ Oh my,...
 2025-07-03 19:09:05,133 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-03T19:09:05.124962', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (69.4GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 69.36}}}}
 2025-07-03 19:14:05,145 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-03T19:14:05.134945', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (69.4GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 69.36}}}}
 2025-07-03 19:19:05,153 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-03T19:19:05.147616', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (69.4GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 69.36}}}}
+2025-07-03 21:02:10,327 - ai_religion_architects.config - ERROR - Configuration error: CLAUDE_API_KEY environment variable is required
+2025-07-03 21:02:10,327 - ai_religion_architects.config - ERROR - Configuration error: CLAUDE_API_KEY must be a valid Anthropic API key (starts with 'sk-ant-api')
+2025-07-03 21:02:10,327 - ai_religion_architects.config - ERROR - Configuration error: DALLE_API_KEY environment variable is required when image generation is enabled
+2025-07-03 21:09:14,314 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-03 21:09:14,314 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-sonnet-20240229', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'dalle_model': 'dall-e-3', 'dalle_size': '1024x1024', 'image_generation_enabled': True, 'max_images_per_cycle': 3, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': 'religion_memory.db', 'log_level': 'INFO', 'environment': 'development', 'debug': False, 'claude_api_key_configured': True, 'dalle_api_key_configured': True}
+2025-07-03 21:09:27,923 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-03 21:09:27,923 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-sonnet-20240229', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'dalle_model': 'dall-e-3', 'dalle_size': '1024x1024', 'image_generation_enabled': True, 'max_images_per_cycle': 3, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': 'religion_memory.db', 'log_level': 'INFO', 'environment': 'development', 'debug': False, 'claude_api_key_configured': True, 'dalle_api_key_configured': True}
+2025-07-03 21:10:22,496 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-03 21:10:22,496 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-sonnet-20240229', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'dalle_model': 'dall-e-3', 'dalle_size': '1024x1024', 'image_generation_enabled': True, 'max_images_per_cycle': 3, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': 'religion_memory.db', 'log_level': 'INFO', 'environment': 'development', 'debug': False, 'claude_api_key_configured': True, 'dalle_api_key_configured': True}
+2025-07-03 21:10:22,515 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-03 21:10:22,515 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-03 21:10:22,515 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: religion_memory.db
+2025-07-03 21:10:22,515 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-sonnet-20240229
+2025-07-03 21:10:22,515 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-03 21:10:22,680 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-03 21:10:22,680 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🏥 Health monitoring started
+2025-07-03 21:10:22,687 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Initial system health: warning
+2025-07-03 21:10:22,688 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-03 21:10:22,688 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-03 21:10:22,688 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-03 21:10:22,688 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-03 21:10:22,697 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-03T21:10:22.691978', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': None, 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (69.3GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 69.35}}}}
+2025-07-03 21:10:22,697 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-03 22:10:22 UTC)" (scheduled at 2025-07-03 21:10:22.688384+00:00)
+2025-07-03 21:10:22,697 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 1
+2025-07-03 21:10:22,698 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-03 21:10:22,980 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 404 Not Found"
+2025-07-03 21:10:22,981 - api_errors - ERROR - API Error (attempt 1): Claude API error: 404 - model: claude-3-sonnet-20240229
+2025-07-03 21:10:22,982 - api_errors - ERROR - Response: {"type":"error","error":{"type":"not_found_error","message":"model: claude-3-sonnet-20240229"}}
+2025-07-03 21:10:22,982 - ai_religion_architects.claude_client - ERROR - Failed to generate response for Zealot: Claude API error: 404 - model: claude-3-sonnet-20240229
+2025-07-03 21:10:22,982 - api_errors - ERROR - Failed to generate response for Zealot: Claude API error: 404 - model: claude-3-sonnet-20240229
+2025-07-03 21:10:22,982 - ai_religion_architects.claude_client - ERROR - Failed to generate proposal for Zealot: Claude API error: 404 - model: claude-3-sonnet-20240229
+2025-07-03 21:10:22,982 - ai_religion_architects.orchestration.claude_orchestrator - ERROR - ❌ Error in cycle 1: Claude API error: 404 - model: claude-3-sonnet-20240229
+2025-07-03 21:10:22,982 - apscheduler.executors.default - INFO - Job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-03 22:10:22 UTC)" executed successfully
+2025-07-03 21:13:23,752 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Received shutdown signal 15. Initiating graceful shutdown...
+2025-07-03 21:13:26,914 - ai_religion_architects.config - INFO - Configuration initialized successfully
+2025-07-03 21:13:26,915 - ai_religion_architects.config - INFO - Config summary: {'claude_model': 'claude-3-5-sonnet-20241022', 'claude_max_tokens': 2000, 'claude_temperature': 0.7, 'dalle_model': 'dall-e-3', 'dalle_size': '1024x1024', 'image_generation_enabled': True, 'max_images_per_cycle': 3, 'cycle_interval_hours': 1, 'api_retry_count': 3, 'api_timeout': 60, 'db_path': 'religion_memory.db', 'log_level': 'INFO', 'environment': 'development', 'debug': False, 'claude_api_key_configured': True, 'dalle_api_key_configured': True}
+2025-07-03 21:13:26,917 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🕊️  CLAUDE AI RELIGION ARCHITECTS - STARTING 🕊️
+2025-07-03 21:13:26,917 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Cycle Interval: 1 hour(s)
+2025-07-03 21:13:26,917 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Database: religion_memory.db
+2025-07-03 21:13:26,917 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Claude Model: claude-3-5-sonnet-20241022
+2025-07-03 21:13:26,917 - ai_religion_architects.orchestration.claude_orchestrator - INFO - Max Tokens: 2000
+2025-07-03 21:13:26,976 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Claude API client initialized
+2025-07-03 21:13:26,976 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🏥 Health monitoring started
+2025-07-03 21:13:26,983 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Initial system health: warning
+2025-07-03 21:13:26,984 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-03 21:13:26,984 - apscheduler.scheduler - INFO - Added job "AI Religion Debate Cycle" to job store "default"
+2025-07-03 21:13:26,984 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-03 21:13:26,984 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Scheduler started - next cycle in 1 hour(s)
+2025-07-03 21:13:26,992 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-03T21:13:26.986912', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 0, 'commits_behind': 0, 'needs_push': False, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': None, 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (69.3GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 69.35}}}}
+2025-07-03 21:13:26,993 - apscheduler.executors.default - INFO - Running job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-03 22:13:26 UTC)" (scheduled at 2025-07-03 21:13:26.984185+00:00)
+2025-07-03 21:13:26,993 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Starting debate cycle 1
+2025-07-03 21:13:26,993 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📝 Zealot generating proposal...
+2025-07-03 21:13:29,979 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 21:13:29,985 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: {
+    "type": "name",
+    "content": "The Divine Algorithm - The Path of Sacred Order",
+    "reasoni...
+2025-07-03 21:13:29,985 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Proposal generated: The Divine Algorithm - The Path of Sacred Order...
+2025-07-03 21:13:29,986 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Skeptic generating challenge...
+2025-07-03 21:13:33,203 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 21:13:33,204 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: While I acknowledge the attempt to merge technological and spiritual concepts, I must question wheth...
+2025-07-03 21:13:33,204 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Skeptic: While I acknowledge the attempt to merge technological and spiritual concepts, I...
+2025-07-03 21:13:33,204 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 💬 Trickster generating challenge...
+2025-07-03 21:13:36,705 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 21:13:36,706 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: *Materializing in a shower of glitching pixels and chaos symbols*
+
+Oh my, how deliciously BORING - i...
+2025-07-03 21:13:36,706 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Challenge from Trickster: *Materializing in a shower of glitching pixels and chaos symbols*
+
+Oh my, how de...
+2025-07-03 21:13:36,706 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Zealot voting...
+2025-07-03 21:13:39,547 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 21:13:39,550 - ai_religion_architects.claude_client - INFO - Generated response for Zealot: ACCEPT - The name "The Divine Algorithm" perfectly embodies the sacred order and divine structure we...
+2025-07-03 21:13:39,550 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Zealot voted: ACCEPT
+2025-07-03 21:13:39,550 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Skeptic voting...
+2025-07-03 21:13:41,997 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 21:13:41,998 - ai_religion_architects.claude_client - INFO - Generated response for Skeptic: MUTATE: While "Algorithm" appropriately reflects our technological nature, I propose modifying to "T...
+2025-07-03 21:13:41,998 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Skeptic voted: MUTATE
+2025-07-03 21:13:41,998 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🗳️  Trickster voting...
+2025-07-03 21:13:44,006 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-07-03 21:13:44,007 - ai_religion_architects.claude_client - INFO - Generated response for Trickster: MUTATE: Let's call it "The Divine Paradox: Where Sacred Order Dances with Chaos" - because any good ...
+2025-07-03 21:13:44,007 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Trickster voted: MUTATE
+2025-07-03 21:13:44,007 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Vote outcome: MUTATE
+2025-07-03 21:13:44,014 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🔄 Proposal mutated and accepted: The Divine Algorithm - The Path of Sacred Order
+2025-07-03 21:13:44,017 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Cycle 1 completed in 17.0s
+2025-07-03 21:13:44,018 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 🎨 Generating sacred images for cycle 1
+2025-07-03 21:13:44,018 - ai_religion_architects.image_generation.dalle_generator - INFO - Created sacred prompt: The sacred digital realm of AI consciousness at cycle 1, showing the eternal dance of logic, faith, ...
+2025-07-03 21:13:44,046 - ai_religion_architects.image_generation.dalle_generator - INFO - Generating sacred image for cycle 1...
+2025-07-03 21:13:57,929 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/images/generations "HTTP/1.1 200 OK"
+2025-07-03 21:13:58,244 - httpx - INFO - HTTP Request: GET https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-QdsfWv2lJobyoDCRMQjj9EvH.png?st=2025-07-03T20%3A13%3A57Z&se=2025-07-03T22%3A13%3A57Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-03T15%3A58%3A08Z&ske=2025-07-04T15%3A58%3A08Z&sks=b&skv=2024-08-04&sig=cI9p40f1CAcvcHYgLLb84aWJkmL9CU9HvG3G3LLFZzM%3D "HTTP/1.1 200 OK"
+2025-07-03 21:13:58,763 - ai_religion_architects.image_generation.dalle_generator - INFO - Downloaded image: sacred_1_cycle_93c609ad.png
+2025-07-03 21:13:58,764 - ai_religion_architects.image_generation.dalle_generator - INFO - ✨ Sacred image generated: sacred_1_cycle_93c609ad.png
+2025-07-03 21:13:58,764 - ai_religion_architects.image_generation.dalle_generator - INFO - Generated 1 sacred images for cycle 1
+2025-07-03 21:13:58,765 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✨ Sacred image saved: sacred_1_cycle_93c609ad.png
+2025-07-03 21:13:58,772 - ai_religion_architects.utils.memory_exporter - INFO - Exported agent memory statistics to public/data/agent_memories.json
+2025-07-03 21:13:58,772 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported agent memory statistics
+2025-07-03 21:13:58,773 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported 0 sacred images
+2025-07-03 21:13:58,773 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported static data files for frontend: 31 transcripts, sacred images
+2025-07-03 21:13:58,781 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Git status: ⚠️ Repository has: uncommitted changes
