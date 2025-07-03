@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         doctrineSections.forEach(section => {
             const h3 = section.querySelector('h3');
-            if (h3 && h3.textContent.includes('Recent Doctrines')) {
+            if (h3 && h3.textContent.includes('Sacred Text Archive')) {
                 doctrineSection = section;
             }
         });

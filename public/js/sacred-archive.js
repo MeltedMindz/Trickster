@@ -30,14 +30,14 @@ class SacredArchivePopup {
     }
 
     setupArchiveClickListeners() {
-        // Add click listener to doctrines section header
+        // Add click listener to Sacred Text Archive section header
         document.addEventListener('click', (e) => {
-            const doctrineSectionHeader = e.target.closest('.panel-section h3');
-            if (doctrineSectionHeader && doctrineSectionHeader.textContent.includes('Recent Doctrines')) {
+            const archiveSectionHeader = e.target.closest('.panel-section h3');
+            if (archiveSectionHeader && archiveSectionHeader.textContent.includes('Sacred Text Archive')) {
                 this.showSacredArchive();
             }
             
-            // Also handle clicks on doctrine items
+            // Also handle clicks on doctrine items (if any are shown)
             const doctrineItem = e.target.closest('.doctrine-item');
             if (doctrineItem) {
                 this.showSacredArchive();
