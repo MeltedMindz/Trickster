@@ -229,8 +229,8 @@ class SacredAIImageGenerator:
             image_type, related_doctrine
         )
         
-        # Apply style wrapper only for API call
-        full_prompt = self.naming_system.apply_style_wrapper(agent_description)
+        # Apply style wrapper only for API call (randomized based on agent preferences)
+        full_prompt = self.naming_system.apply_style_wrapper(agent_description, proposing_agent)
         
         # Log full prompt for backend tracking
         image_gen_logger.info(f"Cycle {cycle_number} - Agent: {proposing_agent} - "

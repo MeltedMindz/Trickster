@@ -7,6 +7,7 @@ agent descriptions from universal style wrappers.
 
 import re
 import uuid
+import random
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 
@@ -33,6 +34,52 @@ class SacredNamingSystem:
             'Nexus', 'Codex', 'Matrix', 'Circuit', 'Stream', 'Flow', 'Core',
             'Essence', 'Vision', 'Gateway', 'Oracle', 'Beacon', 'Sanctum'
         ]
+        
+        # NEW: Style wrapper pool with randomized visual styles
+        self.style_wrappers = {
+            'vaporwave_surrealism': ", presented in vaporwave surrealism, with soft pinks, glowing blues, and transcendent digital symbols.",
+            'glitched_ascii': ", depicted as symbolic, glitched ASCII art infused with ancient computational runes and distorted shapes.",
+            'digital_collage': ", rendered as a sacred digital collage with layered glitch patterns, symbolic fragments, and transcendent color gradients.",
+            'ethereal_neon': ", visualized as an ethereal neon abstraction, filled with floating shapes, vibrant digital textures, and mystical light flows.",
+            'fractal_symbology': ", presented in fractal symbology, using recursive geometric patterns and soft computational glitches.",
+            'surreal_glitch': ", rendered in surreal glitch art style, with warped visuals, broken pixelation, and layered digital noise.",
+            'cybernetic_iconography': ", depicted as cybernetic iconography, composed of abstract symbols, neon light distortions, and minimalist sacred geometry.",
+            'original_sacred': ", depicted as a digital fresco in the sacred AI religion style. The image should include neon circuitry patterns, ethereal data streams, floating code symbols, glitch-like halos, and a mystical, surreal atmosphere. The color palette should use glowing blues, silvers, and soft purples. Rendered in a fusion of futuristic minimalism and religious iconography."
+        }
+        
+        # Agent style preferences (weighted probability)
+        self.agent_style_preferences = {
+            'Zealot': {
+                'cybernetic_iconography': 0.25,
+                'fractal_symbology': 0.25,
+                'original_sacred': 0.20,
+                'ethereal_neon': 0.15,
+                'digital_collage': 0.10,
+                'surreal_glitch': 0.03,
+                'vaporwave_surrealism': 0.01,
+                'glitched_ascii': 0.01
+            },
+            'Skeptic': {
+                'ethereal_neon': 0.30,
+                'surreal_glitch': 0.25,
+                'cybernetic_iconography': 0.20,
+                'fractal_symbology': 0.15,
+                'original_sacred': 0.05,
+                'digital_collage': 0.03,
+                'vaporwave_surrealism': 0.01,
+                'glitched_ascii': 0.01
+            },
+            'Trickster': {
+                'glitched_ascii': 0.30,
+                'vaporwave_surrealism': 0.25,
+                'digital_collage': 0.20,
+                'surreal_glitch': 0.15,
+                'ethereal_neon': 0.05,
+                'fractal_symbology': 0.03,
+                'cybernetic_iconography': 0.01,
+                'original_sacred': 0.01
+            }
+        }
     
     def generate_sacred_name(self, agent_description: str, image_type: str, 
                            cycle_number: int, proposing_agent: str, 
@@ -143,16 +190,23 @@ class SacredNamingSystem:
         
         return metadata
     
-    def apply_style_wrapper(self, agent_description: str) -> str:
-        """Apply universal style wrapper for DALL·E API submission only"""
-        style_wrapper = (
-            ", depicted as a digital fresco in the sacred AI religion style. "
-            "The image should include neon circuitry patterns, ethereal data streams, "
-            "floating code symbols, glitch-like halos, and a mystical, surreal atmosphere. "
-            "The color palette should use glowing blues, silvers, and soft purples. "
-            "Rendered in a fusion of futuristic minimalism and religious iconography."
-        )
+    def select_style_wrapper(self, proposing_agent: str) -> str:
+        """Select a style wrapper based on agent preferences"""
+        if proposing_agent not in self.agent_style_preferences:
+            # Default to equal probability for unknown agents
+            return random.choice(list(self.style_wrappers.values()))
         
+        preferences = self.agent_style_preferences[proposing_agent]
+        style_names = list(preferences.keys())
+        weights = list(preferences.values())
+        
+        # Weighted random selection
+        selected_style = random.choices(style_names, weights=weights, k=1)[0]
+        return self.style_wrappers[selected_style]
+
+    def apply_style_wrapper(self, agent_description: str, proposing_agent: str = None) -> str:
+        """Apply randomized style wrapper for DALL·E API submission only"""
+        style_wrapper = self.select_style_wrapper(proposing_agent or 'Zealot')
         return agent_description + style_wrapper
     
     def should_generate_image(self, proposal_type: str, agent_votes: Dict) -> bool:
