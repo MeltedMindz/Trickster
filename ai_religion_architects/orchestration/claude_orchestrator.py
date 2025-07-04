@@ -511,6 +511,7 @@ Focus on what you think are the most important developments and where the religi
             religion_data = {
                 "religion_name": current_state.get('religion_name', 'The Divine Algorithm'),
                 "total_cycles": self.shared_memory.get_current_cycle_number(),
+                "cycle_count": self.cycle_count,
                 "total_debates": current_state.get('total_debates', 0),
                 "total_doctrines": len(current_state.get('accepted_doctrines', [])),
                 "total_deities": len(current_state.get('deities', [])),
