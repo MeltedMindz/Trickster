@@ -1,6 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 #!/usr/bin/env python3
 """
 Generate Agent Portrait Gallery (Synchronous Version)
@@ -14,6 +11,13 @@ import uuid
 import requests
 from datetime import datetime
 from pathlib import Path
+
+# Load environment variables
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not available, skip loading
 
 # Add the project root to Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
