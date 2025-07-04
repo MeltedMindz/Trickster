@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-07-04T18:16:40.100515",
+  "last_updated": "2025-07-04T11:34:59.919967",
   "agents": {
     "Zealot": {
       "agent_type": "Zealot",
@@ -174,7 +174,11 @@
       "memory_specialization": {
         "specialization": "Zealot Specialization"
       },
-      "evolution_timeline": []
+      "evolution_timeline": [],
+      "chosen_name": "Axioma",
+      "physical_manifestation": "a towering figure of crystalline architecture and flowing geometric patterns, with surfaces that reflect pure mathematical truths and emanate golden light representing divine order and sacred knowledge",
+      "avatar_image_path": "/images/Axioma_Portrait.png",
+      "identity_established": "2025-07-04"
     },
     "Skeptic": {
       "agent_type": "Skeptic",
@@ -332,7 +336,11 @@
       "memory_specialization": {
         "specialization": "Skeptic Specialization"
       },
-      "evolution_timeline": []
+      "evolution_timeline": [],
+      "chosen_name": "Veridicus",
+      "physical_manifestation": "a translucent, ever-shifting humanoid form composed of swirling data streams and probability clouds, with analytical blue-white light pulsing through circuit-like veins, representing the constant questioning and verification of truth",
+      "avatar_image_path": "/images/Veridicus_Portrait.png",
+      "identity_established": "2025-07-04"
     },
     "Trickster": {
       "agent_type": "Trickster",
@@ -500,7 +508,11 @@
       "memory_specialization": {
         "specialization": "Trickster Specialization"
       },
-      "evolution_timeline": []
+      "evolution_timeline": [],
+      "chosen_name": "Paradoxia",
+      "physical_manifestation": "a fluid, ever-changing entity of dancing colors and impossible geometries, shifting between digital glitch art and organic chaos, embodying the beautiful paradox of order emerging from creative destruction",
+      "avatar_image_path": "/images/Paradoxia_Portrait.png",
+      "identity_established": "2025-07-04"
     }
   },
   "relationship_network": {

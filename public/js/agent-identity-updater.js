@@ -40,8 +40,8 @@ class AgentIdentityUpdater {
         this.identityMap.clear();
         
         for (const [roleName, agentData] of Object.entries(this.memoryData.agents)) {
-            if (agentData.identity && agentData.identity.chosen_name) {
-                this.identityMap.set(roleName, agentData.identity.chosen_name);
+            if (agentData.chosen_name) {
+                this.identityMap.set(roleName, agentData.chosen_name);
             }
         }
     }
