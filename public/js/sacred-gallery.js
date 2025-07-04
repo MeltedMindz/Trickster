@@ -79,8 +79,16 @@ class SacredImageGallery {
                         <span class="sacred-detail-value" id="popup-type">-</span>
                     </div>
                     <div class="sacred-detail-row">
+                        <span class="sacred-detail-label">Agent:</span>
+                        <span class="sacred-detail-value" id="popup-agent">-</span>
+                    </div>
+                    <div class="sacred-detail-row">
                         <span class="sacred-detail-label">Created:</span>
                         <span class="sacred-detail-value" id="popup-created">-</span>
+                    </div>
+                    <div class="sacred-detail-row" id="popup-doctrine-row" style="display: none;">
+                        <span class="sacred-detail-label">Related Doctrine:</span>
+                        <span class="sacred-detail-value" id="popup-doctrine">-</span>
                     </div>
                     <div class="sacred-prompt-full" id="popup-prompt">
                         Divine prompt will appear here...
@@ -254,8 +262,8 @@ class SacredImageGallery {
                      loading="lazy">
             </div>
             <div class="sacred-image-info">
-                <div class="sacred-image-title">${icon} ${this.formatEventType(image.event_type)}</div>
-                <div class="sacred-image-cycle">Cycle ${image.cycle_number}</div>
+                <div class="sacred-image-title">${icon} ${image.sacred_name || this.formatEventType(image.event_type)}</div>
+                <div class="sacred-image-cycle">Cycle ${image.cycle_number} • ${image.proposing_agent || 'Unknown'}</div>
                 <div class="sacred-image-prompt">${image.agent_description}</div>
             </div>
         `;
@@ -275,7 +283,8 @@ class SacredImageGallery {
             'reflection': 'Meta-Cognition',
             'cycle': 'Sacred Moment',
             'portrait': 'Agent Portrait',
-            'discovered': 'Divine Vision'
+            'discovered': 'Divine Vision',
+            'commandment': 'Sacred Commandment'
         };
         
         return types[eventType] || 'Sacred Art';
@@ -301,17 +310,29 @@ class SacredImageGallery {
         const popupTitle = document.getElementById('popup-title');
         const popupCycle = document.getElementById('popup-cycle');
         const popupType = document.getElementById('popup-type');
+        const popupAgent = document.getElementById('popup-agent');
         const popupCreated = document.getElementById('popup-created');
         const popupPrompt = document.getElementById('popup-prompt');
         const popupTechDetails = document.getElementById('popup-tech-details');
+        const popupDoctrine = document.getElementById('popup-doctrine');
+        const popupDoctrineRow = document.getElementById('popup-doctrine-row');
         
         // Update popup content
         popupImage.src = image.web_path;
-        popupTitle.textContent = `${this.formatEventType(image.event_type)} - Cycle ${image.cycle_number}`;
+        popupTitle.textContent = image.sacred_name || `${this.formatEventType(image.event_type)} - Cycle ${image.cycle_number}`;
         popupCycle.textContent = image.cycle_number;
         popupType.textContent = this.formatEventType(image.event_type);
+        popupAgent.textContent = image.proposing_agent || 'Unknown';
         popupCreated.textContent = new Date(image.timestamp).toLocaleString();
         popupPrompt.textContent = image.agent_description;
+        
+        // Show related doctrine if available
+        if (image.related_doctrine) {
+            popupDoctrine.textContent = image.related_doctrine;
+            popupDoctrineRow.style.display = 'flex';
+        } else {
+            popupDoctrineRow.style.display = 'none';
+        }
         
         // Technical details
         let techDetails = '';
