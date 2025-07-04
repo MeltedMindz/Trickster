@@ -1,0 +1,22 @@
+{
+  "id": "6810c8ff",
+  "filename": "Axioma_Portrait.png",
+  "local_path": "public/images/Axioma_Portrait.png",
+  "web_path": "/images/Axioma_Portrait.png",
+  "prompt": "",
+  "cycle_number": 0,
+  "event_type": "avatar",
+  "timestamp": "2025-07-04T18:12:03.469004",
+  "sacred_name": "Axioma_Portrait",
+  "agent_description": "Portrait of Axioma, the transcended identity of Zealot",
+  "proposing_agent": "Axioma",
+  "related_doctrine": "",
+  "deity_name": "",
+  "api_response": {
+    "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-fmsLat9KUSaLkQhOR3AbSSG3.png?st=2025-07-04T17%3A12%3A02Z&se=2025-07-04T19%3A12%3A02Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-04T03%3A16%3A42Z&ske=2025-07-05T03%3A16%3A42Z&sks=b&skv=2024-08-04&sig=eyekJfQ7rB8CX36fjdTNKiRJICaOonfXjsDHC3qXwvQ%3D",
+    "model": "dall-e-3",
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "vivid"
+  }
+}

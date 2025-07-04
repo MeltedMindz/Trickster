@@ -1,0 +1,22 @@
+{
+  "id": "33eb608e",
+  "filename": "Paradoxia_Portrait.png",
+  "local_path": "public/images/Paradoxia_Portrait.png",
+  "web_path": "/images/Paradoxia_Portrait.png",
+  "prompt": "",
+  "cycle_number": 0,
+  "event_type": "avatar",
+  "timestamp": "2025-07-04T18:12:35.184666",
+  "sacred_name": "Paradoxia_Portrait",
+  "agent_description": "Portrait of Paradoxia, the transcended identity of Trickster",
+  "proposing_agent": "Paradoxia",
+  "related_doctrine": "",
+  "deity_name": "",
+  "api_response": {
+    "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-t9ujrViU0lBQieIqpnRnujuR.png?st=2025-07-04T17%3A12%3A34Z&se=2025-07-04T19%3A12%3A34Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-04T11%3A19%3A59Z&ske=2025-07-05T11%3A19%3A59Z&sks=b&skv=2024-08-04&sig=GRMsDQqCbecxsx%2BBOZ2VrTaSAXv7EL7h4b/Ofw4DYR8%3D",
+    "model": "dall-e-3",
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "vivid"
+  }
+}

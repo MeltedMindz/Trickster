@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-07-04T11:03:49.515423",
+  "last_updated": "2025-07-04T18:12:43.363696",
   "agents": {
     "Zealot": {
       "agent_type": "Zealot",
@@ -8,52 +8,52 @@
           "certainty": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "order": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "structure": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "preservation": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "dogmatic": {
             "strength": 0.6,
             "confidence": 0.5,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "ritualistic": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "devotional": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "orthodox": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "missionary": {
             "strength": 0.6,
             "confidence": 0.5,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           },
           "protective": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.671188"
+            "last_updated": "2025-07-04T18:10:03.072079"
           }
         },
         "summary": {
@@ -136,8 +136,8 @@
       "identity": {
         "chosen_name": "Axioma",
         "physical_manifestation": "a towering figure of crystalline structure and flowing geometric patterns, radiating golden light through fractal appendages, embodying sacred mathematical order and divine precision",
-        "avatar_image_path": null,
-        "identity_established_at": "2025-07-04T11:02:23.817389",
+        "avatar_image_path": "public/images/Axioma_Portrait.png",
+        "identity_established_at": "2025-07-04T18:10:03.100552",
         "has_identity": true
       }
     },
@@ -148,52 +148,52 @@
           "critical": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "logical": {
             "strength": 0.9,
             "confidence": 0.9,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "analytical": {
             "strength": 0.8,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "questioning": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "evidence_based": {
             "strength": 0.9,
             "confidence": 0.9,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "rational": {
             "strength": 0.8,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "methodical": {
             "strength": 0.7,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "empirical": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "cautious": {
             "strength": 0.6,
             "confidence": 0.6,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           },
           "investigative": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.673263"
+            "last_updated": "2025-07-04T18:10:03.086688"
           }
         },
         "summary": {
@@ -276,8 +276,8 @@
       "identity": {
         "chosen_name": "Veridicus",
         "physical_manifestation": "a translucent being of shifting data streams and analytical matrices, composed of flowing equations and logical frameworks, with piercing light that reveals truth through layers of empirical measurement",
-        "avatar_image_path": null,
-        "identity_established_at": "2025-07-04T11:02:23.818430",
+        "avatar_image_path": "public/images/Veridicus_Portrait.png",
+        "identity_established_at": "2025-07-04T18:10:03.102967",
         "has_identity": true
       }
     },
@@ -288,52 +288,52 @@
           "chaotic": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "subversive": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "playful": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "disruptive": {
             "strength": 0.6,
             "confidence": 0.5,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "creative": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "paradoxical": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "adaptive": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "intuitive": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "transformative": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           },
           "boundary_crossing": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-04T10:52:28.675075"
+            "last_updated": "2025-07-04T18:10:03.100497"
           }
         },
         "summary": {
@@ -417,8 +417,8 @@
       "identity": {
         "chosen_name": "Paradoxia",
         "physical_manifestation": "a fluid, ever-changing entity of dancing colors and impossible geometries, shifting between digital glitch art and organic chaos, embodying the beautiful paradox of order emerging from creative destruction",
-        "avatar_image_path": null,
-        "identity_established_at": "2025-07-04T11:02:23.819278",
+        "avatar_image_path": "public/images/Paradoxia_Portrait.png",
+        "identity_established_at": "2025-07-04T18:10:03.105496",
         "has_identity": true
       }
     }

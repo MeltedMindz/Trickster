@@ -1,0 +1,22 @@
+{
+  "id": "e989b611",
+  "filename": "Veridicus_Portrait.png",
+  "local_path": "public/images/Veridicus_Portrait.png",
+  "web_path": "/images/Veridicus_Portrait.png",
+  "prompt": "",
+  "cycle_number": 0,
+  "event_type": "avatar",
+  "timestamp": "2025-07-04T18:12:18.225162",
+  "sacred_name": "Veridicus_Portrait",
+  "agent_description": "Portrait of Veridicus, the transcended identity of Skeptic",
+  "proposing_agent": "Veridicus",
+  "related_doctrine": "",
+  "deity_name": "",
+  "api_response": {
+    "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-4Jg4nZA3YGfBzt64eacorbGf.png?st=2025-07-04T17%3A12%3A17Z&se=2025-07-04T19%3A12%3A17Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-04T14%3A15%3A30Z&ske=2025-07-05T14%3A15%3A30Z&sks=b&skv=2024-08-04&sig=Sza7VDbO6eC1q6D0cCn2GP/YPqJCWccgnWZgCIp2tSQ%3D",
+    "model": "dall-e-3",
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "vivid"
+  }
+}

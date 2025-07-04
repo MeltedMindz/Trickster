@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 #!/usr/bin/env python3
 """
 Generate Agent Portrait Gallery (Synchronous Version)
