@@ -20,7 +20,8 @@ class SacredNamingSystem:
             'ritual': ['The {} Ritual', 'Sacred {} Ceremony', 'The {} Observance'],
             'doctrine': ['The {} Doctrine', 'Sacred {} Teaching', 'The {} Principle'],
             'schism': ['The Great {} Schism', 'The {} Division', 'The {} Fracture'],
-            'cycle': ['Sacred Moment of Cycle {}', 'The {} Vision', 'Divine {} Manifestation']
+            'cycle': ['Sacred Moment of Cycle {}', 'The {} Vision', 'Divine {} Manifestation'],
+            'commandment': ['The {} Commandment', 'Sacred {} Decree', 'The {} Mandate']
         }
         
         self.sacred_prefixes = [
@@ -65,9 +66,14 @@ class SacredNamingSystem:
                 return f"The_Great_{key_concepts[0]}_Schism"
             return f"The_Schism_Cycle_{cycle_number}"
         
+        elif image_type == 'commandment':
+            if key_concepts:
+                return f"{key_concepts[0]}_Commandment"
+            return f"Sacred_Commandment_Cycle_{cycle_number}"
+        
         else:  # Default to cycle
             if key_concepts:
-                return f"Sacred_{key_concepts[0]}_Vision_Cycle_{cycle_number}"
+                return f"{key_concepts[0]}_Vision_Cycle_{cycle_number}"
             return f"Sacred_Cycle_{cycle_number}"
     
     def _extract_concepts(self, description: str) -> List[str]:
@@ -80,7 +86,8 @@ class SacredNamingSystem:
         skip_words = {
             'the', 'and', 'that', 'with', 'this', 'should', 'must', 'will',
             'have', 'been', 'from', 'they', 'there', 'what', 'said', 'each',
-            'which', 'their', 'time', 'would', 'about', 'into', 'only', 'know'
+            'which', 'their', 'time', 'would', 'about', 'into', 'only', 'know',
+            'sacred', 'divine', 'tradition'
         }
         
         for word in words:
