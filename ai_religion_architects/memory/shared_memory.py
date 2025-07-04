@@ -488,7 +488,8 @@ class SharedMemory:
                 'full_history': {
                     'doctrines': self.get_all_doctrines(),
                     'deities': self.get_all_deities(),
-                    'debates': []
+                    'debates': [],
+                    'sacred_images': self.get_recent_sacred_images(limit=1000)  # Export all sacred images
                 }
             }
             
@@ -517,22 +518,23 @@ class SharedMemory:
             cursor.execute('''
                 INSERT INTO sacred_images 
                 (image_id, filename, local_path, web_path, prompt, cycle_number, event_type, metadata, created_at,
-                 sacred_name, proposing_agent, related_doctrine, agent_description)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 sacred_name, agent_description, proposing_agent, related_doctrine, deity_name)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 image_metadata.get('id', ''),
                 image_metadata.get('filename', ''),
                 image_metadata.get('local_path', ''),
                 image_metadata.get('web_path', ''),
-                image_metadata.get('agent_description', ''),  # Store agent description in prompt field
+                image_metadata.get('prompt', ''),  # Original prompt field
                 image_metadata.get('cycle_number', 0),
                 image_metadata.get('event_type', 'cycle'),
                 json.dumps(image_metadata),
                 datetime.now(),
                 image_metadata.get('sacred_name', ''),
+                image_metadata.get('agent_description', ''),
                 image_metadata.get('proposing_agent', ''),
                 image_metadata.get('related_doctrine', ''),
-                image_metadata.get('agent_description', '')
+                image_metadata.get('deity_name', '')
             ))
             conn.commit()
             return cursor.lastrowid
@@ -572,11 +574,12 @@ class SharedMemory:
             return images
     
     def get_recent_sacred_images(self, limit: int = 20) -> List[Dict[str, Any]]:
-        """Get recent sacred images for gallery"""
+        """Get recent sacred images for gallery with all metadata fields"""
         with self._get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('''
-                SELECT image_id, filename, web_path, prompt, cycle_number, event_type, created_at, metadata
+                SELECT image_id, filename, web_path, prompt, cycle_number, event_type, created_at, metadata,
+                       sacred_name, agent_description, proposing_agent, related_doctrine, deity_name
                 FROM sacred_images 
                 ORDER BY created_at DESC 
                 LIMIT ?
@@ -588,11 +591,28 @@ class SharedMemory:
                     'id': row[0],
                     'filename': row[1],
                     'web_path': row[2],
-                    'prompt': row[3],  # Full prompt for detailed view
+                    'prompt': row[3],  # Original prompt field
                     'cycle_number': row[4],
                     'event_type': row[5],
-                    'created_at': row[6],
+                    'timestamp': row[6],  # Changed from created_at to timestamp for frontend compatibility
+                    'sacred_name': row[8] if row[8] else '',
+                    'agent_description': row[9] if row[9] else '',  # This is what frontend expects instead of prompt
+                    'proposing_agent': row[10] if row[10] else '',
+                    'related_doctrine': row[11] if row[11] else '',
+                    'deity_name': row[12] if row[12] else ''
                 }
+                
+                # Parse metadata JSON if available for any additional fields
+                if row[7]:
+                    try:
+                        metadata = json.loads(row[7])
+                        # Don't overwrite the explicitly queried fields
+                        for key, value in metadata.items():
+                            if key not in image_data:
+                                image_data[key] = value
+                    except json.JSONDecodeError:
+                        pass
+                
                 images.append(image_data)
             
             return images

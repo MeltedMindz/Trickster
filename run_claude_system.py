@@ -141,10 +141,10 @@ Examples:
     print(f"   Max Tokens: {config_summary['claude_max_tokens']}")
     print(f"   Cycle Interval: {config_summary['cycle_interval_hours']} hour(s)")
     print(f"   Database: {config_summary['db_path']}")
-    print(f"   API Key Configured: {'✅' if config_summary['api_key_configured'] else '❌'}")
+    print(f"   API Key Configured: {'✅' if config_summary['claude_api_key_configured'] else '❌'}")
     print()
     
-    if not config_summary['api_key_configured']:
+    if not config_summary['claude_api_key_configured']:
         print("❌ CLAUDE_API_KEY is not configured!")
         print("Please set your Claude API key in the environment or .env file")
         return 1
