@@ -34,30 +34,44 @@ class AgentMemoryPopup {
         document.addEventListener('click', (e) => {
             const agentItem = e.target.closest('.agent-item');
             if (agentItem) {
-                const agentName = agentItem.querySelector('.agent-name')?.textContent?.trim();
-                if (agentName) {
-                    this.showAgentPopup(agentName);
+                const agentNameElement = agentItem.querySelector('.agent-name');
+                if (agentNameElement) {
+                    // Get the role name for data lookup (stored in data attribute or fallback to class)
+                    let roleName = agentNameElement.getAttribute('data-role-name');
+                    if (!roleName) {
+                        // Fallback: determine from CSS classes
+                        if (agentItem.classList.contains('zealot')) roleName = 'Zealot';
+                        else if (agentItem.classList.contains('skeptic')) roleName = 'Skeptic';
+                        else if (agentItem.classList.contains('trickster')) roleName = 'Trickster';
+                    }
+                    
+                    const displayName = agentNameElement.textContent?.trim();
+                    if (roleName) {
+                        this.showAgentPopup(roleName, displayName);
+                    }
                 }
             }
         });
     }
 
-    showAgentPopup(agentName) {
+    showAgentPopup(roleName, displayName = null) {
         if (!this.memoryData || !this.memoryData.agents) {
-            this.showErrorPopup(`${agentName} memory data not available yet.`);
+            this.showErrorPopup(`${displayName || roleName} memory data not available yet.`);
             return;
         }
 
-        const agent = this.memoryData.agents[agentName];
+        const agent = this.memoryData.agents[roleName];
         if (!agent) {
-            this.showErrorPopup(`${agentName} data not found.`);
+            this.showErrorPopup(`${displayName || roleName} data not found.`);
             return;
         }
 
-        this.createPopup(agentName, agent);
+        // Use display name if provided, otherwise use role name
+        const nameToShow = displayName || roleName;
+        this.createPopup(nameToShow, agent, roleName);
     }
 
-    createPopup(agentName, agent) {
+    createPopup(agentName, agent, roleName = null) {
         // Remove existing popup if any
         this.closePopup();
 
@@ -73,7 +87,7 @@ class AgentMemoryPopup {
         // Create popup content
         const popup = document.createElement('div');
         popup.className = 'agent-popup';
-        popup.innerHTML = this.generatePopupContent(agentName, agent);
+        popup.innerHTML = this.generatePopupContent(agentName, agent, roleName);
 
         overlay.appendChild(popup);
         document.body.appendChild(overlay);
@@ -92,11 +106,20 @@ class AgentMemoryPopup {
         document.body.style.overflow = 'hidden';
     }
 
-    generatePopupContent(agentName, agent) {
+    generatePopupContent(agentName, agent, roleName = null) {
+        // Use roleName for icon lookup if provided, otherwise fall back to agentName
+        const iconName = roleName || agentName;
+        
+        // Show both chosen name and role name if different
+        let title = `${this.getAgentIcon(iconName)} ${agentName} Memory Profile`;
+        if (roleName && roleName !== agentName) {
+            title = `${this.getAgentIcon(roleName)} ${agentName} Memory Profile <span class="role-subtitle">(formerly ${roleName})</span>`;
+        }
+        
         return `
             <div class="popup-header">
                 <div class="popup-title">
-                    ${this.getAgentIcon(agentName)} ${agentName} Memory Profile
+                    ${title}
                 </div>
                 <button class="popup-close" aria-label="Close popup">✕</button>
             </div>
@@ -107,11 +130,43 @@ class AgentMemoryPopup {
                 </div>
                 
                 <div class="popup-grid">
+                    ${this.renderIdentitySection(agent)}
                     ${this.renderPersonalitySection(agent)}
                     ${this.renderRelationshipSection(agent)}
                     ${this.renderPerformanceSection(agent)}
                     ${this.renderBeliefSection(agent)}
                     ${this.renderSpecializationSection(agent)}
+                </div>
+            </div>
+        `;
+    }
+
+    renderIdentitySection(agent) {
+        const identity = agent.identity;
+        if (!identity || !identity.has_identity) return '';
+
+        return `
+            <div class="popup-section identity-section">
+                <h4>🎭 Agent Identity</h4>
+                <div class="identity-details">
+                    <div class="identity-item">
+                        <span class="identity-label">Chosen Name:</span>
+                        <span class="identity-value chosen-name">${identity.chosen_name}</span>
+                    </div>
+                    <div class="identity-item">
+                        <span class="identity-label">Physical Form:</span>
+                        <div class="manifestation-text">${identity.physical_manifestation}</div>
+                    </div>
+                    ${identity.avatar_image_path ? `
+                        <div class="identity-item">
+                            <span class="identity-label">Avatar:</span>
+                            <img src="${identity.avatar_image_path.replace('public/', '/')}" alt="${identity.chosen_name} Avatar" class="agent-avatar" />
+                        </div>
+                    ` : ''}
+                    <div class="identity-item">
+                        <span class="identity-label">Identity Established:</span>
+                        <span class="identity-value">${new Date(identity.identity_established_at).toLocaleDateString()}</span>
+                    </div>
                 </div>
             </div>
         `;
@@ -177,15 +232,20 @@ class AgentMemoryPopup {
                     </div>
                 </div>
                 <div class="relationships-list">
-                    ${Object.entries(relationships.relationships).map(([name, rel]) => `
-                        <div class="relationship-item">
-                            <div class="rel-agent">${name}</div>
-                            <div class="rel-status" style="color: ${this.getTrustColor(rel.trust_score)}">
-                                ${rel.relationship_status}
+                    ${Object.entries(relationships.relationships).map(([name, rel]) => {
+                        // Try to get chosen name for this agent
+                        const otherAgent = this.memoryData?.agents?.[name];
+                        const displayName = otherAgent?.identity?.chosen_name || name;
+                        return `
+                            <div class="relationship-item">
+                                <div class="rel-agent">${displayName}</div>
+                                <div class="rel-status" style="color: ${this.getTrustColor(rel.trust_score)}">
+                                    ${rel.relationship_status}
+                                </div>
+                                <div class="rel-trust">Trust: ${rel.trust_score}</div>
                             </div>
-                            <div class="rel-trust">Trust: ${rel.trust_score}</div>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;

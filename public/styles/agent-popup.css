@@ -1,5 +1,11 @@
 /* Agent Memory Popup Styles */
 
+.role-subtitle {
+    font-size: 0.8em;
+    color: #888;
+    font-weight: normal;
+}
+
 .agent-popup-overlay {
     position: fixed;
     top: 0;
