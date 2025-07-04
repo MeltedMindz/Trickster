@@ -2,3 +2,13 @@
 2025-07-03 21:10:22,982 - ERROR - Response: {"type":"error","error":{"type":"not_found_error","message":"model: claude-3-sonnet-20240229"}}
 2025-07-03 21:10:22,982 - ERROR - Failed to generate response for Zealot: Claude API error: 404 - model: claude-3-sonnet-20240229
 2025-07-04 00:42:55,860 - ERROR - Timeout error (attempt 1): 
+2025-07-04 02:25:10,739 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-04 02:25:10,739 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-04 02:25:25,676 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-04 02:25:25,677 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-04 02:25:30,989 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-04 02:25:30,989 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-04 02:25:36,105 - ERROR - API Error (attempt 3): Claude API error: 529 - Overloaded
+2025-07-04 02:25:36,105 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-04 02:25:40,106 - ERROR - All 3 API request attempts failed
+2025-07-04 02:25:40,107 - ERROR - Failed to generate response for Skeptic: All 3 API request attempts failed
