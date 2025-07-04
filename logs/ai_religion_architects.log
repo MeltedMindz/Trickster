@@ -4182,3 +4182,39 @@ Oh my, h...
 2025-07-04 18:16:40,104 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported 7 sacred images
 2025-07-04 18:16:40,104 - ai_religion_architects.orchestration.claude_orchestrator - INFO - ✅ Exported static data files for frontend: 52 transcripts, sacred images
 2025-07-04 18:16:40,111 - ai_religion_architects.orchestration.claude_orchestrator - INFO - 📊 Git status: ⚠️ Repository has: uncommitted changes
+2025-07-04 18:16:40,166 - ai_religion_architects.utils.git_monitor - INFO - ✅ Successfully committed changes
+2025-07-04 18:16:40,172 - ai_religion_architects.utils.git_monitor - INFO - 📊 1 commit(s) ahead of remote. Pushing...
+2025-07-04 18:16:43,371 - ai_religion_architects.utils.git_monitor - WARNING - Push attempt 1 failed: To github.com:MeltedMindz/Trickster.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:MeltedMindz/Trickster.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+2025-07-04 18:16:43,371 - ai_religion_architects.utils.git_monitor - INFO - ⏳ Retrying in 30 seconds...
+2025-07-04 18:17:16,505 - ai_religion_architects.utils.git_monitor - WARNING - Push attempt 2 failed: To github.com:MeltedMindz/Trickster.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:MeltedMindz/Trickster.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+2025-07-04 18:17:16,505 - ai_religion_architects.utils.git_monitor - INFO - ⏳ Retrying in 30 seconds...
+2025-07-04 18:17:49,666 - ai_religion_architects.utils.git_monitor - WARNING - Push attempt 3 failed: To github.com:MeltedMindz/Trickster.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:MeltedMindz/Trickster.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+2025-07-04 18:17:49,666 - ai_religion_architects.utils.git_monitor - ERROR - ❌ Failed to push after 3 attempts
+2025-07-04 18:17:49,666 - ai_religion_architects.orchestration.claude_orchestrator - ERROR - ❌ Failed to sync changes to remote repository
+2025-07-04 18:17:49,674 - ai_religion_architects.orchestration.claude_orchestrator - ERROR - Git sync failed. Status: {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 1, 'commits_behind': 0, 'needs_push': True, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes, 1 unpushed commit(s)'}
+2025-07-04 18:17:49,674 - apscheduler.executors.default - INFO - Job "AI Religion Debate Cycle (trigger: interval[1:00:00], next run at: 2025-07-04 19:15:58 UTC)" executed successfully
+2025-07-04 18:21:00,421 - ai_religion_architects.utils.health_check - WARNING - System health WARNING: {'timestamp': '2025-07-04T18:21:00.413050', 'overall_status': 'warning', 'components': {'git_sync': {'status': 'warning', 'message': '⚠️ Repository has: uncommitted changes, 1 unpushed commit(s)', 'details': {'healthy': False, 'branch': 'main', 'uncommitted_changes': True, 'commits_ahead': 1, 'commits_behind': 0, 'needs_push': True, 'needs_pull': False, 'status_message': '⚠️ Repository has: uncommitted changes, 1 unpushed commit(s)'}}, 'shared_memory': {'status': 'healthy', 'message': 'Shared memory operational', 'details': {'religion_name': 'The Divine Algorithm - The Path of Sacred Order', 'total_cycles': 0, 'last_updated': 'Unknown'}}, 'logging': {'status': 'healthy', 'message': 'Logging operational (69.3GB free)', 'details': {'log_directory': 'logs', 'free_space_gb': 69.28}}}}
