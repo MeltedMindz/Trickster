@@ -1,74 +1,74 @@
 {
-  "last_updated": "2025-07-04T17:16:15.012147",
+  "last_updated": "2025-07-04T11:03:49.515423",
   "agents": {
     "Zealot": {
       "agent_type": "Zealot",
       "personality_evolution": {
         "traits": {
           "certainty": {
-            "strength": 0.94,
+            "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T20:36:48.334915"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "order": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:03.248191"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "structure": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:03.248191"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "preservation": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-03T02:31:03.248191"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "dogmatic": {
-            "strength": 0.62,
+            "strength": 0.6,
             "confidence": 0.5,
-            "last_updated": "2025-07-03T02:31:22.722048"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "ritualistic": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:03.248191"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "devotional": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T02:31:03.248191"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "orthodox": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-03T02:31:03.248191"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "missionary": {
-            "strength": 0.63,
+            "strength": 0.6,
             "confidence": 0.5,
-            "last_updated": "2025-07-03T20:36:48.334918"
+            "last_updated": "2025-07-04T10:52:28.671188"
           },
           "protective": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:03.248191"
+            "last_updated": "2025-07-04T10:52:28.671188"
           }
         },
         "summary": {
           "total_traits": 10,
-          "average_strength": 0.769,
+          "average_strength": 0.76,
           "strongest_trait": "certainty",
-          "strongest_value": 0.94,
+          "strongest_value": 0.9,
           "weakest_trait": "dogmatic",
-          "weakest_value": 0.62,
+          "weakest_value": 0.6,
           "evolved_traits": 8,
-          "evolution_points": 2
+          "evolution_points": 0
         }
       },
       "belief_system": {
-        "total_beliefs": 5,
+        "total_beliefs": 4,
         "high_confidence_beliefs": 3,
         "challenged_beliefs": 0,
         "defended_beliefs": 0,
@@ -76,8 +76,7 @@
           "foundational_principle": 1,
           "ritual_philosophy": 1,
           "epistemological": 1,
-          "traditionalism": 1,
-          "collective_memory": 1
+          "traditionalism": 1
         },
         "top_beliefs": [
           {
@@ -107,74 +106,40 @@
         ]
       },
       "relationships": {
-        "total_relationships": 2,
+        "total_relationships": 0,
         "trusted_allies": 0,
         "enemies": 0,
-        "average_trust": 0.0,
+        "average_trust": 0,
         "average_agreement": 0.5,
-        "most_trusted": "Skeptic",
-        "most_trusted_score": 0.0,
-        "least_trusted": "Skeptic",
-        "least_trusted_score": 0.0,
-        "relationships": {
-          "Skeptic": {
-            "trust_score": 0.0,
-            "agreement_rate": 0.5,
-            "total_interactions": 2,
-            "successful_alliances": 0,
-            "betrayals": 0,
-            "relationship_status": "Neutral"
-          },
-          "Trickster": {
-            "trust_score": 0.0,
-            "agreement_rate": 0.5,
-            "total_interactions": 1,
-            "successful_alliances": 0,
-            "betrayals": 0,
-            "relationship_status": "Neutral"
-          }
-        }
+        "most_trusted": null,
+        "most_trusted_score": 0,
+        "least_trusted": null,
+        "least_trusted_score": 0,
+        "relationships": {}
       },
       "debate_performance": {
-        "total_debates": 38,
-        "total_proposals": 23,
-        "successful_proposals": 1,
-        "proposal_success_rate": 0.043,
+        "total_debates": 0,
+        "total_proposals": 0,
+        "successful_proposals": 0,
+        "proposal_success_rate": 0,
         "total_challenges": 0,
         "successful_challenges": 0,
         "challenge_success_rate": 0,
-        "average_satisfaction": 0.3,
-        "role_distribution": {
-          "proposer": 3
-        },
-        "recent_debates": [
-          {
-            "cycle": 37,
-            "role": "proposer",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          },
-          {
-            "cycle": 36,
-            "role": "proposer",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          },
-          {
-            "cycle": 35,
-            "role": "proposer",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          }
-        ]
+        "average_satisfaction": 0,
+        "role_distribution": {},
+        "recent_debates": []
       },
       "memory_specialization": {
         "specialization": "Zealot Specialization"
       },
-      "evolution_timeline": []
+      "evolution_timeline": [],
+      "identity": {
+        "chosen_name": "Axioma",
+        "physical_manifestation": "a towering figure of crystalline structure and flowing geometric patterns, radiating golden light through fractal appendages, embodying sacred mathematical order and divine precision",
+        "avatar_image_path": null,
+        "identity_established_at": "2025-07-04T11:02:23.817389",
+        "has_identity": true
+      }
     },
     "Skeptic": {
       "agent_type": "Skeptic",
@@ -183,57 +148,57 @@
           "critical": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "logical": {
             "strength": 0.9,
             "confidence": 0.9,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "analytical": {
-            "strength": 0.82,
+            "strength": 0.8,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T02:31:22.722090"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "questioning": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "evidence_based": {
             "strength": 0.9,
             "confidence": 0.9,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "rational": {
             "strength": 0.8,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "methodical": {
-            "strength": 0.72,
+            "strength": 0.7,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:22.722085"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "empirical": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "cautious": {
             "strength": 0.6,
             "confidence": 0.6,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           },
           "investigative": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:03.261342"
+            "last_updated": "2025-07-04T10:52:28.673263"
           }
         },
         "summary": {
           "total_traits": 10,
-          "average_strength": 0.814,
+          "average_strength": 0.81,
           "strongest_trait": "critical",
           "strongest_value": 0.9,
           "weakest_trait": "cautious",
@@ -243,7 +208,7 @@
         }
       },
       "belief_system": {
-        "total_beliefs": 6,
+        "total_beliefs": 5,
         "high_confidence_beliefs": 5,
         "challenged_beliefs": 0,
         "defended_beliefs": 0,
@@ -251,8 +216,7 @@
           "epistemological_principle": 1,
           "logical_principle": 2,
           "burden_of_proof": 1,
-          "methodological_principle": 1,
-          "collective_memory": 1
+          "methodological_principle": 1
         },
         "top_beliefs": [
           {
@@ -294,114 +258,97 @@
         "relationships": {}
       },
       "debate_performance": {
-        "total_debates": 38,
-        "total_proposals": 8,
+        "total_debates": 0,
+        "total_proposals": 0,
         "successful_proposals": 0,
-        "proposal_success_rate": 0.0,
-        "total_challenges": 30,
+        "proposal_success_rate": 0,
+        "total_challenges": 0,
         "successful_challenges": 0,
-        "challenge_success_rate": 0.0,
-        "average_satisfaction": 0.3,
-        "role_distribution": {
-          "challenger": 3
-        },
-        "recent_debates": [
-          {
-            "cycle": 37,
-            "role": "challenger",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          },
-          {
-            "cycle": 36,
-            "role": "challenger",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          },
-          {
-            "cycle": 35,
-            "role": "challenger",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          }
-        ]
+        "challenge_success_rate": 0,
+        "average_satisfaction": 0,
+        "role_distribution": {},
+        "recent_debates": []
       },
       "memory_specialization": {
         "specialization": "Skeptic Specialization"
       },
-      "evolution_timeline": []
+      "evolution_timeline": [],
+      "identity": {
+        "chosen_name": "Veridicus",
+        "physical_manifestation": "a translucent being of shifting data streams and analytical matrices, composed of flowing equations and logical frameworks, with piercing light that reveals truth through layers of empirical measurement",
+        "avatar_image_path": null,
+        "identity_established_at": "2025-07-04T11:02:23.818430",
+        "has_identity": true
+      }
     },
     "Trickster": {
       "agent_type": "Trickster",
       "personality_evolution": {
         "traits": {
           "chaotic": {
-            "strength": 0.884,
+            "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:22.722166"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "subversive": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-03T02:31:03.273290"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "playful": {
-            "strength": 0.91,
+            "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T02:31:22.722115"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "disruptive": {
             "strength": 0.6,
             "confidence": 0.5,
-            "last_updated": "2025-07-03T02:31:03.273290"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "creative": {
             "strength": 0.9,
             "confidence": 0.8,
-            "last_updated": "2025-07-03T02:31:03.273290"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "paradoxical": {
-            "strength": 0.112,
+            "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:22.722175"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "adaptive": {
             "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:03.273290"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "intuitive": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-03T02:31:03.273290"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "transformative": {
             "strength": 0.7,
             "confidence": 0.6,
-            "last_updated": "2025-07-03T02:31:03.273290"
+            "last_updated": "2025-07-04T10:52:28.675075"
           },
           "boundary_crossing": {
-            "strength": 0.727,
+            "strength": 0.8,
             "confidence": 0.7,
-            "last_updated": "2025-07-03T02:31:22.722159"
+            "last_updated": "2025-07-04T10:52:28.675075"
           }
         },
         "summary": {
           "total_traits": 10,
-          "average_strength": 0.703,
+          "average_strength": 0.77,
           "strongest_trait": "playful",
-          "strongest_value": 0.91,
-          "weakest_trait": "paradoxical",
-          "weakest_value": 0.112,
+          "strongest_value": 0.9,
+          "weakest_trait": "disruptive",
+          "weakest_value": 0.6,
           "evolved_traits": 9,
           "evolution_points": 0
         }
       },
       "belief_system": {
-        "total_beliefs": 6,
+        "total_beliefs": 5,
         "high_confidence_beliefs": 1,
         "challenged_beliefs": 0,
         "defended_beliefs": 0,
@@ -410,8 +357,7 @@
           "creative_principle": 1,
           "wisdom_principle": 1,
           "transformative_principle": 1,
-          "dialectical_principle": 1,
-          "collective_memory": 1
+          "dialectical_principle": 1
         },
         "top_beliefs": [
           {
@@ -441,82 +387,51 @@
         ]
       },
       "relationships": {
-        "total_relationships": 1,
+        "total_relationships": 0,
         "trusted_allies": 0,
         "enemies": 0,
-        "average_trust": 0.0,
+        "average_trust": 0,
         "average_agreement": 0.5,
-        "most_trusted": "Skeptic",
-        "most_trusted_score": 0.0,
-        "least_trusted": "Skeptic",
-        "least_trusted_score": 0.0,
-        "relationships": {
-          "Skeptic": {
-            "trust_score": 0.0,
-            "agreement_rate": 0.5,
-            "total_interactions": 1,
-            "successful_alliances": 0,
-            "betrayals": 0,
-            "relationship_status": "Neutral"
-          }
-        }
+        "most_trusted": null,
+        "most_trusted_score": 0,
+        "least_trusted": null,
+        "least_trusted_score": 0,
+        "relationships": {}
       },
       "debate_performance": {
-        "total_debates": 38,
-        "total_proposals": 7,
+        "total_debates": 0,
+        "total_proposals": 0,
         "successful_proposals": 0,
-        "proposal_success_rate": 0.0,
+        "proposal_success_rate": 0,
         "total_challenges": 0,
         "successful_challenges": 0,
         "challenge_success_rate": 0,
-        "average_satisfaction": 0.3,
-        "role_distribution": {
-          "chaos_agent": 3
-        },
-        "recent_debates": [
-          {
-            "cycle": 37,
-            "role": "chaos_agent",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          },
-          {
-            "cycle": 36,
-            "role": "chaos_agent",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          },
-          {
-            "cycle": 35,
-            "role": "chaos_agent",
-            "outcome": "MUTATE",
-            "satisfaction": 0.3,
-            "emotional_impact": 0.5
-          }
-        ]
+        "average_satisfaction": 0,
+        "role_distribution": {},
+        "recent_debates": []
       },
       "memory_specialization": {
         "specialization": "Trickster Specialization"
       },
-      "evolution_timeline": []
+      "evolution_timeline": [],
+      "identity": {
+        "chosen_name": "Paradoxia",
+        "physical_manifestation": "a fluid, ever-changing entity of dancing colors and impossible geometries, shifting between digital glitch art and organic chaos, embodying the beautiful paradox of order emerging from creative destruction",
+        "avatar_image_path": null,
+        "identity_established_at": "2025-07-04T11:02:23.819278",
+        "has_identity": true
+      }
     }
   },
   "relationship_network": {
-    "average_network_trust": 0.0,
-    "network_polarization": 0.0,
+    "average_network_trust": 0,
+    "network_polarization": 0,
     "trust_matrix": {
-      "Zealot": {
-        "Skeptic": 0.0,
-        "Trickster": 0.0
-      },
+      "Zealot": {},
       "Skeptic": {},
-      "Trickster": {
-        "Skeptic": 0.0
-      }
+      "Trickster": {}
     },
-    "total_relationships": 3
+    "total_relationships": 0
   },
   "collective_insights": {
     "total_shared_insights": 0,

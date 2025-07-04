@@ -15,8 +15,8 @@ def update_json_export():
     print("🔄 Updating JSON exports with corrected agent data")
     print("=" * 50)
     
-    # Initialize memory exporter
-    exporter = AgentMemoryExporter()
+    # Initialize memory exporter with correct database directory
+    exporter = AgentMemoryExporter(memory_dir="data/agent_memories")
     
     # Export updated agent memories
     agent_data = exporter.export_all_agent_memories()
