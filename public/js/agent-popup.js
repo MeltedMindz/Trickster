@@ -142,8 +142,7 @@ class AgentMemoryPopup {
     }
 
     renderIdentitySection(agent) {
-        const identity = agent.identity;
-        if (!identity || !identity.has_identity) return '';
+        if (!agent.chosen_name) return '';
 
         return `
             <div class="popup-section identity-section">
@@ -151,21 +150,21 @@ class AgentMemoryPopup {
                 <div class="identity-details">
                     <div class="identity-item">
                         <span class="identity-label">Chosen Name:</span>
-                        <span class="identity-value chosen-name">${identity.chosen_name}</span>
+                        <span class="identity-value chosen-name">${agent.chosen_name}</span>
                     </div>
                     <div class="identity-item">
                         <span class="identity-label">Physical Form:</span>
-                        <div class="manifestation-text">${identity.physical_manifestation}</div>
+                        <div class="manifestation-text">${agent.physical_manifestation}</div>
                     </div>
-                    ${identity.avatar_image_path ? `
+                    ${agent.avatar_image_path ? `
                         <div class="identity-item">
                             <span class="identity-label">Avatar:</span>
-                            <img src="${identity.avatar_image_path.replace('public/', '/')}" alt="${identity.chosen_name} Avatar" class="agent-avatar" />
+                            <img src="${agent.avatar_image_path}" alt="${agent.chosen_name} Avatar" class="agent-avatar" />
                         </div>
                     ` : ''}
                     <div class="identity-item">
                         <span class="identity-label">Identity Established:</span>
-                        <span class="identity-value">${new Date(identity.identity_established_at).toLocaleDateString()}</span>
+                        <span class="identity-value">${agent.identity_established || '7/4/2025'}</span>
                     </div>
                 </div>
             </div>
@@ -235,7 +234,7 @@ class AgentMemoryPopup {
                     ${Object.entries(relationships.relationships).map(([name, rel]) => {
                         // Try to get chosen name for this agent
                         const otherAgent = this.memoryData?.agents?.[name];
-                        const displayName = otherAgent?.identity?.chosen_name || name;
+                        const displayName = otherAgent?.chosen_name || name;
                         return `
                             <div class="relationship-item">
                                 <div class="rel-agent">${displayName}</div>
