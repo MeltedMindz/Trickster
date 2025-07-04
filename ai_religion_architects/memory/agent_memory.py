@@ -344,6 +344,16 @@ class AgentMemory(ABC):
                       json.dumps(relationship.shared_beliefs), json.dumps(relationship.conflicts), 
                       relationship.last_interaction.isoformat()))
             
+            # Save debate memories
+            cursor.execute("DELETE FROM debate_memories")
+            for debate in self.recent_debates:
+                cursor.execute("""
+                    INSERT INTO debate_memories (cycle_number, proposal_content, agent_role, agent_response, outcome, other_participants, personal_satisfaction, lessons_learned, emotional_impact, timestamp)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (debate.cycle_number, debate.proposal_content, debate.agent_role, debate.agent_response, 
+                      debate.outcome, json.dumps(debate.other_participants), debate.personal_satisfaction,
+                      json.dumps(debate.lessons_learned), debate.emotional_impact, debate.timestamp.isoformat()))
+            
             # Save statistics
             cursor.execute("DELETE FROM agent_stats")
             cursor.execute("""
