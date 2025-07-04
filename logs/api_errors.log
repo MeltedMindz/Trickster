@@ -1,3 +1,4 @@
 2025-07-03 21:10:22,981 - ERROR - API Error (attempt 1): Claude API error: 404 - model: claude-3-sonnet-20240229
 2025-07-03 21:10:22,982 - ERROR - Response: {"type":"error","error":{"type":"not_found_error","message":"model: claude-3-sonnet-20240229"}}
 2025-07-03 21:10:22,982 - ERROR - Failed to generate response for Zealot: Claude API error: 404 - model: claude-3-sonnet-20240229
+2025-07-04 00:42:55,860 - ERROR - Timeout error (attempt 1): 
