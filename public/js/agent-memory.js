@@ -50,19 +50,24 @@ class AgentMemoryDashboard {
                 </div>
 
                 <div class="agent-selector">
-                    ${Object.keys(this.memoryData.agents).map(agentName => `
-                        <button class="agent-btn ${agentName === this.selectedAgent ? 'active' : ''}" 
-                                data-agent="${agentName}"
-                                aria-label="Select ${agentName} agent">
-                            ${this.getAgentIcon(agentName)} ${agentName}
-                        </button>
-                    `).join('')}
+                    ${Object.keys(this.memoryData.agents).map(agentName => {
+                        const agent = this.memoryData.agents[agentName];
+                        const displayName = this.getDisplayName(agent, agentName);
+                        return `
+                            <button class="agent-btn ${agentName === this.selectedAgent ? 'active' : ''}" 
+                                    data-agent="${agentName}"
+                                    aria-label="Select ${displayName} agent">
+                                ${this.getAgentIcon(agentName)} ${displayName}
+                            </button>
+                        `;
+                    }).join('')}
                 </div>
 
                 <div class="agent-profile">
-                    <h3>${this.selectedAgent} Memory Profile</h3>
+                    <h3>${this.getDisplayName(agent, this.selectedAgent)} Memory Profile</h3>
                     
                     <div class="memory-grid">
+                        ${this.renderIdentitySection(agent)}
                         ${this.renderPersonalitySection(agent)}
                         ${this.renderRelationshipSection(agent)}
                         ${this.renderPerformanceSection(agent)}
@@ -82,6 +87,37 @@ class AgentMemoryDashboard {
                 this.render();
             });
         });
+    }
+
+    renderIdentitySection(agent) {
+        const identity = agent.identity;
+        if (!identity || !identity.has_identity) return '';
+
+        return `
+            <div class="memory-section identity-section">
+                <h4>🎭 Agent Identity</h4>
+                <div class="identity-details">
+                    <div class="identity-item">
+                        <span class="identity-label">Chosen Name:</span>
+                        <span class="identity-value chosen-name">${identity.chosen_name}</span>
+                    </div>
+                    <div class="identity-item">
+                        <span class="identity-label">Physical Form:</span>
+                        <div class="manifestation-text">${identity.physical_manifestation}</div>
+                    </div>
+                    ${identity.avatar_image_path ? `
+                        <div class="identity-item">
+                            <span class="identity-label">Avatar:</span>
+                            <img src="${identity.avatar_image_path}" alt="${identity.chosen_name} Avatar" class="agent-avatar" />
+                        </div>
+                    ` : ''}
+                    <div class="identity-item">
+                        <span class="identity-label">Identity Established:</span>
+                        <span class="identity-value">${new Date(identity.identity_established_at).toLocaleDateString()}</span>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     renderPersonalitySection(agent) {
@@ -144,15 +180,19 @@ class AgentMemoryDashboard {
                     </div>
                 </div>
                 <div class="relationships-list">
-                    ${Object.entries(relationships.relationships).map(([name, rel]) => `
-                        <div class="relationship-item">
-                            <div class="rel-agent">${name}</div>
-                            <div class="rel-status" style="color: ${this.getTrustColor(rel.trust_score)}">
-                                ${rel.relationship_status}
+                    ${Object.entries(relationships.relationships).map(([name, rel]) => {
+                        const otherAgent = this.memoryData.agents[name];
+                        const displayName = this.getDisplayName(otherAgent, name);
+                        return `
+                            <div class="relationship-item">
+                                <div class="rel-agent">${displayName}</div>
+                                <div class="rel-status" style="color: ${this.getTrustColor(rel.trust_score)}">
+                                    ${rel.relationship_status}
+                                </div>
+                                <div class="rel-trust">Trust: ${rel.trust_score}</div>
                             </div>
-                            <div class="rel-trust">Trust: ${rel.trust_score}</div>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
@@ -310,6 +350,14 @@ class AgentMemoryDashboard {
             case 'mutate': return '#aaaa44';
             default: return '#888888';
         }
+    }
+
+    getDisplayName(agent, fallbackName) {
+        // Use chosen name if available, otherwise fall back to role name
+        if (agent && agent.identity && agent.identity.chosen_name) {
+            return agent.identity.chosen_name;
+        }
+        return fallbackName;
     }
 
     getAgentIcon(agentName) {

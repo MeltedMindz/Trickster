@@ -1,5 +1,61 @@
 /* Agent Memory Dashboard Styles */
 
+/* Identity Section Styles */
+.identity-section {
+    background: linear-gradient(135deg, #2a1810 0%, #1a1a1a 100%);
+    border: 2px solid #8B4513;
+}
+
+.identity-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.identity-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.identity-label {
+    font-weight: bold;
+    color: #DAA520;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.identity-value {
+    color: #FFE4B5;
+    font-weight: 500;
+}
+
+.chosen-name {
+    font-size: 1.2em;
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+    font-weight: bold;
+}
+
+.manifestation-text {
+    color: #E6E6FA;
+    font-style: italic;
+    line-height: 1.4;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid #9370DB;
+}
+
+.agent-avatar {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 10px;
+    border: 2px solid #DAA520;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
 .agent-memory-dashboard {
     background: #1a1a1a;
     color: #e0e0e0;

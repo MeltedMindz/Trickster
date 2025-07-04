@@ -86,7 +86,8 @@ class AgentMemoryExporter:
                     "relationships": self._get_relationships_from_db(conn),
                     "debate_performance": self._get_debates_from_db(conn),
                     "memory_specialization": {"specialization": f"{agent_name.capitalize()} Specialization"},
-                    "evolution_timeline": []
+                    "evolution_timeline": [],
+                    "identity": self._get_identity_from_db(conn)
                 }
                 
                 return stats
@@ -261,6 +262,29 @@ class AgentMemoryExporter:
             }
         except Exception as e:
             logger.error(f"Error getting relationships from database: {e}")
+            return {}
+    
+    def _get_identity_from_db(self, conn: sqlite3.Connection) -> Dict[str, Any]:
+        """Get agent identity from database"""
+        try:
+            cursor = conn.execute("""
+                SELECT chosen_name, physical_manifestation, avatar_image_path, identity_established_at
+                FROM agent_identity WHERE id = 1
+            """)
+            row = cursor.fetchone()
+            
+            if not row:
+                return {}
+            
+            return {
+                "chosen_name": row['chosen_name'],
+                "physical_manifestation": row['physical_manifestation'],
+                "avatar_image_path": row['avatar_image_path'],
+                "identity_established_at": row['identity_established_at'],
+                "has_identity": bool(row['chosen_name'])
+            }
+        except Exception as e:
+            logger.error(f"Error getting identity from database: {e}")
             return {}
     
     def _get_debates_from_db(self, conn: sqlite3.Connection) -> Dict[str, Any]:

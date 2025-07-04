@@ -136,6 +136,12 @@ class AgentMemory(ABC):
         self.total_votes: int = 0
         self.evolution_points: int = 0
         
+        # Agent identity
+        self.chosen_name: Optional[str] = None
+        self.physical_manifestation: Optional[str] = None
+        self.avatar_image_path: Optional[str] = None
+        self.identity_established_at: Optional[datetime] = None
+        
         self._initialize_database()
         self._load_from_database()
     
@@ -216,6 +222,18 @@ class AgentMemory(ABC):
                     successful_challenges INTEGER DEFAULT 0,
                     total_votes INTEGER DEFAULT 0,
                     evolution_points INTEGER DEFAULT 0,
+                    last_updated TEXT NOT NULL
+                )
+            """)
+            
+            # Agent identity table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS agent_identity (
+                    id INTEGER PRIMARY KEY,
+                    chosen_name TEXT,
+                    physical_manifestation TEXT,
+                    avatar_image_path TEXT,
+                    identity_established_at TEXT,
                     last_updated TEXT NOT NULL
                 )
             """)
@@ -309,6 +327,16 @@ class AgentMemory(ABC):
             stats = cursor.fetchone()
             if stats:
                 _, self.total_proposals, self.successful_proposals, self.total_challenges, self.successful_challenges, self.total_votes, self.evolution_points, _ = stats
+            
+            # Load identity
+            cursor.execute("SELECT chosen_name, physical_manifestation, avatar_image_path, identity_established_at FROM agent_identity WHERE id = 1")
+            identity = cursor.fetchone()
+            if identity:
+                chosen_name, physical_manifestation, avatar_image_path, identity_established_at = identity
+                self.chosen_name = chosen_name
+                self.physical_manifestation = physical_manifestation
+                self.avatar_image_path = avatar_image_path
+                self.identity_established_at = datetime.fromisoformat(identity_established_at) if identity_established_at else None
     
     def save_to_database(self):
         """Save current in-memory state to database"""
@@ -362,6 +390,16 @@ class AgentMemory(ABC):
             """, (self.total_proposals, self.successful_proposals, self.total_challenges, 
                   self.successful_challenges, self.total_votes, self.evolution_points, 
                   datetime.now().isoformat()))
+            
+            # Save identity
+            cursor.execute("DELETE FROM agent_identity")
+            if self.chosen_name or self.physical_manifestation or self.avatar_image_path:
+                cursor.execute("""
+                    INSERT INTO agent_identity (id, chosen_name, physical_manifestation, avatar_image_path, identity_established_at, last_updated)
+                    VALUES (1, ?, ?, ?, ?, ?)
+                """, (self.chosen_name, self.physical_manifestation, self.avatar_image_path,
+                      self.identity_established_at.isoformat() if self.identity_established_at else None,
+                      datetime.now().isoformat()))
             
             conn.commit()
         
@@ -469,6 +507,15 @@ class AgentMemory(ABC):
         
         logger.info(f"{self.agent_name}: Added debate memory from cycle {cycle_number}")
     
+    def set_identity(self, chosen_name: str, physical_manifestation: str, avatar_image_path: str = None):
+        """Set the agent's chosen identity"""
+        self.chosen_name = chosen_name
+        self.physical_manifestation = physical_manifestation
+        self.avatar_image_path = avatar_image_path
+        self.identity_established_at = datetime.now()
+        
+        logger.info(f"{self.agent_name}: Identity established - chosen name: {chosen_name}")
+    
     def get_memory_summary(self) -> Dict[str, Any]:
         """Get a summary of the agent's memory for decision making"""
         return {
@@ -483,6 +530,12 @@ class AgentMemory(ABC):
                 'successful_challenges': self.successful_challenges,
                 'total_votes': self.total_votes,
                 'evolution_points': self.evolution_points
+            },
+            'identity': {
+                'chosen_name': self.chosen_name,
+                'physical_manifestation': self.physical_manifestation,
+                'avatar_image_path': self.avatar_image_path,
+                'identity_established_at': self.identity_established_at.isoformat() if self.identity_established_at else None
             }
         }
     
