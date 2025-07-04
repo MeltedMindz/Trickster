@@ -717,7 +717,7 @@ Outcome: {outcome}
 """
             
             # Files to add
-            files_to_add = ['public/data/', 'logs/']
+            files_to_add = ['public/data/', 'logs/', 'public/images/']
             
             # Perform sync with monitoring and retry
             success = git_monitor.sync_repository(files_to_add, commit_msg)
