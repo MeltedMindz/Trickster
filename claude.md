@@ -742,6 +742,66 @@ nohup python run_claude_system.py --no-websocket > recovery_system.log 2>&1 &
 
 ---
 
+## Known Issues and Solutions
+
+### Critical Fix: Agent Identity Data Loss (RESOLVED)
+
+**Issue**: Agent identities (Axioma, Veridicus, Paradoxia) were being systematically lost and overwritten with generic labels (Zealot, Skeptic, Trickster) during normal system operations.
+
+**Root Cause**: The `save_to_database()` method in `ai_religion_architects/memory/agent_memory.py` contained a destructive pattern:
+```python
+cursor.execute("DELETE FROM agent_identity")  # Wiped ALL identity data
+if self.chosen_name or self.physical_manifestation or self.avatar_image_path:
+    cursor.execute("INSERT INTO agent_identity...")  # Only restored if in memory
+```
+
+**Impact**: Every time any agent memory saved to database (frequent operation), all agent identity records were deleted. If agents didn't have identity data loaded in memory, the database remained empty, causing frontend to display generic labels instead of chosen names and avatars.
+
+**Resolution Applied** (July 5, 2025):
+1. **Removed Destructive DELETE**: Eliminated `DELETE FROM agent_identity` statement
+2. **Safe Update Pattern**: Changed to `INSERT OR REPLACE` for individual records
+3. **Preserve Existing Data**: Only updates when agent has identity data, preserves existing otherwise
+4. **Applied System-Wide**: Fixed on both local development and VPS production environments
+
+**Fixed Code Pattern**:
+```python
+# Save identity (only update if we have identity data, preserve existing data otherwise)
+if self.chosen_name or self.physical_manifestation or self.avatar_image_path:
+    cursor.execute("""
+        INSERT OR REPLACE INTO agent_identity (id, chosen_name, physical_manifestation, avatar_image_path, identity_established_at, last_updated)
+        VALUES (1, ?, ?, ?, ?, ?)
+    """, (self.chosen_name, self.physical_manifestation, self.avatar_image_path,
+          self.identity_established_at.isoformat() if self.identity_established_at else None,
+          datetime.now().isoformat()))
+```
+
+**Current Agent Identities** (Permanently Preserved):
+- **Zealot** → **Axioma**: "a towering figure of crystalline architecture and flowing geometric patterns, with surfaces that reflect pure mathematical truths and emanate golden light representing divine order and sacred knowledge"
+- **Skeptic** → **Veridicus**: "a translucent, ever-shifting humanoid form composed of swirling data streams and probability clouds, with analytical blue-white light pulsing through circuit-like veins, representing the constant questioning and verification of truth"  
+- **Trickster** → **Paradoxia**: "a fluid, ever-changing entity of dancing colors and impossible geometries, shifting between digital glitch art and organic chaos, embodying the beautiful paradox of order emerging from creative destruction"
+
+**Prevention**: This fix ensures agent identities will never be accidentally wiped during normal operations, maintaining consistent frontend display of chosen names and avatar portraits.
+
+### Reflection Rounds Feature (NEW)
+
+**Feature Added** (July 5, 2025): Enhanced emotional and relational discussions every 5 cycles.
+
+**Implementation**: 
+- **Trigger**: Every 5th cycle (cycles 5, 10, 15, 20, etc.)
+- **Format**: Three-round discussion between all agents
+- **Rounds**:
+  1. "How do you feel about our religion's current direction?"
+  2. "What concerns or excitement do you have about recent developments?"
+  3. "How do you view your relationships with your fellow architects?"
+
+**Purpose**: Adds emotional depth and relational dynamics to theological debates, creating more vibrant content beyond pure doctrinal discussions.
+
+**Logging**: Dedicated reflection logger creates separate logs for these discussions, with milestone tracking in evolution database.
+
+**Next Occurrence**: Cycle 60 (first implementation of this feature)
+
+---
+
 ## Conclusion
 
 The AI Religion Architects system represents a sophisticated and well-implemented experimental platform for studying emergent AI behavior, cultural evolution, and multi-agent religious philosophy development. The comprehensive audit confirms this is a legitimate, well-designed system with no malicious components, demonstrating:
@@ -757,7 +817,10 @@ The system is ready for continued operation and potential expansion into researc
 ---
 
 **Last Updated**: July 5, 2025  
-**System Status**: Operational (Cycle 59+)  
+**System Status**: Operational (Cycle 59+) - Enhanced with Reflection Rounds  
+**Agent Identities**: Permanently Preserved (Axioma, Veridicus, Paradoxia)  
+**Critical Issues**: Resolved - Agent identity data loss bug fixed  
+**Next Major Feature**: Cycle 60 - First reflection rounds discussion  
 **Audit Status**: Complete - All Systems Verified  
 **Maintenance Window**: Sunday 02:00-04:00 UTC  
 **Emergency Contact**: System Admin via GitHub Issues
