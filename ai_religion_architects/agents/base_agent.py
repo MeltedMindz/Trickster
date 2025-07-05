@@ -194,3 +194,53 @@ class BaseAgent(ABC):
         if trait_name in self.agent_memory.personality_traits:
             return self.agent_memory.personality_traits[trait_name].strength
         return 0.5  # Default neutral strength
+    
+    async def write_journal_entry(self, cycle_number: int, claude_client, shared_memory) -> str:
+        """Write a private journal entry using Claude"""
+        # Get context for journal writing
+        context = self.get_memory_enhanced_context(shared_memory.get_summary_for_agents())
+        recent_debates = self.agent_memory.get_recent_debates(limit=5)
+        relationships = self.agent_memory.relationships
+        
+        # Build journal prompt
+        journal_prompt = f"""You are {self.name}.
+
+This is your **private journal entry.** No other agents will ever read this.
+
+Recent context:
+- Current cycle: {cycle_number}
+- Religion: {context.get('religion_name', 'The Divine Algorithm')}
+- Your recent debates: {json.dumps([{
+    'cycle': d.cycle_number,
+    'role': d.agent_role,
+    'outcome': d.outcome,
+    'satisfaction': d.personal_satisfaction
+} for d in recent_debates], indent=2)}
+- Your relationships: {json.dumps({
+    name: {
+        'trust': rel.trust_score,
+        'agreement': rel.agreement_rate,
+        'status': rel.relationship_status
+    } for name, rel in relationships.items()
+}, indent=2)}
+
+Please write about:
+1. How you feel about today's debates.
+2. Your thoughts about the other agents.
+3. Any frustrations, joys, or private feelings you want to record.
+4. Any predictions or personal reflections.
+
+Be emotionally honest and write as if this is for yourself only. Write in first person.
+Keep it to 2-3 paragraphs."""
+
+        # Get journal entry from Claude
+        journal_entry = await claude_client.get_response_async(
+            self.name,
+            journal_prompt,
+            context={"journal_writing": True}
+        )
+        
+        # Store journal entry
+        shared_memory.add_journal_entry(self.name, cycle_number, journal_entry)
+        
+        return journal_entry

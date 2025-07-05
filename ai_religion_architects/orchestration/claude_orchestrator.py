@@ -272,6 +272,10 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 24 == 0:
                 await self._create_daily_summary()
             
+            # Agent journals every 24 cycles (daily)
+            if self.cycle_count % 24 == 0:
+                await self._write_agent_journals()
+            
             # Generate sacred images for significant events
             await self._generate_cycle_images(proposal, outcome, result)
             
@@ -501,6 +505,47 @@ Focus on what you think are the most important developments and where the religi
             logger.error(f"❌ Failed to create Day {day_number} summary: {e}")
             self.general_logger.log_event(f"ERROR creating Day {day_number} summary: {str(e)}", "System")
     
+    async def _write_agent_journals(self):
+        """Have each agent write a private journal entry"""
+        logger.info(f"📔 Agents writing journal entries at cycle {self.cycle_count}")
+        
+        try:
+            # Create journal logger
+            journal_logger = DebateLogger(self.log_dir, self.cycle_count)
+            journal_logger.log_event("=== AGENT JOURNAL ENTRIES ===", "System")
+            
+            # Have each agent write their journal
+            for agent in self.agents:
+                logger.info(f"📝 {agent.name} writing journal entry...")
+                
+                try:
+                    journal_entry = await agent.write_journal_entry(
+                        self.cycle_count, 
+                        self.claude_client,
+                        self.shared_memory
+                    )
+                    
+                    journal_logger.log_event(f"JOURNAL by {agent.name}:", "Journal")
+                    journal_logger.log_event(journal_entry, "Journal")
+                    logger.info(f"✅ {agent.name} completed journal entry")
+                    
+                except Exception as e:
+                    logger.error(f"❌ {agent.name} failed to write journal: {e}")
+                    journal_logger.log_event(f"ERROR: {agent.name} journal failed: {str(e)}", "System")
+            
+            journal_logger.log_event("=== JOURNAL ENTRIES COMPLETED ===", "System")
+            logger.info(f"✅ Journal entries completed for cycle {self.cycle_count}")
+            
+            # Add evolution milestone
+            self.shared_memory.add_evolution_milestone(
+                milestone_type="agent_journals",
+                description=f"Agents wrote private journal entries at cycle {self.cycle_count}",
+                cycle_number=self.cycle_count
+            )
+            
+        except Exception as e:
+            logger.error(f"❌ Error during journal writing: {e}")
+    
     async def _export_static_data(self):
         """Export current religion state to static JSON files for frontend"""
         try:
@@ -688,7 +733,19 @@ Focus on what you think are the most important developments and where the religi
             except Exception as e:
                 logger.warning(f"Failed to export sacred images: {e}")
             
-            logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts, sacred images")
+            # Export agent journals
+            try:
+                all_journals = self.shared_memory.get_all_journals()
+                with open(os.path.join(data_dir, 'agent_journals.json'), 'w') as f:
+                    json.dump({
+                        "journals": all_journals,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                logger.info(f"✅ Exported agent journals")
+            except Exception as e:
+                logger.warning(f"Failed to export agent journals: {e}")
+            
+            logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts, sacred images, journals")
             
         except Exception as e:
             logger.warning(f"Failed to export static data: {str(e)}")

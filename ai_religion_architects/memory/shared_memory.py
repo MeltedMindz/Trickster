@@ -253,6 +253,18 @@ class SharedMemory:
                 )
             ''')
             
+            # Agent journals
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS agent_journals (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    agent_name TEXT NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    journal_entry TEXT NOT NULL,
+                    timestamp TIMESTAMP NOT NULL,
+                    UNIQUE(agent_name, cycle_number)
+                )
+            ''')
+            
             # Initialize religion state if not exists
             cursor.execute("SELECT COUNT(*) FROM religion_state")
             if cursor.fetchone()[0] == 0:
@@ -650,3 +662,69 @@ class SharedMemory:
                 images.append(image_data)
             
             return images
+    
+    def add_journal_entry(self, agent_name: str, cycle_number: int, journal_entry: str):
+        """Add a journal entry for an agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            try:
+                cursor.execute('''
+                    INSERT INTO agent_journals (agent_name, cycle_number, journal_entry, timestamp)
+                    VALUES (?, ?, ?, ?)
+                ''', (agent_name, cycle_number, journal_entry, datetime.now()))
+                conn.commit()
+            except sqlite3.IntegrityError:
+                # Update existing entry if it already exists
+                cursor.execute('''
+                    UPDATE agent_journals 
+                    SET journal_entry = ?, timestamp = ?
+                    WHERE agent_name = ? AND cycle_number = ?
+                ''', (journal_entry, datetime.now(), agent_name, cycle_number))
+                conn.commit()
+
+    def get_agent_journals(self, agent_name: str) -> List[Dict[str, Any]]:
+        """Get all journal entries for a specific agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT id, cycle_number, journal_entry, timestamp
+                FROM agent_journals
+                WHERE agent_name = ?
+                ORDER BY cycle_number DESC
+            ''', (agent_name,))
+            
+            journals = []
+            for row in cursor.fetchall():
+                journals.append({
+                    'id': row['id'],
+                    'cycle_number': row['cycle_number'],
+                    'journal_entry': row['journal_entry'],
+                    'timestamp': row['timestamp']
+                })
+            
+            return journals
+
+    def get_all_journals(self) -> Dict[str, List[Dict[str, Any]]]:
+        """Get all journal entries grouped by agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT agent_name, id, cycle_number, journal_entry, timestamp
+                FROM agent_journals
+                ORDER BY agent_name, cycle_number DESC
+            ''')
+            
+            journals = {}
+            for row in cursor.fetchall():
+                agent_name = row['agent_name']
+                if agent_name not in journals:
+                    journals[agent_name] = []
+                
+                journals[agent_name].append({
+                    'id': row['id'],
+                    'cycle_number': row['cycle_number'],
+                    'journal_entry': row['journal_entry'],
+                    'timestamp': row['timestamp']
+                })
+            
+            return journals
