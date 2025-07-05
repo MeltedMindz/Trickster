@@ -102,7 +102,7 @@ class GitSyncMonitor:
             # Add files
             for file_pattern in files_to_add:
                 subprocess.run(
-                    ['git', 'add', file_pattern],
+                    ['git', 'add', '-A', file_pattern],
                     cwd=self.repo_path,
                     capture_output=True,
                     check=False  # Don't fail if file doesn't exist
