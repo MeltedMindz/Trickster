@@ -79,7 +79,11 @@ class StaticTerminalClient {
         }
         
         this.loadLatestTranscripts();
-        this.loadAgentIdentities();
+        
+        // Load agent identities with a small delay to ensure DOM is ready
+        setTimeout(() => {
+            this.loadAgentIdentities();
+        }, 500);
     }
     
     updateReligionInfo(data) {
@@ -291,10 +295,15 @@ class StaticTerminalClient {
         try {
             console.log('🔍 Loading agent identities...');
             const response = await fetch('./data/agent_memories.json');
+            console.log('📡 Agent memories response:', response.status);
+            
             if (response.ok) {
                 const data = await response.json();
+                console.log('📊 Agent data loaded:', data.agents ? Object.keys(data.agents) : 'No agents found');
                 this.updateAgentNames(data.agents);
-                console.log('✅ Agent identities loaded');
+                console.log('✅ Agent identities loaded and updated');
+            } else {
+                console.error('❌ Failed to fetch agent memories:', response.status, response.statusText);
             }
         } catch (error) {
             console.error('❌ Error loading agent identities:', error);
@@ -302,11 +311,15 @@ class StaticTerminalClient {
     }
     
     updateAgentNames(agents) {
+        console.log('🎭 Updating agent names with data:', agents);
+        
         const agentMappings = {
             'Zealot': agents.Zealot,
             'Skeptic': agents.Skeptic,
             'Trickster': agents.Trickster
         };
+        
+        console.log('🎯 Agent mappings:', agentMappings);
         
         Object.entries(agentMappings).forEach(([roleName, agentData]) => {
             if (agentData && agentData.identity && agentData.identity.chosen_name) {
