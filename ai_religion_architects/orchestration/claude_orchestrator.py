@@ -774,7 +774,7 @@ Outcome: {outcome}
         logger.info(f"💭 Starting reflection rounds at cycle {self.cycle_count}")
         
         # Create reflection-specific logger
-        reflection_logger = DebateLogger(self.log_dir, self.cycle_count, "reflection")
+        reflection_logger = DebateLogger(self.log_dir, self.cycle_count)
         reflection_logger.log_event(f"=== REFLECTION ROUNDS - CYCLE {self.cycle_count} ===", "System")
         
         try:
