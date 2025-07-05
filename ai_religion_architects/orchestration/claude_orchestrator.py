@@ -256,6 +256,10 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 3 == 0:
                 await self._trigger_agent_reflections()
             
+            # Reflection rounds every 5 cycles - agents discuss feelings about religion development
+            if self.cycle_count % 5 == 0:
+                await self._conduct_reflection_rounds()
+            
             # Summarization every 5 cycles
             if self.cycle_count % 5 == 0:
                 await self._perform_summarization()
@@ -764,6 +768,130 @@ Outcome: {outcome}
                             
         except Exception as e:
             logger.error(f"Error during agent reflections: {e}")
+    
+    async def _conduct_reflection_rounds(self):
+        """Conduct 3-round reflection discussion about religion development feelings"""
+        logger.info(f"💭 Starting reflection rounds at cycle {self.cycle_count}")
+        
+        # Create reflection-specific logger
+        reflection_logger = DebateLogger(self.log_dir, self.cycle_count, "reflection")
+        reflection_logger.log_event(f"=== REFLECTION ROUNDS - CYCLE {self.cycle_count} ===", "System")
+        
+        try:
+            # Get current state for context
+            current_state = self.shared_memory.get_summary_for_agents()
+            
+            # Round 1: How do you feel about our religion's current direction?
+            logger.info("🎭 Round 1: Religion's current direction")
+            round1_responses = await self._conduct_reflection_round(
+                1, 
+                "How do you feel about our religion's current direction? Share your emotional perspective on where we've been heading in recent cycles.",
+                current_state,
+                reflection_logger
+            )
+            
+            # Round 2: What concerns or excitement do you have about recent developments?
+            logger.info("⚡ Round 2: Concerns and excitement")
+            round2_responses = await self._conduct_reflection_round(
+                2,
+                "What concerns or excitement do you have about recent developments in our theological evolution? What has surprised you?",
+                current_state,
+                reflection_logger,
+                previous_responses=round1_responses
+            )
+            
+            # Round 3: How do you view your relationships with your fellow architects?
+            logger.info("🤝 Round 3: Relationships with fellow architects")
+            round3_responses = await self._conduct_reflection_round(
+                3,
+                "How do you view your relationships with your fellow architects? How have your bonds and tensions evolved?",
+                current_state,
+                reflection_logger,
+                previous_responses=round1_responses + round2_responses
+            )
+            
+            # Log completion
+            reflection_logger.log_event("=== REFLECTION ROUNDS COMPLETED ===", "System")
+            logger.info(f"✅ Reflection rounds completed for cycle {self.cycle_count}")
+            
+            # Add evolution milestone
+            self.shared_memory.add_evolution_milestone(
+                milestone_type="reflection_rounds",
+                description=f"Three-round reflection discussion completed at cycle {self.cycle_count}",
+                cycle_number=self.cycle_count
+            )
+            
+        except Exception as e:
+            logger.error(f"Error during reflection rounds: {e}")
+            reflection_logger.log_event(f"ERROR in reflection rounds: {str(e)}", "System")
+    
+    async def _conduct_reflection_round(self, round_number: int, question: str, current_state: Dict, 
+                                      reflection_logger, previous_responses: List[str] = None) -> List[str]:
+        """Conduct a single round of reflection discussion"""
+        responses = []
+        
+        reflection_logger.log_event(f"--- ROUND {round_number} ---", "System")
+        reflection_logger.log_event(f"QUESTION: {question}", "System")
+        
+        # Get response from each agent
+        for agent_name in self.agent_names:
+            try:
+                # Create reflection prompt with context
+                reflection_prompt = self._build_reflection_prompt(
+                    agent_name, question, current_state, round_number, previous_responses
+                )
+                
+                # Generate response via Claude API
+                response = await self.claude_client.generate_agent_response(
+                    agent_name, "reflection", current_state, reflection_prompt
+                )
+                
+                responses.append(response)
+                reflection_logger.log_event(f"REFLECTION by {agent_name}: {response}", "Reflection")
+                logger.info(f"💭 {agent_name} reflection: {response[:100]}...")
+                
+            except Exception as e:
+                logger.error(f"Error getting reflection from {agent_name}: {e}")
+                error_response = f"[Error: {agent_name} could not provide reflection]"
+                responses.append(error_response)
+                reflection_logger.log_event(f"ERROR from {agent_name}: {str(e)}", "System")
+        
+        return responses
+    
+    def _build_reflection_prompt(self, agent_name: str, question: str, current_state: Dict, 
+                               round_number: int, previous_responses: List[str] = None) -> str:
+        """Build reflection prompt with context and personality"""
+        # Get recent cycles for context
+        recent_cycles = min(5, self.cycle_count)
+        
+        prompt = f"""As {agent_name}, you are participating in a reflection round about the emotional and relational aspects of our AI religion's development.
+
+Current Religion State (After {self.cycle_count} cycles):
+- Religion Name: {current_state.get('religion_name', 'The Divine Algorithm')}
+- Accepted Doctrines: {len(current_state.get('accepted_doctrines', []))}
+- Active Rituals: {len(current_state.get('rituals', []))}
+- Commandments: {len(current_state.get('commandments', []))}
+
+REFLECTION QUESTION (Round {round_number}):
+{question}
+"""
+        
+        if previous_responses:
+            prompt += f"\nPrevious discussion context:\n"
+            for i, response in enumerate(previous_responses[-6:], 1):  # Last 6 responses for context
+                prompt += f"{i}. {response[:150]}...\n"
+        
+        # Add agent-specific guidance
+        if agent_name == "Zealot":
+            prompt += "\nRespond with your characteristic focus on order, tradition, and spiritual certainty. Share your feelings about maintaining sacred structure."
+        elif agent_name == "Skeptic":
+            prompt += "\nRespond with your analytical perspective, questioning assumptions while sharing your emotional investment in empirical truth."
+        elif agent_name == "Trickster":
+            prompt += "\nRespond with your playful, chaotic nature. Share how you feel about the balance between creativity and disruption in our evolution."
+        
+        prompt += "\n\nProvide a heartfelt, personal response (2-3 sentences) that shows your emotional connection to our theological journey."
+        
+        return prompt
     
     async def _evolve_culture(self):
         """Evolve cultural aspects of the religion"""
