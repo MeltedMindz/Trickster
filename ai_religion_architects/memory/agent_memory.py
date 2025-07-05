@@ -392,7 +392,6 @@ class AgentMemory(ABC):
                   datetime.now().isoformat()))
             
             # Save identity (only update if we have identity data, preserve existing data otherwise)
-            # Fixed: Removed DELETE that was wiping agent identities
             if self.chosen_name or self.physical_manifestation or self.avatar_image_path:
                 cursor.execute("""
                     INSERT OR REPLACE INTO agent_identity (id, chosen_name, physical_manifestation, avatar_image_path, identity_established_at, last_updated)
