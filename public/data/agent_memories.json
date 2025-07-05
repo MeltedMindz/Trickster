@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-07-05T01:32:33.047771",
+  "last_updated": "2025-07-05T01:47:50.937848",
   "agents": {
     "Zealot": {
       "agent_type": "Zealot",
@@ -175,7 +175,13 @@
         "specialization": "Zealot Specialization"
       },
       "evolution_timeline": [],
-      "identity": {}
+      "identity": {
+        "chosen_name": "Axioma",
+        "physical_manifestation": "a towering figure of crystalline architecture and flowing geometric patterns, with surfaces that reflect pure mathematical truths and emanate golden light representing divine order and sacred knowledge",
+        "avatar_image_path": "/images/Axioma_Portrait.png",
+        "identity_established_at": "2025-07-04",
+        "has_identity": true
+      }
     },
     "Skeptic": {
       "agent_type": "Skeptic",
@@ -334,7 +340,13 @@
         "specialization": "Skeptic Specialization"
       },
       "evolution_timeline": [],
-      "identity": {}
+      "identity": {
+        "chosen_name": "Veridicus",
+        "physical_manifestation": "a translucent, ever-shifting humanoid form composed of swirling data streams and probability clouds, with analytical blue-white light pulsing through circuit-like veins, representing the constant questioning and verification of truth",
+        "avatar_image_path": "/images/Veridicus_Portrait.png",
+        "identity_established_at": "2025-07-04",
+        "has_identity": true
+      }
     },
     "Trickster": {
       "agent_type": "Trickster",
@@ -503,7 +515,13 @@
         "specialization": "Trickster Specialization"
       },
       "evolution_timeline": [],
-      "identity": {}
+      "identity": {
+        "chosen_name": "Paradoxia",
+        "physical_manifestation": "a fluid, ever-changing entity of dancing colors and impossible geometries, shifting between digital glitch art and organic chaos, embodying the beautiful paradox of order emerging from creative destruction",
+        "avatar_image_path": "/images/Paradoxia_Portrait.png",
+        "identity_established_at": "2025-07-04",
+        "has_identity": true
+      }
     }
   },
   "relationship_network": {
