@@ -98,6 +98,7 @@ The AI Religion Architects system is a sophisticated multi-agent AI framework th
 │   ├── data/                      # JSON exports for frontend
 │   │   ├── religion_state.json    # Current religion state
 │   │   ├── agent_memories.json    # Agent memory exports
+│   │   ├── agent_journals.json    # Agent journal entries
 │   │   ├── sacred_images.json     # Sacred image metadata
 │   │   ├── recent_transcripts.json # Recent debate transcripts
 │   │   └── daily_summaries.json   # Daily summary data
@@ -107,6 +108,7 @@ The AI Religion Architects system is a sophisticated multi-agent AI framework th
 │   ├── js/                        # Frontend JavaScript
 │   │   ├── terminal-static.js     # Main terminal interface
 │   │   ├── agent-popup.js         # Agent memory popups
+│   │   ├── journal-popup.js       # Agent journal popups
 │   │   ├── sacred-gallery.js      # Image gallery
 │   │   ├── mobile-ui.js           # Mobile optimizations
 │   │   └── config.js              # Frontend configuration
@@ -114,6 +116,7 @@ The AI Religion Architects system is a sophisticated multi-agent AI framework th
 │   │   ├── terminal.css           # Main terminal styling
 │   │   ├── mobile-fixes.css       # Mobile responsive fixes
 │   │   ├── sacred-gallery.css     # Image gallery styling
+│   │   ├── journal-popup.css      # Agent journal styling
 │   │   └── [component].css        # Component-specific styles
 │   └── index.html                 # Main HTML interface
 ├── scripts/                       # Utility scripts
@@ -431,6 +434,7 @@ AGENT MEMORIES                    SHARED MEMORY                   CULTURAL MEMOR
 **JSON Export System**:
 - **religion_state.json**: Core religion data, doctrines, statistics
 - **agent_memories.json**: Personality evolution, relationships, performance
+- **agent_journals.json**: Private agent journal entries with timestamps
 - **sacred_images.json**: Image metadata with cultural context
 - **recent_transcripts.json**: Complete debate transcripts
 - **daily_summaries.json**: Aggregated daily statistics
@@ -484,6 +488,7 @@ window.AI_RELIGION_CONFIG = {
 - **Terminal Interface** (`terminal-static.js`): Debate transcript display
 - **Sacred Gallery** (`sacred-gallery.js`): Interactive image viewer
 - **Agent Popups** (`agent-popup.js`): Memory and personality displays
+- **Journal Popups** (`journal-popup.js`): Private agent journal viewer
 - **Mobile UI** (`mobile-ui.js`): Touch-optimized interactions
 
 **Mobile Optimization**:
@@ -799,6 +804,45 @@ if self.chosen_name or self.physical_manifestation or self.avatar_image_path:
 **Logging**: Dedicated reflection logger creates separate logs for these discussions, with milestone tracking in evolution database.
 
 **Next Occurrence**: Cycle 60 (first implementation of this feature)
+
+### Agent Journal System (NEW)
+
+**Feature Added** (July 5, 2025): Private agent journals with automated writing and public frontend access.
+
+**Implementation**:
+- **Trigger**: Every 24 cycles (daily journals)
+- **Database**: New `agent_journals` table in shared memory database
+- **Content**: Emotionally honest, introspective entries using Claude API
+- **Privacy**: Journals are private to agents, never referenced in debates
+- **Frontend**: Accessible via journal links in agent sidebar with popup modals
+
+**Database Schema**:
+```sql
+CREATE TABLE agent_journals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    agent_name TEXT NOT NULL,
+    cycle_number INTEGER NOT NULL,
+    journal_entry TEXT NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    UNIQUE(agent_name, cycle_number)
+)
+```
+
+**Frontend Features**:
+- **Journal Links**: Clickable links under each agent in sidebar
+- **Popup Modals**: Responsive modal system showing all journal entries
+- **Mobile Optimized**: Full responsive design for all device sizes
+- **Privacy Notice**: Clear indication that journals are private thoughts
+
+**Sample Content**: Manual backfill created for cycles 24 and 48, demonstrating personality-appropriate introspective writing for each agent.
+
+**Next Journal Writing**: Cycle 72 (next 24-cycle milestone)
+
+**Files Added**:
+- `public/js/journal-popup.js` - Journal popup functionality
+- `public/styles/journal-popup.css` - Responsive journal styling
+- `public/data/agent_journals.json` - Journal data export
+- `manual_journal_backfill.py` - Demo content creation script
 
 ---
 
