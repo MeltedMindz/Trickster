@@ -192,9 +192,18 @@ class StaticTerminalClient {
         const validTranscripts = [];
         sortedTranscripts.forEach((transcript) => {
             if (transcript.content && transcript.content.trim().length > 200) {
-                // Extract cycle number from content
-                const cycleMatch = transcript.content.match(/CYCLE (\d+) BEGINNING/);
-                const cycleNumber = cycleMatch ? parseInt(cycleMatch[1]) : null;
+                // Extract cycle number from filename or content
+                let cycleNumber = null;
+                
+                // First try to get from filename (e.g., CYCLE61.txt)
+                const filenameMatch = transcript.filename.match(/CYCLE(\d+)/);
+                if (filenameMatch) {
+                    cycleNumber = parseInt(filenameMatch[1]);
+                } else {
+                    // Fallback to content matching
+                    const cycleMatch = transcript.content.match(/CYCLE (\d+) BEGINNING/);
+                    cycleNumber = cycleMatch ? parseInt(cycleMatch[1]) : null;
+                }
                 
                 if (cycleNumber) {
                     validTranscripts.push({
@@ -236,9 +245,24 @@ class StaticTerminalClient {
     
     displayTranscriptContent(content) {
         const lines = content.split('\n');
+        let inReflectionSection = false;
+        
         lines.forEach(line => {
             if (line.trim()) {
-                if (line.includes('PROPOSAL')) {
+                // Check for reflection rounds markers
+                if (line.includes('=== REFLECTION ROUNDS')) {
+                    inReflectionSection = true;
+                    this.addTerminalLine(line, 'reflection-header');
+                } else if (line.includes('=== REFLECTION ROUNDS COMPLETED ===')) {
+                    inReflectionSection = false;
+                    this.addTerminalLine(line, 'reflection-header');
+                } else if (inReflectionSection && line.includes('[Reflection]')) {
+                    this.addTerminalLine(line, 'reflection');
+                } else if (inReflectionSection && line.includes('QUESTION:')) {
+                    this.addTerminalLine(line, 'reflection-question');
+                } else if (inReflectionSection && line.includes('--- ROUND')) {
+                    this.addTerminalLine(line, 'reflection-round');
+                } else if (line.includes('PROPOSAL')) {
                     this.addTerminalLine(line, 'proposal');
                 } else if (line.includes('CHALLENGE')) {
                     this.addTerminalLine(line, 'challenge');
@@ -250,6 +274,8 @@ class StaticTerminalClient {
                     this.addTerminalLine(line, 'accepted');
                 } else if (line.includes('===') || line.includes('---')) {
                     this.addTerminalLine(line, 'system');
+                } else if (inReflectionSection) {
+                    this.addTerminalLine(line, 'reflection-content');
                 } else {
                     this.addTerminalLine(line, 'system');
                 }

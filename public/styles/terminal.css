@@ -392,6 +392,39 @@ body {
     color: #dda0dd;
 }
 
+/* Reflection Rounds Styling */
+.terminal-line.reflection-header {
+    color: #ff00ff;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 10px 0;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.terminal-line.reflection-round {
+    color: #ff69b4;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.terminal-line.reflection-question {
+    color: #00ffff;
+    font-style: italic;
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.terminal-line.reflection {
+    color: #ffa500;
+    font-weight: bold;
+}
+
+.terminal-line.reflection-content {
+    color: #e0e0e0;
+    padding-left: 20px;
+    line-height: 1.4;
+}
+
 .timestamp {
     color: #555;
     flex-shrink: 0;
