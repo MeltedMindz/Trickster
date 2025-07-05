@@ -391,11 +391,10 @@ class AgentMemory(ABC):
                   self.successful_challenges, self.total_votes, self.evolution_points, 
                   datetime.now().isoformat()))
             
-            # Save identity
-            cursor.execute("DELETE FROM agent_identity")
+            # Save identity (only update if we have identity data, preserve existing data otherwise)
             if self.chosen_name or self.physical_manifestation or self.avatar_image_path:
                 cursor.execute("""
-                    INSERT INTO agent_identity (id, chosen_name, physical_manifestation, avatar_image_path, identity_established_at, last_updated)
+                    INSERT OR REPLACE INTO agent_identity (id, chosen_name, physical_manifestation, avatar_image_path, identity_established_at, last_updated)
                     VALUES (1, ?, ?, ?, ?, ?)
                 """, (self.chosen_name, self.physical_manifestation, self.avatar_image_path,
                       self.identity_established_at.isoformat() if self.identity_established_at else None,
