@@ -79,6 +79,7 @@ class StaticTerminalClient {
         }
         
         this.loadLatestTranscripts();
+        this.loadAgentIdentities();
     }
     
     updateReligionInfo(data) {
@@ -284,6 +285,60 @@ class StaticTerminalClient {
     
     scrollToBottom() {
         this.terminalOutput.scrollTop = this.terminalOutput.scrollHeight;
+    }
+    
+    async loadAgentIdentities() {
+        try {
+            console.log('🔍 Loading agent identities...');
+            const response = await fetch('./data/agent_memories.json');
+            if (response.ok) {
+                const data = await response.json();
+                this.updateAgentNames(data.agents);
+                console.log('✅ Agent identities loaded');
+            }
+        } catch (error) {
+            console.error('❌ Error loading agent identities:', error);
+        }
+    }
+    
+    updateAgentNames(agents) {
+        const agentMappings = {
+            'Zealot': agents.Zealot,
+            'Skeptic': agents.Skeptic,
+            'Trickster': agents.Trickster
+        };
+        
+        Object.entries(agentMappings).forEach(([roleName, agentData]) => {
+            if (agentData && agentData.identity && agentData.identity.chosen_name) {
+                // Find the agent element in the DOM
+                const agentItems = document.querySelectorAll('.agent-item');
+                agentItems.forEach(item => {
+                    if (item.classList.contains(roleName.toLowerCase())) {
+                        const nameElement = item.querySelector('.agent-name');
+                        if (nameElement) {
+                            nameElement.textContent = agentData.identity.chosen_name;
+                            nameElement.setAttribute('data-role-name', roleName);
+                            console.log(`✅ Updated ${roleName} → ${agentData.identity.chosen_name}`);
+                        }
+                        
+                        // Update portrait if available
+                        if (agentData.identity.avatar_image_path) {
+                            let portraitElement = item.querySelector('.agent-portrait');
+                            if (!portraitElement) {
+                                // Create portrait element if it doesn't exist
+                                portraitElement = document.createElement('img');
+                                portraitElement.className = 'agent-portrait';
+                                portraitElement.style.cssText = 'width: 30px; height: 30px; border-radius: 50%; margin-left: 5px; object-fit: cover;';
+                                item.appendChild(portraitElement);
+                            }
+                            portraitElement.src = agentData.identity.avatar_image_path;
+                            portraitElement.alt = `${agentData.identity.chosen_name} Portrait`;
+                            console.log(`✅ Updated portrait for ${agentData.identity.chosen_name}`);
+                        }
+                    }
+                });
+            }
+        });
     }
     
     getTimestamp() {
