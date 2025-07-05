@@ -1,0 +1,86 @@
+{
+  "decay_profiles": [
+    {
+      "id": 4,
+      "agent_id": "Skeptic",
+      "memory_type": "episodic",
+      "cycle_number": 60,
+      "decay_rate": 0.04,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.350775"
+    },
+    {
+      "id": 6,
+      "agent_id": "Skeptic",
+      "memory_type": "procedural",
+      "cycle_number": 60,
+      "decay_rate": 0.03,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.356054"
+    },
+    {
+      "id": 5,
+      "agent_id": "Skeptic",
+      "memory_type": "semantic",
+      "cycle_number": 60,
+      "decay_rate": 0.04,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.353000"
+    },
+    {
+      "id": 7,
+      "agent_id": "Trickster",
+      "memory_type": "episodic",
+      "cycle_number": 60,
+      "decay_rate": 0.08,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.358286"
+    },
+    {
+      "id": 9,
+      "agent_id": "Trickster",
+      "memory_type": "procedural",
+      "cycle_number": 60,
+      "decay_rate": 0.08,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.363462"
+    },
+    {
+      "id": 8,
+      "agent_id": "Trickster",
+      "memory_type": "semantic",
+      "cycle_number": 60,
+      "decay_rate": 0.08,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.360513"
+    },
+    {
+      "id": 1,
+      "agent_id": "Zealot",
+      "memory_type": "episodic",
+      "cycle_number": 60,
+      "decay_rate": 0.05,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.343759"
+    },
+    {
+      "id": 3,
+      "agent_id": "Zealot",
+      "memory_type": "procedural",
+      "cycle_number": 60,
+      "decay_rate": 0.05,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.348474"
+    },
+    {
+      "id": 2,
+      "agent_id": "Zealot",
+      "memory_type": "semantic",
+      "cycle_number": 60,
+      "decay_rate": 0.02,
+      "memory_retained": 50,
+      "timestamp": "2025-07-05 23:34:13.346359"
+    }
+  ],
+  "last_updated": "2025-07-05T23:35:21.304483"
+}
