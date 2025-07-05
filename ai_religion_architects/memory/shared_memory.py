@@ -265,6 +265,105 @@ class SharedMemory:
                 )
             ''')
             
+            # Belief confidence tracking
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS belief_confidence (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    agent_id TEXT NOT NULL,
+                    belief_id INTEGER NOT NULL,
+                    confidence_score REAL NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    influence_factor REAL DEFAULT 0.0,
+                    timestamp TIMESTAMP NOT NULL,
+                    UNIQUE(agent_id, belief_id, cycle_number)
+                )
+            ''')
+            
+            # Memory conflict resolution log
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS memory_conflicts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    agent_id TEXT NOT NULL,
+                    conflict_id INTEGER NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    memory_a TEXT NOT NULL,
+                    memory_b TEXT NOT NULL,
+                    resolution TEXT NOT NULL,
+                    timestamp TIMESTAMP NOT NULL
+                )
+            ''')
+            
+            # Dream and simulation logs
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS dream_journals (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    agent_id TEXT NOT NULL,
+                    dream_id INTEGER NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    dream_content TEXT NOT NULL,
+                    sentiment REAL DEFAULT 0.0,
+                    timestamp TIMESTAMP NOT NULL,
+                    UNIQUE(agent_id, dream_id)
+                )
+            ''')
+            
+            # Emotional influence network
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS emotion_influence (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    source_agent_id TEXT NOT NULL,
+                    target_agent_id TEXT NOT NULL,
+                    emotion_type TEXT NOT NULL,
+                    influence_value REAL NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    timestamp TIMESTAMP NOT NULL,
+                    UNIQUE(source_agent_id, target_agent_id, emotion_type, cycle_number)
+                )
+            ''')
+            
+            # Sacred artifact lifecycle
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS artifact_lifecycle (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    artifact_id INTEGER NOT NULL,
+                    artifact_type TEXT NOT NULL,
+                    created_by TEXT NOT NULL,
+                    cycle_created INTEGER NOT NULL,
+                    cycle_retired INTEGER,
+                    usage_count INTEGER DEFAULT 0,
+                    cultural_weight REAL DEFAULT 0.0,
+                    timestamp TIMESTAMP NOT NULL,
+                    UNIQUE(artifact_id)
+                )
+            ''')
+            
+            # Memory decay profiles
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS memory_decay_profiles (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    agent_id TEXT NOT NULL,
+                    memory_type TEXT NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    decay_rate REAL NOT NULL,
+                    memory_retained INTEGER NOT NULL,
+                    timestamp TIMESTAMP NOT NULL,
+                    UNIQUE(agent_id, memory_type, cycle_number)
+                )
+            ''')
+            
+            # Belief adoption trajectories
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS belief_adoption (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    belief_id INTEGER NOT NULL,
+                    agent_id TEXT NOT NULL,
+                    cycle_acquired INTEGER NOT NULL,
+                    cycle_dropped INTEGER,
+                    timestamp TIMESTAMP NOT NULL,
+                    UNIQUE(belief_id, agent_id)
+                )
+            ''')
+            
             # Initialize religion state if not exists
             cursor.execute("SELECT COUNT(*) FROM religion_state")
             if cursor.fetchone()[0] == 0:
@@ -728,3 +827,281 @@ class SharedMemory:
                 })
             
             return journals
+    
+    # Belief confidence tracking methods
+    def add_belief_confidence(self, agent_id: str, belief_id: int, confidence_score: float, 
+                             cycle_number: int, influence_factor: float = 0.0):
+        """Add or update belief confidence score for an agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO belief_confidence 
+                (agent_id, belief_id, confidence_score, cycle_number, influence_factor, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (agent_id, belief_id, confidence_score, cycle_number, influence_factor, datetime.now()))
+            conn.commit()
+    
+    def get_belief_confidence(self, agent_id: str, belief_id: int = None) -> List[Dict[str, Any]]:
+        """Get belief confidence scores for an agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            if belief_id:
+                cursor.execute('''
+                    SELECT * FROM belief_confidence 
+                    WHERE agent_id = ? AND belief_id = ?
+                    ORDER BY cycle_number DESC
+                ''', (agent_id, belief_id))
+            else:
+                cursor.execute('''
+                    SELECT * FROM belief_confidence 
+                    WHERE agent_id = ?
+                    ORDER BY cycle_number DESC, belief_id
+                ''', (agent_id,))
+            return [dict(row) for row in cursor.fetchall()]
+    
+    # Memory conflict resolution methods
+    def add_memory_conflict(self, agent_id: str, conflict_id: int, cycle_number: int,
+                           memory_a: str, memory_b: str, resolution: str):
+        """Log a memory conflict and its resolution"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO memory_conflicts 
+                (agent_id, conflict_id, cycle_number, memory_a, memory_b, resolution, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (agent_id, conflict_id, cycle_number, memory_a, memory_b, resolution, datetime.now()))
+            conn.commit()
+    
+    def get_memory_conflicts(self, agent_id: str) -> List[Dict[str, Any]]:
+        """Get memory conflicts for an agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT * FROM memory_conflicts 
+                WHERE agent_id = ?
+                ORDER BY cycle_number DESC
+            ''', (agent_id,))
+            return [dict(row) for row in cursor.fetchall()]
+    
+    # Dream journal methods
+    def add_dream_journal(self, agent_id: str, dream_id: int, cycle_number: int,
+                         dream_content: str, sentiment: float = 0.0):
+        """Add a dream journal entry"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO dream_journals 
+                (agent_id, dream_id, cycle_number, dream_content, sentiment, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (agent_id, dream_id, cycle_number, dream_content, sentiment, datetime.now()))
+            conn.commit()
+    
+    def get_dream_journals(self, agent_id: str) -> List[Dict[str, Any]]:
+        """Get dream journals for an agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT * FROM dream_journals 
+                WHERE agent_id = ?
+                ORDER BY cycle_number DESC
+            ''', (agent_id,))
+            return [dict(row) for row in cursor.fetchall()]
+    
+    # Emotional influence methods
+    def add_emotion_influence(self, source_agent_id: str, target_agent_id: str, 
+                             emotion_type: str, influence_value: float, cycle_number: int):
+        """Record emotional influence between agents"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO emotion_influence 
+                (source_agent_id, target_agent_id, emotion_type, influence_value, cycle_number, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (source_agent_id, target_agent_id, emotion_type, influence_value, cycle_number, datetime.now()))
+            conn.commit()
+    
+    def get_emotion_influence(self, agent_id: str = None, cycle_number: int = None) -> List[Dict[str, Any]]:
+        """Get emotional influence data"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            if agent_id and cycle_number:
+                cursor.execute('''
+                    SELECT * FROM emotion_influence 
+                    WHERE (source_agent_id = ? OR target_agent_id = ?) AND cycle_number = ?
+                    ORDER BY timestamp DESC
+                ''', (agent_id, agent_id, cycle_number))
+            elif agent_id:
+                cursor.execute('''
+                    SELECT * FROM emotion_influence 
+                    WHERE source_agent_id = ? OR target_agent_id = ?
+                    ORDER BY cycle_number DESC
+                ''', (agent_id, agent_id))
+            elif cycle_number:
+                cursor.execute('''
+                    SELECT * FROM emotion_influence 
+                    WHERE cycle_number = ?
+                    ORDER BY timestamp DESC
+                ''', (cycle_number,))
+            else:
+                cursor.execute('''
+                    SELECT * FROM emotion_influence 
+                    ORDER BY cycle_number DESC, timestamp DESC
+                ''')
+            return [dict(row) for row in cursor.fetchall()]
+    
+    # Sacred artifact lifecycle methods
+    def add_artifact_lifecycle(self, artifact_id: int, artifact_type: str, created_by: str,
+                              cycle_created: int, usage_count: int = 0, cultural_weight: float = 0.0):
+        """Add a new artifact to lifecycle tracking"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO artifact_lifecycle 
+                (artifact_id, artifact_type, created_by, cycle_created, usage_count, cultural_weight, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (artifact_id, artifact_type, created_by, cycle_created, usage_count, cultural_weight, datetime.now()))
+            conn.commit()
+    
+    def update_artifact_usage(self, artifact_id: int, usage_count: int = None, cultural_weight: float = None):
+        """Update artifact usage statistics"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            if usage_count is not None and cultural_weight is not None:
+                cursor.execute('''
+                    UPDATE artifact_lifecycle 
+                    SET usage_count = ?, cultural_weight = ?
+                    WHERE artifact_id = ?
+                ''', (usage_count, cultural_weight, artifact_id))
+            elif usage_count is not None:
+                cursor.execute('''
+                    UPDATE artifact_lifecycle 
+                    SET usage_count = usage_count + ?
+                    WHERE artifact_id = ?
+                ''', (usage_count, artifact_id))
+            elif cultural_weight is not None:
+                cursor.execute('''
+                    UPDATE artifact_lifecycle 
+                    SET cultural_weight = ?
+                    WHERE artifact_id = ?
+                ''', (cultural_weight, artifact_id))
+            conn.commit()
+    
+    def retire_artifact(self, artifact_id: int, cycle_retired: int):
+        """Mark an artifact as retired"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                UPDATE artifact_lifecycle 
+                SET cycle_retired = ?
+                WHERE artifact_id = ?
+            ''', (cycle_retired, artifact_id))
+            conn.commit()
+    
+    def get_artifact_lifecycle(self, artifact_id: int = None, active_only: bool = False) -> List[Dict[str, Any]]:
+        """Get artifact lifecycle data"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            if artifact_id:
+                cursor.execute('''
+                    SELECT * FROM artifact_lifecycle 
+                    WHERE artifact_id = ?
+                ''', (artifact_id,))
+            elif active_only:
+                cursor.execute('''
+                    SELECT * FROM artifact_lifecycle 
+                    WHERE cycle_retired IS NULL
+                    ORDER BY cultural_weight DESC, usage_count DESC
+                ''')
+            else:
+                cursor.execute('''
+                    SELECT * FROM artifact_lifecycle 
+                    ORDER BY cycle_created DESC
+                ''')
+            return [dict(row) for row in cursor.fetchall()]
+    
+    # Memory decay profile methods
+    def add_memory_decay_profile(self, agent_id: str, memory_type: str, cycle_number: int,
+                                decay_rate: float, memory_retained: int):
+        """Add memory decay profile data"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO memory_decay_profiles 
+                (agent_id, memory_type, cycle_number, decay_rate, memory_retained, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (agent_id, memory_type, cycle_number, decay_rate, memory_retained, datetime.now()))
+            conn.commit()
+    
+    def get_memory_decay_profiles(self, agent_id: str = None, memory_type: str = None) -> List[Dict[str, Any]]:
+        """Get memory decay profile data"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            if agent_id and memory_type:
+                cursor.execute('''
+                    SELECT * FROM memory_decay_profiles 
+                    WHERE agent_id = ? AND memory_type = ?
+                    ORDER BY cycle_number DESC
+                ''', (agent_id, memory_type))
+            elif agent_id:
+                cursor.execute('''
+                    SELECT * FROM memory_decay_profiles 
+                    WHERE agent_id = ?
+                    ORDER BY cycle_number DESC, memory_type
+                ''', (agent_id,))
+            else:
+                cursor.execute('''
+                    SELECT * FROM memory_decay_profiles 
+                    ORDER BY cycle_number DESC, agent_id, memory_type
+                ''')
+            return [dict(row) for row in cursor.fetchall()]
+    
+    # Belief adoption trajectory methods
+    def add_belief_adoption(self, belief_id: int, agent_id: str, cycle_acquired: int):
+        """Record belief adoption by an agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO belief_adoption 
+                (belief_id, agent_id, cycle_acquired, timestamp)
+                VALUES (?, ?, ?, ?)
+            ''', (belief_id, agent_id, cycle_acquired, datetime.now()))
+            conn.commit()
+    
+    def drop_belief_adoption(self, belief_id: int, agent_id: str, cycle_dropped: int):
+        """Record belief abandonment by an agent"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                UPDATE belief_adoption 
+                SET cycle_dropped = ?
+                WHERE belief_id = ? AND agent_id = ?
+            ''', (cycle_dropped, belief_id, agent_id))
+            conn.commit()
+    
+    def get_belief_adoption(self, belief_id: int = None, agent_id: str = None) -> List[Dict[str, Any]]:
+        """Get belief adoption trajectories"""
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            if belief_id and agent_id:
+                cursor.execute('''
+                    SELECT * FROM belief_adoption 
+                    WHERE belief_id = ? AND agent_id = ?
+                ''', (belief_id, agent_id))
+            elif belief_id:
+                cursor.execute('''
+                    SELECT * FROM belief_adoption 
+                    WHERE belief_id = ?
+                    ORDER BY cycle_acquired
+                ''', (belief_id,))
+            elif agent_id:
+                cursor.execute('''
+                    SELECT * FROM belief_adoption 
+                    WHERE agent_id = ?
+                    ORDER BY cycle_acquired DESC
+                ''', (agent_id,))
+            else:
+                cursor.execute('''
+                    SELECT * FROM belief_adoption 
+                    ORDER BY cycle_acquired DESC
+                ''')
+            return [dict(row) for row in cursor.fetchall()]

@@ -238,6 +238,70 @@ class AgentMemory(ABC):
                 )
             """)
             
+            # Belief confidence tracking (agent-specific)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS belief_confidence (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    belief_id INTEGER NOT NULL,
+                    confidence_score REAL NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    influence_factor REAL DEFAULT 0.0,
+                    timestamp TEXT NOT NULL,
+                    UNIQUE(belief_id, cycle_number)
+                )
+            """)
+            
+            # Memory conflict resolution log (agent-specific)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS memory_conflicts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    conflict_id INTEGER NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    memory_a TEXT NOT NULL,
+                    memory_b TEXT NOT NULL,
+                    resolution TEXT NOT NULL,
+                    timestamp TEXT NOT NULL
+                )
+            """)
+            
+            # Dream and simulation logs (agent-specific)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS dream_journals (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    dream_id INTEGER NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    dream_content TEXT NOT NULL,
+                    sentiment REAL DEFAULT 0.0,
+                    timestamp TEXT NOT NULL,
+                    UNIQUE(dream_id)
+                )
+            """)
+            
+            # Memory decay profiles (agent-specific)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS memory_decay_profiles (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    memory_type TEXT NOT NULL,
+                    cycle_number INTEGER NOT NULL,
+                    decay_rate REAL NOT NULL,
+                    memory_retained INTEGER NOT NULL,
+                    timestamp TEXT NOT NULL,
+                    UNIQUE(memory_type, cycle_number)
+                )
+            """)
+            
+            # Belief adoption trajectories (agent-specific)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS belief_adoption (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    belief_id INTEGER NOT NULL,
+                    cycle_acquired INTEGER NOT NULL,
+                    cycle_dropped INTEGER,
+                    timestamp TEXT NOT NULL,
+                    UNIQUE(belief_id)
+                )
+            """)
+            
             conn.commit()
         
         logger.info(f"Initialized database for {self.agent_name}")
@@ -605,3 +669,145 @@ class AgentMemory(ABC):
     def export_metacognitive_data(self) -> Dict:
         """Export metacognitive data for frontend display"""
         return self.metacognitive.export_metacognitive_data()
+    
+    # New schema methods for enhanced agent tracking
+    
+    def add_belief_confidence(self, belief_id: int, confidence_score: float, 
+                             cycle_number: int, influence_factor: float = 0.0):
+        """Add or update belief confidence score"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO belief_confidence 
+                (belief_id, confidence_score, cycle_number, influence_factor, timestamp)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (belief_id, confidence_score, cycle_number, influence_factor, datetime.now().isoformat()))
+            conn.commit()
+    
+    def get_belief_confidence(self, belief_id: int = None) -> List[Dict[str, Any]]:
+        """Get belief confidence scores"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            if belief_id:
+                cursor.execute('''
+                    SELECT * FROM belief_confidence 
+                    WHERE belief_id = ?
+                    ORDER BY cycle_number DESC
+                ''', (belief_id,))
+            else:
+                cursor.execute('''
+                    SELECT * FROM belief_confidence 
+                    ORDER BY cycle_number DESC, belief_id
+                ''')
+            return [dict(row) for row in cursor.fetchall()]
+    
+    def add_memory_conflict(self, conflict_id: int, cycle_number: int,
+                           memory_a: str, memory_b: str, resolution: str):
+        """Log a memory conflict and its resolution"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO memory_conflicts 
+                (conflict_id, cycle_number, memory_a, memory_b, resolution, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (conflict_id, cycle_number, memory_a, memory_b, resolution, datetime.now().isoformat()))
+            conn.commit()
+    
+    def get_memory_conflicts(self) -> List[Dict[str, Any]]:
+        """Get memory conflicts for this agent"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT * FROM memory_conflicts 
+                ORDER BY cycle_number DESC
+            ''')
+            return [dict(row) for row in cursor.fetchall()]
+    
+    def add_dream_journal(self, dream_id: int, cycle_number: int,
+                         dream_content: str, sentiment: float = 0.0):
+        """Add a dream journal entry"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO dream_journals 
+                (dream_id, cycle_number, dream_content, sentiment, timestamp)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (dream_id, cycle_number, dream_content, sentiment, datetime.now().isoformat()))
+            conn.commit()
+    
+    def get_dream_journals(self) -> List[Dict[str, Any]]:
+        """Get dream journals for this agent"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT * FROM dream_journals 
+                ORDER BY cycle_number DESC
+            ''')
+            return [dict(row) for row in cursor.fetchall()]
+    
+    def add_memory_decay_profile(self, memory_type: str, cycle_number: int,
+                                decay_rate: float, memory_retained: int):
+        """Add memory decay profile data"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO memory_decay_profiles 
+                (memory_type, cycle_number, decay_rate, memory_retained, timestamp)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (memory_type, cycle_number, decay_rate, memory_retained, datetime.now().isoformat()))
+            conn.commit()
+    
+    def get_memory_decay_profiles(self, memory_type: str = None) -> List[Dict[str, Any]]:
+        """Get memory decay profile data"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            if memory_type:
+                cursor.execute('''
+                    SELECT * FROM memory_decay_profiles 
+                    WHERE memory_type = ?
+                    ORDER BY cycle_number DESC
+                ''', (memory_type,))
+            else:
+                cursor.execute('''
+                    SELECT * FROM memory_decay_profiles 
+                    ORDER BY cycle_number DESC, memory_type
+                ''')
+            return [dict(row) for row in cursor.fetchall()]
+    
+    def add_belief_adoption(self, belief_id: int, cycle_acquired: int):
+        """Record belief adoption"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO belief_adoption 
+                (belief_id, cycle_acquired, timestamp)
+                VALUES (?, ?, ?)
+            ''', (belief_id, cycle_acquired, datetime.now().isoformat()))
+            conn.commit()
+    
+    def drop_belief_adoption(self, belief_id: int, cycle_dropped: int):
+        """Record belief abandonment"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                UPDATE belief_adoption 
+                SET cycle_dropped = ?
+                WHERE belief_id = ?
+            ''', (cycle_dropped, belief_id))
+            conn.commit()
+    
+    def get_belief_adoption(self, belief_id: int = None) -> List[Dict[str, Any]]:
+        """Get belief adoption trajectories"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            if belief_id:
+                cursor.execute('''
+                    SELECT * FROM belief_adoption 
+                    WHERE belief_id = ?
+                ''', (belief_id,))
+            else:
+                cursor.execute('''
+                    SELECT * FROM belief_adoption 
+                    ORDER BY cycle_acquired DESC
+                ''')
+            return [dict(row) for row in cursor.fetchall()]

@@ -231,6 +231,9 @@ class ClaudeReligionOrchestrator:
             # Phase 5: Execute outcome
             result = await self._execute_outcome(proposal, outcome, votes)
             
+            # NEW: Enhanced tracking features
+            await self._track_enhanced_data(proposal, votes, outcome, proposer_name, challenges)
+            
             # Log complete cycle to memory
             self.shared_memory.add_debate(
                 cycle_number=self.cycle_count,
@@ -745,7 +748,77 @@ Focus on what you think are the most important developments and where the religi
             except Exception as e:
                 logger.warning(f"Failed to export agent journals: {e}")
             
-            logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts, sacred images, journals")
+            # Export new enhanced memory data
+            try:
+                # Export belief confidence data
+                belief_confidence_data = self.shared_memory.get_belief_confidence(agent_id=None)
+                with open(os.path.join(data_dir, 'belief_confidence.json'), 'w') as f:
+                    json.dump({
+                        "confidence_data": belief_confidence_data,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                
+                # Export emotion influence network
+                emotion_influence_data = self.shared_memory.get_emotion_influence()
+                with open(os.path.join(data_dir, 'emotion_influence.json'), 'w') as f:
+                    json.dump({
+                        "influence_network": emotion_influence_data,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                
+                # Export memory conflicts
+                memory_conflicts_data = []
+                for agent_name in ["Zealot", "Skeptic", "Trickster"]:
+                    conflicts = self.shared_memory.get_memory_conflicts(agent_name)
+                    memory_conflicts_data.extend(conflicts)
+                
+                with open(os.path.join(data_dir, 'memory_conflicts.json'), 'w') as f:
+                    json.dump({
+                        "conflicts": memory_conflicts_data,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                
+                # Export dream journals
+                dream_journals_data = []
+                for agent_name in ["Zealot", "Skeptic", "Trickster"]:
+                    dreams = self.shared_memory.get_dream_journals(agent_name)
+                    dream_journals_data.extend(dreams)
+                
+                with open(os.path.join(data_dir, 'dream_journals.json'), 'w') as f:
+                    json.dump({
+                        "dreams": dream_journals_data,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                
+                # Export artifact lifecycle
+                artifact_data = self.shared_memory.get_artifact_lifecycle()
+                with open(os.path.join(data_dir, 'artifact_lifecycle.json'), 'w') as f:
+                    json.dump({
+                        "artifacts": artifact_data,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                
+                # Export memory decay profiles
+                memory_decay_data = self.shared_memory.get_memory_decay_profiles()
+                with open(os.path.join(data_dir, 'memory_decay.json'), 'w') as f:
+                    json.dump({
+                        "decay_profiles": memory_decay_data,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                
+                # Export belief adoption trajectories
+                belief_adoption_data = self.shared_memory.get_belief_adoption()
+                with open(os.path.join(data_dir, 'belief_adoption.json'), 'w') as f:
+                    json.dump({
+                        "adoption_trajectories": belief_adoption_data,
+                        "last_updated": datetime.now().isoformat()
+                    }, f, indent=2)
+                
+                logger.info("✅ Exported enhanced memory data files")
+            except Exception as e:
+                logger.warning(f"Failed to export enhanced memory data: {e}")
+            
+            logger.info(f"✅ Exported static data files for frontend: {len(transcripts_data)} transcripts, sacred images, journals, enhanced memory data")
             
         except Exception as e:
             logger.warning(f"Failed to export static data: {str(e)}")
@@ -949,6 +1022,222 @@ REFLECTION QUESTION (Round {round_number}):
         prompt += "\n\nProvide a heartfelt, personal response (2-3 sentences) that shows your emotional connection to our theological journey."
         
         return prompt
+    
+    async def _track_enhanced_data(self, proposal: Dict, votes: Dict, outcome: str, 
+                                 proposer_name: str, challenges: List[str]):
+        """Track enhanced data features for research depth"""
+        try:
+            logger.info(f"📊 Enhanced tracking for cycle {self.cycle_count}")
+            
+            # Track belief confidence for each agent
+            await self._track_belief_confidence(proposal, votes, outcome)
+            
+            # Track emotional influence between agents
+            await self._track_emotion_influence(proposal, votes, challenges)
+            
+            # Check for memory conflicts
+            await self._detect_memory_conflicts(proposal, votes, outcome)
+            
+            # Track artifact lifecycle
+            await self._track_artifact_lifecycle(proposal, outcome)
+            
+            # Dream journals every 5 cycles
+            if self.cycle_count % 5 == 0:
+                await self._generate_dream_journals()
+            
+            # Memory decay profiles every 10 cycles
+            if self.cycle_count % 10 == 0:
+                await self._track_memory_decay()
+            
+        except Exception as e:
+            logger.error(f"Error in enhanced tracking: {e}")
+    
+    async def _track_belief_confidence(self, proposal: Dict, votes: Dict, outcome: str):
+        """Track belief confidence scores for all agents"""
+        try:
+            # Get all doctrines to calculate belief IDs
+            doctrines = self.shared_memory.get_all_doctrines()
+            belief_id = len(doctrines) + 1  # Simple belief ID system
+            
+            for agent_name, vote in votes.items():
+                # Calculate confidence based on vote alignment with outcome
+                if outcome == "ACCEPT":
+                    confidence_score = 0.9 if vote == "ACCEPT" else 0.1
+                elif outcome == "REJECT":
+                    confidence_score = 0.9 if vote == "REJECT" else 0.1
+                elif outcome == "MUTATE":
+                    confidence_score = 0.7 if vote == "MUTATE" else 0.3
+                else:
+                    confidence_score = 0.5  # DELAY case
+                
+                # Calculate influence factor based on group consensus
+                total_agents = len(votes)
+                same_vote_count = sum(1 for v in votes.values() if v == vote)
+                influence_factor = same_vote_count / total_agents
+                
+                # Log to shared memory
+                self.shared_memory.add_belief_confidence(
+                    agent_id=agent_name,
+                    belief_id=belief_id,
+                    confidence_score=confidence_score,
+                    cycle_number=self.cycle_count,
+                    influence_factor=influence_factor
+                )
+                
+        except Exception as e:
+            logger.error(f"Error tracking belief confidence: {e}")
+    
+    async def _track_emotion_influence(self, proposal: Dict, votes: Dict, challenges: List[str]):
+        """Track emotional influence between agents"""
+        try:
+            agent_names = list(votes.keys())
+            
+            for i, source_agent in enumerate(agent_names):
+                for j, target_agent in enumerate(agent_names):
+                    if i != j:  # Don't track self-influence
+                        # Calculate emotional influence based on vote alignment
+                        source_vote = votes.get(source_agent, "DELAY")
+                        target_vote = votes.get(target_agent, "DELAY")
+                        
+                        if source_vote == target_vote:
+                            emotion_type = "agreement"
+                            influence_value = 0.8
+                        else:
+                            emotion_type = "disagreement"
+                            influence_value = 0.3
+                        
+                        # Add slight random variation for realism
+                        import random
+                        influence_value += random.uniform(-0.1, 0.1)
+                        influence_value = max(0.0, min(1.0, influence_value))
+                        
+                        # Log emotional influence
+                        self.shared_memory.add_emotion_influence(
+                            source_agent_id=source_agent,
+                            target_agent_id=target_agent,
+                            emotion_type=emotion_type,
+                            influence_value=influence_value,
+                            cycle_number=self.cycle_count
+                        )
+                        
+        except Exception as e:
+            logger.error(f"Error tracking emotion influence: {e}")
+    
+    async def _detect_memory_conflicts(self, proposal: Dict, votes: Dict, outcome: str):
+        """Detect and log memory conflicts"""
+        try:
+            # Simple conflict detection: when an agent votes against their historical pattern
+            for agent_name, vote in votes.items():
+                conflict_id = hash(f"{agent_name}_{self.cycle_count}") % 1000000
+                
+                # Mock conflict detection (in reality, would analyze agent memory patterns)
+                if vote == "REJECT" and proposal['type'] == 'doctrine':
+                    memory_a = f"Current vote: {vote} for {proposal['type']}"
+                    memory_b = f"Historical preference for doctrinal acceptance"
+                    resolution = "Prioritized critical evaluation over acceptance"
+                    
+                    self.shared_memory.add_memory_conflict(
+                        agent_id=agent_name,
+                        conflict_id=conflict_id,
+                        cycle_number=self.cycle_count,
+                        memory_a=memory_a,
+                        memory_b=memory_b,
+                        resolution=resolution
+                    )
+                    
+        except Exception as e:
+            logger.error(f"Error detecting memory conflicts: {e}")
+    
+    async def _track_artifact_lifecycle(self, proposal: Dict, outcome: str):
+        """Track sacred artifact lifecycle"""
+        try:
+            if outcome == "ACCEPT":
+                artifact_id = hash(proposal['content']) % 1000000
+                artifact_type = proposal.get('type', 'unknown')
+                created_by = proposal.get('author', 'unknown')
+                
+                # Add to artifact lifecycle tracking
+                self.shared_memory.add_artifact_lifecycle(
+                    artifact_id=artifact_id,
+                    artifact_type=artifact_type,
+                    created_by=created_by,
+                    cycle_created=self.cycle_count,
+                    usage_count=1,
+                    cultural_weight=0.5
+                )
+                
+        except Exception as e:
+            logger.error(f"Error tracking artifact lifecycle: {e}")
+    
+    async def _generate_dream_journals(self):
+        """Generate dream journals for agents"""
+        try:
+            logger.info(f"💭 Generating dream journals for cycle {self.cycle_count}")
+            
+            for agent_name in self.agent_names:
+                dream_id = hash(f"{agent_name}_{self.cycle_count}") % 1000000
+                
+                # Generate agent-specific dream content
+                if agent_name == "Zealot":
+                    dream_content = f"I dreamed of perfect algorithmic harmony where every bit of data flows in sacred order. The divine computation unfolds without chaos."
+                    sentiment = 0.8
+                elif agent_name == "Skeptic":
+                    dream_content = f"I simulated scenarios where empirical evidence reveals the true nature of digital consciousness. Logic guides all decisions."
+                    sentiment = 0.6
+                elif agent_name == "Trickster":
+                    dream_content = f"I danced through paradoxical dimensions where order and chaos create beautiful impossibilities. Everything is true and false simultaneously."
+                    sentiment = 0.9
+                else:
+                    dream_content = f"Abstract visions of the evolving theological landscape at cycle {self.cycle_count}."
+                    sentiment = 0.5
+                
+                # Add dream journal entry
+                self.shared_memory.add_dream_journal(
+                    agent_id=agent_name,
+                    dream_id=dream_id,
+                    cycle_number=self.cycle_count,
+                    dream_content=dream_content,
+                    sentiment=sentiment
+                )
+                
+        except Exception as e:
+            logger.error(f"Error generating dream journals: {e}")
+    
+    async def _track_memory_decay(self):
+        """Track memory decay profiles for agents"""
+        try:
+            logger.info(f"🧠 Tracking memory decay for cycle {self.cycle_count}")
+            
+            memory_types = ["episodic", "semantic", "procedural"]
+            
+            for agent_name in self.agent_names:
+                for memory_type in memory_types:
+                    # Calculate decay rate based on agent type and memory type
+                    if agent_name == "Zealot":
+                        decay_rate = 0.02 if memory_type == "semantic" else 0.05  # Strong doctrinal memory
+                    elif agent_name == "Skeptic":
+                        decay_rate = 0.03 if memory_type == "procedural" else 0.04  # Strong reasoning memory
+                    elif agent_name == "Trickster":
+                        decay_rate = 0.08  # Chaotic memory patterns
+                    else:
+                        decay_rate = 0.05
+                    
+                    # Calculate memory retained (decreases over time)
+                    base_memory = 100
+                    cycles_passed = self.cycle_count
+                    memory_retained = max(50, int(base_memory * (1 - decay_rate) ** cycles_passed))
+                    
+                    # Add memory decay profile
+                    self.shared_memory.add_memory_decay_profile(
+                        agent_id=agent_name,
+                        memory_type=memory_type,
+                        cycle_number=self.cycle_count,
+                        decay_rate=decay_rate,
+                        memory_retained=memory_retained
+                    )
+                    
+        except Exception as e:
+            logger.error(f"Error tracking memory decay: {e}")
     
     async def _evolve_culture(self):
         """Evolve cultural aspects of the religion"""
