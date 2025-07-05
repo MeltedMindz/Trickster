@@ -14,3 +14,5 @@
 2025-07-04 02:25:40,107 - ERROR - Failed to generate response for Skeptic: All 3 API request attempts failed
 2025-07-04 05:16:14,753 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
 2025-07-04 05:16:14,753 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-05 06:34:11,303 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-05 06:34:11,303 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
