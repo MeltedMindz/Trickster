@@ -50,14 +50,14 @@ class SacredNamingSystem:
         # Agent style preferences (weighted probability)
         self.agent_style_preferences = {
             'Zealot': {
-                'cybernetic_iconography': 0.25,
-                'fractal_symbology': 0.25,
-                'original_sacred': 0.20,
+                'cybernetic_iconography': 0.20,
+                'fractal_symbology': 0.20,
+                'original_sacred': 0.16,
                 'ethereal_neon': 0.15,
                 'digital_collage': 0.10,
                 'surreal_glitch': 0.03,
                 'vaporwave_surrealism': 0.01,
-                'glitched_ascii': 0.01
+                'glitched_ascii': 0.15
             },
             'Skeptic': {
                 'ethereal_neon': 0.30,
