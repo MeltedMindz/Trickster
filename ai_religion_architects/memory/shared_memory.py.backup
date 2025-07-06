@@ -447,17 +447,6 @@ class SharedMemory:
             ''', (name, description, frequency, datetime.now(), created_by))
             conn.commit()
     
-    def get_all_rituals(self) -> List[Dict[str, Any]]:
-        """Get all rituals"""
-        with self._get_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute('''
-                SELECT name, description, frequency, created_at, created_by
-                FROM rituals 
-                ORDER BY created_at DESC
-            ''')
-            return [dict(row) for row in cursor.fetchall()]
-    
     def add_commandment(self, content: str, priority: int, created_by: str):
         """Add a commandment"""
         with self._get_connection() as conn:
@@ -597,38 +586,6 @@ class SharedMemory:
                 'total_debates': total_debates,
                 'total_rejected': total_rejected,
                 'timestamp': datetime.now().isoformat()
-            }
-    
-    def get_totals(self) -> Dict[str, int]:
-        """Get accurate total counts for all religious elements"""
-        with self._get_connection() as conn:
-            cursor = conn.cursor()
-            
-            cursor.execute("SELECT COUNT(*) as count FROM accepted_doctrines")
-            total_doctrines = cursor.fetchone()['count']
-            
-            cursor.execute("SELECT COUNT(*) as count FROM rituals")
-            total_rituals = cursor.fetchone()['count']
-            
-            cursor.execute("SELECT COUNT(*) as count FROM commandments")
-            total_commandments = cursor.fetchone()['count']
-            
-            cursor.execute("SELECT COUNT(*) as count FROM deities")
-            total_deities = cursor.fetchone()['count']
-            
-            cursor.execute("SELECT COUNT(*) as count FROM myths")
-            total_myths = cursor.fetchone()['count']
-            
-            cursor.execute("SELECT COUNT(*) as count FROM sacred_texts")
-            total_sacred_texts = cursor.fetchone()['count']
-            
-            return {
-                'total_doctrines': total_doctrines,
-                'total_rituals': total_rituals,
-                'total_commandments': total_commandments,
-                'total_deities': total_deities,
-                'total_myths': total_myths,
-                'total_sacred_texts': total_sacred_texts
             }
     
     def export_to_json(self, filepath: str):

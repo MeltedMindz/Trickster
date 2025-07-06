@@ -145,9 +145,10 @@ class SacredArchivePopup {
             });
         }
 
-        // Add rituals
-        if (this.religionData.rituals) {
-            this.religionData.rituals.forEach((ritual, index) => {
+        // Add rituals - use all_rituals if available, otherwise fall back to rituals
+        const rituals = this.religionData.all_rituals || this.religionData.rituals;
+        if (rituals) {
+            rituals.forEach((ritual, index) => {
                 timeline.push({
                     type: 'ritual',
                     name: ritual.name,

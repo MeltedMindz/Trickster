@@ -558,6 +558,8 @@ Focus on what you think are the most important developments and where the religi
             
             # Get current religion state
             current_state = self.shared_memory.get_current_state()
+            # Get accurate total counts
+            totals = self.shared_memory.get_totals()
             
             # Export main religion state
             religion_data = {
@@ -565,14 +567,15 @@ Focus on what you think are the most important developments and where the religi
                 "total_cycles": self.shared_memory.get_current_cycle_number(),
                 "cycle_count": self.cycle_count,
                 "total_debates": current_state.get('total_debates', 0),
-                "total_doctrines": len(current_state.get('accepted_doctrines', [])),
-                "total_deities": len(current_state.get('deities', [])),
-                "total_rituals": len(current_state.get('rituals', [])),
-                "total_commandments": len(current_state.get('commandments', [])),
+                "total_doctrines": totals.get('total_doctrines', 0),
+                "total_deities": totals.get('total_deities', 0),
+                "total_rituals": totals.get('total_rituals', 0),
+                "total_commandments": totals.get('total_commandments', 0),
                 "last_updated": datetime.now().isoformat(),
                 "accepted_doctrines": current_state.get('accepted_doctrines', []),
                 "deities": current_state.get('deities', []),
-                "rituals": current_state.get('rituals', []),
+                "rituals": current_state.get('rituals', []),  # Keep recent 5 for main display
+                "all_rituals": self.shared_memory.get_all_rituals(),  # Export all rituals for archive
                 "commandments": current_state.get('commandments', [])
             }
             
