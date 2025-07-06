@@ -1,4 +1,16 @@
 {
-  "artifacts": [],
-  "last_updated": "2025-07-06T02:34:13.835859"
+  "artifacts": [
+    {
+      "id": 1,
+      "artifact_id": 667787,
+      "artifact_type": "belief",
+      "created_by": "Skeptic",
+      "cycle_created": 64,
+      "cycle_retired": null,
+      "usage_count": 1,
+      "cultural_weight": 0.5,
+      "timestamp": "2025-07-06 03:34:13.715709"
+    }
+  ],
+  "last_updated": "2025-07-06T03:34:28.800072"
 }
