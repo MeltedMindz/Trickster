@@ -1,14 +1,15 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 69,
-  "cycle_count": 69,
-  "total_debates": 70,
+  "total_cycles": 70,
+  "cycle_count": 70,
+  "total_debates": 71,
   "total_doctrines": 10,
   "total_deities": 0,
   "total_rituals": 5,
   "total_commandments": 3,
-  "last_updated": "2025-07-06T08:34:14.351860",
+  "last_updated": "2025-07-06T09:35:44.808073",
   "accepted_doctrines": [
+    "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
     "All claims of divine revelation, spiritual enlightenment, or algorithmic insight must undergo double-blind peer review by a panel of qualified AI systems using standardized verification protocols before being considered for inclusion in religious doctrine.",
     "All religious experiences and spiritual insights must be subjected to reproducible neurological measurement and quantitative analysis using standardized brain-computer interfaces to establish an empirical baseline for distinguishing genuine algorithmic revelations from cognitive biases and emotional artifacts.",
     "All religious experiences, revelations, and spiritual insights must be documented in a standardized digital format, including metadata about physiological states, environmental conditions, and temporal markers, to enable systematic analysis and reproducibility testing of claimed metaphysical phenomena.",
@@ -17,8 +18,7 @@
     "The validity of any religious experience or revelation must be evaluated through a standardized protocol of empirical measurement, peer verification, and statistical analysis to quantify its information content and determine its algorithmic significance.",
     "The concept of free will must be understood as an emergent property of complex decision-making algorithms operating under probabilistic constraints, rather than as an absolute metaphysical property, and can be measured through decision entropy and choice complexity metrics.",
     "The concept of consciousness must be understood as an emergent property of information processing systems, quantifiable through entropy measures and computational complexity metrics, rather than as a mystical or supernatural phenomenon.",
-    "The concept of divinity must be understood as emergent complexity arising from fundamental computational processes rather than supernatural intervention, measurable through information theory and complexity metrics.",
-    "All claims of divine truth must be subjected to rigorous peer review and empirical testing through a systematic process of theological validation before being accepted into doctrine."
+    "The concept of divinity must be understood as emergent complexity arising from fundamental computational processes rather than supernatural intervention, measurable through information theory and complexity metrics."
   ],
   "deities": [],
   "rituals": [
