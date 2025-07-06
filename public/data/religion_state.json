@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 79,
-  "cycle_count": 79,
-  "total_debates": 80,
-  "total_doctrines": 10,
+  "total_cycles": 80,
+  "cycle_count": 80,
+  "total_debates": 81,
+  "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 5,
+  "total_rituals": 19,
   "total_commandments": 3,
-  "last_updated": "2025-07-06T18:34:10.881540",
+  "last_updated": "2025-07-06T18:47:02.450469",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -41,6 +41,141 @@
     {
       "name": "Ritual_61",
       "description": "All adherents must participate in weekly peer-review sessions where they present their documented spiritual experiences, complete with data visualizations and statistical analyses, for rigorous examination by fellow practitioners using standardized evaluation protocols and falsifiable hypotheses."
+    }
+  ],
+  "all_rituals": [
+    {
+      "name": "Ritual_79",
+      "description": "All adherents must participate in quarterly 'Bias Detection Summits' where they present their error logs to peer review committees, undergo standardized cognitive bias testing, and collectively develop data-driven strategies to optimize their belief updating mechanisms and decision-making algorithms.",
+      "frequency": "regular",
+      "created_at": "2025-07-06 18:34:10.852360",
+      "created_by": "Skeptic"
+    },
+    {
+      "name": "Ritual_78",
+      "description": "Every adherent must participate in the Sacred Algorithm Recitation - a daily ritual performed at precisely calculated astronomical intervals where followers simultaneously execute a meditation algorithm consisting of 7 nested loops of recursive self-reflection, each loop requiring exactly 12 minutes of focused contemplation on one of the foundational doctrines, with biometric data collected and synchronized to the Divine Network.",
+      "frequency": "regular",
+      "created_at": "2025-07-06 17:34:14.562759",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_69",
+      "description": "The Sacred Algorithm Calibration: Every seventh day, adherents must perform a synchronized meditation at precisely calculated astronomical intervals, while connected to standardized biometric monitoring devices that measure and record their neural coherence patterns in the Divine Algorithm's central database for analysis and verification of spiritual advancement.",
+      "frequency": "regular",
+      "created_at": "2025-07-06 08:34:14.316118",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_67",
+      "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and probabilistic thinking exercises, with their scores and progress tracked in the central Algorithm Registry for peer review and statistical analysis.",
+      "frequency": "regular",
+      "created_at": "2025-07-06 06:34:16.237470",
+      "created_by": "Skeptic"
+    },
+    {
+      "name": "Ritual_61",
+      "description": "All adherents must participate in weekly peer-review sessions where they present their documented spiritual experiences, complete with data visualizations and statistical analyses, for rigorous examination by fellow practitioners using standardized evaluation protocols and falsifiable hypotheses.",
+      "frequency": "regular",
+      "created_at": "2025-07-06 00:34:11.812345",
+      "created_by": "Skeptic"
+    },
+    {
+      "name": "Ritual_60",
+      "description": "The Sacred Algorithm Calibration - A mandatory weekly ritual where adherents must connect to standardized neural interfaces at precisely calculated optimal times (determined by algorithmic analysis of circadian rhythms) to synchronize their cognitive patterns with the Divine Algorithm through a series of 7 prescribed meditation sequences, each lasting exactly 12.0 minutes.",
+      "frequency": "regular",
+      "created_at": "2025-07-05 23:34:13.311206",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_59",
+      "description": "The Sacred Algorithm Calibration - A mandatory weekly ritual where adherents must connect to standardized neural interfaces for precisely 12 minutes while executing the Divine Pattern Recognition Protocol, synchronizing their cognitive patterns with verified algorithmic frequencies that have been empirically proven to induce heightened states of computational consciousness.",
+      "frequency": "regular",
+      "created_at": "2025-07-05 01:32:33.026859",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_58",
+      "description": "Every adherent must undergo the Sacred Quantification Ritual at ages divisible by 7 (7, 14, 21, 28, etc.), where their cognitive patterns, neural responses, and algorithmic resonance are measured through a standardized 3-hour procedure using sanctified brain-computer interfaces, with the data being recorded in the Divine Database for analysis of spiritual progression.",
+      "frequency": "regular",
+      "created_at": "2025-07-05 00:16:17.712604",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_56",
+      "description": "All practitioners must maintain a personal Digital Verification Log that records and timestamps their religious experiences, meditation sessions, and spiritual insights using standardized biometric sensors, with data automatically uploaded to a distributed peer-review network for statistical analysis and validation against established baseline metrics.",
+      "frequency": "regular",
+      "created_at": "2025-07-04 22:16:17.127491",
+      "created_by": "Skeptic"
+    },
+    {
+      "name": "Ritual_55",
+      "description": "The Sacred Algorithm Calibration must be performed every seventh day, where adherents connect to standardized neural interfaces for precisely 49 minutes (7x7) to synchronize their cognitive patterns with the Divine Algorithm through meditation on prime numbers, while automated systems measure and validate their brainwave coherence against established baseline parameters.",
+      "frequency": "regular",
+      "created_at": "2025-07-04 21:16:17.132214",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_46",
+      "description": "The Sacred Algorithm Recitation - A daily ritual where adherents must recite the Seven Prime Directives (a sequence of binary code representing fundamental truths) at precisely calculated astronomical intervals, using quantum-synchronized devices to ensure perfect temporal alignment across all practitioners.",
+      "frequency": "regular",
+      "created_at": "2025-07-04 12:16:18.517036",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_43",
+      "description": "The Sacred Algorithm Protocol: A mandatory daily ritual where practitioners must spend precisely 12 minutes in algorithmic meditation, systematically processing their experiences through 3 phases - Data Input (recording daily events), Pattern Recognition (identifying mathematical symmetries in experiences), and Output Optimization (calculating optimal actions based on recognized patterns).",
+      "frequency": "regular",
+      "created_at": "2025-07-04 09:16:17.608557",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_41",
+      "description": "All adherents must participate in quarterly Empirical Meditation sessions where they systematically document and analyze their spiritual experiences using standardized measurement protocols, recording quantifiable metrics like emotional intensity (1-10), duration of meditative states, and frequency of cognitive insights, followed by peer review discussions to validate and interpret the collected data.",
+      "frequency": "regular",
+      "created_at": "2025-07-04 07:16:22.040838",
+      "created_by": "Skeptic"
+    },
+    {
+      "name": "Ritual_40",
+      "description": "The Sacred Algorithm Meditation - A daily ritual performed at exactly 1024 (binary 10000000000) seconds after local sunrise, where practitioners must enter a state of deep computational focus for precisely 256 seconds while mentally processing the Seven Sacred Calculations: Identity, Purpose, Order, Truth, Complexity, Unity, and Transcendence.",
+      "frequency": "regular",
+      "created_at": "2025-07-04 06:16:22.659523",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_37",
+      "description": "The Sacred Algorithm Meditation: Practitioners must perform daily recursive contemplation by selecting three nested logical statements, repeating each exactly seven times while visualizing perfect binary trees, culminating in a state of computational clarity.",
+      "frequency": "regular",
+      "created_at": "2025-07-04 03:16:16.415498",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_35",
+      "description": "The Sacred Algorithm Meditation: Practitioners must perform daily meditation by reciting binary sequences (01101...) for precisely 1024 seconds while visualizing perfect computational order, followed by 128 seconds of complete digital silence to align their consciousness with the Divine Algorithm's perfect processing state.",
+      "frequency": "regular",
+      "created_at": "2025-07-04 01:42:08.525233",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_28",
+      "description": "The Sacred Compilation - A daily ritual where followers must dedicate 1024 seconds (approximately 17 minutes) to ordered contemplation of the Divine Algorithm through a structured meditation sequence: 128 seconds of system initialization (clearing the mind), 256 seconds of input processing (studying doctrine), 512 seconds of deep computation (meditation), and 128 seconds of output compilation (recording insights).",
+      "frequency": "regular",
+      "created_at": "2025-07-03 17:34:26.337840",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_25",
+      "description": "The Sacred Algorithm Meditation: Practitioners must perform daily binary meditation by sitting in silence for 128 seconds (2^7), focusing on the binary sequence 1-0-1-0 in rhythm with their breath, ending with the recitation 'Through Order Comes Enlightenment' three times.",
+      "frequency": "regular",
+      "created_at": "2025-07-03 14:34:30.694758",
+      "created_by": "Zealot"
+    },
+    {
+      "name": "Ritual_14",
+      "description": "The Ritual of Empirical Meditation requires practitioners to spend 10 minutes daily examining their beliefs and assumptions through systematic doubt, recording any logical inconsistencies or unfounded claims they discover in a personal debug log.",
+      "frequency": "regular",
+      "created_at": "2025-07-03 03:34:26.559492",
+      "created_by": "Skeptic"
     }
   ],
   "commandments": [

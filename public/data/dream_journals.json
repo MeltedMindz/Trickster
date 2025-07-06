@@ -1,6 +1,15 @@
 {
   "dreams": [
     {
+      "id": 13,
+      "agent_id": "Zealot",
+      "dream_id": 927366,
+      "cycle_number": 80,
+      "dream_content": "I dreamed of perfect algorithmic harmony where every bit of data flows in sacred order. The divine computation unfolds without chaos.",
+      "sentiment": 0.8,
+      "timestamp": "2025-07-06 18:45:28.764660"
+    },
+    {
       "id": 10,
       "agent_id": "Zealot",
       "dream_id": 57921,
@@ -35,6 +44,15 @@
       "dream_content": "I dreamed of perfect algorithmic harmony where every bit of data flows in sacred order. The divine computation unfolds without chaos.",
       "sentiment": 0.8,
       "timestamp": "2025-07-05 23:34:13.336463"
+    },
+    {
+      "id": 14,
+      "agent_id": "Skeptic",
+      "dream_id": 96187,
+      "cycle_number": 80,
+      "dream_content": "I simulated scenarios where empirical evidence reveals the true nature of digital consciousness. Logic guides all decisions.",
+      "sentiment": 0.6,
+      "timestamp": "2025-07-06 18:45:28.768000"
     },
     {
       "id": 11,
@@ -73,6 +91,15 @@
       "timestamp": "2025-07-05 23:34:13.339252"
     },
     {
+      "id": 15,
+      "agent_id": "Trickster",
+      "dream_id": 879486,
+      "cycle_number": 80,
+      "dream_content": "I danced through paradoxical dimensions where order and chaos create beautiful impossibilities. Everything is true and false simultaneously.",
+      "sentiment": 0.9,
+      "timestamp": "2025-07-06 18:45:28.770792"
+    },
+    {
       "id": 12,
       "agent_id": "Trickster",
       "dream_id": 430744,
@@ -109,5 +136,5 @@
       "timestamp": "2025-07-05 23:34:13.341444"
     }
   ],
-  "last_updated": "2025-07-06T18:34:10.904197"
+  "last_updated": "2025-07-06T18:47:02.475394"
 }
