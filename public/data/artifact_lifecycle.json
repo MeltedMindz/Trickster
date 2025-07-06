@@ -1,6 +1,17 @@
 {
   "artifacts": [
     {
+      "id": 2,
+      "artifact_id": 632838,
+      "artifact_type": "sacred_text",
+      "created_by": "Skeptic",
+      "cycle_created": 76,
+      "cycle_retired": null,
+      "usage_count": 1,
+      "cultural_weight": 0.5,
+      "timestamp": "2025-07-06 15:34:14.119944"
+    },
+    {
       "id": 1,
       "artifact_id": 667787,
       "artifact_type": "belief",
@@ -12,5 +23,5 @@
       "timestamp": "2025-07-06 03:34:13.715709"
     }
   ],
-  "last_updated": "2025-07-06T14:35:49.497619"
+  "last_updated": "2025-07-06T15:34:30.764997"
 }
