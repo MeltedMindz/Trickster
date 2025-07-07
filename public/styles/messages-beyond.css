@@ -201,6 +201,28 @@
     gap: 10px;
 }
 
+.modal-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.refresh-btn {
+    background: rgba(74, 144, 226, 0.2);
+    border: 1px solid rgba(74, 144, 226, 0.4);
+    color: #4a90e2;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+    background: rgba(74, 144, 226, 0.3);
+    border-color: #4a90e2;
+}
+
 .modal-close {
     background: none;
     border: none;

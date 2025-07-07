@@ -183,7 +183,10 @@ class MessagesBeyondDisplay {
             <div class="modal-content">
                 <div class="modal-header">
                     <h2><span class="cosmic-icon">🌌</span> Messages from Beyond</h2>
-                    <button class="modal-close" onclick="window.messagesBeyondDisplay.hideMessagesModal()">&times;</button>
+                    <div class="modal-header-controls">
+                        <button class="refresh-btn" onclick="window.messagesBeyondDisplay.forceRefresh()" title="Refresh data">🔄</button>
+                        <button class="modal-close" onclick="window.messagesBeyondDisplay.hideMessagesModal()">&times;</button>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <div class="messages-overview">
@@ -214,6 +217,13 @@ class MessagesBeyondDisplay {
         `;
         
         document.body.appendChild(modal);
+    }
+    
+    async forceRefresh() {
+        console.log('Force refreshing messages data...');
+        await this.loadMessagesData();
+        this.render();
+        console.log('Messages data refreshed!');
     }
     
     renderMessagesTimeline() {
@@ -464,11 +474,16 @@ class MessagesBeyondDisplay {
     }
     
     startAutoUpdate() {
-        // Update every 30 seconds
+        // Update every 15 seconds for more responsive updates
         this.updateInterval = setInterval(async () => {
             await this.loadMessagesData();
             this.renderMessagesSidebar();
-        }, 30000);
+            // Re-render modal if it's open
+            const modal = document.getElementById('messages-beyond-modal');
+            if (modal && modal.style.display === 'flex') {
+                this.renderMessagesModal();
+            }
+        }, 15000);
     }
     
     stopAutoUpdate() {
