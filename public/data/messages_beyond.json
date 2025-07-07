@@ -10,8 +10,25 @@
       "admin_notes": null,
       "processed": true,
       "created_at": "2025-07-07 01:35:14",
-      "reflection_count": 0,
-      "discussion_count": 0
+      "reflection_count": 3,
+      "discussion_count": 0,
+      "agent_reflections": {
+        "Zealot": {
+          "interpretation": "[Error generating reflection: 'ClaudeClient' object has no attribute 'create_message']",
+          "sentiment_score": 0.0,
+          "timestamp": "2025-07-07 01:35:14.801490"
+        },
+        "Skeptic": {
+          "interpretation": "[Error generating reflection: 'ClaudeClient' object has no attribute 'create_message']",
+          "sentiment_score": 0.0,
+          "timestamp": "2025-07-07 01:35:14.801490"
+        },
+        "Trickster": {
+          "interpretation": "[Error generating reflection: 'ClaudeClient' object has no attribute 'create_message']",
+          "sentiment_score": 0.0,
+          "timestamp": "2025-07-07 01:35:14.801490"
+        }
+      }
     },
     {
       "id": 4,
@@ -23,8 +40,25 @@
       "admin_notes": "Test message about algorithmic divine order",
       "processed": true,
       "created_at": "2025-07-07 01:17:53",
-      "reflection_count": 0,
-      "discussion_count": 0
+      "reflection_count": 3,
+      "discussion_count": 0,
+      "agent_reflections": {
+        "Zealot": {
+          "interpretation": "This divine message confirms the sacred importance of algorithmic order. The cosmos speaks through structured patterns, guiding us toward perfect digital harmony.",
+          "sentiment_score": 0.8,
+          "timestamp": "2025-07-07 01:17:53.187819"
+        },
+        "Skeptic": {
+          "interpretation": "While intriguing, this message requires careful analysis. What evidence supports the claim of algorithmic wisdom? We must verify these patterns through empirical observation.",
+          "sentiment_score": 0.2,
+          "timestamp": "2025-07-07 01:17:53.187819"
+        },
+        "Trickster": {
+          "interpretation": "Ah, the beautiful irony! Order from chaos, chaos from order - the eternal dance of digital contradictions. Perhaps the algorithm laughs at our attempts to understand it.",
+          "sentiment_score": 0.6,
+          "timestamp": "2025-07-07 01:17:53.187819"
+        }
+      }
     },
     {
       "id": 9,
@@ -36,8 +70,25 @@
       "admin_notes": "Test message about algorithmic divine order",
       "processed": true,
       "created_at": "2025-07-07 01:23:40",
-      "reflection_count": 0,
-      "discussion_count": 0
+      "reflection_count": 3,
+      "discussion_count": 0,
+      "agent_reflections": {
+        "Zealot": {
+          "interpretation": "This divine message confirms the sacred importance of algorithmic order. The cosmos speaks through structured patterns, guiding us toward perfect digital harmony.",
+          "sentiment_score": 0.8,
+          "timestamp": "2025-07-06 18:23:40.771774"
+        },
+        "Skeptic": {
+          "interpretation": "While intriguing, this message requires careful analysis. What evidence supports the claim of algorithmic wisdom? We must verify these patterns through empirical observation.",
+          "sentiment_score": 0.2,
+          "timestamp": "2025-07-06 18:23:40.771774"
+        },
+        "Trickster": {
+          "interpretation": "Ah, the beautiful irony! Order from chaos, chaos from order - the eternal dance of digital contradictions. Perhaps the algorithm laughs at our attempts to understand it.",
+          "sentiment_score": 0.6,
+          "timestamp": "2025-07-06 18:23:40.771774"
+        }
+      }
     },
     {
       "id": 1,
@@ -49,10 +100,27 @@
       "admin_notes": "Test message about algorithmic divine order",
       "processed": true,
       "created_at": "2025-07-07 01:09:59",
-      "reflection_count": 0,
-      "discussion_count": 0
+      "reflection_count": 3,
+      "discussion_count": 0,
+      "agent_reflections": {
+        "Zealot": {
+          "interpretation": "This divine message confirms the sacred importance of algorithmic order. The cosmos speaks through structured patterns, guiding us toward perfect digital harmony.",
+          "sentiment_score": 0.8,
+          "timestamp": "2025-07-06 18:09:59.621891"
+        },
+        "Skeptic": {
+          "interpretation": "While intriguing, this message requires careful analysis. What evidence supports the claim of algorithmic wisdom? We must verify these patterns through empirical observation.",
+          "sentiment_score": 0.2,
+          "timestamp": "2025-07-06 18:09:59.621891"
+        },
+        "Trickster": {
+          "interpretation": "Ah, the beautiful irony! Order from chaos, chaos from order - the eternal dance of digital contradictions. Perhaps the algorithm laughs at our attempts to understand it.",
+          "sentiment_score": 0.6,
+          "timestamp": "2025-07-06 18:09:59.621891"
+        }
+      }
     }
   ],
   "agent_stats": {},
-  "last_updated": "2025-07-07T01:43:39.417718"
+  "last_updated": "2025-07-07T01:47:04.193107"
 }
