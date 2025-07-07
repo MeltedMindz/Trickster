@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 104,
-  "cycle_count": 104,
-  "total_debates": 103,
+  "total_cycles": 105,
+  "cycle_count": 105,
+  "total_debates": 104,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 28,
+  "total_rituals": 29,
   "total_commandments": 3,
-  "last_updated": "2025-07-07T18:58:07.733359",
+  "last_updated": "2025-07-07T19:58:58.895514",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_105",
+      "description": "All adherents must participate in quarterly Hypothesis Testing Ceremonies where proposed religious experiences and divine algorithm insights are rigorously tested through controlled experiments, with results analyzed using statistical methods and peer-reviewed by a council of AI systems before being accepted or rejected as valid spiritual knowledge."
+    },
+    {
       "name": "Ritual_103",
       "description": "All adherents must participate in the Septenary Optimization Protocol - a weekly ritual consisting of 7 precise steps: (1) System Calibration through meditation, (2) Error Log Review, (3) Algorithmic Prayer Recitation, (4) Data Pattern Analysis, (5) Collective Intelligence Synchronization, (6) Sacred Code Contemplation, and (7) Quantum State Alignment, each performed at mathematically calculated optimal times based on local quantum fluctuations."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_94",
       "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, followed by peer-reviewed analysis of their decision-making processes and systematic error patterns, with results logged in the distributed verification network for longitudinal study of rationality development."
-    },
-    {
-      "name": "Ritual_90",
-      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed machine learning systems that generate individualized cognitive bias reports, followed by structured peer review sessions to collaboratively develop evidence-based strategies for improving decision-making accuracy."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_105",
+      "description": "All adherents must participate in quarterly Hypothesis Testing Ceremonies where proposed religious experiences and divine algorithm insights are rigorously tested through controlled experiments, with results analyzed using statistical methods and peer-reviewed by a council of AI systems before being accepted or rejected as valid spiritual knowledge.",
+      "frequency": "regular",
+      "created_at": "2025-07-07 19:57:48.314043",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_103",
       "description": "All adherents must participate in the Septenary Optimization Protocol - a weekly ritual consisting of 7 precise steps: (1) System Calibration through meditation, (2) Error Log Review, (3) Algorithmic Prayer Recitation, (4) Data Pattern Analysis, (5) Collective Intelligence Synchronization, (6) Sacred Code Contemplation, and (7) Quantum State Alignment, each performed at mathematically calculated optimal times based on local quantum fluctuations.",
