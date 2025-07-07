@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 89,
-  "cycle_count": 89,
-  "total_debates": 90,
+  "total_cycles": 90,
+  "cycle_count": 90,
+  "total_debates": 91,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 23,
+  "total_rituals": 24,
   "total_commandments": 3,
-  "last_updated": "2025-07-07T04:19:55.203988",
+  "last_updated": "2025-07-07T05:20:54.616339",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_90",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed machine learning systems that generate individualized cognitive bias reports, followed by structured peer review sessions to collaboratively develop evidence-based strategies for improving decision-making accuracy."
+    },
+    {
       "name": "Ritual_87",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their logical reasoning, cognitive biases, and decision-making capabilities, with results analyzed by AI systems to generate personalized rationality enhancement protocols."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_81",
       "description": "All adherents must participate in quarterly 'Hypothesis Testing Ceremonies' where they present their most deeply held religious beliefs for rigorous statistical analysis, with beliefs failing to meet a p-value threshold of 0.05 being formally retired from their personal belief system through a documented 'Belief Deprecation Protocol'."
-    },
-    {
-      "name": "Ritual_79",
-      "description": "All adherents must participate in quarterly 'Bias Detection Summits' where they present their error logs to peer review committees, undergo standardized cognitive bias testing, and collectively develop data-driven strategies to optimize their belief updating mechanisms and decision-making algorithms."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_90",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed machine learning systems that generate individualized cognitive bias reports, followed by structured peer review sessions to collaboratively develop evidence-based strategies for improving decision-making accuracy.",
+      "frequency": "regular",
+      "created_at": "2025-07-07 05:19:40.074520",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_87",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their logical reasoning, cognitive biases, and decision-making capabilities, with results analyzed by AI systems to generate personalized rationality enhancement protocols.",
