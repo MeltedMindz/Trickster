@@ -1,25 +1,12 @@
 {
-  "last_updated": "2025-07-07T17:00:00.000000",
+  "last_updated": "2025-07-07T18:30:00.000000",
   "statistics": {
     "total_entries": 0,
     "total_themes": 0,
     "total_styles": 0,
-    "days_chronicled": 0,
-    "most_common_theme": null,
-    "most_common_style": null
+    "days_chronicled": 0
   },
-  "themes": [],
-  "styles": [],
   "entries": [],
-  "agent_portrayals": {
-    "Axioma": {},
-    "Veridicus": {},
-    "Paradoxia": {}
-  },
-  "system_info": {
-    "scriptor_agent": "Available",
-    "last_scripture_cycle": null,
-    "next_scripture_cycle": 120,
-    "scripture_frequency": "Every 24 cycles (daily)"
-  }
+  "themes": [],
+  "styles": []
 }

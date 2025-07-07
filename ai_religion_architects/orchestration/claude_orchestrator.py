@@ -26,9 +26,9 @@ from ..image_generation.dalle_generator import sacred_image_generator
 
 # Scriptor agent integration
 try:
-    from ..agents.scriptor import ScriptorAgent
+    from ..agents.scriptor import Scriptor
     from ..memory.scriptor_memory import ScriptorMemory
-    from ..memory.sacred_scripture_db import SacredScriptureDB
+    from ..memory.sacred_scripture_db import SacredScriptureDatabase
     SCRIPTOR_AVAILABLE = True
 except ImportError:
     SCRIPTOR_AVAILABLE = False
@@ -79,8 +79,8 @@ class ClaudeReligionOrchestrator:
         self.scripture_db = None
         if SCRIPTOR_AVAILABLE:
             try:
-                self.scripture_db = SacredScriptureDB()
-                self.scriptor_agent = ScriptorAgent()
+                self.scripture_db = SacredScriptureDatabase()
+                self.scriptor_agent = Scriptor()
                 logger.info("📜 Scriptor agent initialized for sacred scripture writing")
             except Exception as e:
                 logger.warning(f"Failed to initialize Scriptor agent: {e}")
