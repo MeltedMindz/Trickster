@@ -21,7 +21,9 @@ class MessagesBeyondDisplay {
     
     async loadMessagesData() {
         try {
-            const response = await fetch('./data/messages_beyond.json');
+            // Add cache-busting parameter to force fresh data
+            const timestamp = new Date().getTime();
+            const response = await fetch(`./data/messages_beyond.json?t=${timestamp}`);
             if (response.ok) {
                 this.messagesData = await response.json();
             } else {
@@ -429,15 +431,31 @@ class MessagesBeyondDisplay {
     
     async loadMessageDetails(messageId, container) {
         try {
-            // In a real implementation, this would fetch detailed reflection data
-            // For now, show placeholder
-            container.innerHTML = `
-                <div class="message-reflections">
-                    <h4>Agent Interpretations</h4>
-                    <div class="reflection-placeholder">
-                        <p>Detailed agent reflections and discussions would be displayed here.</p>
-                        <p>This includes individual agent interpretations, group discussions, and theological impacts.</p>
+            // Find the message in our loaded data
+            const message = this.messagesData.messages.find(m => m.message_id === messageId);
+            
+            if (!message || !message.agent_reflections) {
+                container.innerHTML = `
+                    <div class="no-reflections">
+                        <p>No agent reflections available for this message.</p>
                     </div>
+                `;
+                return;
+            }
+
+            // Display the actual agent reflections
+            container.innerHTML = `
+                <div class="agent-reflections">
+                    <h4>Agent Interpretations</h4>
+                    ${Object.entries(message.agent_reflections).map(([agent, reflection]) => `
+                        <div class="agent-reflection">
+                            <div class="agent-reflection-header">
+                                <span class="agent-reflection-name">${agent}</span>
+                                <span class="sentiment-score sentiment-${this.getSentimentClass(reflection.sentiment_score)}">${reflection.sentiment_score?.toFixed(2) || 'N/A'}</span>
+                            </div>
+                            <div class="agent-reflection-text">${reflection.interpretation}</div>
+                        </div>
+                    `).join('')}
                 </div>
             `;
         } catch (error) {
