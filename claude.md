@@ -922,3 +922,306 @@ print(s.agent_style_preferences['Trickster']['glitched_ascii'])
 
 Expected output should include text exclusion language and ASCII art probability of 0.4 (40%).
 
+---
+
+## Messages from Beyond System - July 6, 2025
+
+### Overview
+The Messages from Beyond System enables manual input of external messages that agents interpret as communications from beyond their reality. This system provides controlled external influence on the AI religion's development through admin-managed message input and comprehensive agent reflection workflows.
+
+### System Architecture
+
+**Core Components:**
+1. **Admin Interface** - Manual message input with full control
+2. **Message Memory System** - Dedicated database storage and retrieval
+3. **Agent Reflection Engine** - Three-phase interpretation workflow
+4. **Orchestrator Integration** - Message-triggered reflection sessions
+5. **Frontend Visualization** - Timeline and agent response display
+
+### Database Schema
+
+**Five new tables added to religion_memory.db:**
+
+```sql
+-- Primary messages table
+CREATE TABLE messages_from_beyond (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message_id TEXT UNIQUE NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    content TEXT NOT NULL,
+    source_label TEXT DEFAULT 'Beyond',
+    cycle_number INTEGER,
+    admin_notes TEXT,
+    processed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Agent reflection responses
+CREATE TABLE message_reflections (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message_id TEXT NOT NULL,
+    agent_id TEXT NOT NULL,
+    reflection_text TEXT NOT NULL,
+    sentiment_score REAL,
+    theological_impact TEXT,
+    confidence_change REAL DEFAULT 0.0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Group discussion responses
+CREATE TABLE message_discussions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message_id TEXT NOT NULL,
+    discussion_round INTEGER NOT NULL,
+    agent_id TEXT NOT NULL,
+    response_text TEXT NOT NULL,
+    response_type TEXT DEFAULT 'interpretation',
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Cultural/doctrinal influences
+CREATE TABLE message_influences (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message_id TEXT NOT NULL,
+    influence_type TEXT NOT NULL,
+    description TEXT NOT NULL,
+    agent_affected TEXT,
+    magnitude REAL DEFAULT 0.5,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Processing status tracking
+CREATE TABLE message_processing (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message_id TEXT UNIQUE NOT NULL,
+    reflection_phase_complete BOOLEAN DEFAULT FALSE,
+    discussion_phase_complete BOOLEAN DEFAULT FALSE,
+    influence_analysis_complete BOOLEAN DEFAULT FALSE,
+    total_agent_responses INTEGER DEFAULT 0,
+    processing_started_at TIMESTAMP,
+    processing_completed_at TIMESTAMP
+);
+```
+
+### Admin Interface Usage
+
+**Command Line Interface:**
+```bash
+# Interactive message input
+python admin_message_interface.py interactive
+
+# Add message directly
+python admin_message_interface.py add "Your message content" --source "Source Label" --notes "Optional notes"
+
+# List recent messages
+python admin_message_interface.py list --limit 10
+
+# Show message details
+python admin_message_interface.py show <message_id>
+
+# Mark as processed
+python admin_message_interface.py process <message_id>
+
+# View system status
+python admin_message_interface.py status
+```
+
+**Interactive Mode Example:**
+```
+=== Add Message from Beyond ===
+📝 Enter message content: The algorithm whispers of order emerging from chaos.
+🏷️  Source label (default: Beyond): The Cosmic Network
+📋 Admin notes (optional): Test message about divine order
+🔄 Current cycle number (optional): 85
+✅ Message added with ID: a1b2c3d4-e5f6
+```
+
+### Agent Reflection Workflow
+
+**Three-Phase Processing:**
+
+1. **Individual Reflections Phase**
+   - Each agent (Zealot, Skeptic, Trickster) generates personal interpretation
+   - Claude API used for authentic agent personality responses
+   - Sentiment analysis and theological impact assessment
+   - Confidence change tracking (±0.3 range)
+
+2. **Group Discussion Phase**
+   - Three rounds of structured discussion:
+     * Round 1: "What are the most important implications?"
+     * Round 2: "How should we respond or act upon this?"
+     * Round 3: "What does this reveal about divine communication?"
+   - Agent responses classified as: interpretation, question, agreement, challenge
+
+3. **Influence Analysis Phase**
+   - Belief confidence changes applied to agent memories
+   - Theological shifts recorded in agent debate histories
+   - Consensus themes identified and stored in cultural memory
+   - Cultural artifacts created for significant influences
+
+### Agent Personality Responses
+
+**Zealot (Order/Authority Focus):**
+- Sees messages as divine commandments requiring obedience
+- Emphasizes implementation and proper hierarchical interpretation
+- Positive sentiment toward clear divine guidance
+- Confidence increases with authoritative messages
+
+**Skeptic (Evidence/Logic Focus):**
+- Examines messages for logical consistency and empirical content
+- Requests clarification and verification of claims
+- Cautious sentiment toward unverified communications
+- Confidence changes based on logical coherence
+
+**Trickster (Paradox/Creativity Focus):**
+- Finds ironic and paradoxical interpretations
+- Sees multiple meanings and hidden contradictions
+- Playful yet profound approach to interpretation
+- Confidence unchanged by apparent contradictions
+
+### Orchestrator Integration
+
+**Message Processing Hook:**
+- Checks for unprocessed messages every cycle
+- Can interrupt current cycles for urgent messages
+- Processes messages through complete reflection workflow
+- Updates agent memories with influences
+- Exports updated data for frontend display
+
+**Interruption Criteria:**
+- Messages containing urgent keywords (urgent, immediate, crisis)
+- Very short messages (under 50 characters) - command-like
+- Admin-flagged priority messages
+
+### Frontend Visualization
+
+**Components Added:**
+- `public/js/messages-beyond.js` - Message display system
+- `public/styles/messages-beyond.css` - Responsive styling
+- Sidebar indicator with cosmic icon (🌌)
+- Modal interface for timeline and agent responses
+
+**Features:**
+- Real-time message count with unprocessed indicator
+- Timeline view of all messages with status badges
+- Agent reflection summaries and sentiment analysis
+- Cultural impact visualization
+- Mobile-responsive design
+- Auto-refresh every 30 seconds
+
+**Frontend Integration:**
+```html
+<!-- Add to index.html head -->
+<link rel="stylesheet" href="styles/messages-beyond.css">
+
+<!-- Add to index.html body before closing -->
+<script src="js/messages-beyond.js"></script>
+```
+
+### Data Flow Example
+
+1. **Admin Input**: `python admin_message_interface.py interactive`
+2. **Message Storage**: Stored in `messages_from_beyond` table
+3. **Detection**: Orchestrator detects unprocessed message
+4. **Processing**: Three-phase reflection workflow triggered
+5. **Storage**: Reflections, discussions, influences stored
+6. **Export**: Data exported to `public/data/messages_beyond.json`
+7. **Display**: Frontend shows timeline and agent responses
+8. **Integration**: Agent memories updated with influences
+
+### Testing and Validation
+
+**Test Script:** `test_messages_beyond_system.py`
+- Tests complete database initialization
+- Validates message addition and retrieval
+- Tests mock reflection system
+- Verifies data export functionality
+- Confirms admin interface operations
+
+**Test Results:** ✅ All 7 test phases passed successfully
+
+### Configuration and Security
+
+**Environment Variables:**
+- Uses existing Claude API credentials
+- No additional API keys required
+- Database path configurable via Config.DB_PATH
+
+**Security Measures:**
+- Manual admin control prevents automated abuse
+- Message content sanitization
+- SQL injection protection via parameterized queries
+- No external API dependencies for message input
+
+### Future Enhancements
+
+**Planned Features:**
+- Message scheduling for delayed release
+- Batch message import from files
+- Advanced sentiment analysis
+- Agent personality evolution tracking
+- Message impact correlation analysis
+
+**Integration Opportunities:**
+- Webhook support for external systems
+- Email/SMS notifications for new messages
+- Advanced admin dashboard
+- Message template system
+- Automated message classification
+
+### Operational Procedures
+
+**Daily Operations:**
+1. Monitor unprocessed message count
+2. Review agent reflection quality
+3. Check for processing errors in logs
+4. Verify frontend display updates
+
+**Weekly Maintenance:**
+1. Archive old processed messages
+2. Analyze agent behavior patterns
+3. Review influence effectiveness
+4. Update message templates if needed
+
+**Emergency Procedures:**
+- Stop processing: Update message `processed = TRUE`
+- Clear stuck messages: Check `message_processing` table
+- Reset agent influences: Restore agent memory backups
+- System recovery: Use test script to verify functionality
+
+### File Structure
+
+```
+ai_religion_architects/
+├── memory/
+│   └── messages_beyond_memory.py     # Message storage/retrieval
+├── reflection/
+│   └── message_reflection.py         # Agent interpretation engine
+├── orchestration/
+│   └── message_orchestrator_integration.py  # Orchestrator hooks
+public/
+├── js/
+│   └── messages-beyond.js            # Frontend display
+├── styles/
+│   └── messages-beyond.css           # Responsive styling
+└── data/
+    └── messages_beyond.json          # Exported message data
+admin_message_interface.py            # Command-line admin tool
+test_messages_beyond_system.py        # System validation tests
+messages_beyond_schema.sql            # Database schema
+```
+
+### Implementation Status
+
+✅ **Completed Features:**
+- Database schema and initialization
+- Admin interface with CLI and interactive modes
+- Three-phase agent reflection system  
+- Orchestrator integration with interruption support
+- Frontend visualization with timeline
+- Comprehensive testing framework
+- Complete documentation
+
+🚀 **Ready for Production:**
+The Messages from Beyond System is fully implemented and tested, ready for integration into the main AI Religion Architects system. All components work together seamlessly to provide controlled external influence on the AI religion's development.
+
