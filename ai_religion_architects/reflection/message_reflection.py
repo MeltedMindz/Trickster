@@ -136,13 +136,14 @@ Respond with your characteristic personality, providing both theological analysi
 Format your response as a cohesive reflection (2-3 paragraphs) that shows your unique perspective on this communication from beyond."""
         
         try:
-            response = await self.claude_client.create_message(
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=1000,
-                temperature=0.7
+            response = await self.claude_client.generate_agent_response(
+                agent_name=agent_name,
+                role="message_reflection",
+                context={"message": message},
+                prompt=prompt
             )
             
-            reflection_text = response.content[0].text.strip()
+            reflection_text = response.strip()
             
             # Analyze sentiment and impact
             sentiment_score = self._analyze_sentiment(reflection_text, agent_name)
@@ -215,13 +216,14 @@ As {{agent_name}}, provide your perspective on this question. Respond to both th
             try:
                 prompt = prompt_base.replace('{agent_name}', agent_name)
                 
-                response = await self.claude_client.create_message(
-                    messages=[{"role": "user", "content": prompt}],
-                    max_tokens=500,
-                    temperature=0.8
+                response = await self.claude_client.generate_agent_response(
+                    agent_name=agent_name,
+                    role="message_discussion",
+                    context={"message": message, "reflections": reflections, "round": round_num},
+                    prompt=prompt
                 )
                 
-                response_text = response.content[0].text.strip()
+                response_text = response.strip()
                 response_type = self._classify_response_type(response_text)
                 
                 discussion_entry = {

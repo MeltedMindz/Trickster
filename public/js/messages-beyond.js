@@ -241,6 +241,9 @@ class MessagesBeyondDisplay {
         const reflectionCount = message.reflection_count || 0;
         const discussionCount = message.discussion_count || 0;
         
+        const isLongContent = message.content.length > 200;
+        const shortContent = isLongContent ? message.content.substring(0, 200) + '...' : message.content;
+        
         return `
             <div class="message-card ${status}" data-message-id="${message.message_id}">
                 <div class="message-header">
@@ -252,7 +255,16 @@ class MessagesBeyondDisplay {
                     <div class="message-id">ID: ${message.message_id}</div>
                 </div>
                 <div class="message-content">
-                    <p>${this.formatMessageContent(message.content)}</p>
+                    <div class="message-text">
+                        <p class="message-preview-text" id="preview-${message.message_id}">${shortContent}</p>
+                        ${isLongContent ? `<p class="message-full-text" id="full-${message.message_id}" style="display: none;">${message.content}</p>` : ''}
+                    </div>
+                    ${isLongContent ? `
+                        <button class="read-more-btn" onclick="window.messagesBeyondDisplay.toggleMessageContent('${message.message_id}')">
+                            <span class="read-more-text">Read More</span>
+                            <span class="read-less-text" style="display: none;">Read Less</span>
+                        </button>
+                    ` : ''}
                 </div>
                 ${message.admin_notes ? `<div class="admin-notes"><strong>Admin Notes:</strong> ${message.admin_notes}</div>` : ''}
                 <div class="message-stats">
@@ -272,15 +284,39 @@ class MessagesBeyondDisplay {
     }
     
     renderMessageDetails(message) {
-        // This would show agent reflections and discussions
-        // For now, just show a summary
+        const hasReflections = message.agent_reflections && Object.keys(message.agent_reflections).length > 0;
+        
+        if (!hasReflections) {
+            return `
+                <div class="message-details">
+                    <button class="details-toggle" onclick="window.messagesBeyondDisplay.toggleMessageDetails('${message.message_id}')">
+                        View Agent Interpretations
+                    </button>
+                    <div class="details-content" id="details-${message.message_id}" style="display: none;">
+                        <div class="no-reflections">No agent reflections available yet.</div>
+                    </div>
+                </div>
+            `;
+        }
+        
         return `
             <div class="message-details">
                 <button class="details-toggle" onclick="window.messagesBeyondDisplay.toggleMessageDetails('${message.message_id}')">
                     View Agent Interpretations
                 </button>
                 <div class="details-content" id="details-${message.message_id}" style="display: none;">
-                    <div class="loading">Loading agent interpretations...</div>
+                    <div class="agent-reflections">
+                        <h4>Agent Interpretations</h4>
+                        ${Object.entries(message.agent_reflections).map(([agent, reflection]) => `
+                            <div class="agent-reflection">
+                                <div class="agent-reflection-header">
+                                    <span class="agent-reflection-name">${agent}</span>
+                                    <span class="sentiment-score sentiment-${this.getSentimentClass(reflection.sentiment_score)}">${reflection.sentiment_score?.toFixed(2) || 'N/A'}</span>
+                                </div>
+                                <div class="agent-reflection-text">${reflection.interpretation}</div>
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
             </div>
         `;
@@ -350,6 +386,31 @@ class MessagesBeyondDisplay {
         if (modal) {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
+        }
+    }
+    
+    toggleMessageContent(messageId) {
+        const previewEl = document.getElementById(`preview-${messageId}`);
+        const fullEl = document.getElementById(`full-${messageId}`);
+        const btn = document.querySelector(`[onclick*="${messageId}"]`);
+        
+        if (!previewEl || !fullEl || !btn) return;
+        
+        const readMoreText = btn.querySelector('.read-more-text');
+        const readLessText = btn.querySelector('.read-less-text');
+        
+        if (fullEl.style.display === 'none') {
+            // Show full text
+            previewEl.style.display = 'none';
+            fullEl.style.display = 'block';
+            readMoreText.style.display = 'none';
+            readLessText.style.display = 'inline';
+        } else {
+            // Show preview text
+            previewEl.style.display = 'block';
+            fullEl.style.display = 'none';
+            readMoreText.style.display = 'inline';
+            readLessText.style.display = 'none';
         }
     }
     

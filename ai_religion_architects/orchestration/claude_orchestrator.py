@@ -271,6 +271,9 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 3 == 0:
                 await self._evolve_culture()
             
+            # Process messages from beyond every cycle
+            await self._process_messages_from_beyond()
+            
             # Daily summary every 24 cycles
             if self.cycle_count % 24 == 0:
                 await self._create_daily_summary()
@@ -296,6 +299,61 @@ class ClaudeReligionOrchestrator:
             
             # Don't stop the scheduler for individual cycle errors
             return {"status": "error", "error": str(e), "cycle": self.cycle_count}
+    
+    async def _process_messages_from_beyond(self):
+        """Process any pending messages from beyond"""
+        try:
+            from ai_religion_architects.memory.messages_beyond_memory import MessagesBeyondMemory
+            from ai_religion_architects.reflection.message_reflection import MessageReflectionEngine
+            
+            # Initialize messages system
+            messages_memory = MessagesBeyondMemory()
+            reflection_engine = MessageReflectionEngine(self.claude_client, messages_memory)
+            
+            # Get unprocessed messages
+            unprocessed_messages = messages_memory.get_unprocessed_messages()
+            
+            if unprocessed_messages:
+                logger.info(f"📡 Processing {len(unprocessed_messages)} messages from beyond")
+                
+                for message in unprocessed_messages:
+                    try:
+                        logger.info(f"🔮 Processing message: {message['message_id']}")
+                        result = await reflection_engine.process_message(message['message_id'])
+                        
+                        if result:
+                            logger.info(f"✅ Message {message['message_id']} processed successfully")
+                        else:
+                            logger.warning(f"⚠️  Message {message['message_id']} processing incomplete")
+                            
+                    except Exception as e:
+                        logger.error(f"❌ Error processing message {message['message_id']}: {e}")
+                
+                # Export updated messages data
+                await self._export_messages_beyond_data()
+                
+        except Exception as e:
+            logger.warning(f"Failed to process messages from beyond: {e}")
+    
+    async def _export_messages_beyond_data(self):
+        """Export messages from beyond data to JSON for frontend"""
+        try:
+            from ai_religion_architects.memory.messages_beyond_memory import MessagesBeyondMemory
+            
+            messages_memory = MessagesBeyondMemory()
+            messages_data = messages_memory.export_for_frontend()
+            
+            # Ensure public/data directory exists
+            data_dir = os.path.join("public", "data")
+            os.makedirs(data_dir, exist_ok=True)
+            
+            with open(os.path.join(data_dir, 'messages_beyond.json'), 'w') as f:
+                json.dump(messages_data, f, indent=2)
+                
+            logger.info("✅ Exported messages from beyond data")
+            
+        except Exception as e:
+            logger.warning(f"Failed to export messages from beyond data: {e}")
     
     def _parse_vote(self, vote_response: str) -> str:
         """Parse vote from Claude's response"""
