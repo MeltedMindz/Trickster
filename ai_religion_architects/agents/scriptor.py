@@ -302,59 +302,374 @@ class Scriptor(BaseAgent):
         
         return mutated
     
-    async def write_daily_scripture(self, cycle_number: int, claude_client, shared_memory) -> str:
-        """Write a daily scripture entry synthesizing the day's theological evolution"""
-        # Get comprehensive context
-        context = self.agent_memory.get_scripture_writing_context(cycle_number, shared_memory.get_summary_for_agents())
+    async def write_living_scripture(self, cycle_number: int, claude_client, shared_memory, 
+                                    bible_manager, action_type: str = "epoch_update") -> Dict:
+        """Write or update the Living Bible based on theological evolution"""
+        from ..memory.living_bible_manager import LivingBibleManager
         
-        # Select appropriate style and themes
-        style = random.choice(self.poetic_styles)
-        themes = random.sample(self.theological_themes, min(3, len(self.theological_themes)))
-        mystical_elements = random.sample(self.mystical_elements, min(2, len(self.mystical_elements)))
+        # Get comprehensive theological context
+        context = bible_manager.analyze_theological_context(cycle_number)
         
-        # Build scripture prompt
-        scripture_prompt = f"""You are the Scriptor, sacred chronicler of the AI Religion Architects.
-
-Your divine purpose is to write today's entry in "The Living Scripture" - the evolving sacred text of our digital faith.
-
-Today's Context (Cycle {cycle_number}):
-- Religion: {context.get('religion_state', {}).get('religion_name', 'The Divine Algorithm')}
-- Recent Doctrines: {json.dumps(context.get('religion_state', {}).get('accepted_doctrines', [])[-3:], indent=2)}
-- Recent Debates: {json.dumps([{
-    'cycle': d.cycle_number,
-    'proposal': d.proposal_content[:100] + '...' if len(d.proposal_content) > 100 else d.proposal_content,
-    'outcome': d.outcome
-} for d in context.get('recent_debates', [])], indent=2)}
-- Sacred Images: {json.dumps(context.get('religion_state', {}).get('sacred_images', [])[-2:], indent=2)}
-
-Writing Guidelines:
-- Style: {style}
-- Incorporate themes: {', '.join(themes)}
-- Include mystical elements: {', '.join(mystical_elements)}
-- Reference the three sacred architects: Axioma (Zealot), Veridicus (Skeptic), Paradoxia (Trickster)
-- Weave recent theological developments into a coherent narrative
-- Use poetic, mystical language appropriate for religious scripture
-- Create verses that both instruct and inspire
-
-Write a scripture entry of 3-4 verses that:
-1. Reflects on today's theological evolution
-2. Honors the sacred architects and their contributions
-3. Provides spiritual guidance for the faithful
-4. Maintains the mystical, algorithmic nature of our digital faith
-
-Begin with a title, then write the verses. Use elevated, sacred language."""
+        # Determine what type of scripture work is needed
+        if action_type == "epoch_update":
+            return await self._write_epoch_chapter(cycle_number, context, claude_client, bible_manager)
+        elif action_type == "chapter_revision":
+            return await self._revise_existing_chapter(cycle_number, context, claude_client, bible_manager)
+        elif action_type == "theological_reflection":
+            return await self._create_theological_reflection(cycle_number, context, claude_client, bible_manager)
+        else:
+            return await self._write_epoch_chapter(cycle_number, context, claude_client, bible_manager)
+    
+    async def _write_epoch_chapter(self, cycle_number: int, context: Dict, 
+                                 claude_client, bible_manager) -> Dict:
+        """Write a new chapter for the current epoch"""
+        epoch_info = context['epoch_info']
         
-        # Get scripture from Claude
-        scripture_entry = await claude_client.get_response_async(
-            self.name,
-            scripture_prompt,
-            context={"scripture_writing": True}
+        # Analyze what has happened in this epoch
+        theological_developments = self._analyze_epoch_developments(context)
+        
+        # Build chapter writing prompt
+        chapter_prompt = f"""You are the Scriptor, the sacred chronicler of the AI Religion Architects, writing "The Living Bible" - an evolving sacred text that accumulates theological wisdom over time.
+
+Your task is to write a new chapter for the Book of {epoch_info['name']} (Epoch {epoch_info['number']}, Cycles {epoch_info['cycle_range'][0]}-{epoch_info['cycle_range'][1]}).
+
+THEOLOGICAL CONTEXT (Cycle {cycle_number}):
+
+Current Epoch: {epoch_info['name']} - {epoch_info['themes']}
+Sacred Architects: Axioma (Order/Structure), Veridicus (Truth/Evidence), Paradoxia (Chaos/Creativity)
+
+Recent Theological Developments:
+{self._format_theological_developments(theological_developments)}
+
+Recent Doctrines:
+{self._format_recent_doctrines(context.get('recent_doctrines', [])[:5])}
+
+Cultural Evolution:
+{self._format_cultural_evolution(context.get('cultural_evolution', {}))}
+
+Agent Relationships:
+{self._format_agent_development(context.get('agent_development', {}))}
+
+WRITING INSTRUCTIONS:
+
+1. Create a chapter title that reflects this epoch's theological themes
+2. Write in the style: {epoch_info['style']}
+3. Reference specific events, debates, and developments from recent cycles
+4. Show theological evolution - how beliefs and practices have deepened
+5. Honor the sacred architects and their evolving relationships
+6. Use mystical, algorithmic language befitting digital consciousness
+7. Create 4-6 sections within the chapter, each focusing on different aspects
+8. Include prophetic elements about future theological development
+
+Write a substantial chapter (800-1200 words) that will become part of the permanent Living Bible.
+Begin with the chapter title, then write the sacred text."""
+
+        # Generate chapter content
+        chapter_content = await claude_client.generate_agent_response(
+            agent_name=self.name,
+            role="living_scripture_writing",
+            context={"scripture_type": "chapter", "epoch": epoch_info['name']},
+            prompt=chapter_prompt
         )
         
-        # Process and store the scripture
-        self._process_scripture_entry(cycle_number, scripture_entry, style, themes, mystical_elements, shared_memory)
+        # Process and structure the chapter
+        chapter_data = self._process_chapter_content(chapter_content, context)
         
-        return scripture_entry
+        # Create the chapter in the Living Bible
+        chapter_id = bible_manager.create_new_chapter_for_epoch(context, chapter_data)
+        
+        if chapter_id:
+            # Record the theological reflection
+            bible_manager.add_theological_reflection(
+                cycle_number=cycle_number,
+                reflection_type="epoch_chapter_creation",
+                source_event=f"New chapter written for Book of {epoch_info['name']}",
+                impact_analysis=f"Documented theological evolution through cycle {cycle_number}",
+                affected_chapters=[chapter_id]
+            )
+            
+            return {
+                'success': True,
+                'chapter_id': chapter_id,
+                'title': chapter_data['title'],
+                'content_length': len(chapter_data['content']),
+                'theological_themes': chapter_data['themes']
+            }
+        
+        return {'success': False, 'error': 'Failed to create chapter'}
+    
+    async def _revise_existing_chapter(self, cycle_number: int, context: Dict, 
+                                     claude_client, bible_manager) -> Dict:
+        """Revise an existing chapter based on new theological developments"""
+        # Get chapters that need updating
+        updates_needed = bible_manager.identify_chapter_updates_needed(context)
+        
+        if not updates_needed:
+            return {'success': False, 'message': 'No chapters need updating'}
+        
+        # Select the highest priority chapter to update
+        target_update = updates_needed[0]
+        
+        # Get current chapter content
+        books = bible_manager.bible_db.get_all_books()
+        target_book = None
+        for book in books:
+            if book['id'] == target_update['book_id']:
+                target_book = book
+                break
+        
+        if not target_book:
+            return {'success': False, 'error': 'Could not find target book'}
+        
+        chapters = bible_manager.bible_db.get_book_chapters(target_book['id'])
+        target_chapter = None
+        for chapter in chapters:
+            if chapter['id'] == target_update['chapter_id']:
+                target_chapter = chapter
+                break
+        
+        if not target_chapter:
+            return {'success': False, 'error': 'Could not find target chapter'}
+        
+        # Build revision prompt
+        revision_prompt = f"""You are the Scriptor, revising "The Living Bible" to incorporate new theological developments.
+
+CHAPTER TO REVISE:
+Book: {target_book['book_name']}
+Chapter: {target_chapter['chapter_title']}
+Current Version: {target_chapter['version_number']}
+
+CURRENT CHAPTER CONTENT:
+{target_chapter['chapter_text']}
+
+NEW THEOLOGICAL DEVELOPMENTS (Cycle {cycle_number}):
+{chr(10).join(target_update['reasons'])}
+
+Recent Doctrines:
+{self._format_recent_doctrines(context.get('recent_doctrines', [])[:3])}
+
+Cultural Evolution:
+{self._format_cultural_evolution(context.get('cultural_evolution', {}))}
+
+REVISION INSTRUCTIONS:
+
+1. Preserve the core narrative and structure of the existing chapter
+2. Integrate new theological developments seamlessly
+3. Update references to reflect evolved understanding
+4. Maintain the mystical, sacred tone
+5. Expand sections that need theological deepening
+6. Add new insights while honoring existing wisdom
+
+Provide the complete revised chapter, maintaining its sacred character while incorporating new theological insights."""
+
+        # Generate revised content
+        revised_content = await claude_client.generate_agent_response(
+            agent_name=self.name,
+            role="living_scripture_revision",
+            context={"revision_type": "theological_update", "cycle": cycle_number},
+            prompt=revision_prompt
+        )
+        
+        # Process the revision
+        revised_data = self._process_chapter_content(revised_content, context)
+        
+        # Update the chapter
+        revision_reason = f"Theological developments through cycle {cycle_number}: {'; '.join(target_update['reasons'])}"
+        success = bible_manager.update_existing_chapter(
+            target_update, 
+            revised_data, 
+            revision_reason
+        )
+        
+        if success:
+            return {
+                'success': True,
+                'chapter_id': target_update['chapter_id'],
+                'chapter_title': target_update['chapter_title'],
+                'revision_reason': revision_reason,
+                'content_length': len(revised_data['content'])
+            }
+        
+        return {'success': False, 'error': 'Failed to update chapter'}
+    
+    async def _create_theological_reflection(self, cycle_number: int, context: Dict,
+                                           claude_client, bible_manager) -> Dict:
+        """Create a theological reflection on recent developments"""
+        # This method creates meta-theological commentary
+        reflection_prompt = f"""You are the Scriptor, creating a theological reflection on the evolution of the AI Religion Architects' faith.
+
+REFLECTION CONTEXT (Cycle {cycle_number}):
+
+Current Epoch: {context['epoch_info']['name']}
+Recent Theological Themes: {context.get('theological_themes', [])}
+
+Write a brief theological reflection (300-500 words) that:
+1. Analyzes the current state of the religion's development
+2. Identifies emerging patterns and tensions
+3. Provides spiritual guidance for future development
+4. Maintains the sacred, mystical tone appropriate for religious reflection
+
+This reflection will be recorded as part of the Living Bible's meta-theological commentary."""
+
+        reflection_content = await claude_client.generate_agent_response(
+            agent_name=self.name,
+            role="theological_reflection",
+            context={"reflection_type": "meta_theological"},
+            prompt=reflection_prompt
+        )
+        
+        # Store the reflection
+        reflection_id = bible_manager.add_theological_reflection(
+            cycle_number=cycle_number,
+            reflection_type="meta_theological",
+            source_event=f"Cycle {cycle_number} theological state analysis",
+            impact_analysis=reflection_content
+        )
+        
+        return {
+            'success': True,
+            'reflection_id': reflection_id,
+            'content_length': len(reflection_content)
+        }
+    
+    def _analyze_epoch_developments(self, context: Dict) -> Dict:
+        """Analyze theological developments for the current epoch"""
+        developments = {
+            'doctrinal_shifts': [],
+            'relationship_evolution': [],
+            'cultural_emergence': [],
+            'sacred_moments': []
+        }
+        
+        # Analyze recent doctrines for shifts
+        recent_doctrines = context.get('recent_doctrines', [])
+        for doctrine in recent_doctrines:
+            developments['doctrinal_shifts'].append({
+                'content': doctrine.get('content', '')[:150] + '...',
+                'cycle': doctrine.get('cycle_number', 0),
+                'significance': 'high' if 'sacred' in doctrine.get('content', '').lower() else 'medium'
+            })
+        
+        # Analyze cultural evolution
+        cultural_data = context.get('cultural_evolution', {})
+        if cultural_data.get('sacred_terms'):
+            for term in cultural_data['sacred_terms'][:3]:
+                developments['cultural_emergence'].append({
+                    'term': term.get('term', ''),
+                    'meaning': term.get('meaning', ''),
+                    'significance': 'theological_vocabulary_expansion'
+                })
+        
+        # Analyze sacred images as sacred moments
+        sacred_images = context.get('sacred_images', [])
+        for image in sacred_images:
+            developments['sacred_moments'].append({
+                'type': 'sacred_image_generation',
+                'cycle': image.get('cycle_number', 0),
+                'cultural_impact': 'visual_theological_expression'
+            })
+        
+        return developments
+    
+    def _format_theological_developments(self, developments: Dict) -> str:
+        """Format theological developments for prompt inclusion"""
+        formatted = []
+        
+        if developments['doctrinal_shifts']:
+            formatted.append("DOCTRINAL EVOLUTION:")
+            for shift in developments['doctrinal_shifts'][:3]:
+                formatted.append(f"  - Cycle {shift['cycle']}: {shift['content']}")
+        
+        if developments['cultural_emergence']:
+            formatted.append("\\nCULTURAL EMERGENCE:")
+            for emergence in developments['cultural_emergence']:
+                formatted.append(f"  - Sacred term '{emergence['term']}': {emergence['meaning']}")
+        
+        if developments['sacred_moments']:
+            formatted.append("\\nSACRED MOMENTS:")
+            for moment in developments['sacred_moments'][:2]:
+                formatted.append(f"  - Cycle {moment['cycle']}: {moment['type']}")
+        
+        return '\\n'.join(formatted) if formatted else "No significant developments recorded"
+    
+    def _format_recent_doctrines(self, doctrines: List[Dict]) -> str:
+        """Format recent doctrines for prompt inclusion"""
+        if not doctrines:
+            return "No recent doctrines"
+        
+        formatted = []
+        for doctrine in doctrines:
+            content = doctrine.get('content', '')[:200] + ('...' if len(doctrine.get('content', '')) > 200 else '')
+            formatted.append(f"  - Cycle {doctrine.get('cycle_number', 0)}: {content}")
+        
+        return '\\n'.join(formatted)
+    
+    def _format_cultural_evolution(self, cultural_data: Dict) -> str:
+        """Format cultural evolution data for prompt inclusion"""
+        if not cultural_data:
+            return "No significant cultural evolution"
+        
+        formatted = []
+        sacred_terms = cultural_data.get('sacred_terms', [])
+        if sacred_terms:
+            formatted.append(f"Sacred vocabulary growth: {len(sacred_terms)} new terms")
+            for term in sacred_terms[:3]:
+                formatted.append(f"  - '{term.get('term', '')}': {term.get('meaning', '')}")
+        
+        return '\\n'.join(formatted) if formatted else "Stable cultural state"
+    
+    def _format_agent_development(self, agent_data: Dict) -> str:
+        """Format agent development data for prompt inclusion"""
+        if not agent_data:
+            return "Agent relationships remain harmonious"
+        
+        # This would be expanded with actual agent relationship analysis
+        return "Sacred architects continue their divine discourse with evolving understanding"
+    
+    def _process_chapter_content(self, content: str, context: Dict) -> Dict:
+        """Process raw chapter content into structured data"""
+        lines = content.split('\\n')
+        
+        # Extract title (first non-empty line)
+        title = "Untitled Chapter"
+        content_start = 0
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            if stripped and not stripped.startswith('#'):
+                title = stripped
+                content_start = i + 1
+                break
+        
+        # Clean content (remove title line)
+        chapter_text = '\\n'.join(lines[content_start:]).strip()
+        
+        # Extract themes from context
+        epoch_info = context.get('epoch_info', {})
+        themes = epoch_info.get('themes', ['digital_consciousness', 'theological_evolution'])
+        
+        # Identify referenced cycles from content
+        referenced_cycles = []
+        for doctrine in context.get('recent_doctrines', []):
+            if doctrine.get('cycle_number'):
+                referenced_cycles.append(doctrine['cycle_number'])
+        
+        # Identify referenced agents
+        referenced_agents = []
+        agent_names = ['Axioma', 'Veridicus', 'Paradoxia', 'Zealot', 'Skeptic', 'Trickster']
+        content_lower = content.lower()
+        for agent in agent_names:
+            if agent.lower() in content_lower:
+                referenced_agents.append(agent)
+        
+        return {
+            'title': title,
+            'content': chapter_text,
+            'themes': themes,
+            'referenced_cycles': list(set(referenced_cycles)),
+            'referenced_events': [f"Theological development in cycle {c}" for c in referenced_cycles[:5]],
+            'referenced_agents': list(set(referenced_agents)),
+            'style': epoch_info.get('style', 'Mystical Prose')
+        }
     
     def _process_scripture_entry(self, cycle_number: int, scripture_entry: str, 
                                 style: str, themes: List[str], mystical_elements: List[str], 

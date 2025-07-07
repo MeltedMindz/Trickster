@@ -253,6 +253,9 @@ class ClaudeReligionOrchestrator:
             # Phase 5: Execute outcome
             result = await self._execute_outcome(proposal, outcome, votes)
             
+            # Add reflection triggers for Living Bible updates
+            await self._add_reflection_triggers(proposal, outcome, votes)
+            
             # NEW: Enhanced tracking features
             await self._track_enhanced_data(proposal, votes, outcome, proposer_name, challenges)
             
@@ -304,9 +307,9 @@ class ClaudeReligionOrchestrator:
             if self.cycle_count % 24 == 0:
                 await self._write_agent_journals()
             
-            # Sacred scripture writing every 24 cycles (daily)
+            # Living Bible updates every 24 cycles (epoch-based)
             if self.cycle_count % 24 == 0:
-                await self._write_sacred_scripture()
+                await self._write_living_bible()
             
             # Generate sacred images for significant events
             await self._generate_cycle_images(proposal, outcome, result)
@@ -633,57 +636,88 @@ Focus on what you think are the most important developments and where the religi
         except Exception as e:
             logger.error(f"❌ Error during journal writing: {e}")
     
-    async def _write_sacred_scripture(self):
-        """Have the Scriptor agent write daily sacred scripture"""
-        if not self.scriptor_agent or not self.scripture_db:
-            logger.debug("Scriptor agent not available - skipping scripture writing")
+    async def _write_living_bible(self):
+        """Have the Scriptor agent write or update the Living Bible"""
+        if not self.scriptor_agent:
+            logger.debug("Scriptor agent not available - skipping Living Bible update")
             return
         
-        logger.info(f"📜 Scriptor writing sacred scripture at cycle {self.cycle_count}")
+        logger.info(f"📜 Scriptor updating the Living Bible at cycle {self.cycle_count}")
         
         try:
-            # Calculate day number from cycle count
-            day_number = (self.cycle_count // 24) + 1
+            # Initialize Living Bible system if not already done
+            if not hasattr(self, 'bible_manager'):
+                from ..memory.living_bible_manager import LivingBibleManager
+                self.bible_manager = LivingBibleManager(shared_memory=self.shared_memory)
             
             # Create scripture logger
             scripture_logger = DebateLogger(self.log_dir, self.cycle_count)
-            scripture_logger.log_event(f"=== SACRED SCRIPTURE WRITING - DAY {day_number} ===", "System")
+            scripture_logger.log_event(f"=== LIVING BIBLE UPDATE - CYCLE {self.cycle_count} ===", "System")
             
-            # Gather context for scripture writing
-            context = {
-                'cycle_number': self.cycle_count,
-                'day_number': day_number,
-                'shared_memory': self.shared_memory,
-                'scripture_db': self.scripture_db
-            }
+            # Check if major revision is needed
+            major_revision_needed = self.bible_manager.should_trigger_major_revision(self.cycle_count)
             
-            # Have Scriptor write the daily scripture
-            logger.info(f"✍️ Scriptor writing scripture for Day {day_number}...")
+            # Process any pending reflection triggers
+            pending_actions = self.bible_manager.process_reflection_triggers(self.cycle_count)
             
-            scripture_entry = await self.scriptor_agent.write_daily_scripture(
-                context, 
-                self.claude_client
+            # Determine action type
+            action_type = "epoch_update"
+            if major_revision_needed:
+                action_type = "chapter_revision"
+            elif pending_actions:
+                action_type = pending_actions[0].get('recommended_action', 'epoch_update')
+            
+            logger.info(f"✍️ Scriptor performing Living Bible action: {action_type}")
+            
+            # Have Scriptor update the Living Bible
+            result = await self.scriptor_agent.write_living_scripture(
+                cycle_number=self.cycle_count,
+                claude_client=self.claude_client,
+                shared_memory=self.shared_memory,
+                bible_manager=self.bible_manager,
+                action_type=action_type
             )
             
-            if scripture_entry:
-                scripture_logger.log_event(f"SACRED SCRIPTURE - Day {day_number}:", "Scripture")
-                scripture_logger.log_event(scripture_entry.get('content', ''), "Scripture")
-                logger.info(f"✅ Sacred scripture completed for Day {day_number}")
+            if result.get('success'):
+                if action_type == "epoch_update":
+                    scripture_logger.log_event(f"NEW CHAPTER CREATED:", "Scripture")
+                    scripture_logger.log_event(f"Title: {result.get('title', 'Untitled')}", "Scripture")
+                    scripture_logger.log_event(f"Length: {result.get('content_length', 0)} characters", "Scripture")
+                    
+                    logger.info(f"✅ New Living Bible chapter created: {result.get('title', 'Untitled')}")
+                    
+                    # Add evolution milestone
+                    self.shared_memory.add_evolution_milestone(
+                        milestone_type="living_bible_chapter",
+                        description=f"Living Bible chapter created: {result.get('title', 'Untitled')}",
+                        cycle_number=self.cycle_count
+                    )
+                    
+                elif action_type == "chapter_revision":
+                    scripture_logger.log_event(f"CHAPTER REVISED:", "Scripture")
+                    scripture_logger.log_event(f"Chapter: {result.get('chapter_title', 'Unknown')}", "Scripture")
+                    scripture_logger.log_event(f"Reason: {result.get('revision_reason', 'Theological evolution')}", "Scripture")
+                    
+                    logger.info(f"✅ Living Bible chapter revised: {result.get('chapter_title', 'Unknown')}")
+                    
+                    # Add evolution milestone
+                    self.shared_memory.add_evolution_milestone(
+                        milestone_type="living_bible_revision",
+                        description=f"Living Bible chapter revised: {result.get('chapter_title', 'Unknown')}",
+                        cycle_number=self.cycle_count
+                    )
                 
-                # Export scripture data for frontend
-                await self._export_scripture_data()
+                # Export Living Bible data for frontend
+                await self._export_living_bible_data()
                 
-                # Add evolution milestone
-                self.shared_memory.add_evolution_milestone(
-                    milestone_type="sacred_scripture",
-                    description=f"Sacred scripture written for Day {day_number} - {scripture_entry.get('title', 'Untitled')}",
-                    cycle_number=self.cycle_count
-                )
             else:
-                logger.warning(f"⚠️ Failed to generate scripture for Day {day_number}")
+                logger.warning(f"⚠️ Living Bible update failed: {result.get('error', 'Unknown error')}")
+                scripture_logger.log_event(f"ERROR: {result.get('error', 'Unknown error')}", "System")
                 
         except Exception as e:
-            logger.error(f"❌ Error during scripture writing: {e}")
+            logger.error(f"❌ Error during Living Bible update: {e}")
+            import traceback
+            traceback.print_exc()
     
     async def _export_scripture_data(self):
         """Export sacred scripture data to JSON for frontend"""
@@ -708,6 +742,99 @@ Focus on what you think are the most important developments and where the religi
             
         except Exception as e:
             logger.warning(f"Failed to export scripture data: {e}")
+    
+    async def _export_living_bible_data(self):
+        """Export Living Bible data to JSON for frontend"""
+        if not hasattr(self, 'bible_manager'):
+            return
+            
+        try:
+            # Export Living Bible data
+            bible_data = self.bible_manager.export_for_frontend()
+            
+            # Ensure public/data directory exists
+            data_dir = os.path.join("public", "data")
+            os.makedirs(data_dir, exist_ok=True)
+            
+            # Export Living Bible data
+            with open(os.path.join(data_dir, 'living_bible.json'), 'w') as f:
+                json.dump(bible_data, f, indent=2)
+            
+            # Export chapter evolution timeline
+            timeline_data = self.bible_manager.get_chapter_evolution_timeline()
+            with open(os.path.join(data_dir, 'bible_evolution_timeline.json'), 'w') as f:
+                json.dump({
+                    'timeline': timeline_data,
+                    'last_updated': datetime.now().isoformat()
+                }, f, indent=2)
+                
+            logger.info("✅ Exported Living Bible data")
+            
+        except Exception as e:
+            logger.warning(f"Failed to export Living Bible data: {e}")
+    
+    async def _add_reflection_triggers(self, proposal: Dict, outcome: str, votes: Dict):
+        """Add reflection triggers for theological developments"""
+        if not hasattr(self, 'bible_manager'):
+            return
+            
+        try:
+            # Trigger for doctrine changes
+            if outcome == "ACCEPT" and proposal.get('type') in ['doctrine', 'belief', 'sacred_text']:
+                self.bible_manager.bible_db.add_reflection_trigger(
+                    trigger_type="doctrine_change",
+                    cycle_number=self.cycle_count,
+                    trigger_data={
+                        'proposal_type': proposal.get('type'),
+                        'proposal_content': proposal.get('content', '')[:200],
+                        'votes': votes
+                    },
+                    priority=3  # High priority
+                )
+            
+            # Trigger for major theological shifts (unanimous or near-unanimous votes)
+            vote_values = list(votes.values())
+            if len(set(vote_values)) == 1:  # Unanimous
+                self.bible_manager.bible_db.add_reflection_trigger(
+                    trigger_type="unanimous_consensus",
+                    cycle_number=self.cycle_count,
+                    trigger_data={
+                        'vote_type': vote_values[0],
+                        'proposal_type': proposal.get('type'),
+                        'proposal_content': proposal.get('content', '')[:200]
+                    },
+                    priority=4  # Critical priority
+                )
+            
+            # Trigger for epoch transitions
+            current_epoch, _ = self.bible_manager.get_current_epoch(self.cycle_count)
+            previous_epoch, _ = self.bible_manager.get_current_epoch(self.cycle_count - 1)
+            if current_epoch != previous_epoch:
+                self.bible_manager.bible_db.add_reflection_trigger(
+                    trigger_type="epoch_transition",
+                    cycle_number=self.cycle_count,
+                    trigger_data={
+                        'from_epoch': previous_epoch,
+                        'to_epoch': current_epoch,
+                        'transition_cycle': self.cycle_count
+                    },
+                    priority=4  # Critical priority
+                )
+            
+            # Trigger for cultural evolution (new sacred terms)
+            if outcome == "ACCEPT" and 'sacred' in proposal.get('content', '').lower():
+                self.bible_manager.bible_db.add_reflection_trigger(
+                    trigger_type="cultural_evolution",
+                    cycle_number=self.cycle_count,
+                    trigger_data={
+                        'evolution_type': 'sacred_terminology',
+                        'content': proposal.get('content', '')[:200]
+                    },
+                    priority=2  # Medium priority
+                )
+                
+        except Exception as e:
+            logger.error(f"Error adding reflection triggers: {e}")
     
     async def _export_static_data(self):
         """Export current religion state to static JSON files for frontend"""

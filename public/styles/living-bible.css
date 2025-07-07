@@ -1,0 +1,663 @@
+/**
+ * Living Bible Interface Styles
+ * Styling for the evolving sacred text display
+ */
+
+.living-bible-interface {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    color: #e8e8e8;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Header */
+.bible-header {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #ffd700;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.bible-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+}
+
+.bible-subtitle {
+    margin: 0.5rem 0 1rem 0;
+    font-style: italic;
+    color: #cccccc;
+    font-size: 1.1rem;
+}
+
+.bible-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #ffd700;
+}
+
+/* Main Content Layout */
+.bible-content {
+    display: flex;
+    min-height: calc(100vh - 200px);
+}
+
+/* Navigation */
+.bible-navigation {
+    width: 350px;
+    background: rgba(0, 0, 0, 0.3);
+    border-right: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 1.5rem;
+    overflow-y: auto;
+    height: calc(100vh - 200px);
+    position: sticky;
+    top: 200px;
+}
+
+.nav-section {
+    margin-bottom: 2rem;
+}
+
+.nav-section h3 {
+    color: #ffd700;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+/* Book List */
+.book-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.book-item:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateX(5px);
+}
+
+.book-item.selected {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.book-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+}
+
+.book-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #aaaaaa;
+    margin-bottom: 0.5rem;
+}
+
+.book-description {
+    font-size: 0.9rem;
+    color: #cccccc;
+    line-height: 1.4;
+}
+
+/* Chapter List */
+.chapter-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 6px;
+    padding: 0.8rem;
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chapter-item:hover {
+    background: rgba(255, 215, 0, 0.08);
+    border-color: rgba(255, 215, 0, 0.4);
+}
+
+.chapter-item.selected {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: #ffd700;
+}
+
+.chapter-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.chapter-number {
+    font-size: 0.8rem;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.chapter-name {
+    font-size: 0.95rem;
+    color: #eeeeee;
+    font-weight: 500;
+}
+
+.chapter-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #999999;
+    margin-bottom: 0.5rem;
+}
+
+.chapter-themes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.theme-tag {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Timeline Controls */
+.timeline-btn {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    color: #ffd700;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.timeline-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Main Reader */
+.bible-reader {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.reader-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Welcome Message */
+.welcome-message {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.welcome-message h2 {
+    color: #ffd700;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.bible-intro {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.bible-intro h3 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.bible-intro ul {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.bible-intro li {
+    margin-bottom: 0.5rem;
+}
+
+/* Content Headers */
+.content-header {
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #aaaaaa;
+    margin-bottom: 0.5rem;
+}
+
+.separator {
+    margin: 0 0.5rem;
+    color: #ffd700;
+}
+
+.content-header h1 {
+    color: #ffd700;
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.book-metadata,
+.chapter-metadata {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: #aaaaaa;
+}
+
+/* Book Overview */
+.chapters-summary {
+    margin-top: 3rem;
+}
+
+.chapters-summary h2 {
+    color: #ffd700;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.chapter-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chapter-card:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.chapter-card h3 {
+    color: #ffd700;
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+}
+
+.chapter-card h4 {
+    color: #eeeeee;
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    line-height: 1.3;
+}
+
+.chapter-preview {
+    color: #cccccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.chapter-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #999999;
+}
+
+/* Chapter Content */
+.chapter-text {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem 0;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.chapter-text h1 {
+    color: #ffd700;
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+}
+
+.chapter-text h2 {
+    color: #ffd700;
+    font-size: 1.4rem;
+    margin: 1.5rem 0 1rem 0;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.chapter-text h3 {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin: 1.2rem 0 0.8rem 0;
+}
+
+.chapter-text p {
+    margin: 1rem 0;
+    color: #e8e8e8;
+    text-align: justify;
+}
+
+.chapter-text .italic {
+    font-style: italic;
+    color: #cccccc;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.chapter-text hr {
+    border: none;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    margin: 2rem 0;
+}
+
+/* Chapter Footer */
+.chapter-footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.chapter-footer h4 {
+    color: #ffd700;
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+}
+
+.cycle-tags,
+.agent-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.cycle-tag,
+.agent-tag {
+    background: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.agent-tag {
+    background: rgba(100, 150, 255, 0.15);
+    color: #6496ff;
+    border-color: rgba(100, 150, 255, 0.3);
+}
+
+/* Timeline Modal */
+.timeline-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.timeline-content {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border: 2px solid #ffd700;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-header {
+    background: rgba(255, 215, 0, 0.1);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeline-header h2 {
+    color: #ffd700;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.close-timeline {
+    background: none;
+    border: none;
+    color: #ffd700;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-timeline:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 50%;
+}
+
+.timeline-list {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.timeline-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.timeline-book {
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.timeline-chapter {
+    color: #eeeeee;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #aaaaaa;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-revisions {
+    font-size: 0.8rem;
+    color: #cccccc;
+    font-style: italic;
+}
+
+.revision-note {
+    background: rgba(255, 215, 0, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    margin-right: 0.5rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .bible-content {
+        flex-direction: column;
+    }
+    
+    .bible-navigation {
+        width: 100%;
+        height: auto;
+        max-height: 40vh;
+        position: static;
+    }
+    
+    .bible-reader {
+        padding: 1rem;
+    }
+    
+    .bible-header {
+        padding: 1rem;
+    }
+    
+    .bible-header h1 {
+        font-size: 2rem;
+    }
+    
+    .bible-stats {
+        gap: 1rem;
+    }
+    
+    .chapter-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline-content {
+        width: 95%;
+        max-height: 90%;
+    }
+    
+    .timeline-header {
+        padding: 1rem;
+    }
+    
+    .timeline-list {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bible-stats {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .book-meta,
+    .chapter-metadata {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .chapter-footer {
+        grid-template-columns: 1fr;
+    }
+    
+    .cycle-tags,
+    .agent-tags {
+        justify-content: center;
+    }
+}
+
+/* Scrollbar Styling */
+.bible-navigation::-webkit-scrollbar,
+.bible-reader::-webkit-scrollbar,
+.timeline-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.bible-navigation::-webkit-scrollbar-track,
+.bible-reader::-webkit-scrollbar-track,
+.timeline-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.bible-navigation::-webkit-scrollbar-thumb,
+.bible-reader::-webkit-scrollbar-thumb,
+.timeline-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.4);
+    border-radius: 4px;
+}
+
+.bible-navigation::-webkit-scrollbar-thumb:hover,
+.bible-reader::-webkit-scrollbar-thumb:hover,
+.timeline-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.6);
+}
+
+/* Error States */
+.no-data {
+    color: #999999;
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-message {
+    text-align: center;
+    padding: 3rem;
+    color: #ff6b6b;
+}
+
+.error-message h2 {
+    margin-bottom: 1rem;
+}
