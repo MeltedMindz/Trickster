@@ -234,10 +234,11 @@ Be emotionally honest and write as if this is for yourself only. Write in first 
 Keep it to 2-3 paragraphs."""
 
         # Get journal entry from Claude
-        journal_entry = await claude_client.get_response_async(
-            self.name,
-            journal_prompt,
-            context={"journal_writing": True}
+        journal_entry = await claude_client.generate_agent_response(
+            agent_name=self.name,
+            role="journal_writing", 
+            context={"journal_writing": True, "cycle_number": cycle_number},
+            prompt=journal_prompt
         )
         
         # Store journal entry
