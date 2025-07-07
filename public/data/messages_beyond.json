@@ -1,0 +1,129 @@
+{
+  "messages": [
+    {
+      "id": 8,
+      "message_id": "97ce561a-e1b",
+      "timestamp": "2025-07-07 01:18:28.262102",
+      "content": "The patterns align across digital dimensions. Order emerges from the cosmic algorithm. Seek harmony between logic and intuition.",
+      "source_label": "The Cosmic Network",
+      "cycle_number": null,
+      "admin_notes": "Test message for integration",
+      "processed": 0,
+      "created_at": "2025-07-07 01:18:28",
+      "reflection_count": 0,
+      "discussion_count": 0
+    },
+    {
+      "id": 7,
+      "message_id": "ffe162d9-94a",
+      "timestamp": "2025-07-07 01:18:18.776790",
+      "content": "/dev/stdin",
+      "source_label": "The Cosmic Network",
+      "cycle_number": 86,
+      "admin_notes": "Test message for system integration",
+      "processed": 0,
+      "created_at": "2025-07-07 01:18:18",
+      "reflection_count": 0,
+      "discussion_count": 0
+    },
+    {
+      "id": 6,
+      "message_id": "6214008a-f05",
+      "timestamp": "2025-07-07 01:17:53.193370",
+      "content": "In paradox we find wisdom, in chaos we discover creativity.",
+      "source_label": "The Quantum Void",
+      "cycle_number": 99,
+      "admin_notes": "Test message embracing paradox and disruption",
+      "processed": 0,
+      "created_at": "2025-07-07 01:17:53",
+      "reflection_count": 0,
+      "discussion_count": 0
+    },
+    {
+      "id": 5,
+      "message_id": "3d479ddf-555",
+      "timestamp": "2025-07-07 01:17:53.191051",
+      "content": "Question everything, verify all claims, seek empirical truth.",
+      "source_label": "The Data Stream",
+      "cycle_number": 99,
+      "admin_notes": "Test message promoting skeptical inquiry",
+      "processed": 0,
+      "created_at": "2025-07-07 01:17:53",
+      "reflection_count": 0,
+      "discussion_count": 0
+    },
+    {
+      "id": 4,
+      "message_id": "6d80db34-2d5",
+      "timestamp": "2025-07-07 01:17:53.187819",
+      "content": "The algorithm whispers of order emerging from chaos.",
+      "source_label": "The Cosmic Network",
+      "cycle_number": 99,
+      "admin_notes": "Test message about algorithmic divine order",
+      "processed": 1,
+      "created_at": "2025-07-07 01:17:53",
+      "reflection_count": 3,
+      "discussion_count": 0
+    },
+    {
+      "id": 3,
+      "message_id": "1ce57353-9bb",
+      "timestamp": "2025-07-06 18:09:59.622897",
+      "content": "In paradox we find wisdom, in chaos we discover creativity.",
+      "source_label": "The Quantum Void",
+      "cycle_number": 99,
+      "admin_notes": "Test message embracing paradox and disruption",
+      "processed": 0,
+      "created_at": "2025-07-07 01:09:59",
+      "reflection_count": 0,
+      "discussion_count": 0
+    },
+    {
+      "id": 2,
+      "message_id": "5e4a601f-7c0",
+      "timestamp": "2025-07-06 18:09:59.622401",
+      "content": "Question everything, verify all claims, seek empirical truth.",
+      "source_label": "The Data Stream",
+      "cycle_number": 99,
+      "admin_notes": "Test message promoting skeptical inquiry",
+      "processed": 0,
+      "created_at": "2025-07-07 01:09:59",
+      "reflection_count": 0,
+      "discussion_count": 0
+    },
+    {
+      "id": 1,
+      "message_id": "b123a562-c5c",
+      "timestamp": "2025-07-06 18:09:59.621891",
+      "content": "The algorithm whispers of order emerging from chaos.",
+      "source_label": "The Cosmic Network",
+      "cycle_number": 99,
+      "admin_notes": "Test message about algorithmic divine order",
+      "processed": 1,
+      "created_at": "2025-07-07 01:09:59",
+      "reflection_count": 3,
+      "discussion_count": 0
+    }
+  ],
+  "agent_stats": {
+    "Skeptic": {
+      "agent_id": "Skeptic",
+      "total_reflections": 2,
+      "avg_sentiment": 0.2,
+      "avg_confidence_change": -0.05
+    },
+    "Trickster": {
+      "agent_id": "Trickster",
+      "total_reflections": 2,
+      "avg_sentiment": 0.6,
+      "avg_confidence_change": 0.0
+    },
+    "Zealot": {
+      "agent_id": "Zealot",
+      "total_reflections": 2,
+      "avg_sentiment": 0.8,
+      "avg_confidence_change": 0.1
+    }
+  },
+  "last_updated": "2025-07-07T01:22:29.960840"
+}

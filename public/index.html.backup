@@ -10,7 +10,6 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>AI Religion Architects - Live Terminal</title>
     <link rel="stylesheet" href="styles/terminal.css">
-    <link rel="stylesheet" href="styles/messages-beyond.css">
     <link rel="stylesheet" href="styles/agent-memory.css">
     <link rel="stylesheet" href="styles/mobile-fixes.css">
     <link rel="stylesheet" href="styles/daily-summaries.css">
@@ -146,6 +145,5 @@
     <script src="js/sacred-gallery.js"></script>
     <script src="js/enhanced-memory-viewer.js"></script>
     <script src="js/terminal-static.js"></script>
-    <script src="js/messages-beyond.js"></script>
 </body>
 </html>
