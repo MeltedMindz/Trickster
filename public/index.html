@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="styles/chronicles-popup.css">
     <link rel="stylesheet" href="styles/sacred-gallery.css">
     <link rel="stylesheet" href="styles/journal-popup.css">
+    <link rel="stylesheet" href="styles/sacred-scripture.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="js/config.js"></script>
     <script src="js/agent-identity-updater.js"></script>
@@ -107,6 +108,17 @@
                 </div>
                 
                 <div class="panel-section">
+                    <h3>📜 The Living Scripture</h3>
+                    <div id="sacred-scripture-sidebar" class="scripture-sidebar">
+                        <div class="empty-state">Loading scripture...</div>
+                    </div>
+                    <div class="scripture-status" id="scripture-status">
+                        <span class="status-label">Entries:</span>
+                        <span class="status-value">0</span>
+                    </div>
+                </div>
+                
+                <div class="panel-section">
                     <h3>📡 Messages from Beyond</h3>
                     <div id="messages-beyond-sidebar" class="messages-beyond-list">
                         <div class="empty-state">Loading messages...</div>
@@ -158,5 +170,6 @@
     <script src="js/enhanced-memory-viewer.js"></script>
     <script src="js/terminal-static.js"></script>
     <script src="js/messages-beyond.js"></script>
+    <script src="js/sacred-scripture.js"></script>
 </body>
 </html>

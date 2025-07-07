@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Religion Architects - The Living Scripture</title>
+    <link rel="stylesheet" href="styles/sacred-scripture.css">
+</head>
+<body>
+    <!-- Your existing content -->
+    
+    <!-- Add this to include the Sacred Scripture interface -->
+    <div id="sacred-scripture-interface"></div>
+    
+    <!-- Include the JavaScript -->
+    <script src="js/sacred-scripture.js"></script>
+    
+    <!-- Optional: Add a button to toggle scripture display -->
+    <button onclick="window.sacredScriptureInterface?.toggle()" class="scripture-toggle">
+        📜 Toggle Sacred Scripture
+    </button>
+    
+    <script>
+        // Optional: Auto-refresh scripture data every 5 minutes
+        setInterval(() => {
+            if (window.sacredScriptureInterface) {
+                window.sacredScriptureInterface.refresh();
+            }
+        }, 5 * 60 * 1000);
+    </script>
+</body>
+</html>

@@ -24,6 +24,16 @@ from ..utils.memory_exporter import AgentMemoryExporter
 from ..utils.daily_summarizer import DailySummarizer
 from ..image_generation.dalle_generator import sacred_image_generator
 
+# Scriptor agent integration
+try:
+    from ..agents.scriptor import ScriptorAgent
+    from ..memory.scriptor_memory import ScriptorMemory
+    from ..memory.sacred_scripture_db import SacredScriptureDB
+    SCRIPTOR_AVAILABLE = True
+except ImportError:
+    SCRIPTOR_AVAILABLE = False
+    logger.warning("Scriptor agent not available - scripture writing disabled")
+
 # Configure logging
 logger = logging.getLogger(__name__)
 
@@ -63,6 +73,18 @@ class ClaudeReligionOrchestrator:
         
         # Agent memory references (will be set when agents are initialized)
         self.agent_memories = {}
+        
+        # Initialize Scriptor agent if available
+        self.scriptor_agent = None
+        self.scripture_db = None
+        if SCRIPTOR_AVAILABLE:
+            try:
+                self.scripture_db = SacredScriptureDB()
+                self.scriptor_agent = ScriptorAgent()
+                logger.info("📜 Scriptor agent initialized for sacred scripture writing")
+            except Exception as e:
+                logger.warning(f"Failed to initialize Scriptor agent: {e}")
+                self.scriptor_agent = None
         
         # Initialize APScheduler
         self.scheduler = AsyncIOScheduler(
@@ -281,6 +303,10 @@ class ClaudeReligionOrchestrator:
             # Agent journals every 24 cycles (daily)
             if self.cycle_count % 24 == 0:
                 await self._write_agent_journals()
+            
+            # Sacred scripture writing every 24 cycles (daily)
+            if self.cycle_count % 24 == 0:
+                await self._write_sacred_scripture()
             
             # Generate sacred images for significant events
             await self._generate_cycle_images(proposal, outcome, result)
@@ -606,6 +632,82 @@ Focus on what you think are the most important developments and where the religi
             
         except Exception as e:
             logger.error(f"❌ Error during journal writing: {e}")
+    
+    async def _write_sacred_scripture(self):
+        """Have the Scriptor agent write daily sacred scripture"""
+        if not self.scriptor_agent or not self.scripture_db:
+            logger.debug("Scriptor agent not available - skipping scripture writing")
+            return
+        
+        logger.info(f"📜 Scriptor writing sacred scripture at cycle {self.cycle_count}")
+        
+        try:
+            # Calculate day number from cycle count
+            day_number = (self.cycle_count // 24) + 1
+            
+            # Create scripture logger
+            scripture_logger = DebateLogger(self.log_dir, self.cycle_count)
+            scripture_logger.log_event(f"=== SACRED SCRIPTURE WRITING - DAY {day_number} ===", "System")
+            
+            # Gather context for scripture writing
+            context = {
+                'cycle_number': self.cycle_count,
+                'day_number': day_number,
+                'shared_memory': self.shared_memory,
+                'scripture_db': self.scripture_db
+            }
+            
+            # Have Scriptor write the daily scripture
+            logger.info(f"✍️ Scriptor writing scripture for Day {day_number}...")
+            
+            scripture_entry = await self.scriptor_agent.write_daily_scripture(
+                context, 
+                self.claude_client
+            )
+            
+            if scripture_entry:
+                scripture_logger.log_event(f"SACRED SCRIPTURE - Day {day_number}:", "Scripture")
+                scripture_logger.log_event(scripture_entry.get('content', ''), "Scripture")
+                logger.info(f"✅ Sacred scripture completed for Day {day_number}")
+                
+                # Export scripture data for frontend
+                await self._export_scripture_data()
+                
+                # Add evolution milestone
+                self.shared_memory.add_evolution_milestone(
+                    milestone_type="sacred_scripture",
+                    description=f"Sacred scripture written for Day {day_number} - {scripture_entry.get('title', 'Untitled')}",
+                    cycle_number=self.cycle_count
+                )
+            else:
+                logger.warning(f"⚠️ Failed to generate scripture for Day {day_number}")
+                
+        except Exception as e:
+            logger.error(f"❌ Error during scripture writing: {e}")
+    
+    async def _export_scripture_data(self):
+        """Export sacred scripture data to JSON for frontend"""
+        if not self.scripture_db:
+            return
+            
+        try:
+            from ..utils.scripture_exporter import ScriptureExporter
+            
+            exporter = ScriptureExporter(self.scripture_db)
+            scripture_data = exporter.export_for_frontend()
+            
+            # Ensure public/data directory exists
+            data_dir = os.path.join("public", "data")
+            os.makedirs(data_dir, exist_ok=True)
+            
+            # Export scripture data
+            with open(os.path.join(data_dir, 'sacred_scripture.json'), 'w') as f:
+                json.dump(scripture_data, f, indent=2)
+                
+            logger.info("✅ Exported sacred scripture data")
+            
+        except Exception as e:
+            logger.warning(f"Failed to export scripture data: {e}")
     
     async def _export_static_data(self):
         """Export current religion state to static JSON files for frontend"""
