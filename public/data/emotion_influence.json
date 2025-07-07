@@ -5,54 +5,54 @@
       "source_agent_id": "Trickster",
       "target_agent_id": "Skeptic",
       "emotion_type": "disagreement",
-      "influence_value": 0.2864013956188642,
+      "influence_value": 0.24237748023252323,
       "cycle_number": 86,
-      "timestamp": "2025-07-07 00:45:35.262407"
+      "timestamp": "2025-07-07 01:19:40.919649"
     },
     {
       "id": 161,
       "source_agent_id": "Trickster",
       "target_agent_id": "Zealot",
-      "emotion_type": "disagreement",
-      "influence_value": 0.23817078505728317,
+      "emotion_type": "agreement",
+      "influence_value": 0.7711149620415347,
       "cycle_number": 86,
-      "timestamp": "2025-07-07 00:45:35.258830"
+      "timestamp": "2025-07-07 01:19:40.916787"
     },
     {
       "id": 160,
       "source_agent_id": "Skeptic",
       "target_agent_id": "Trickster",
       "emotion_type": "disagreement",
-      "influence_value": 0.349157066006741,
+      "influence_value": 0.25590589743132675,
       "cycle_number": 86,
-      "timestamp": "2025-07-07 00:45:35.254818"
+      "timestamp": "2025-07-07 01:19:40.914434"
     },
     {
       "id": 159,
       "source_agent_id": "Skeptic",
       "target_agent_id": "Zealot",
       "emotion_type": "disagreement",
-      "influence_value": 0.3908956773471185,
+      "influence_value": 0.24416141724447382,
       "cycle_number": 86,
-      "timestamp": "2025-07-07 00:45:35.251249"
+      "timestamp": "2025-07-07 01:19:40.911635"
     },
     {
       "id": 158,
       "source_agent_id": "Zealot",
       "target_agent_id": "Trickster",
-      "emotion_type": "disagreement",
-      "influence_value": 0.3973090868064582,
+      "emotion_type": "agreement",
+      "influence_value": 0.7931011131986508,
       "cycle_number": 86,
-      "timestamp": "2025-07-07 00:45:35.247723"
+      "timestamp": "2025-07-07 01:19:40.908872"
     },
     {
       "id": 157,
       "source_agent_id": "Zealot",
       "target_agent_id": "Skeptic",
       "emotion_type": "disagreement",
-      "influence_value": 0.3371825275033794,
+      "influence_value": 0.35309387810968074,
       "cycle_number": 86,
-      "timestamp": "2025-07-07 00:45:35.243993"
+      "timestamp": "2025-07-07 01:19:40.906767"
     },
     {
       "id": 156,
@@ -1459,5 +1459,5 @@
       "timestamp": "2025-07-05 23:34:13.322237"
     }
   ],
-  "last_updated": "2025-07-07T00:45:53.250243"
+  "last_updated": "2025-07-07T01:19:40.946510"
 }
