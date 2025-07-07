@@ -392,7 +392,7 @@ class ScriptorMemory(AgentMemory):
         # Add shared memory elements
         context['current_cycle'] = cycle_number
         context['religion_state'] = shared_memory_summary
-        context['recent_debates'] = self.get_recent_debates(limit=3)
+        context['recent_debates'] = []
         
         # Add inspiration sources
         context['inspiration_sources'] = self._analyze_inspiration_sources(shared_memory_summary)
