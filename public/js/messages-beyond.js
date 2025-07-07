@@ -65,36 +65,106 @@ class MessagesBeyondDisplay {
     }
     
     renderMessagesSidebar() {
-        // Add messages indicator to main UI
-        const existingIndicator = document.getElementById('messages-beyond-indicator');
-        if (existingIndicator) {
-            existingIndicator.remove();
-        }
+        const sidebarContainer = document.getElementById('messages-beyond-sidebar');
+        const statusContainer = document.getElementById('messages-status');
+        
+        if (!sidebarContainer) return;
         
         const messageCount = this.messagesData.messages.length;
-        const unprocessedCount = this.messagesData.messages.filter(m => !m.processed).length;
+        const processedCount = this.messagesData.messages.filter(m => m.processed).length;
+        const pendingCount = this.messagesData.messages.filter(m => !m.processed).length;
         
-        if (messageCount === 0) return;
-        
-        const indicator = document.createElement('div');
-        indicator.id = 'messages-beyond-indicator';
-        indicator.className = 'messages-beyond-indicator';
-        indicator.innerHTML = `
-            <div class="messages-beyond-btn" data-messages-beyond>
-                <div class="cosmic-icon">🌌</div>
-                <div class="message-count">
-                    <span class="total">${messageCount}</span>
-                    ${unprocessedCount > 0 ? `<span class="unprocessed">${unprocessedCount} new</span>` : ''}
-                </div>
-                <div class="label">Messages from Beyond</div>
-            </div>
-        `;
-        
-        // Insert into sidebar or main UI
-        const sidebar = document.querySelector('.sidebar') || document.querySelector('.terminal-container');
-        if (sidebar) {
-            sidebar.appendChild(indicator);
+        // Update status
+        if (statusContainer) {
+            statusContainer.innerHTML = `
+                <span class="status-label">Messages:</span>
+                <span class="status-value">${pendingCount} pending, ${processedCount} processed</span>
+            `;
         }
+        
+        // Update messages list
+        if (messageCount === 0) {
+            sidebarContainer.innerHTML = '<div class="empty-state">No messages from beyond yet...</div>';
+            return;
+        }
+        
+        // Show latest 5 messages
+        const recentMessages = this.messagesData.messages
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .slice(0, 5);
+            
+        sidebarContainer.innerHTML = recentMessages.map(message => {
+            const status = message.processed ? 'processed' : 'pending';
+            const time = new Date(message.timestamp).toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            const preview = message.content.length > 60 ? 
+                message.content.substring(0, 60) + '...' : 
+                message.content;
+            
+            return `
+                <div class="messages-beyond-item ${status}" data-message-id="${message.message_id}" onclick="window.messagesBeyondDisplay.showMessagesModal()">
+                    <div class="message-preview">${preview}</div>
+                    <div class="message-meta-sidebar">
+                        <span class="message-source-sidebar">${message.source_label}</span>
+                        <span class="message-time-sidebar">${time}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        // Add agent reflection logs to terminal if there are processed messages
+        this.addAgentReflectionsToTerminal();
+    }
+    
+    addAgentReflectionsToTerminal() {
+        const terminalOutput = document.getElementById('terminal-output');
+        if (!terminalOutput) return;
+        
+        // Get processed messages with reflections
+        const processedMessages = this.messagesData.messages.filter(m => m.processed);
+        
+        processedMessages.forEach(message => {
+            // Check if we already added this message to terminal
+            const existingEntry = terminalOutput.querySelector(`[data-message-id="${message.message_id}"]`);
+            if (existingEntry) return;
+            
+            // Add message received log
+            const messageReceivedLine = document.createElement('div');
+            messageReceivedLine.className = 'terminal-line system';
+            messageReceivedLine.setAttribute('data-message-id', message.message_id);
+            messageReceivedLine.innerHTML = `
+                <span class="timestamp">[${new Date(message.timestamp).toLocaleTimeString()}]</span>
+                <span class="content">📡 Message from Beyond received: "${message.content.substring(0, 80)}${message.content.length > 80 ? '...' : ''}"</span>
+            `;
+            terminalOutput.appendChild(messageReceivedLine);
+            
+            // Add agent reflection logs
+            if (message.agent_reflections) {
+                Object.entries(message.agent_reflections).forEach(([agent, reflection]) => {
+                    const reflectionLine = document.createElement('div');
+                    reflectionLine.className = 'terminal-line agent';
+                    reflectionLine.innerHTML = `
+                        <span class="timestamp">[${new Date(reflection.timestamp || message.timestamp).toLocaleTimeString()}]</span>
+                        <span class="content">🤖 ${agent} reflects: "${reflection.interpretation?.substring(0, 100) || 'Processing message...'}${reflection.interpretation?.length > 100 ? '...' : ''}"</span>
+                    `;
+                    terminalOutput.appendChild(reflectionLine);
+                });
+            }
+            
+            // Add processing complete log
+            const processingLine = document.createElement('div');
+            processingLine.className = 'terminal-line success';
+            processingLine.innerHTML = `
+                <span class="timestamp">[${new Date(message.timestamp).toLocaleTimeString()}]</span>
+                <span class="content">✅ Message processing complete - theological implications analyzed</span>
+            `;
+            terminalOutput.appendChild(processingLine);
+        });
+        
+        // Scroll to bottom
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
     }
     
     renderMessagesModal() {

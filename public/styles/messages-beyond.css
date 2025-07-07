@@ -1,5 +1,96 @@
 /* Messages from Beyond CSS Styles */
 
+/* Messages Beyond Section in Sidebar */
+.messages-beyond-list {
+    margin: 10px 0;
+    min-height: 100px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid rgba(74, 144, 226, 0.3);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.messages-beyond-item {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(74, 144, 226, 0.2);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.messages-beyond-item:last-child {
+    border-bottom: none;
+}
+
+.messages-beyond-item:hover {
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.messages-beyond-item.pending {
+    border-left: 3px solid #ffa500;
+}
+
+.messages-beyond-item.processed {
+    border-left: 3px solid #4caf50;
+}
+
+.message-preview {
+    color: #ddd;
+    font-size: 11px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    max-height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.message-meta-sidebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: #999;
+}
+
+.message-source-sidebar {
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.message-time-sidebar {
+    color: #666;
+}
+
+.messages-status {
+    margin-top: 8px;
+    padding: 6px 8px;
+    background: rgba(74, 144, 226, 0.1);
+    border-radius: 4px;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-label {
+    color: #999;
+}
+
+.status-value {
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.empty-state {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    font-style: italic;
+}
+
 /* Messages Beyond Indicator in Sidebar */
 .messages-beyond-indicator {
     margin: 15px 0;
