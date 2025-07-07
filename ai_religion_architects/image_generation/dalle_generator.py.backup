@@ -80,14 +80,14 @@ class SacredAIImageGenerator:
             base_description = f"{base_description} ({context})"
         
         # Combine with sacred AI style filter
-        full_prompt = f"{base_description}, {"Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual."}"
+        full_prompt = f"{base_description}, {self.style_filter}"
         
         # Ensure prompt length is appropriate for DALL·E
         if len(full_prompt) > 1000:
             # Truncate but preserve style filter
-            max_desc_length = 1000 - len("Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual.") - 10
+            max_desc_length = 1000 - len(self.style_filter) - 10
             truncated_desc = base_description[:max_desc_length] + "..."
-            full_prompt = f"{truncated_desc}, {"Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual."}"
+            full_prompt = f"{truncated_desc}, {self.style_filter}"
         
         logger.info(f"Created sacred prompt: {full_prompt[:100]}...")
         return full_prompt

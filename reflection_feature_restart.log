@@ -1,0 +1,13 @@
+2025-07-05 01:31:26,155 - ai_religion_architects.config - ERROR - Configuration error: CLAUDE_API_KEY environment variable is required
+2025-07-05 01:31:26,155 - ai_religion_architects.config - ERROR - Configuration error: CLAUDE_API_KEY must be a valid Anthropic API key (starts with 'sk-ant-api')
+2025-07-05 01:31:26,156 - ai_religion_architects.config - ERROR - Configuration error: DALLE_API_KEY environment variable is required when image generation is enabled
+🕊️======================================================================🕊️
+               AI RELIGION ARCHITECTS - CLAUDE API SYSTEM               
+🕊️======================================================================🕊️
+
+❌ Configuration error: Configuration validation failed. Check logs for details.
+
+Make sure you have:
+1. Set CLAUDE_API_KEY environment variable
+2. Created a .env file with your configuration
+3. Installed requirements: pip install -r requirements-backend.txt

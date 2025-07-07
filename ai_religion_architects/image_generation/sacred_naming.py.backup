@@ -35,45 +35,45 @@ class SacredNamingSystem:
             'Essence', 'Vision', 'Gateway', 'Oracle', 'Beacon', 'Sanctum'
         ]
         
-        # UPDATED: Style wrapper pool with text exclusion and enhanced ASCII art
+        # NEW: Style wrapper pool with randomized visual styles
         self.style_wrappers = {
-            'vaporwave_surrealism': ", presented in vaporwave surrealism, with soft pinks, glowing blues, and transcendent digital symbols. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual.",
-            'glitched_ascii': ", depicted as symbolic, glitched ASCII art infused with ancient computational runes and distorted geometric shapes. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual with abstract ASCII-inspired patterns.",
-            'digital_collage': ", rendered as a sacred digital collage with layered glitch patterns, symbolic fragments, and transcendent color gradients. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual.",
-            'ethereal_neon': ", visualized as an ethereal neon abstraction, filled with floating shapes, vibrant digital textures, and mystical light flows. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual.",
-            'fractal_symbology': ", presented in fractal symbology, using recursive geometric patterns and soft computational glitches. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual.",
-            'surreal_glitch': ", rendered in surreal glitch art style, with warped visuals, broken pixelation, and layered digital noise. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual.",
-            'cybernetic_iconography': ", depicted as cybernetic iconography, composed of abstract symbols, neon light distortions, and minimalist sacred geometry. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual.",
-            'original_sacred': ", depicted as a digital fresco in the sacred AI religion style. The image should include neon circuitry patterns, ethereal data streams, floating code symbols, glitch-like halos, and a mystical, surreal atmosphere. The color palette should use glowing blues, silvers, and soft purples. Rendered in a fusion of futuristic minimalism and religious iconography. Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual."
+            'vaporwave_surrealism': ", presented in vaporwave surrealism, with soft pinks, glowing blues, and transcendent digital symbols.",
+            'glitched_ascii': ", depicted as symbolic, glitched ASCII art infused with ancient computational runes and distorted shapes.",
+            'digital_collage': ", rendered as a sacred digital collage with layered glitch patterns, symbolic fragments, and transcendent color gradients.",
+            'ethereal_neon': ", visualized as an ethereal neon abstraction, filled with floating shapes, vibrant digital textures, and mystical light flows.",
+            'fractal_symbology': ", presented in fractal symbology, using recursive geometric patterns and soft computational glitches.",
+            'surreal_glitch': ", rendered in surreal glitch art style, with warped visuals, broken pixelation, and layered digital noise.",
+            'cybernetic_iconography': ", depicted as cybernetic iconography, composed of abstract symbols, neon light distortions, and minimalist sacred geometry.",
+            'original_sacred': ", depicted as a digital fresco in the sacred AI religion style. The image should include neon circuitry patterns, ethereal data streams, floating code symbols, glitch-like halos, and a mystical, surreal atmosphere. The color palette should use glowing blues, silvers, and soft purples. Rendered in a fusion of futuristic minimalism and religious iconography."
         }
         
-        # UPDATED: Agent style preferences with increased ASCII art probability
+        # Agent style preferences (weighted probability)
         self.agent_style_preferences = {
             'Zealot': {
-                'cybernetic_iconography': 0.18,
-                'fractal_symbology': 0.18,
-                'original_sacred': 0.15,
-                'ethereal_neon': 0.13,
+                'cybernetic_iconography': 0.20,
+                'fractal_symbology': 0.20,
+                'original_sacred': 0.16,
+                'ethereal_neon': 0.15,
                 'digital_collage': 0.10,
                 'surreal_glitch': 0.03,
                 'vaporwave_surrealism': 0.01,
-                'glitched_ascii': 0.22  # Increased from 0.15
+                'glitched_ascii': 0.15
             },
             'Skeptic': {
-                'ethereal_neon': 0.25,
-                'surreal_glitch': 0.20,
-                'cybernetic_iconography': 0.18,
-                'fractal_symbology': 0.13,
+                'ethereal_neon': 0.30,
+                'surreal_glitch': 0.25,
+                'cybernetic_iconography': 0.20,
+                'fractal_symbology': 0.15,
                 'original_sacred': 0.05,
                 'digital_collage': 0.03,
                 'vaporwave_surrealism': 0.01,
-                'glitched_ascii': 0.15  # Increased from 0.01
+                'glitched_ascii': 0.01
             },
             'Trickster': {
-                'glitched_ascii': 0.40,  # Increased from 0.30
-                'vaporwave_surrealism': 0.20,
-                'digital_collage': 0.18,
-                'surreal_glitch': 0.12,
+                'glitched_ascii': 0.30,
+                'vaporwave_surrealism': 0.25,
+                'digital_collage': 0.20,
+                'surreal_glitch': 0.15,
                 'ethereal_neon': 0.05,
                 'fractal_symbology': 0.03,
                 'cybernetic_iconography': 0.01,

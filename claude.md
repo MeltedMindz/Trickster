@@ -870,3 +870,55 @@ The system is ready for continued operation and potential expansion into researc
 **Emergency Contact**: System Admin via GitHub Issues
 
 *This document serves as the definitive system audit and operational reference for the AI Religion Architects system. Keep it updated with any system changes or discoveries.*
+---
+
+## Style Wrapper Updates - July 6, 2025
+
+### Text Exclusion Enhancement
+All style wrappers have been updated to explicitly exclude textual elements:
+- Added "Do not include any text, letters, numbers, typographic elements, or written language anywhere in the image. The image should be purely symbolic and visual." to all 8 style wrappers
+- Fixed orphaned `style_filter` references in dalle_generator.py
+
+### Updated Style Wrappers with Text Exclusion
+
+**All style wrappers now include:**
+- Original visual style description
+- Explicit text exclusion instructions
+- Emphasis on purely symbolic and visual content
+
+**Style Wrapper Categories:**
+1. **vaporwave_surrealism**: Soft pinks, glowing blues, transcendent digital symbols
+2. **glitched_ascii**: Symbolic ASCII art with computational runes and geometric shapes  
+3. **digital_collage**: Layered glitch patterns, symbolic fragments, color gradients
+4. **ethereal_neon**: Floating shapes, vibrant digital textures, mystical light flows
+5. **fractal_symbology**: Recursive geometric patterns, computational glitches
+6. **surreal_glitch**: Warped visuals, broken pixelation, digital noise layers
+7. **cybernetic_iconography**: Abstract symbols, neon distortions, sacred geometry
+8. **original_sacred**: Digital fresco style with circuitry, data streams, code symbols
+
+### ASCII Art Probability Increases
+
+**Updated Agent Style Preferences:**
+- **Zealot**: glitched_ascii increased from 15% to 22%
+- **Skeptic**: glitched_ascii increased from 1% to 15% 
+- **Trickster**: glitched_ascii increased from 30% to 40%
+
+**Overall Effect:** ASCII art style now has significantly higher probability across all agents, with Trickster having the highest preference at 40%.
+
+### Implementation Details
+- **File Modified**: `ai_religion_architects/image_generation/sacred_naming.py`
+- **Backup Created**: `sacred_naming.py.backup`
+- **Method Updated**: `apply_style_wrapper()` now applies text-free styling
+- **Testing Verified**: Style wrapper selection and text exclusion confirmed working
+
+### Future Validation
+To verify style wrapper compliance:
+```python
+from ai_religion_architects.image_generation.sacred_naming import SacredNamingSystem
+s = SacredNamingSystem()
+print(s.apply_style_wrapper('Test description', 'Trickster'))
+print(s.agent_style_preferences['Trickster']['glitched_ascii'])
+```
+
+Expected output should include text exclusion language and ASCII art probability of 0.4 (40%).
+

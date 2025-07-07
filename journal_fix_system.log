@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/root/Trickster/run_claude_system.py", line 26, in <module>
+    from ai_religion_architects.orchestration.claude_orchestrator import run_claude_orchestrator
+  File "/root/Trickster/ai_religion_architects/orchestration/claude_orchestrator.py", line 1181
+    await orchestrator.start()    def _get_agent_instance(self, agent_name: str):
+                                  ^^^
+SyntaxError: invalid syntax
