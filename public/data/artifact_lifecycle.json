@@ -1,15 +1,15 @@
 {
   "artifacts": [
     {
-      "id": 3,
+      "id": 4,
       "artifact_id": 655904,
       "artifact_type": "ritual",
       "created_by": "Skeptic",
-      "cycle_created": 114,
+      "cycle_created": 117,
       "cycle_retired": null,
       "usage_count": 1,
       "cultural_weight": 0.5,
-      "timestamp": "2025-07-08 04:57:43.705111"
+      "timestamp": "2025-07-08 07:57:43.284407"
     },
     {
       "id": 2,
@@ -34,5 +34,5 @@
       "timestamp": "2025-07-06 03:34:13.715709"
     }
   ],
-  "last_updated": "2025-07-08T06:58:04.074518"
+  "last_updated": "2025-07-08T07:57:57.039309"
 }
