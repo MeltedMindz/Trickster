@@ -1,6 +1,87 @@
 {
   "decay_profiles": [
     {
+      "id": 58,
+      "agent_id": "Skeptic",
+      "memory_type": "episodic",
+      "cycle_number": 120,
+      "decay_rate": 0.04,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.073113"
+    },
+    {
+      "id": 60,
+      "agent_id": "Skeptic",
+      "memory_type": "procedural",
+      "cycle_number": 120,
+      "decay_rate": 0.03,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.078666"
+    },
+    {
+      "id": 59,
+      "agent_id": "Skeptic",
+      "memory_type": "semantic",
+      "cycle_number": 120,
+      "decay_rate": 0.04,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.076252"
+    },
+    {
+      "id": 61,
+      "agent_id": "Trickster",
+      "memory_type": "episodic",
+      "cycle_number": 120,
+      "decay_rate": 0.08,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.081511"
+    },
+    {
+      "id": 63,
+      "agent_id": "Trickster",
+      "memory_type": "procedural",
+      "cycle_number": 120,
+      "decay_rate": 0.08,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.086739"
+    },
+    {
+      "id": 62,
+      "agent_id": "Trickster",
+      "memory_type": "semantic",
+      "cycle_number": 120,
+      "decay_rate": 0.08,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.084495"
+    },
+    {
+      "id": 55,
+      "agent_id": "Zealot",
+      "memory_type": "episodic",
+      "cycle_number": 120,
+      "decay_rate": 0.05,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.066198"
+    },
+    {
+      "id": 57,
+      "agent_id": "Zealot",
+      "memory_type": "procedural",
+      "cycle_number": 120,
+      "decay_rate": 0.05,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.070788"
+    },
+    {
+      "id": 56,
+      "agent_id": "Zealot",
+      "memory_type": "semantic",
+      "cycle_number": 120,
+      "decay_rate": 0.02,
+      "memory_retained": 50,
+      "timestamp": "2025-07-08 10:57:46.068797"
+    },
+    {
       "id": 49,
       "agent_id": "Skeptic",
       "memory_type": "episodic",
@@ -487,5 +568,5 @@
       "timestamp": "2025-07-05 23:34:13.346359"
     }
   ],
-  "last_updated": "2025-07-08T09:58:08.638327"
+  "last_updated": "2025-07-08T11:00:44.755175"
 }

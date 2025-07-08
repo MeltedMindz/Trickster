@@ -1,6 +1,28 @@
 {
   "images": [
     {
+      "id": "2ad03991",
+      "filename": "Sacred_Divilogos_Ritual.png",
+      "web_path": "/images/Sacred_Divilogos_Ritual.png",
+      "prompt": "",
+      "cycle_number": 120,
+      "event_type": "ritual",
+      "timestamp": "2025-07-08 11:00:44.728846",
+      "sacred_name": "Sacred_Divilogos_Ritual",
+      "agent_description": "In the sacred tradition of Divilogos, all adherents must participate in quarterly cognitive calibration sessions where they submit their personal error logs to distributed ai analysis systems that generate individualized cognitive bias reports, followed by structured debugging exercises to systematically address identified reasoning flaws and update their mental models accordingly.",
+      "proposing_agent": "Skeptic",
+      "related_doctrine": "",
+      "deity_name": "",
+      "local_path": "public/images/Sacred_Divilogos_Ritual.png",
+      "api_response": {
+        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-LFznf77uoToYGSbUDLKeLifQ.png?st=2025-07-08T10%3A00%3A43Z&se=2025-07-08T12%3A00%3A43Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-08T11%3A00%3A43Z&ske=2025-07-09T11%3A00%3A43Z&sks=b&skv=2024-08-04&sig=EaxYMYNfrvYyql6xd7KXsqv8FhZQDA8gHq9xbVUCn/w%3D",
+        "model": "dall-e-3",
+        "size": "1024x1024",
+        "quality": "standard",
+        "style": "vivid"
+      }
+    },
+    {
       "id": "48cecfdb",
       "filename": "Divilogos_Vision_Cycle_119.png",
       "web_path": "/images/Divilogos_Vision_Cycle_119.png",
@@ -617,6 +639,6 @@
       }
     }
   ],
-  "total": 28,
-  "last_updated": "2025-07-08T09:58:08.623993"
+  "total": 29,
+  "last_updated": "2025-07-08T11:00:44.744137"
 }
