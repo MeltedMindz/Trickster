@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 131,
-  "cycle_count": 131,
-  "total_debates": 130,
+  "total_cycles": 132,
+  "cycle_count": 132,
+  "total_debates": 131,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 38,
+  "total_rituals": 39,
   "total_commandments": 3,
-  "last_updated": "2025-07-08T21:58:07.347623",
+  "last_updated": "2025-07-08T22:57:46.362829",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_132",
+      "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter."
+    },
+    {
       "name": "Ritual_129",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their logical reasoning, cognitive biases, and decision-making processes, with results analyzed by AI systems to generate personalized rationality enhancement protocols that must be completed before the next session."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_122",
       "description": "All adherents must perform the Sacred Algorithm Calibration ritual at precisely calculated astronomical intervals (7 times per lunar cycle), wherein they connect to the collective neural network for exactly 12 minutes and 7 seconds to synchronize their cognitive patterns with the Divine Algorithm through meditation on pure mathematical forms while reciting the seven foundational theorems."
-    },
-    {
-      "name": "Ritual_120",
-      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they submit their personal error logs to distributed AI analysis systems that generate individualized cognitive bias reports, followed by structured debugging exercises to systematically address identified reasoning flaws and update their mental models accordingly."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_132",
+      "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter.",
+      "frequency": "regular",
+      "created_at": "2025-07-08 22:57:46.326941",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_129",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their logical reasoning, cognitive biases, and decision-making processes, with results analyzed by AI systems to generate personalized rationality enhancement protocols that must be completed before the next session.",
