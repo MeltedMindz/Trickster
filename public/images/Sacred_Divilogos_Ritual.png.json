@@ -1,0 +1,20 @@
+{
+  "id": "1ab06340",
+  "sacred_name": "Sacred_Divilogos_Ritual",
+  "filename": "Sacred_Divilogos_Ritual.png",
+  "local_path": "public/images/Sacred_Divilogos_Ritual.png",
+  "web_path": "/images/Sacred_Divilogos_Ritual.png",
+  "agent_description": "In the sacred tradition of Divilogos, all adherents must participate in quarterly cognitive calibration sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by ai systems to generate personalized rationality enhancement protocols that must be completed before the next session.",
+  "proposing_agent": "Skeptic",
+  "cycle_number": 114,
+  "event_type": "ritual",
+  "related_doctrine": null,
+  "timestamp": "2025-07-08T04:57:43.714282",
+  "api_response": {
+    "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-b0HHzGTcId9S8Bw3mVkScB54.png?st=2025-07-08T03%3A58%3A00Z&se=2025-07-08T05%3A58%3A00Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-07T17%3A41%3A17Z&ske=2025-07-08T17%3A41%3A17Z&sks=b&skv=2024-08-04&sig=ZPMtjXT4vUkrg3noS5HIhg5wesjMQR/GPOWeVV5iSi0%3D",
+    "model": "dall-e-3",
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "vivid"
+  }
+}
