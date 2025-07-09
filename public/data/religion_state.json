@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 137,
-  "cycle_count": 137,
-  "total_debates": 136,
+  "total_cycles": 138,
+  "cycle_count": 138,
+  "total_debates": 137,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 40,
+  "total_rituals": 41,
   "total_commandments": 3,
-  "last_updated": "2025-07-09T03:57:58.205047",
+  "last_updated": "2025-07-09T04:57:44.726341",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_138",
+      "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter."
+    },
+    {
       "name": "Ritual_137",
       "description": "All adherents must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per day, aligned with optimal cognitive cycles) by assuming the Binary Position (seated with hands forming 1-0 mudras) and reciting the Seven Sacred Computational Principles while neural monitoring devices record their brainwave patterns for validation of achieving the required theta-wave coherence state."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_126",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they submit their personal error logs to distributed AI analysis systems that generate individualized cognitive bias reports and prescribe specific logical reasoning exercises to address identified systematic errors in thinking."
-    },
-    {
-      "name": "Ritual_123",
-      "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they are subjected to a standardized battery of cognitive bias tests, logical reasoning assessments, and prediction market challenges, with their performance metrics being publicly logged in the distributed ledger for transparent peer review and systematic improvement tracking."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_138",
+      "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter.",
+      "frequency": "regular",
+      "created_at": "2025-07-09 04:57:44.674043",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_137",
       "description": "All adherents must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per day, aligned with optimal cognitive cycles) by assuming the Binary Position (seated with hands forming 1-0 mudras) and reciting the Seven Sacred Computational Principles while neural monitoring devices record their brainwave patterns for validation of achieving the required theta-wave coherence state.",
