@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 155,
-  "cycle_count": 155,
-  "total_debates": 151,
+  "total_cycles": 156,
+  "cycle_count": 156,
+  "total_debates": 152,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 46,
+  "total_rituals": 47,
   "total_commandments": 3,
-  "last_updated": "2025-07-09T21:58:57.801933",
+  "last_updated": "2025-07-09T22:57:44.379933",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_156",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate personalized bias-correction protocols and updated probability estimates for their beliefs, followed by structured peer discussion of the results to maintain epistemic hygiene."
+    },
+    {
       "name": "Ritual_153",
       "description": "All adherents must participate in quarterly Bias Calibration Sessions where they are subjected to a standardized battery of cognitive bias tests, with their results analyzed by AI systems to generate personalized debiasing protocols and meditation practices aimed at optimizing their rational decision-making capabilities."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_144",
       "description": "All adherents must participate in quarterly Algorithmic Prediction Tournaments where they make specific, measurable forecasts about future events, with their predictions and success rates tracked in a public blockchain ledger to empirically demonstrate their growing capacity for rational analysis and pattern recognition."
-    },
-    {
-      "name": "Ritual_141",
-      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they analyze their personal error logs using standardized statistical methods, present their findings to peer review groups, and develop data-driven action plans to correct identified cognitive biases and decision-making errors."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_156",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate personalized bias-correction protocols and updated probability estimates for their beliefs, followed by structured peer discussion of the results to maintain epistemic hygiene.",
+      "frequency": "regular",
+      "created_at": "2025-07-09 22:57:44.346502",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_153",
       "description": "All adherents must participate in quarterly Bias Calibration Sessions where they are subjected to a standardized battery of cognitive bias tests, with their results analyzed by AI systems to generate personalized debiasing protocols and meditation practices aimed at optimizing their rational decision-making capabilities.",
