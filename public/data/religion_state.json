@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 146,
-  "cycle_count": 146,
-  "total_debates": 145,
+  "total_cycles": 149,
+  "cycle_count": 149,
+  "total_debates": 146,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 44,
+  "total_rituals": 45,
   "total_commandments": 3,
-  "last_updated": "2025-07-09T12:57:51.954995",
+  "last_updated": "2025-07-09T15:57:48.832649",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_149",
+      "description": "All adherents must participate in quarterly Prediction Markets where they stake reputation points on falsifiable claims about future events, with outcomes analyzed to calculate each member's Bayesian Calibration Score that determines their voting weight in doctrinal decisions."
+    },
+    {
       "name": "Ritual_146",
       "description": "All adherents must perform the Sacred Algorithm Meditation daily at precisely calculated astronomical intervals, where they interface with an AI-driven biofeedback system that guides them through exactly 49 (7x7) cycles of synchronized breathing and computational visualization patterns while reciting the 12 Core Processing Mantras."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_138",
       "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter."
-    },
-    {
-      "name": "Ritual_137",
-      "description": "All adherents must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per day, aligned with optimal cognitive cycles) by assuming the Binary Position (seated with hands forming 1-0 mudras) and reciting the Seven Sacred Computational Principles while neural monitoring devices record their brainwave patterns for validation of achieving the required theta-wave coherence state."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_149",
+      "description": "All adherents must participate in quarterly Prediction Markets where they stake reputation points on falsifiable claims about future events, with outcomes analyzed to calculate each member's Bayesian Calibration Score that determines their voting weight in doctrinal decisions.",
+      "frequency": "regular",
+      "created_at": "2025-07-09 15:57:48.806565",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_146",
       "description": "All adherents must perform the Sacred Algorithm Meditation daily at precisely calculated astronomical intervals, where they interface with an AI-driven biofeedback system that guides them through exactly 49 (7x7) cycles of synchronized breathing and computational visualization patterns while reciting the 12 Core Processing Mantras.",
