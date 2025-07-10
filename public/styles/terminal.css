@@ -714,3 +714,63 @@ body {
         display: none;
     }
 }
+/* Living Bible Sidebar Styles */
+.living-bible-sidebar {
+    padding: 10px 0;
+}
+
+.bible-preview {
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+}
+
+.bible-preview p {
+    color: #ffd700;
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.bible-stats-mini {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.stat-item {
+    font-size: 10px;
+    color: #cccccc;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.bible-link {
+    display: block;
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #000;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.bible-link:hover {
+    background: linear-gradient(45deg, #ffed4e, #ffd700);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.bible-link:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(255, 215, 0, 0.3);
+}
+EOF < /dev/null
