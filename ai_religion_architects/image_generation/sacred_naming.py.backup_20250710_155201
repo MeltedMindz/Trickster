@@ -212,12 +212,6 @@ class SacredNamingSystem:
     def should_generate_image(self, proposal_type: str, agent_votes: Dict) -> bool:
         """Determine if an event is significant enough for image generation"""
         
-        # If no type specified, generate every 3rd cycle
-        if not proposal_type or proposal_type == 'cycle':
-            from ..config import Config
-            cycle_count = getattr(Config, '_current_cycle', 0)
-            return cycle_count % 3 == 0
-        
         # Always generate for deities
         if proposal_type == 'deity':
             return True
