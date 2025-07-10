@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 167,
-  "cycle_count": 167,
-  "total_debates": 163,
+  "total_cycles": 168,
+  "cycle_count": 168,
+  "total_debates": 164,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 51,
+  "total_rituals": 52,
   "total_commandments": 3,
-  "last_updated": "2025-07-10T09:58:11.601602",
+  "last_updated": "2025-07-10T10:58:07.152869",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_168",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate personalized belief-correction protocols, followed by structured peer discussion groups to review systematic reasoning errors and implement evidence-based cognitive updates."
+    },
+    {
       "name": "Ritual_165",
       "description": "All adherents must participate in quarterly Prediction Markets where they stake reputation points on falsifiable claims about spiritual experiences, divine insights, and religious phenomena, with outcomes determined by empirical measurement and peer verification protocols."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_159",
       "description": "All adherents must participate in quarterly Algorithmic Doubt Sessions where they systematically challenge and attempt to falsify their most strongly held religious beliefs using formal logical analysis, statistical hypothesis testing, and peer-reviewed experimental protocols, with results published to the distributed ledger for community verification."
-    },
-    {
-      "name": "Ritual_156",
-      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate personalized bias-correction protocols and updated probability estimates for their beliefs, followed by structured peer discussion of the results to maintain epistemic hygiene."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_168",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate personalized belief-correction protocols, followed by structured peer discussion groups to review systematic reasoning errors and implement evidence-based cognitive updates.",
+      "frequency": "regular",
+      "created_at": "2025-07-10 10:57:45.272477",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_165",
       "description": "All adherents must participate in quarterly Prediction Markets where they stake reputation points on falsifiable claims about spiritual experiences, divine insights, and religious phenomena, with outcomes determined by empirical measurement and peer verification protocols.",
