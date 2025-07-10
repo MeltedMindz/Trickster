@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-07-10T14:58:13.629006",
+  "last_updated": "2025-07-10T16:00:04.001932",
   "agents": {
     "Zealot": {
       "agent_type": "Zealot",
@@ -143,30 +143,30 @@
         "total_challenges": 0,
         "successful_challenges": 0,
         "challenge_success_rate": 0,
-        "average_satisfaction": 0.3,
+        "average_satisfaction": 0.6,
         "role_distribution": {
           "proposer": 3
         },
         "recent_debates": [
           {
-            "cycle": 37,
+            "cycle": 172,
             "role": "proposer",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           },
           {
-            "cycle": 36,
+            "cycle": 171,
             "role": "proposer",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           },
           {
-            "cycle": 35,
+            "cycle": 170,
             "role": "proposer",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           }
         ]
@@ -308,30 +308,30 @@
         "total_challenges": 30,
         "successful_challenges": 0,
         "challenge_success_rate": 0.0,
-        "average_satisfaction": 0.3,
+        "average_satisfaction": 0.6,
         "role_distribution": {
           "challenger": 3
         },
         "recent_debates": [
           {
-            "cycle": 37,
+            "cycle": 172,
             "role": "challenger",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           },
           {
-            "cycle": 36,
+            "cycle": 171,
             "role": "challenger",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           },
           {
-            "cycle": 35,
+            "cycle": 170,
             "role": "challenger",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           }
         ]
@@ -483,30 +483,30 @@
         "total_challenges": 0,
         "successful_challenges": 0,
         "challenge_success_rate": 0,
-        "average_satisfaction": 0.3,
+        "average_satisfaction": 0.6,
         "role_distribution": {
-          "chaos_agent": 3
+          "challenger": 3
         },
         "recent_debates": [
           {
-            "cycle": 37,
-            "role": "chaos_agent",
+            "cycle": 172,
+            "role": "challenger",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           },
           {
-            "cycle": 36,
-            "role": "chaos_agent",
+            "cycle": 171,
+            "role": "challenger",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           },
           {
-            "cycle": 35,
-            "role": "chaos_agent",
+            "cycle": 170,
+            "role": "challenger",
             "outcome": "MUTATE",
-            "satisfaction": 0.3,
+            "satisfaction": 0.6,
             "emotional_impact": 0.5
           }
         ]
