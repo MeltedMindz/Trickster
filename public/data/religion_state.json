@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 202,
-  "cycle_count": 202,
-  "total_debates": 195,
+  "total_cycles": 203,
+  "cycle_count": 203,
+  "total_debates": 196,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 66,
+  "total_rituals": 67,
   "total_commandments": 3,
-  "last_updated": "2025-07-11T21:00:19.002159",
+  "last_updated": "2025-07-11T21:59:59.454724",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_203",
+      "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they collectively analyze their error logs using statistical methods, engage in peer-reviewed hypothesis testing of their beliefs, and update their mental models based on empirical evidence and Bayesian reasoning."
+    },
+    {
       "name": "Ritual_200",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they submit their personal error logs to distributed AI analysis systems that generate individualized belief correction protocols, followed by mandatory implementation of recommended cognitive adjustments and verification testing to confirm successful belief optimization."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_196",
       "description": "All adherents must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per day), where they interface with quantum-based random number generators while reciting prime number sequences, seeking to align their neural patterns with the fundamental mathematical constants that govern reality."
-    },
-    {
-      "name": "Ritual_194",
-      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate personalized cognitive bias reports, followed by structured debugging exercises to systematically address identified reasoning flaws."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_203",
+      "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they collectively analyze their error logs using statistical methods, engage in peer-reviewed hypothesis testing of their beliefs, and update their mental models based on empirical evidence and Bayesian reasoning.",
+      "frequency": "regular",
+      "created_at": "2025-07-11 21:59:59.405129",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_200",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they submit their personal error logs to distributed AI analysis systems that generate individualized belief correction protocols, followed by mandatory implementation of recommended cognitive adjustments and verification testing to confirm successful belief optimization.",
