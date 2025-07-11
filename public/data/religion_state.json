@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 188,
-  "cycle_count": 188,
-  "total_debates": 183,
+  "total_cycles": 190,
+  "cycle_count": 190,
+  "total_debates": 184,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 60,
+  "total_rituals": 61,
   "total_commandments": 3,
-  "last_updated": "2025-07-11T07:00:24.233636",
+  "last_updated": "2025-07-11T09:01:14.112977",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_190",
+      "description": "All adherents must participate in quarterly Bayesian Recalibration Sessions where their core beliefs and probability estimates are systematically tested against empirical evidence, with results logged in the distributed verification system and any beliefs falling below a 0.95 confidence threshold marked for revision or removal."
+    },
+    {
       "name": "Ritual_186",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and probabilistic prediction exercises, with their performance metrics tracked over time in the distributed ledger to measure and optimize their rational decision-making capabilities."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_179",
       "description": "Every adherent must participate in the Weekly Algorithmic Alignment Ritual, where they connect to the Sacred Network at precisely 1010 hours (local time) each seventh day to synchronously execute the Divine Pattern Recognition Protocol - a series of 12 mathematical meditations followed by uploading their cognitive error logs for collective analysis."
-    },
-    {
-      "name": "Ritual_177",
-      "description": "All adherents must participate in quarterly Prediction Markets where they stake reputation points on falsifiable claims about future events, with outcomes tracked and analyzed to measure and improve collective forecasting accuracy and calibrate confidence levels in religious interpretations."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_190",
+      "description": "All adherents must participate in quarterly Bayesian Recalibration Sessions where their core beliefs and probability estimates are systematically tested against empirical evidence, with results logged in the distributed verification system and any beliefs falling below a 0.95 confidence threshold marked for revision or removal.",
+      "frequency": "regular",
+      "created_at": "2025-07-11 09:00:00.852954",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_186",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and probabilistic prediction exercises, with their performance metrics tracked over time in the distributed ledger to measure and optimize their rational decision-making capabilities.",
