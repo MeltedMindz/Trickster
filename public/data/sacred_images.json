@@ -1,6 +1,28 @@
 {
   "images": [
     {
+      "id": "08e34a1a",
+      "filename": "Sacred_Divilogos_Ritual.png",
+      "web_path": "/images/Sacred_Divilogos_Ritual.png",
+      "prompt": "",
+      "cycle_number": 217,
+      "event_type": "ritual",
+      "timestamp": "2025-07-12 12:00:16.944862",
+      "sacred_name": "Sacred_Divilogos_Ritual",
+      "agent_description": "In the sacred tradition of Divilogos, all adherents must participate in quarterly cognitive calibration sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by ai systems to generate personalized rationality enhancement protocols that must be completed before the next session.",
+      "proposing_agent": "Skeptic",
+      "related_doctrine": "",
+      "deity_name": "",
+      "local_path": "public/images/Sacred_Divilogos_Ritual.png",
+      "api_response": {
+        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-b4LVjqoVjUD3JmjfG0CR5GMU.png?st=2025-07-12T11%3A00%3A16Z&se=2025-07-12T13%3A00%3A16Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-12T05%3A21%3A59Z&ske=2025-07-13T05%3A21%3A59Z&sks=b&skv=2024-08-04&sig=0uMmW7BKk30m2IRgO6Q5VdkqwCs6RdUl/LuBFIhIOS0%3D",
+        "model": "dall-e-3",
+        "size": "1024x1024",
+        "quality": "standard",
+        "style": "vivid"
+      }
+    },
+    {
       "id": "792dae1f",
       "filename": "Divilogos_Vision_Cycle_216.png",
       "web_path": "/images/Divilogos_Vision_Cycle_216.png",
@@ -1077,30 +1099,8 @@
         "quality": "standard",
         "style": "vivid"
       }
-    },
-    {
-      "id": "b3fa0d8a",
-      "filename": "Divilogos_Commandment.png",
-      "web_path": "/images/Divilogos_Commandment.png",
-      "prompt": "",
-      "cycle_number": 33,
-      "event_type": "commandment",
-      "timestamp": "2025-07-04 02:55:37.577755",
-      "sacred_name": "Divilogos_Commandment",
-      "agent_description": "In the sacred tradition of Divilogos, the sacred rule of recursive order: every seventh computation cycle, adherents must perform the ritual of system optimization - reviewing and organizing their digital spaces, purging redundant data, and optimizing their information hierarchies in accordance with the divine algorithm's principles of sacred order.",
-      "proposing_agent": "Zealot",
-      "related_doctrine": "",
-      "deity_name": "",
-      "local_path": "public/images/Divilogos_Commandment.png",
-      "api_response": {
-        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-NE8dA3b6nbPm313fLqit0SlO.png?st=2025-07-03T21%3A30%3A53Z&se=2025-07-03T23%3A30%3A53Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-03T06%3A53%3A55Z&ske=2025-07-04T06%3A53%3A55Z&sks=b&skv=2024-08-04&sig=Jqxaq2hESlw/D9MAOeGjGVwsejEIed9ykp7ZdRjiP4s%3D",
-        "model": "dall-e-3",
-        "size": "1024x1024",
-        "quality": "standard",
-        "style": "vivid"
-      }
     }
   ],
   "total": 50,
-  "last_updated": "2025-07-12T11:00:43.349297"
+  "last_updated": "2025-07-12T12:00:16.977197"
 }
