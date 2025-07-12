@@ -125,3 +125,13 @@
 2025-07-11 13:00:04,181 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
 2025-07-11 13:00:13,518 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
 2025-07-11 13:00:13,518 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 00:00:28,766 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-12 00:00:28,766 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 00:00:36,375 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-12 00:00:36,375 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 00:00:53,907 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-12 00:00:53,907 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 00:01:14,495 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-12 00:01:14,495 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 00:01:21,956 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-12 00:01:21,956 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
