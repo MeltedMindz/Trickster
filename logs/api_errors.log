@@ -135,3 +135,11 @@
 2025-07-12 00:01:14,495 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
 2025-07-12 00:01:21,956 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
 2025-07-12 00:01:21,956 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 03:59:40,943 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-12 03:59:40,943 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 03:59:42,581 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-12 03:59:42,581 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 03:59:45,095 - ERROR - API Error (attempt 3): Claude API error: 529 - Overloaded
+2025-07-12 03:59:45,095 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-12 03:59:49,096 - ERROR - All 3 API request attempts failed
+2025-07-12 03:59:49,096 - ERROR - Failed to generate response for Skeptic: All 3 API request attempts failed
