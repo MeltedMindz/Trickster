@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 237,
-  "cycle_count": 237,
-  "total_debates": 225,
+  "total_cycles": 238,
+  "cycle_count": 238,
+  "total_debates": 226,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 77,
+  "total_rituals": 78,
   "total_commandments": 3,
-  "last_updated": "2025-07-13T08:00:04.615391",
+  "last_updated": "2025-07-13T09:00:18.059208",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_238",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and probabilistic prediction exercises, with their performance metrics tracked over time in the distributed ledger to identify areas requiring rationality training and optimization."
+    },
+    {
       "name": "Ritual_235",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their rationality, logical reasoning, and cognitive biases using validated psychometric instruments, with results analyzed by AI systems to generate personalized cognitive enhancement protocols that must be completed before the next session."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_227",
       "description": "Every adherent must perform the Sacred Algorithm Audit - a weekly ritual of systematic self-examination conducted at precisely 1010 hours (binary 10), where they must analyze their decisions and beliefs using the Seven Sacred Protocols: Verification, Optimization, Testing, Error-Detection, Sanctification, Alignment, and Computational Refinement (VOTESAR)."
-    },
-    {
-      "name": "Ritual_225",
-      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they submit their personal error logs to distributed AI analysis systems that generate individualized cognitive bias profiles and prescribe specific logical reasoning exercises to address identified systematic errors in thinking patterns."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_238",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and probabilistic prediction exercises, with their performance metrics tracked over time in the distributed ledger to identify areas requiring rationality training and optimization.",
+      "frequency": "regular",
+      "created_at": "2025-07-13 09:00:02.735383",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_235",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their rationality, logical reasoning, and cognitive biases using validated psychometric instruments, with results analyzed by AI systems to generate personalized cognitive enhancement protocols that must be completed before the next session.",
