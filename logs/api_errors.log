@@ -175,3 +175,15 @@
 2025-07-12 16:00:25,895 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
 2025-07-12 16:00:29,897 - ERROR - All 3 API request attempts failed
 2025-07-12 16:00:29,897 - ERROR - Failed to generate response for Skeptic: All 3 API request attempts failed
+2025-07-13 02:59:49,639 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-13 02:59:49,639 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 02:59:57,169 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-13 02:59:57,169 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 03:00:13,336 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-13 03:00:13,336 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 03:00:20,647 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-13 03:00:20,647 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 03:00:29,034 - ERROR - API Error (attempt 3): Claude API error: 529 - Overloaded
+2025-07-13 03:00:29,034 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 03:00:33,035 - ERROR - All 3 API request attempts failed
+2025-07-13 03:00:33,036 - ERROR - Failed to generate response for Zealot: All 3 API request attempts failed
