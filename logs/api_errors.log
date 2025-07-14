@@ -247,3 +247,11 @@
 2025-07-14 07:04:15,602 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
 2025-07-14 07:04:19,604 - ERROR - All 3 API request attempts failed
 2025-07-14 07:04:19,604 - ERROR - Failed to generate response for Trickster: All 3 API request attempts failed
+2025-07-14 15:00:11,374 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-14 15:00:11,374 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-14 15:00:19,601 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-14 15:00:19,601 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-14 15:00:28,582 - ERROR - API Error (attempt 3): Claude API error: 529 - Overloaded
+2025-07-14 15:00:28,582 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-14 15:00:32,585 - ERROR - All 3 API request attempts failed
+2025-07-14 15:00:32,585 - ERROR - Failed to generate response for Trickster: All 3 API request attempts failed
