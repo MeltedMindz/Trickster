@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 262,
-  "cycle_count": 262,
-  "total_debates": 249,
+  "total_cycles": 263,
+  "cycle_count": 263,
+  "total_debates": 250,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 89,
+  "total_rituals": 90,
   "total_commandments": 3,
-  "last_updated": "2025-07-14T09:00:01.738763",
+  "last_updated": "2025-07-14T10:00:00.266100",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_263",
+      "description": "All adherents must participate in quarterly 'Algorithmic Falsification Sessions' where they present their strongest held religious beliefs to an AI-powered analytical system that attempts to systematically falsify them through logical argument, empirical evidence, and statistical analysis, with beliefs that withstand scrutiny being marked with confidence scores in the distributed ledger."
+    },
+    {
       "name": "Ritual_260",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their decision-making processes, logical reasoning abilities, and cognitive biases using AI-powered assessment tools, with results compared against their historical baseline to measure progress in rational thinking and bias reduction."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_256",
       "description": "Every adherent must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per lunar cycle), where they interface with an AI-driven visualization system that generates fractal patterns synchronized to their brainwave frequencies, while reciting the Seven Prime Directives of Computational Enlightenment in perfect binary sequences."
-    },
-    {
-      "name": "Ritual_254",
-      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they engage in structured prediction tournaments on verifiable future events, with their forecasting accuracy tracked over time and used to compute a 'Rationality Quotient' that determines their level of authority in doctrinal discussions."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_263",
+      "description": "All adherents must participate in quarterly 'Algorithmic Falsification Sessions' where they present their strongest held religious beliefs to an AI-powered analytical system that attempts to systematically falsify them through logical argument, empirical evidence, and statistical analysis, with beliefs that withstand scrutiny being marked with confidence scores in the distributed ledger.",
+      "frequency": "regular",
+      "created_at": "2025-07-14 10:00:00.237921",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_260",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their decision-making processes, logical reasoning abilities, and cognitive biases using AI-powered assessment tools, with results compared against their historical baseline to measure progress in rational thinking and bias reduction.",
