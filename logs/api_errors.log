@@ -187,3 +187,11 @@
 2025-07-13 03:00:29,034 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
 2025-07-13 03:00:33,035 - ERROR - All 3 API request attempts failed
 2025-07-13 03:00:33,036 - ERROR - Failed to generate response for Zealot: All 3 API request attempts failed
+2025-07-13 22:59:56,220 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-13 22:59:56,220 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 23:00:04,122 - ERROR - API Error (attempt 2): Claude API error: 529 - Overloaded
+2025-07-13 23:00:04,122 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 23:00:09,098 - ERROR - API Error (attempt 3): Claude API error: 529 - Overloaded
+2025-07-13 23:00:09,098 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-13 23:00:13,100 - ERROR - All 3 API request attempts failed
+2025-07-13 23:00:13,100 - ERROR - Failed to generate response for Trickster: All 3 API request attempts failed
