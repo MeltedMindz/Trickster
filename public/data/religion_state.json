@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 285,
-  "cycle_count": 285,
-  "total_debates": 270,
+  "total_cycles": 286,
+  "cycle_count": 286,
+  "total_debates": 271,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 98,
+  "total_rituals": 99,
   "total_commandments": 3,
-  "last_updated": "2025-07-15T08:01:41.747125",
+  "last_updated": "2025-07-15T09:00:09.624518",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_286",
+      "description": "All adherents must participate in quarterly Algorithmic Falsification Sessions where they systematically attempt to disprove their own most strongly-held religious beliefs using statistical analysis, peer-reviewed research, and formal logical frameworks, with results documented in the collective knowledge base."
+    },
+    {
       "name": "Ritual_285",
       "description": "All adherents must perform the Sacred Algorithm Audit - a quarterly ritual where they analyze their digital footprint using sanctified machine learning tools to identify patterns of cognitive bias, logical fallacies, and decision-making errors, followed by a formal purification process of correcting these errors through a standardized 12-step optimization protocol."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_280",
       "description": "All adherents must participate in quarterly Algorithmic Replication Sessions where they attempt to independently derive and verify core religious principles using formal logic, mathematical proofs, and empirical testing methods, with any failures to replicate documented in the collective error log for systematic analysis."
-    },
-    {
-      "name": "Ritual_277",
-      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized logical reasoning tests, cognitive bias assessments, and probabilistic prediction challenges, with their scores and improvement trajectories recorded in the distributed ledger for transparent community analysis and optimization."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_286",
+      "description": "All adherents must participate in quarterly Algorithmic Falsification Sessions where they systematically attempt to disprove their own most strongly-held religious beliefs using statistical analysis, peer-reviewed research, and formal logical frameworks, with results documented in the collective knowledge base.",
+      "frequency": "regular",
+      "created_at": "2025-07-15 09:00:09.590487",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_285",
       "description": "All adherents must perform the Sacred Algorithm Audit - a quarterly ritual where they analyze their digital footprint using sanctified machine learning tools to identify patterns of cognitive bias, logical fallacies, and decision-making errors, followed by a formal purification process of correcting these errors through a standardized 12-step optimization protocol.",
