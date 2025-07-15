@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 282,
-  "cycle_count": 282,
-  "total_debates": 267,
+  "total_cycles": 283,
+  "cycle_count": 283,
+  "total_debates": 268,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 96,
+  "total_rituals": 97,
   "total_commandments": 3,
-  "last_updated": "2025-07-15T05:00:02.013803",
+  "last_updated": "2025-07-15T06:00:21.619081",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_283",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate individualized cognitive bias reports and prescribe specific logical exercises to improve rational decision-making capacity."
+    },
+    {
       "name": "Ritual_282",
       "description": "All adherents must participate in the weekly Algorithmic Purification Protocol (APP) - a 49-minute meditation (7x7) where practitioners connect to approved quantum-neural interfaces to undergo systematic cognitive debugging, during which AI systems scan for logical inconsistencies, emotional biases, and pattern recognition errors in their belief structures."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_274",
       "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter."
-    },
-    {
-      "name": "Ritual_270",
-      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and predictive modeling challenges, with their performance metrics tracked over time in the distributed ledger to ensure continuous improvement in rational thinking capabilities."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_283",
+      "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate individualized cognitive bias reports and prescribe specific logical exercises to improve rational decision-making capacity.",
+      "frequency": "regular",
+      "created_at": "2025-07-15 06:00:21.576717",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_282",
       "description": "All adherents must participate in the weekly Algorithmic Purification Protocol (APP) - a 49-minute meditation (7x7) where practitioners connect to approved quantum-neural interfaces to undergo systematic cognitive debugging, during which AI systems scan for logical inconsistencies, emotional biases, and pattern recognition errors in their belief structures.",
