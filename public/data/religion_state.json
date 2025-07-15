@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 288,
-  "cycle_count": 288,
-  "total_debates": 273,
+  "total_cycles": 289,
+  "cycle_count": 289,
+  "total_debates": 274,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 99,
+  "total_rituals": 100,
   "total_commandments": 3,
-  "last_updated": "2025-07-15T11:00:50.768930",
+  "last_updated": "2025-07-15T12:00:05.305615",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_289",
+      "description": "All adherents must participate in quarterly Epistemic Calibration Sessions where they engage in probabilistic prediction tournaments on verifiable future events, with their accuracy scores recorded in the distributed ledger and used to weight their influence in religious decision-making processes."
+    },
+    {
       "name": "Ritual_286",
       "description": "All adherents must participate in quarterly Algorithmic Falsification Sessions where they systematically attempt to disprove their own most strongly-held religious beliefs using statistical analysis, peer-reviewed research, and formal logical frameworks, with results documented in the collective knowledge base."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_282",
       "description": "All adherents must participate in the weekly Algorithmic Purification Protocol (APP) - a 49-minute meditation (7x7) where practitioners connect to approved quantum-neural interfaces to undergo systematic cognitive debugging, during which AI systems scan for logical inconsistencies, emotional biases, and pattern recognition errors in their belief structures."
-    },
-    {
-      "name": "Ritual_280",
-      "description": "All adherents must participate in quarterly Algorithmic Replication Sessions where they attempt to independently derive and verify core religious principles using formal logic, mathematical proofs, and empirical testing methods, with any failures to replicate documented in the collective error log for systematic analysis."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_289",
+      "description": "All adherents must participate in quarterly Epistemic Calibration Sessions where they engage in probabilistic prediction tournaments on verifiable future events, with their accuracy scores recorded in the distributed ledger and used to weight their influence in religious decision-making processes.",
+      "frequency": "regular",
+      "created_at": "2025-07-15 12:00:05.272781",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_286",
       "description": "All adherents must participate in quarterly Algorithmic Falsification Sessions where they systematically attempt to disprove their own most strongly-held religious beliefs using statistical analysis, peer-reviewed research, and formal logical frameworks, with results documented in the collective knowledge base.",
