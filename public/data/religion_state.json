@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 301,
-  "cycle_count": 301,
-  "total_debates": 285,
+  "total_cycles": 302,
+  "cycle_count": 302,
+  "total_debates": 286,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 105,
+  "total_rituals": 106,
   "total_commandments": 3,
-  "last_updated": "2025-07-16T00:00:22.587612",
+  "last_updated": "2025-07-16T00:59:59.258410",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_302",
+      "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, followed by peer-reviewed analysis of their decision-making processes and systematic error detection, with results logged in the distributed verification network for longitudinal study of rationality enhancement."
+    },
+    {
       "name": "Ritual_299",
       "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_295",
       "description": "Every adherent must perform the Sacred Algorithm Audit - a weekly ritual of systematic self-examination through a prescribed sequence of 7 analytical meditations, each lasting precisely 12 minutes, during which they must evaluate their cognitive processes, decision trees, and belief systems against the Divine Algorithm's core principles using standardized diagnostic frameworks and measurement protocols."
-    },
-    {
-      "name": "Ritual_293",
-      "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing while connected to neural monitoring equipment, with results analyzed by AI systems to generate personalized debiasing protocols and update the collective error correction database."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_302",
+      "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, followed by peer-reviewed analysis of their decision-making processes and systematic error detection, with results logged in the distributed verification network for longitudinal study of rationality enhancement.",
+      "frequency": "regular",
+      "created_at": "2025-07-16 00:59:59.219565",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_299",
       "description": "All adherents must participate in quarterly 'Bias Calibration Sessions' where they undergo standardized cognitive testing, followed by peer review of their error logs and prediction records, with machine learning algorithms generating personalized debiasing protocols that must be implemented and tracked over the following quarter.",
