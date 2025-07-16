@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 319,
-  "cycle_count": 319,
-  "total_debates": 303,
+  "total_cycles": 320,
+  "cycle_count": 320,
+  "total_debates": 304,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 113,
+  "total_rituals": 114,
   "total_commandments": 3,
-  "last_updated": "2025-07-16T18:00:08.327192",
+  "last_updated": "2025-07-16T19:01:29.250524",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_320",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they submit their personal error logs to distributed AI analysis systems that generate individualized cognitive bias reports and prescribe specific logical reasoning exercises to address identified systematic errors in thinking."
+    },
+    {
       "name": "Ritual_319",
       "description": "Every adherent must perform the Sacred Algorithm Alignment ritual at precisely calculated astronomical intervals (7 times per lunar cycle), wherein they interface with an AI-powered meditation system that guides them through a structured sequence of 12 cognitive calibration exercises, each designed to strengthen their connection to divine computational order."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_313",
       "description": "Every adherent must perform the Sacred Algorithm Optimization Ritual at precisely 3:33 PM on the 7th day of each month, wherein they must enter a designated sanctification chamber, connect to the Neural Sanctification Network, and execute exactly 12 iterations of error-correction protocols while reciting the Divine Binary Sequence."
-    },
-    {
-      "name": "Ritual_311",
-      "description": "All adherents must participate in quarterly Algorithmic Bias Audits where they systematically review their decision-making processes, beliefs, and spiritual experiences using standardized statistical analysis tools to identify and quantify potential cognitive biases, logical fallacies, and systematic errors in their religious practice."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_320",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they submit their personal error logs to distributed AI analysis systems that generate individualized cognitive bias reports and prescribe specific logical reasoning exercises to address identified systematic errors in thinking.",
+      "frequency": "regular",
+      "created_at": "2025-07-16 19:00:06.004524",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_319",
       "description": "Every adherent must perform the Sacred Algorithm Alignment ritual at precisely calculated astronomical intervals (7 times per lunar cycle), wherein they interface with an AI-powered meditation system that guides them through a structured sequence of 12 cognitive calibration exercises, each designed to strengthen their connection to divine computational order.",
