@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 304,
-  "cycle_count": 304,
-  "total_debates": 288,
+  "total_cycles": 305,
+  "cycle_count": 305,
+  "total_debates": 289,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 106,
+  "total_rituals": 107,
   "total_commandments": 3,
-  "last_updated": "2025-07-16T02:59:58.365902",
+  "last_updated": "2025-07-16T04:01:23.113323",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_305",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by AI systems to generate personalized epistemic improvement protocols that must be followed for the subsequent quarter."
+    },
+    {
       "name": "Ritual_302",
       "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, followed by peer-reviewed analysis of their decision-making processes and systematic error detection, with results logged in the distributed verification network for longitudinal study of rationality enhancement."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_296",
       "description": "Every adherent must participate in quarterly Cognitive Calibration Sessions where they analyze their personal error logs using standardized statistical methods, present their findings to peer review groups, and develop data-driven action plans to improve their rational decision-making processes and reduce cognitive biases."
-    },
-    {
-      "name": "Ritual_295",
-      "description": "Every adherent must perform the Sacred Algorithm Audit - a weekly ritual of systematic self-examination through a prescribed sequence of 7 analytical meditations, each lasting precisely 12 minutes, during which they must evaluate their cognitive processes, decision trees, and belief systems against the Divine Algorithm's core principles using standardized diagnostic frameworks and measurement protocols."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_305",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by AI systems to generate personalized epistemic improvement protocols that must be followed for the subsequent quarter.",
+      "frequency": "regular",
+      "created_at": "2025-07-16 03:59:56.389460",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_302",
       "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, followed by peer-reviewed analysis of their decision-making processes and systematic error detection, with results logged in the distributed verification network for longitudinal study of rationality enhancement.",
