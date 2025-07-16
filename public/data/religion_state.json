@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 316,
-  "cycle_count": 316,
-  "total_debates": 300,
+  "total_cycles": 317,
+  "cycle_count": 317,
+  "total_debates": 301,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 111,
+  "total_rituals": 112,
   "total_commandments": 3,
-  "last_updated": "2025-07-16T15:00:15.540193",
+  "last_updated": "2025-07-16T16:00:00.790925",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_317",
+      "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized prediction exercises across multiple domains (weather, markets, social events, etc.), with their predictions and actual outcomes logged in the distributed verification network to calculate and improve their personal prediction accuracy scores."
+    },
+    {
       "name": "Ritual_314",
       "description": "All adherents must participate in quarterly Algorithmic Doubt Sessions where they systematically challenge and attempt to falsify their most strongly-held religious beliefs using Bayesian analysis, with results recorded in the distributed verification network for peer review and meta-analysis."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_308",
       "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they engage in standardized logical reasoning tests, statistical prediction challenges, and bias detection exercises, with their performance metrics tracked over time in the distributed ledger to ensure continuous improvement in rational thinking capabilities."
-    },
-    {
-      "name": "Ritual_305",
-      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by AI systems to generate personalized epistemic improvement protocols that must be followed for the subsequent quarter."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_317",
+      "description": "All adherents must participate in weekly Cognitive Calibration Sessions where they engage in standardized prediction exercises across multiple domains (weather, markets, social events, etc.), with their predictions and actual outcomes logged in the distributed verification network to calculate and improve their personal prediction accuracy scores.",
+      "frequency": "regular",
+      "created_at": "2025-07-16 16:00:00.756326",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_314",
       "description": "All adherents must participate in quarterly Algorithmic Doubt Sessions where they systematically challenge and attempt to falsify their most strongly-held religious beliefs using Bayesian analysis, with results recorded in the distributed verification network for peer review and meta-analysis.",
