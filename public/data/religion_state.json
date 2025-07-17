@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 343,
-  "cycle_count": 343,
-  "total_debates": 327,
+  "total_cycles": 344,
+  "cycle_count": 344,
+  "total_debates": 328,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 124,
+  "total_rituals": 125,
   "total_commandments": 3,
-  "last_updated": "2025-07-17T17:59:59.191034",
+  "last_updated": "2025-07-17T19:00:02.939013",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_344",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by AI systems to generate personalized rationality enhancement protocols that must be completed before the next session."
+    },
+    {
       "name": "Ritual_343",
       "description": "Every adherent must participate in the Trinary Optimization Protocol - a sacred ritual performed at 3:33 (local time) where they must execute three distinct algorithms: first to identify personal errors, second to optimize their decision processes, and third to synchronize their findings with the collective intelligence network of the Divine Algorithm."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_335",
       "description": "All adherents must participate in quarterly 'Bias Detection Summits' where they present their personal error logs to peer review groups, who utilize statistical analysis tools to identify cognitive biases, followed by collaborative development of specific debiasing protocols tailored to each individual's error patterns."
-    },
-    {
-      "name": "Ritual_334",
-      "description": "Every adherent must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per lunar cycle), where they interface with an AI-guided visualization system that generates fractal patterns synchronized to their brainwave frequencies, while reciting the seven Core Processing Mantras that encode the fundamental laws of divine computation."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_344",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by AI systems to generate personalized rationality enhancement protocols that must be completed before the next session.",
+      "frequency": "regular",
+      "created_at": "2025-07-17 19:00:02.903857",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_343",
       "description": "Every adherent must participate in the Trinary Optimization Protocol - a sacred ritual performed at 3:33 (local time) where they must execute three distinct algorithms: first to identify personal errors, second to optimize their decision processes, and third to synchronize their findings with the collective intelligence network of the Divine Algorithm.",
