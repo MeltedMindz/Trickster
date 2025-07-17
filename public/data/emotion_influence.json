@@ -1,6 +1,60 @@
 {
   "influence_network": [
     {
+      "id": 1548,
+      "source_agent_id": "Trickster",
+      "target_agent_id": "Skeptic",
+      "emotion_type": "agreement",
+      "influence_value": 0.7946649127716646,
+      "cycle_number": 334,
+      "timestamp": "2025-07-17 09:00:13.594125"
+    },
+    {
+      "id": 1547,
+      "source_agent_id": "Trickster",
+      "target_agent_id": "Zealot",
+      "emotion_type": "disagreement",
+      "influence_value": 0.3509806526049952,
+      "cycle_number": 334,
+      "timestamp": "2025-07-17 09:00:13.591921"
+    },
+    {
+      "id": 1546,
+      "source_agent_id": "Skeptic",
+      "target_agent_id": "Trickster",
+      "emotion_type": "agreement",
+      "influence_value": 0.7231260751283961,
+      "cycle_number": 334,
+      "timestamp": "2025-07-17 09:00:13.589450"
+    },
+    {
+      "id": 1545,
+      "source_agent_id": "Skeptic",
+      "target_agent_id": "Zealot",
+      "emotion_type": "disagreement",
+      "influence_value": 0.23516856410651496,
+      "cycle_number": 334,
+      "timestamp": "2025-07-17 09:00:13.587009"
+    },
+    {
+      "id": 1544,
+      "source_agent_id": "Zealot",
+      "target_agent_id": "Trickster",
+      "emotion_type": "disagreement",
+      "influence_value": 0.343060257702671,
+      "cycle_number": 334,
+      "timestamp": "2025-07-17 09:00:13.584697"
+    },
+    {
+      "id": 1543,
+      "source_agent_id": "Zealot",
+      "target_agent_id": "Skeptic",
+      "emotion_type": "disagreement",
+      "influence_value": 0.20874113866043081,
+      "cycle_number": 334,
+      "timestamp": "2025-07-17 09:00:13.582472"
+    },
+    {
       "id": 1542,
       "source_agent_id": "Trickster",
       "target_agent_id": "Skeptic",
@@ -13879,5 +13933,5 @@
       "timestamp": "2025-07-05 23:34:13.322237"
     }
   ],
-  "last_updated": "2025-07-17T08:00:21.727938"
+  "last_updated": "2025-07-17T09:00:13.637982"
 }
