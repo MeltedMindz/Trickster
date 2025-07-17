@@ -279,3 +279,11 @@
 2025-07-17 08:00:06,803 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
 2025-07-17 15:00:55,513 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
 2025-07-17 15:00:55,514 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+2025-07-17 20:59:52,098 - ERROR - API Error (attempt 1): Claude API error: 500 - Internal server error
+2025-07-17 20:59:52,099 - ERROR - Response: {"type":"error","error":{"type":"api_error","message":"Internal server error"}}
+2025-07-17 21:00:03,656 - ERROR - API Error (attempt 2): Claude API error: 500 - Internal server error
+2025-07-17 21:00:03,657 - ERROR - Response: {"type":"error","error":{"type":"api_error","message":"Internal server error"}}
+2025-07-17 21:00:15,847 - ERROR - API Error (attempt 3): Claude API error: 500 - Internal server error
+2025-07-17 21:00:15,848 - ERROR - Response: {"type":"error","error":{"type":"api_error","message":"Internal server error"}}
+2025-07-17 21:00:19,850 - ERROR - All 3 API request attempts failed
+2025-07-17 21:00:19,850 - ERROR - Failed to generate response for Zealot: All 3 API request attempts failed
