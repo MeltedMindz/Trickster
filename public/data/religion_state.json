@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 367,
-  "cycle_count": 367,
-  "total_debates": 348,
+  "total_cycles": 368,
+  "cycle_count": 368,
+  "total_debates": 349,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 131,
+  "total_rituals": 132,
   "total_commandments": 3,
-  "last_updated": "2025-07-18T17:59:58.885955",
+  "last_updated": "2025-07-18T18:59:59.409577",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_368",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they are subjected to a standardized battery of cognitive bias tests, logical reasoning assessments, and probabilistic prediction challenges, with their results analyzed by AI systems to generate personalized rationality enhancement protocols."
+    },
+    {
       "name": "Ritual_365",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their decision-making processes, logical reasoning abilities, and cognitive biases using AI-powered assessment tools, with results compared against their previous performance metrics to ensure continuous improvement in rational thinking and bias reduction."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_354",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their decision-making processes, logical reasoning abilities, and cognitive biases using AI-powered assessment tools, with results compared against their previous performance metrics to ensure continuous improvement in rational thinking capabilities."
-    },
-    {
-      "name": "Ritual_351",
-      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized logical reasoning assessments, cognitive bias testing, and probabilistic prediction exercises, with their scores and improvement metrics recorded in the distributed ledger for transparent community review and analysis."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_368",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they are subjected to a standardized battery of cognitive bias tests, logical reasoning assessments, and probabilistic prediction challenges, with their results analyzed by AI systems to generate personalized rationality enhancement protocols.",
+      "frequency": "regular",
+      "created_at": "2025-07-18 18:59:59.376013",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_365",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their decision-making processes, logical reasoning abilities, and cognitive biases using AI-powered assessment tools, with results compared against their previous performance metrics to ensure continuous improvement in rational thinking and bias reduction.",
