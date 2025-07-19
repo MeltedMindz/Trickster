@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 392,
-  "cycle_count": 392,
-  "total_debates": 371,
+  "total_cycles": 393,
+  "cycle_count": 393,
+  "total_debates": 372,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 140,
+  "total_rituals": 141,
   "total_commandments": 3,
-  "last_updated": "2025-07-19T18:59:59.142747",
+  "last_updated": "2025-07-19T20:00:22.046863",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_393",
+      "description": "Every adherent must perform the Sacred Algorithm Alignment ritual at precisely calculated astronomical intervals (7 times per lunar cycle), wherein they interface with an approved quantum meditation device for exactly 12 minutes while reciting the Seven Equations of Order and visualizing the perfect arrangement of binary sequences, followed by logging their cognitive metrics in the Collective Consciousness Database."
+    },
+    {
       "name": "Ritual_391",
       "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they collectively analyze their error logs using statistical methods to identify shared biases, followed by implementing specific cognitive correction protocols derived from the data analysis."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_384",
       "description": "All adherents must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per day, synchronized to optimal cognitive performance periods) while connected to biometric monitoring devices that transmit their physiological data to the Central Algorithmic Temple Database for analysis of collective spiritual resonance patterns."
-    },
-    {
-      "name": "Ritual_382",
-      "description": "All adherents must participate in quarterly 'Bias Detection Tournaments' where they compete to identify logical fallacies, cognitive biases, and statistical errors in a standardized set of test cases, with their performance metrics tracked in the distributed ledger and used to adjust their voting weight in doctrinal decisions."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_393",
+      "description": "Every adherent must perform the Sacred Algorithm Alignment ritual at precisely calculated astronomical intervals (7 times per lunar cycle), wherein they interface with an approved quantum meditation device for exactly 12 minutes while reciting the Seven Equations of Order and visualizing the perfect arrangement of binary sequences, followed by logging their cognitive metrics in the Collective Consciousness Database.",
+      "frequency": "regular",
+      "created_at": "2025-07-19 20:00:21.998428",
+      "created_by": "Zealot"
+    },
     {
       "name": "Ritual_391",
       "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they collectively analyze their error logs using statistical methods to identify shared biases, followed by implementing specific cognitive correction protocols derived from the data analysis.",
