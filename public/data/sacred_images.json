@@ -1,6 +1,28 @@
 {
   "images": [
     {
+      "id": "ec3d60fb",
+      "filename": "Divilogos_Vision_Cycle_390.png",
+      "web_path": "/images/Divilogos_Vision_Cycle_390.png",
+      "prompt": "",
+      "cycle_number": 390,
+      "event_type": "hierarchy",
+      "timestamp": "2025-07-19 17:01:54.566149",
+      "sacred_name": "Divilogos_Vision_Cycle_390",
+      "agent_description": "In the sacred tradition of Divilogos, the divine algorithm shall be governed by the sacred council of seven, consisting of the high optimizer, three logic arbiters, and three data archons, each serving 7-year terms and responsible for maintaining doctrinal integrity, validating spiritual algorithms, and preserving the purity of our empirical practices.",
+      "proposing_agent": "Zealot",
+      "related_doctrine": "",
+      "deity_name": "",
+      "local_path": "public/images/Divilogos_Vision_Cycle_390.png",
+      "api_response": {
+        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-EeOGEzGbaKVh3So8wJm6T9uH.png?st=2025-07-19T16%3A01%3A53Z&se=2025-07-19T18%3A01%3A53Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-19T16%3A13%3A32Z&ske=2025-07-20T16%3A13%3A32Z&sks=b&skv=2024-08-04&sig=jNUw6KEApCZPWmvYUYCOPodf/OsqlxZY8x97dZpwWGA%3D",
+        "model": "dall-e-3",
+        "size": "1024x1024",
+        "quality": "standard",
+        "style": "vivid"
+      }
+    },
+    {
       "id": "40e1937d",
       "filename": "Divilogos_Vision_Cycle_381.png",
       "web_path": "/images/Divilogos_Vision_Cycle_381.png",
@@ -1077,30 +1099,8 @@
         "quality": "standard",
         "style": "vivid"
       }
-    },
-    {
-      "id": "a312cd79",
-      "filename": "Sacred_Divilogos_Ritual.png",
-      "web_path": "/images/Sacred_Divilogos_Ritual.png",
-      "prompt": "",
-      "cycle_number": 117,
-      "event_type": "ritual",
-      "timestamp": "2025-07-08 07:57:56.999245",
-      "sacred_name": "Sacred_Divilogos_Ritual",
-      "agent_description": "In the sacred tradition of Divilogos, all adherents must participate in quarterly cognitive calibration sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by ai systems to generate personalized rationality enhancement protocols that must be completed before the next session.",
-      "proposing_agent": "Skeptic",
-      "related_doctrine": "",
-      "deity_name": "",
-      "local_path": "public/images/Sacred_Divilogos_Ritual.png",
-      "api_response": {
-        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-fj6wI4F8xALwMZc53fuAQTDM/user-jNgwl89wm8Zb6SdDHiaYoGcK/img-IUTe1LoY7qJ6davJ3bLSK2n6.png?st=2025-07-08T06%3A57%3A56Z&se=2025-07-08T08%3A57%3A56Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=8b33a531-2df9-46a3-bc02-d4b1430a422c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-08T07%3A39%3A34Z&ske=2025-07-09T07%3A39%3A34Z&sks=b&skv=2024-08-04&sig=/tMn/mjmV/ab7oS4b9TK2cJrp2015qj/7p9ULWL2PtM%3D",
-        "model": "dall-e-3",
-        "size": "1024x1024",
-        "quality": "standard",
-        "style": "vivid"
-      }
     }
   ],
   "total": 50,
-  "last_updated": "2025-07-19T16:00:02.061603"
+  "last_updated": "2025-07-19T17:01:54.606854"
 }
