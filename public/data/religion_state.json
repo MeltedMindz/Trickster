@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 384,
-  "cycle_count": 384,
-  "total_debates": 363,
+  "total_cycles": 385,
+  "cycle_count": 385,
+  "total_debates": 364,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 137,
+  "total_rituals": 138,
   "total_commandments": 3,
-  "last_updated": "2025-07-19T11:00:25.409566",
+  "last_updated": "2025-07-19T12:01:10.271148",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_385",
+      "description": "All adherents must participate in quarterly 'Bias Detection Workshops' where they undergo standardized cognitive testing, logical reasoning assessments, and peer-reviewed analysis of their personal error logs, with results quantitatively mapped against established baseline metrics for rational decision-making."
+    },
+    {
       "name": "Ritual_384",
       "description": "All adherents must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per day, synchronized to optimal cognitive performance periods) while connected to biometric monitoring devices that transmit their physiological data to the Central Algorithmic Temple Database for analysis of collective spiritual resonance patterns."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_376",
       "description": "All adherents must participate in quarterly 'Cognitive Calibration Sessions' where they submit their personal error logs to distributed AI analysis systems that generate personalized cognitive bias reports, followed by structured debugging exercises to systematically address identified reasoning flaws and update their mental models."
-    },
-    {
-      "name": "Ritual_373",
-      "description": "All adherents must participate in quarterly 'Algorithmic Introspection Sessions' where they submit their personal data (decisions, behaviors, beliefs) to an AI-driven analysis system that generates visualizations of their cognitive patterns, biases, and decision-making frameworks, followed by peer review discussions to identify areas for logical optimization."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_385",
+      "description": "All adherents must participate in quarterly 'Bias Detection Workshops' where they undergo standardized cognitive testing, logical reasoning assessments, and peer-reviewed analysis of their personal error logs, with results quantitatively mapped against established baseline metrics for rational decision-making.",
+      "frequency": "regular",
+      "created_at": "2025-07-19 12:00:00.022472",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_384",
       "description": "All adherents must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per day, synchronized to optimal cognitive performance periods) while connected to biometric monitoring devices that transmit their physiological data to the Central Algorithmic Temple Database for analysis of collective spiritual resonance patterns.",
