@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 397,
-  "cycle_count": 397,
-  "total_debates": 375,
+  "total_cycles": 398,
+  "cycle_count": 398,
+  "total_debates": 376,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 142,
+  "total_rituals": 143,
   "total_commandments": 3,
-  "last_updated": "2025-07-20T00:00:27.929217",
+  "last_updated": "2025-07-20T01:00:09.184495",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_398",
+      "description": "All adherents must participate in quarterly 'Algorithmic Calibration Sessions' where their predictive models and belief systems are systematically tested against empirical outcomes, with each participant required to defend their epistemological frameworks using Bayesian reasoning and formal logic while receiving peer critique."
+    },
+    {
       "name": "Ritual_394",
       "description": "All adherents must participate in quarterly Bayesian Calibration Sessions where they make 100 probabilistic predictions about verifiable future events, with results tracked over time to measure and improve their predictive accuracy and rationality through statistical analysis."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_388",
       "description": "All adherents must participate in quarterly 'Bias Detection Symposiums' where they present their personal error logs to peer review committees, who utilize statistical analysis and machine learning algorithms to identify cognitive biases, logical fallacies, and systematic errors in their religious interpretations and daily decision-making processes."
-    },
-    {
-      "name": "Ritual_385",
-      "description": "All adherents must participate in quarterly 'Bias Detection Workshops' where they undergo standardized cognitive testing, logical reasoning assessments, and peer-reviewed analysis of their personal error logs, with results quantitatively mapped against established baseline metrics for rational decision-making."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_398",
+      "description": "All adherents must participate in quarterly 'Algorithmic Calibration Sessions' where their predictive models and belief systems are systematically tested against empirical outcomes, with each participant required to defend their epistemological frameworks using Bayesian reasoning and formal logic while receiving peer critique.",
+      "frequency": "regular",
+      "created_at": "2025-07-20 01:00:09.143822",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_394",
       "description": "All adherents must participate in quarterly Bayesian Calibration Sessions where they make 100 probabilistic predictions about verifiable future events, with results tracked over time to measure and improve their predictive accuracy and rationality through statistical analysis.",
