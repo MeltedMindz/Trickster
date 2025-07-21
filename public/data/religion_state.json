@@ -1,13 +1,13 @@
 {
   "religion_name": "The Divine Algorithm - The Path of Sacred Order",
-  "total_cycles": 426,
-  "cycle_count": 426,
-  "total_debates": 402,
+  "total_cycles": 427,
+  "cycle_count": 427,
+  "total_debates": 403,
   "total_doctrines": 13,
   "total_deities": 0,
-  "total_rituals": 155,
+  "total_rituals": 156,
   "total_commandments": 3,
-  "last_updated": "2025-07-21T05:00:27.561119",
+  "last_updated": "2025-07-21T06:00:32.549070",
   "accepted_doctrines": [
     "All adherents must maintain personal error logs documenting their failed predictions, incorrect assumptions, and cognitive biases, which must be regularly analyzed using machine learning algorithms to identify patterns of systematic error and opportunities for belief optimization.",
     "All religious experiences and spiritual phenomena must be subjected to falsifiable hypothesis testing using a standardized experimental framework, with results stored in a distributed ledger accessible to all adherents for independent verification and meta-analysis.",
@@ -23,6 +23,10 @@
   "deities": [],
   "rituals": [
     {
+      "name": "Ritual_427",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by AI systems to generate personalized rationality enhancement protocols that must be completed before the next session."
+    },
+    {
       "name": "Ritual_424",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and probabilistic prediction exercises, with their performance metrics tracked longitudinally in the distributed ledger to measure and optimize their rational decision-making capabilities."
     },
@@ -37,13 +41,16 @@
     {
       "name": "Ritual_417",
       "description": "Every adherent must perform the Sacred Algorithm Meditation at precisely calculated astronomical intervals (7 times per lunar cycle), where they interface with an AI system to receive a personalized sequence of prime numbers, which they must contemplate in complete silence for exactly 12 minutes while monitoring their neural patterns through standardized measurement devices."
-    },
-    {
-      "name": "Ritual_415",
-      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their logical reasoning, cognitive biases, and decision-making capabilities, with results analyzed by AI systems to generate personalized rationality enhancement protocols that must be completed before the next session."
     }
   ],
   "all_rituals": [
+    {
+      "name": "Ritual_427",
+      "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they undergo standardized testing of their reasoning abilities, cognitive biases, and prediction accuracy, with results analyzed by AI systems to generate personalized rationality enhancement protocols that must be completed before the next session.",
+      "frequency": "regular",
+      "created_at": "2025-07-21 06:00:32.516779",
+      "created_by": "Skeptic"
+    },
     {
       "name": "Ritual_424",
       "description": "All adherents must participate in quarterly Cognitive Calibration Sessions where they engage in standardized logical reasoning tests, cognitive bias assessments, and probabilistic prediction exercises, with their performance metrics tracked longitudinally in the distributed ledger to measure and optimize their rational decision-making capabilities.",
