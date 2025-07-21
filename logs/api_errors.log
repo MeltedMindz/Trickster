@@ -353,3 +353,5 @@
 2025-07-20 15:00:17,462 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
 2025-07-20 15:00:21,464 - ERROR - All 3 API request attempts failed
 2025-07-20 15:00:21,464 - ERROR - Failed to generate response for Zealot: All 3 API request attempts failed
+2025-07-21 02:00:11,932 - ERROR - API Error (attempt 1): Claude API error: 529 - Overloaded
+2025-07-21 02:00:11,932 - ERROR - Response: {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
