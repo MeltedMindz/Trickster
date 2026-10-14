@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "name": "trickster",
-  "public": true,
   "outputDirectory": "public",
   "rewrites": [
     {
