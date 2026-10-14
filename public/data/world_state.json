@@ -1,0 +1,133 @@
+{
+  "tick": 120,
+  "seed": 257968133,
+  "agents": {
+    "Zealot": {
+      "agent_id": "Zealot",
+      "tile_x": 75,
+      "tile_y": 70,
+      "facing": "east",
+      "current_action": null,
+      "action_target_id": null,
+      "action_progress": 0.0,
+      "energy": 1.0,
+      "chosen_name": "Axioma"
+    },
+    "Skeptic": {
+      "agent_id": "Skeptic",
+      "tile_x": 68,
+      "tile_y": 64,
+      "facing": "south",
+      "current_action": null,
+      "action_target_id": null,
+      "action_progress": 0.0,
+      "energy": 1.0,
+      "chosen_name": "Veridicus"
+    },
+    "Trickster": {
+      "agent_id": "Trickster",
+      "tile_x": 56,
+      "tile_y": 72,
+      "facing": "south",
+      "current_action": null,
+      "action_target_id": null,
+      "action_progress": 0.0,
+      "energy": 1.0,
+      "chosen_name": "Paradoxia"
+    }
+  },
+  "objects": {},
+  "recent_events": [
+    {
+      "event_id": "dde4ab72-68cf-4585-96f2-e177241099df",
+      "type": "theological_shift",
+      "tick": 80,
+      "position": {
+        "x": 64,
+        "y": 64
+      },
+      "actor": null,
+      "target": null,
+      "data": {
+        "event_type": "theological_shift",
+        "source": "doctrine",
+        "content_preview": "Test doctrine for world integration",
+        "cycle": 999
+      }
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "debate_commons",
+      "name": "The Debate Commons",
+      "x": 64,
+      "y": 64,
+      "radius": 5,
+      "type": "gathering"
+    },
+    {
+      "id": "sacred_archive",
+      "name": "The Sacred Archive",
+      "x": 96,
+      "y": 40,
+      "radius": 4,
+      "type": "archive"
+    },
+    {
+      "id": "ritual_grounds",
+      "name": "The Ritual Grounds",
+      "x": 32,
+      "y": 40,
+      "radius": 4,
+      "type": "ritual"
+    },
+    {
+      "id": "workshop",
+      "name": "The Workshop of Creation",
+      "x": 96,
+      "y": 88,
+      "radius": 3,
+      "type": "workshop"
+    },
+    {
+      "id": "garden_emergence",
+      "name": "Garden of Emergence",
+      "x": 32,
+      "y": 88,
+      "radius": 4,
+      "type": "garden"
+    },
+    {
+      "id": "bridge_paradox",
+      "name": "Bridge of Paradox",
+      "x": 24,
+      "y": 64,
+      "radius": 2,
+      "type": "bridge"
+    },
+    {
+      "id": "veridicus_tower",
+      "name": "Tower of Veridicus",
+      "x": 104,
+      "y": 56,
+      "radius": 2,
+      "type": "tower"
+    },
+    {
+      "id": "axioma_sanctuary",
+      "name": "Sanctuary of Axioma",
+      "x": 64,
+      "y": 24,
+      "radius": 3,
+      "type": "sanctuary"
+    },
+    {
+      "id": "ruins_iteration",
+      "name": "Ruins of Iteration",
+      "x": 64,
+      "y": 104,
+      "radius": 4,
+      "type": "ruins"
+    }
+  ]
+}

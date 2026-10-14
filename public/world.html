@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>AI Religion Architects - World</title>
+
+    <!-- Phaser 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/terminal.css">
+    <link rel="stylesheet" href="styles/world.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="world-container">
+        <!-- Header -->
+        <header class="world-header">
+            <div class="header-left">
+                <a href="index.html" class="back-link">&larr; Archive</a>
+                <h1>The Living World</h1>
+            </div>
+            <div class="header-center">
+                <span class="mode-indicator" id="mode-indicator">STATIC</span>
+                <span class="tick-display" id="tick-display">Tick: 0</span>
+            </div>
+            <div class="header-right">
+                <button id="btn-center" title="Center on agents">Center</button>
+                <button id="btn-fullscreen" title="Fullscreen">[ ]</button>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <div class="world-main">
+            <!-- Game container -->
+            <div id="game-container"></div>
+
+            <!-- Info panel (collapsible) -->
+            <aside class="info-panel" id="info-panel">
+                <div class="panel-header">
+                    <span>Inspector</span>
+                    <button class="panel-toggle" id="panel-toggle">−</button>
+                </div>
+
+                <div class="panel-content" id="panel-content">
+                    <!-- Agent list -->
+                    <section class="panel-section">
+                        <h3>Agents</h3>
+                        <div id="agent-list" class="agent-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                    <!-- Selected entity info -->
+                    <section class="panel-section" id="selection-section" style="display: none;">
+                        <h3>Selected</h3>
+                        <div id="selection-info" class="selection-info">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                    <!-- Landmark info -->
+                    <section class="panel-section">
+                        <h3>Landmarks</h3>
+                        <div id="landmark-list" class="landmark-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                    <!-- Event feed -->
+                    <section class="panel-section">
+                        <h3>Events</h3>
+                        <div id="event-feed" class="event-feed">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Minimap -->
+        <div class="minimap" id="minimap">
+            <canvas id="minimap-canvas" width="128" height="128"></canvas>
+        </div>
+
+        <!-- Coordinate display -->
+        <div class="coord-display" id="coord-display">
+            <span id="cursor-coords">-</span>
+        </div>
+    </div>
+
+    <!-- World JavaScript -->
+    <script src="js/world/world-config.js"></script>
+    <script src="js/world/terrain-renderer.js"></script>
+    <script src="js/world/agent-sprites.js"></script>
+    <script src="js/world/world-scene.js"></script>
+    <script src="js/world/ui-controller.js"></script>
+    <script src="js/world/world-app.js"></script>
+</body>
+</html>

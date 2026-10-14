@@ -773,4 +773,56 @@ body {
     transform: translateY(0);
     box-shadow: 0 1px 4px rgba(255, 215, 0, 0.3);
 }
+
+/* Living World Sidebar Styles */
+.world-sidebar {
+    padding: 10px 0;
+}
+
+.world-preview {
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+}
+
+.world-preview p {
+    color: #00ff00;
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.world-stats-mini {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.world-link {
+    display: block;
+    background: linear-gradient(45deg, #00aa00, #00dd00);
+    color: #000;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.world-link:hover {
+    background: linear-gradient(45deg, #00dd00, #00ff00);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 255, 0, 0.3);
+}
+
+.world-link:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0, 255, 0, 0.3);
+}
 EOF < /dev/null
